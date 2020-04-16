@@ -23,6 +23,14 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/',index),
+    path('aboutus/',aboutus),
+    path('allproducts/',allproducts),
+    path('category/',category),
+    path('cms/',cms),
+    path('coomingsoon/',coomingsoon),
+    path('howitworks/',howitworks),
+    path('pricing/',pricing),
+    path('productdetails/',productdetails),
     
   
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
