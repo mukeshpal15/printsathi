@@ -3,7 +3,10 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8">
-      <title>PrintSathi-Adminlogin </title>
+
+     
+      <title>Printsathi - Adminlogin </title>
+
       <link rel="stylesheet" href="{% static 'w3.css' %}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <!--enable mobile device-->
@@ -113,25 +116,33 @@
             </div>
          </div>
        <div class="container">
+
+         
+     
+
+         <center>
          <div class="w3-card-4" style="width:50%;border-radius:20px;">
 
-      <div class="w3-container w3-blue" style="padding-top:10px;padding-bottom:10px;border-radius:20px;">
-      <h2>Admin Login</h2>
-      </div>
+            <div class="w3-container w3-blue" style="padding-top:10px;padding-bottom:10px;border-radius:20px;">
+            <h2>Admin Login</h2>
+            </div>
 
-   <form class="w3-container" style="margin-top:20px;margin-bottom:20px;">
+               <form class="w3-container" action="/admindash/" method="POST" style="margin-top:20px;margin-bottom:20px;">
 
-      <label>Email Id</label>
-      <input class="w3-input" type="text" style="margin-bottom:20px;">
+                  <input class="w3-input" type="text" name="email" style="margin-bottom:20px;" placeholder="Admin Email" required>
 
-      <label>Password</label>
-      <input class="w3-input" type="text" style="margin-bottom:20px;">
+                  <input class="w3-input" type="text" name="pass" style="margin-bottom:20px;" placeholder="Admin Password" required>
 
-   </form>
+                  <input type="submit" value="Login" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;margin-bottom:20px;">
 
-      </div>
+               </form>
+
+            </div>
+         </center>
       </div>  
-      </div>
+   </div>
+
+
       <footer>
          <div class="main-footer">
             <div class="container">
