@@ -22,3 +22,11 @@ def pricing(request):
 	return render(request, 'pricing.html',{})
 def productdetails(request):
 	return render(request, 'productdetails.html',{})
+def adminlogin(request):
+	return render(request, 'adminlogin.html',{})
+def addproducts(request):
+	return render(request, 'addproducts.html',{})
+def userlogin(request):
+	return render(request, 'userlogin.html',{})
+def userregistration(request):
+	return render(request, 'userregistration.html',{})

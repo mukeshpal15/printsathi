@@ -31,6 +31,10 @@ urlpatterns = [
     path('howitworks/',howitworks),
     path('pricing/',pricing),
     path('productdetails/',productdetails),
+    path('adminlogin/',adminlogin),
+    path('addproducts/',addproducts),
+    path('userlogin/',userlogin),
+    path('userregistration/',userregistration),
     
   
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
