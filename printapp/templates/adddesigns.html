@@ -3,13 +3,13 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8">
-      <title>Printsathi - Admin Dashboard</title>
+      <title>Printsathi - Add Designs</title>
+      <link rel="stylesheet" href="{% static 'w3.css' %}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <!--enable mobile device-->
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!--fontawesome css-->
       <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-      <link rel="stylesheet" href="{% static 'w3.css' %}">
       <!--bootstrap css-->
       <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
       <!--animate css-->
@@ -44,14 +44,13 @@
                            <div class="login-signup">
                               <ul>
                                  <li>
-                                    <form>
+                                    <form action="/backtoadmindash/" method="POST">
                                        <input class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;" type="submit" value="Back">
                                     </form>
                                  </li>
                               </ul>
                            </div>
                         </div>
-                        
                      </div>
                   </div>
                </div>
@@ -59,38 +58,63 @@
             <!--/.container-fluid --> 
          </nav>
       </header>
-      <div id="sidebar" class="top-nav">
-         <ul id="sidebar-nav" class="sidebar-nav">
-            <li>
-               <form>
-                  <input class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;" type="submit" value="Back">
-               </form>
-            </li>
-         </ul>
-      </div>
+
       <div class="terms-conditions">
          <div class="terms-title">
             <div class="container">
                <div class="row">
                   <ol class="breadcrumb">
-                     <li class="active">Admin Dashboard</li>
+                     <li>Admin Login</li>
+                     <li class="active">Add Designs</li>
                   </ol>
                </div>
             </div>
          </div>
-         <div class="container">
-            <div class="w3-bar">
-               <form action="/addproducts/" method="POST">
-                  <input type="submit" value="Add Product" class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:20px;">
-               </form>
-               <form action="/addpapertype/" method="POST">
-                  <input type="submit" value="Add Paper Type" class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:20px;margin-top:10px;">
-               </form>
-               <form action="/adddesigns/" method="POST">
-                  <input type="submit" value="Add Designs to Products" class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:20px;margin-top:10px;">
+       <div class="container">
+         <div class="row">
+            <div class="column">
+               <div class="w3-container w3-blue" style="padding-top:10px;padding-bottom:10px;margin-bottom:20px;border-radius:10px;font-size:5px;">
+                  <h2 style="font-size:25px;">Add Designs</h2>
+               </div>
+               <form class="w3-container w3-light-grey" style="padding:20px;border-radius:10px;" action="/savedesigns/" method="POST" enctype="multipart/form-data">
+
+                  <label style="margin-bottom:15px;font-size:20px;color:green;">{{ msg|safe }}</label>
+
+                  <select name="Product" style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0">
+                     <option required="required" selected="selected" disabled="disabled">Select Product</option>
+                     {% for x in prod %}
+                     <option value="{{ x.Product_ID|safe }}">{{ x.Product_Name|safe }}</option>
+                     {% endfor %}
+                  </select>
+
+                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" type="file" name="image" accept="image/*" required id="id_image">
+
+                  <input type="submit" value="Add Paper Type" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;">
                </form>
             </div>
+            <div class="column" style="margin-top:20px;">
+               <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+                 <tr class="w3-black">
+                   <th>Product ID</th>
+                   <th>Product Name</th>
+                   <th>Number Designs Uploaded</th>
+                 </tr>
+                 {% for x in data %}
+                 <tr>
+                   <td>{{ x.Paper_ID|safe }}</td>
+                   <td>{{ x.Paper_Name|safe }}</td>
+                   <td>{% csrf_token %}
+                     <form action="/deletepapertype/" method="POST">
+                       <input type="hidden" name="delete" value="{{ x.Paper_ID|safe }}">
+                       <button type="submit" class="w3-button w3-red w3-hover-black" style="font-size:15px;border-radius:20px;">Delete</button>
+                     </form></td>
+                 </tr>
+                 {% endfor %}
+               </table>
+            </div>
          </div>
+
+      </div>  
       </div>
       <footer>
          <div class="main-footer">

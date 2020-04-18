@@ -34,6 +34,9 @@ urlpatterns = [
     path('changeuserdetails/',changeuserdetails),
     path('myorders/',myorders),
     path('myordersdetails/',myordersdetails),
+    path('myuseraccount/',myuseraccount),
+    path('adddesigns/',adddesigns),
+    path('savedesigns/',savedesigns),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

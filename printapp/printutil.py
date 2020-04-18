@@ -16,3 +16,12 @@ def CheckUserSession(request):
 		return 1
 	else:
 		return 0
+def GetDesignImageCount(request):
+	obj=PropertyDesignData.objects.all()
+	count=0
+	lt=[]
+	for x in obj:
+		lt.append(x.Product_ID)
+	lt1=lt
+	lt=[]
+	

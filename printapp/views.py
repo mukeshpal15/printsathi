@@ -10,9 +10,12 @@ import uuid
 from django.contrib.auth import logout
 from django.core.mail import EmailMessage
 from printapp.printutil import *
+from printapp.form import *
 
 def index(request):
-	return render(request, 'index.html', {})
+	dic={'session':CheckUserSession(request),
+		'checksession':1}
+	return render(request, 'index.html', dic)
 def aboutus(request):
 	return render(request, 'about-us.html',{})
 def allproducts(request):
@@ -172,7 +175,6 @@ def DeletePaperType(request):
 		return render(request, 'addpapertype.html',dic)
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
-<<<<<<< HEAD
 
 @csrf_exempt
 def saveuser(request):
@@ -335,3 +337,45 @@ def myorders(request):
 	return render(request, 'myorders.html',{})
 def myordersdetails(request):
 	return render(request, 'myordersdetails.html',{})
+def myuseraccount(request):
+	if UserData.objects.filter(User_Email=request.session['user_email']).exists():
+		dic={}
+		obj=UserData.objects.filter(User_Email=request.session['user_email'])
+		for x in obj:
+			dic={'fname': x.User_First_Name,
+				'lname': x.User_Last_Name,
+				'email': x.User_Email,
+				'phone': x.User_Phone,
+				'address': x.User_Address,
+				'city': x.User_City,
+				'state': x.User_State,
+				'session':CheckUserSession(request),
+				'checksession':1
+			}
+		return render(request,'profile.html',dic)
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+@csrf_exempt
+def adddesigns(request):
+	if request.method=="POST":
+		dic={'prod':ProductData.objects.filter(Product_Status="Active"),}
+		return render(request, 'adddesigns.html',dic)
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+
+@csrf_exempt
+def savedesigns(request):
+	if request.method=="POST":
+		form=ImageUploadForm(request.POST, request.FILES)
+		if form.is_valid():
+			m=form.cleaned_data['image']
+			obj=ProductDesignData(
+				Product_ID=request.POST.get('Product'),
+				Design_Image=m
+				)
+			obj.save()
+		dic={'prod':ProductData.objects.filter(Product_Status="Active"),
+			'msg':'Saved'}
+		return render(request, 'adddesigns.html',dic)
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
