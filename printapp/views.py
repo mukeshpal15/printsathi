@@ -31,10 +31,12 @@ def productdetails(request):
 	return render(request, 'productdetails.html',{})
 def adminlogin(request):
 	return render(request,'adminlogin.html',{})
+def addproducts(request):
+	return render(request, 'addproducts.html',{})
 def userlogin(request):
-	return render(request,'userlogin.html',{})
+	return render(request, 'userlogin.html',{})
 def userregistration(request):
-	return render(request,'userregistration.html',{})
+	return render(request, 'userregistration.html',{})
 @csrf_exempt
 def admindash(request):
 	if request.method=="POST":
@@ -170,6 +172,7 @@ def DeletePaperType(request):
 		return render(request, 'addpapertype.html',dic)
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+<<<<<<< HEAD
 
 @csrf_exempt
 def saveuser(request):
@@ -328,3 +331,7 @@ def changeuserdetails(request):
 		return render(request,'profile.html',dic)
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+def myorders(request):
+	return render(request, 'myorders.html',{})
+def myordersdetails(request):
+	return render(request, 'myordersdetails.html',{})

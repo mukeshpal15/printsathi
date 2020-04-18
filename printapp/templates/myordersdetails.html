@@ -5,7 +5,7 @@
       <meta charset="UTF-8">
 
      
-      <title>Printsathi - Adminlogin </title>
+      <title>My Orders</title>
 
       <link rel="stylesheet" href="{% static 'w3.css' %}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,6 +23,7 @@
       <link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
       <!--responsive css-->
       <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'w3.css' %}">
    </head>
    <body>
       <header id="header" class="top-head">
@@ -110,37 +111,64 @@
                <div class="row">
                   <ol class="breadcrumb">
                      
-                     <li class="active">Admin Login</li>
+                     <li class="active">My Orders</li>
                   </ol>
                </div>
             </div>
          </div>
        <div class="container">
-
-         
-     
-
-         <center>
-         <div class="w3-card-4" style="width:50%;border-radius:20px;">
-
-            <div class="w3-container w3-blue" style="padding-top:10px;padding-bottom:10px;border-radius:20px;">
-            <h2>Admin Login</h2>
-            </div>
-
-               <form class="w3-container" action="/admindash/" method="POST" style="margin-top:20px;margin-bottom:20px;">
-
-                  <input class="w3-input" type="text" name="email" style="margin-bottom:20px;" placeholder="Admin Email" required>
-
-                  <input class="w3-input" type="text" name="pass" style="margin-bottom:20px;" placeholder="Admin Password" required>
-
-                  <input type="submit" value="Login" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;margin-bottom:20px;">
-
-               </form>
-
-            </div>
-         </center>
-      </div>  
-   </div>
+            <center><h1>My Orders</h1></center>      
+                        <div class="panel-body">
+                           <div class="tab-content">
+                              <div class="tab-pane fade in active" id="tab1default">
+                                 <div class="product-box-main row">
+                                    
+                                    <div class="col-md-4 col-sm-6">
+                                       <div class="small-box-c">
+                                          <div class="small-img-b">
+                                             <img src="{% static 'images/tr1.png' %}" alt="#" />
+                                          </div>
+                                          <div class="dit-t clearfix">
+                                             <div class="left-ti">
+                                                <h4>Product</h4>
+                                                <p>Under <span>Sofa Corner</span></p>
+                                             </div>
+                                             <a href="#" tabindex="0">$1220</a>
+                                          </div>
+                                          <div class="prod-btn">
+                                             <a href="#" class="w3-button w3-blue w3-hover-blue" style="padding:10px;border-radius:15px;font-size:10px;"><i class="fa fa-eye"  aria-hidden="true"></i> View Product</a>
+                                             <a href="#" class="w3-button w3-blue w3-hover-black" style="padding:10px;border-radius:15px;font-size:10px;"><i class="fa fa-info" aria-hidden="true"></i> Order Details</a>
+                                             
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6" style="width:750px;">
+                                       <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+                                       <tr class="w3-black">
+                                       <th>Paper ID</th>
+                                       <th>Paper Name</th>
+                                       <th>Delete Paper Type</th>
+                                       </tr>
+                                       {% for x in data %}
+                                       <tr>
+                                       <td>{{ x.Paper_ID|safe }}</td>
+                                       <td>{{ x.Paper_Name|safe }}</td>
+                                       <td>{% csrf_token %}
+                                       <form action="/deletepapertype/" method="POST">
+                                       <input type="hidden" name="delete" value="{{ x.Paper_ID|safe }}">
+                                       <button type="submit" class="w3-button w3-red w3-hover-black" style="font-size:15px;border-radius:20px;">Delete</button>
+                                    </form></td>
+                                       </tr>
+                                       {% endfor %}
+                                       </table>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                  
+                                    </div>  
+                                    </div>
 
 
       <footer>

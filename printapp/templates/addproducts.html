@@ -3,7 +3,11 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8">
+
+      
+
       <title>Printsathi - Add Products</title>
+
       <link rel="stylesheet" href="{% static 'w3.css' %}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <!--enable mobile device-->
@@ -37,12 +41,14 @@
                         </button>
                         <a href="\index\" class="navbar-brand"><img src="{% static 'images/logo.png' %}" alt="" /></a>
                      </div>
+
+                     
+
                   </div>
                   <div class="col-md-8 col-sm-12">
                      <div class="right-nav">
-                        <div class="login-sr">
-                           <div class="login-signup">
-                              <ul>
+                  <ul>
+
                                  <li><form action="/backtoadmindash/" method="POST">
                                        <input class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;" type="submit" value="Back">
                                     </form></li>
@@ -53,18 +59,28 @@
                      </div>
                   </div>
 
+
                </div>
             </div>
             <!--/.container-fluid --> 
          </nav>
       </header>
+
+      <!-- Modal -->
+      
+         
+      
+
       <div class="terms-conditions">
          <div class="terms-title">
             <div class="container">
                <div class="row">
                   <ol class="breadcrumb">
+                     
+                     <li class="active">Admin Login</li>
                      <li class="active">Admin Login</li>
                      <li>Add Product</li>
+
                   </ol>
                </div>
             </div>
@@ -211,6 +227,7 @@
                  </tr>  
                  {% endfor %}
                </table>
+
             </div>
          </div>
 

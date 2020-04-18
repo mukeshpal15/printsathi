@@ -32,6 +32,8 @@ urlpatterns = [
     path('userlog/',userlog),
     path('changeuserpassword/',changeuserpassword),
     path('changeuserdetails/',changeuserdetails),
+    path('myorders/',myorders),
+    path('myordersdetails/',myordersdetails),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
