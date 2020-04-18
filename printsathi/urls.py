@@ -20,11 +20,18 @@ urlpatterns = [
     path('adminlogin/',adminlogin),
     path('backtoadmindash/',backtoadmindash),
     path('addproducts/',addproducts),
+    path('saveproducts/',saveproducts),
+    path('deleteproducts/',deleteproducts),
+    path('deactiveproducts/',deactiveproducts),
     path('addpapertype/',addpapertype),
     path('savepapertype/',savepapertype),
     path('deletepapertype/',DeletePaperType),
-    
-  
+    path('userlogin/',userlogin),
+    path('userregistration/',userregistration),
+    path('saveuser/',saveuser),
+    path('userlog/',userlog),
+    path('changeuserpassword/',changeuserpassword),
+    path('changeuserdetails/',changeuserdetails),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

@@ -3,7 +3,7 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8">
-      <title>Printsathi - Add Products</title>
+      <title>Printsathi - User Registration</title>
       <link rel="stylesheet" href="{% static 'w3.css' %}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <!--enable mobile device-->
@@ -37,185 +37,129 @@
                         </button>
                         <a href="\index\" class="navbar-brand"><img src="{% static 'images/logo.png' %}" alt="" /></a>
                      </div>
+                     <form class="navbar-form navbar-left web-sh">
+                        <div class="form">
+                           <input type="text" class="form-control" placeholder="Search for products or companies">
+                        </div>
+                     </form>
                   </div>
                   <div class="col-md-8 col-sm-12">
                      <div class="right-nav">
                         <div class="login-sr">
                            <div class="login-signup">
                               <ul>
-                                 <li><form action="/backtoadmindash/" method="POST">
-                                       <input class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;" type="submit" value="Back">
-                                    </form></li>
+                                 <li><a href="#">Login</a></li>
+                                 <li><a class="custom-b" href="#">Sign up</a></li>
                               </ul>
                            </div>
                         </div>
-                        
+                        <div class="help-r hidden-xs">
+                           <div class="help-box">
+                              <ul>
+                                 <li> <a data-toggle="modal" data-target="#myModal" href="#"> <span>Change</span> <img src="{% static 'images/flag.png' %}" alt="" /> </a> </li>
+                                 <li> <a href="#"><img class="h-i" src="{% static 'images/help-icon.png' %}" alt="" /> Help </a> </li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="nav-b hidden-xs">
+                           <div class="nav-box">
+                              <ul>
+                                 <li><a href="howitworks.html">How it works</a></li>
+                                 <li><a href="\about\">Chamb for Business</a></li>
+                              </ul>
+                           </div>
+                        </div>
                      </div>
                   </div>
-
                </div>
             </div>
             <!--/.container-fluid --> 
          </nav>
       </header>
-      <div class="terms-conditions">
+      <!-- Modal -->
+      <div class="modal fade lug" id="myModal" role="dialog">
+         <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Change</h4>
+               </div>
+               <div class="modal-body">
+                  <ul>
+                     <li><a href="#"><img src="{% static 'images/flag-up-1.png' %}" alt="" /> United States</a></li>
+                     <li><a href="#"><img src="{% static 'images/flag-up-2.png' %}" alt="" /> France </a></li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar" class="top-nav">
+         <ul id="sidebar-nav" class="sidebar-nav">
+            <li><a href="#">Help</a></li>
+            <li><a href="#">How it works</a></li>
+            <li><a href="#">Chamb for Business</a></li>
+         </ul>
+      </div>
+      <div class="terms-conditions" style="background-size:100% auto;background-image: url({% static 'images/39e8e6ebcec0d5a42b5998857571fbde.jpg' %})">
          <div class="terms-title">
             <div class="container">
                <div class="row">
                   <ol class="breadcrumb">
-                     <li class="active">Admin Login</li>
-                     <li>Add Product</li>
+                     
+                     <li class="active">User Registration</li>
                   </ol>
                </div>
             </div>
          </div>
        <div class="container">
-         <div class="row">
-            <div class="column">
-               <form class="w3-container w3-light-grey" style="padding:20px;border-radius:10px;" action="/saveproducts/" method="POST">
+                  <div class="w3-card-4" style="width:50%;border-radius:20px;background-color:white;">
 
-                  <label style="margin-bottom:15px;font-size:20px;color:green;">{{ msg|safe }}</label>
+            <div class="w3-container w3-blue" style="padding-top:10px;padding-bottom:10px;border-radius:20px;">
+            <h2>User Registration</h2>
+            </div>
+
+               <form class="w3-container" action="/saveuser/" method="POST" style="margin-top:20px;margin-bottom:20px;">
                   
-                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" placeholder="Name" name="name" type="text">
+                  <label style="margin-bottom:15px;color:green;font-size:18px;">Required Fields Marked With *</label><br>
 
-                  <select style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="ptype">
-                     <option disabled="disabled" selected="selected" >Select Paper Type</option>
-                     {% for x in data %}
-                        <option value="{{ x.Paper_Name|safe }}">{{ x.Paper_Name|safe }}</option>
-                     {% endfor %}
+                  <label style="margin-bottom:15px;color:green;font-size:15px;">{{ msg|safe }}</label><br>
+
+                  <label style="margin-bottom:15px;color:green;font-size:15px;">{{ msg1|safe }}</label>
+                  
+                  <input class="w3-input" type="text" name="First Name" style="margin-bottom:20px;" placeholder="First Name*" required>
+                  
+                  <input class="w3-input" type="text" name="Last Name" style="margin-bottom:20px;" placeholder="Last Name*" required>
+
+                  <select class="w3-input" name="Gender" style="margin-bottom:20px;">
+                     <option required="required" disabled="disabled" selected="selected">Gender*</option>
+                     <option value="Male">Male</option>
+                     <option value="Female">Female</option>
                   </select>
 
-                  <select style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="category">
-                     <option disabled="disabled" selected="selected" >Select Product Category</option>
-                     <option value="Business Cards">Business Cards</option>
-                     <option value="Letter Head">Letter Head</option>
-                     <option value="Flyer">Flyer</option>
-                     <option value="Envelope">Envelope</option>
-                     <option value="Brochure">Brochure</option>
-                  </select>
+                  <input class="w3-input" type="Email" name="Email" style="margin-bottom:20px;" placeholder="Email*" required>
+                  
+                  <input class="w3-input" type="Number" name="Phone Number" style="margin-bottom:20px;" placeholder="Phone Number*" required>
+                  
+                  <textarea class="w3-input" type="text" name="Address" style="margin-bottom:20px;" placeholder="Address*" required></textarea>
+                  
+                  <input class="w3-input" type="text" name="City" style="margin-bottom:20px;" placeholder="City*" required>
+                  
+                  <input class="w3-input" type="text" name="State" style="margin-bottom:20px;" placeholder="State*" required>
 
-                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" placeholder="Thickness" type="text" name="thickness">
 
-                  <select style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="lamination">
-                     <option disabled="disabled" selected="selected" >Select Lamination</option>
-                     <option value="Gloss">Gloss</option>
-                     <option value="Met">Met</option>
-                     <option value="No Lamination">No Lamination</option>
-                  </select>
 
-                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" placeholder="Quantity" type="number" name="quantity">
 
-                  <select style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="printside">
-                     <option disabled="disabled" selected="selected" >Select Print Sides</option>
-                     <option value="Both Sides">Both Sides</option>
-                     <option value="Single Sides">Single Side</option>
-                  </select>
 
-                  <select style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="color">
-                     <option disabled="disabled" selected="selected" >Select Color</option>
-                     <option value="Multicolor">Multicolor</option>
-                     <option value="Singlecolor">Singlecolor</option>
-                  </select>
+                  <input type="submit" value="Register" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;margin-bottom:20px;">
 
-                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" placeholder="Paper Size in Height X Width Format" type="text" name="size">
-
-                  <input type="submit" value="Add Product" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;">
                </form>
-            </div>
-            <div class="column" style="margin-top:20px;">
-               <label style="margin-bottom:15px;font-size:20px;color:green;">Active Products List</label>
-               <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
-                 <tr class="w3-black">
-                   <th>ID</th>
-                   <th>Name</th>
-                   <th>Paper Type</th>
-                   <th>Category</th>
-                   <th>Thickness</th>
-                   <th>Lamination</th>
-                   <th>Quantity</th>
-                   <th>Print Sides</th>
-                   <th>Color</th>
-                   <th>Size</th>
-                   <th>Status</th>
-                   <th>Remove</th>
-                 </tr>
-                 {% for x in adata %}
-                 <tr>
-                   <td>{{ x.Product_ID|safe }}</td>
-                   <td>{{ x.Product_Name|safe }}</td>
-                   <td>{{ x.Product_Paper_Type|safe }}</td>
-                   <td>{{ x.Product_Category|safe }}</td>
-                   <td>{{ x.Product_Thickness|safe }}</td>
-                   <td>{{ x.Product_Lamination|safe }}</td>
-                   <td>{{ x.Product_Quantity|safe }}</td>
-                   <td>{{ x.Product_Print_Sides|safe }}</td>
-                   <td>{{ x.Product_Color|safe }}</td>
-                   <td>{{ x.Product_Size|safe }}</td>
-                   <td>
-                     <form action="/deactiveproducts/" method="POST">
-                       <input type="hidden" name="delete" value="{{ x.Product_ID|safe }}">
-                       <button type="submit" class="w3-button w3-green w3-hover-black" style="font-size:15px;border-radius:20px;">{{ x.Product_Status|safe }}</button>
-                     </form>
-                  </td>
-                  <td>
-                     <form action="/deleteproducts/" method="POST">
-                       <input type="hidden" name="delete" value="{{ x.Product_ID|safe }}">
-                       <button type="submit" class="w3-button w3-red w3-hover-black" style="font-size:15px;border-radius:20px;">Delete</button>
-                     </form>
-                  </td>
-                 </tr>  
-                 {% endfor %}
-               </table>
-            </div>
-            <div class="column" style="margin-top:20px;">
-               <label style="margin-bottom:15px;font-size:20px;color:green;">Deactive Products List</label>
-               <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
-                 <tr class="w3-black">
-                   <th>ID</th>
-                   <th>Name</th>
-                   <th>Paper Type</th>
-                   <th>Category</th>
-                   <th>Thickness</th>
-                   <th>Lamination</th>
-                   <th>Quantity</th>
-                   <th>Print Sides</th>
-                   <th>Color</th>
-                   <th>Size</th>
-                   <th>Status</th>
-                   <th>Remove</th>
-                 </tr>
-                 {% for x in ddata %}
-                 <tr>
-                   <td>{{ x.Product_ID|safe }}</td>
-                   <td>{{ x.Product_Name|safe }}</td>
-                   <td>{{ x.Product_Paper_Type|safe }}</td>
-                   <td>{{ x.Product_Category|safe }}</td>
-                   <td>{{ x.Product_Thickness|safe }}</td>
-                   <td>{{ x.Product_Lamination|safe }}</td>
-                   <td>{{ x.Product_Quantity|safe }}</td>
-                   <td>{{ x.Product_Print_Sides|safe }}</td>
-                   <td>{{ x.Product_Color|safe }}</td>
-                   <td>{{ x.Product_Size|safe }}</td>
-                   <td>
-                     <form action="/deactiveproducts/" method="POST">
-                       <input type="hidden" name="delete" value="{{ x.Product_ID|safe }}">
-                       <button type="submit" class="w3-button w3-orange w3-hover-black" style="font-size:15px;border-radius:20px;">{{ x.Product_Status|safe }}</button>
-                     </form>
-                  </td>
-                  <td>
-                     <form action="/deleteproducts/" method="POST">
-                       <input type="hidden" name="delete" value="{{ x.Product_ID|safe }}">
-                       <button type="submit" class="w3-button w3-red w3-hover-black" style="font-size:15px;border-radius:20px;">Delete</button>
-                     </form>
-                  </td>
-                 </tr>  
-                 {% endfor %}
-               </table>
-            </div>
-         </div>
 
+            </div>
+         
       </div>  
-      </div>
+   </div>
+
       <footer>
          <div class="main-footer">
             <div class="container">
