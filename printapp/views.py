@@ -182,9 +182,9 @@ def saveuser(request):
 		u="U00"
 		x=1
 		uid=u+str(x)
-		while UserData.objects.filter(User_Email=request.POST.get('email')).exists():
+		while UserData.objects.filter(User_ID=uid).exists():
 			x=x+1
-			pid=p+str(x)
+			uid=u+str(x)
 		x=int(x)
 		if UserData.objects.filter(User_Email=request.POST.get('Email'),User_Phone=request.POST.get('Phone Number')).exists():
 			dic={'msg':"User Already Registered"}
@@ -392,4 +392,101 @@ def logout(request):
 			'checksession':1}
 		return render(request, 'index.html',dic)
 	except:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+def resellerregistration(request):
+	return render(request,'resellerregistration.html',{})
+@csrf_exempt
+def savereseller(request):
+	if request.method=="POST":
+		u="R00"
+		x=1
+		uid=u+str(x)
+		while ResellerData.objects.filter(Reseller_ID=uid).exists():
+			x=x+1
+			uid=u+str(x)
+		x=int(x)
+		if ResellerData.objects.filter(Reseller_Email=request.POST.get('Email'),Reseller_Phone=request.POST.get('Phone Number')).exists():
+			dic={'msg':"Reseller Already Registered"}
+			return render(request, 'resellerregistration.html',dic)
+		else:
+			otp=uuid.uuid5(uuid.NAMESPACE_DNS, request.POST.get('Email')+uid)
+			password=str(otp)
+			password=password.upper()[0:8]
+			obj=ResellerData(
+				Reseller_ID=uid,
+				Reseller_First_Name=request.POST.get('First Name'),
+				Reseller_Last_Name=request.POST.get('Last Name'),
+				Reseller_Gender=request.POST.get('Gender'),
+				Reseller_Email=request.POST.get('Email'),
+				Reseller_Phone=request.POST.get('Phone Number'),
+				Reseller_Address=request.POST.get('Address'),
+				Reseller_City=request.POST.get('City'),
+				Reseller_State=request.POST.get('State'),
+				Reseller_GSTIN=request.POST.get('GSTIN'),
+				Reseller_PAN=request.POST.get('PAN'),
+				Reseller_Password=password,
+				Reseller_Status='Deactive',
+				Adhaar=request.FILES['adhaar'],
+				Profile=request.FILES['profile']
+			)
+			obj.save()
+			dic={'msg':"Reseller Registered Successfully",
+				'msg1':"Your password has been sent to your email."}
+			msg = '''Hi there!
+Your Reseller's Account has been successfully created on Printsathi. We are checking the documents you have submitted, till then your account is deactivated. You will be notified when your account is active.
+
+Thanks & Regards,
+Printsathi'''
+			sub='Welcome to Printsathi Reseller Family'
+			email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
+			email.send()
+			return render(request, 'resellerregistration.html',dic)
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+
+@csrf_exempt
+def resellerdata(request):
+	if request.method=="POST":
+		dic={'adata':ResellerData.objects.filter(Reseller_Status="Active"),
+			'ddata':ResellerData.objects.filter(Reseller_Status="Deactive")}
+		return render(request,'resellerdata.html',dic)
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+
+@csrf_exempt
+def reselleractive(request):
+	if request.method=="POST":
+		obj=ResellerData.objects.filter(Reseller_ID=request.POST.get('id'))
+		obj.update(Reseller_Status="Active")
+		e=''
+		p=''
+		for x in obj:
+			e=x.Reseller_Email
+			p=x.Reseller_Password
+			break
+		msg = '''Hi there!
+Your Reseller Account has been activated successfully,
+
+Password : '''+p+'''
+
+Thanks & Regards,
+Printsathi'''
+		sub='Congratulations! Reseller Account Activated Successfully'
+		email = EmailMessage(sub, msg, to=[e])
+		email.send()
+		dic={'adata':ResellerData.objects.filter(Reseller_Status="Active"),
+			'ddata':ResellerData.objects.filter(Reseller_Status="Deactive")}
+		return render(request,'resellerdata.html',dic)
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+
+@csrf_exempt
+def resellerdeactive(request):
+	if request.method=="POST":
+		obj=ResellerData.objects.filter(Reseller_ID=request.POST.get('id'))
+		obj.update(Reseller_Status="Deactive")
+		dic={'adata':ResellerData.objects.filter(Reseller_Status="Active"),
+			'ddata':ResellerData.objects.filter(Reseller_Status="Deactive")}
+		return render(request,'resellerdata.html',dic)
+	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')

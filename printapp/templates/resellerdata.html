@@ -3,13 +3,17 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8">
-      <title>Printsathi - Admin Dashboard</title>
+
+      
+
+      <title>Printsathi - Add Products</title>
+
+      <link rel="stylesheet" href="{% static 'w3.css' %}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <!--enable mobile device-->
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!--fontawesome css-->
       <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-      <link rel="stylesheet" href="{% static 'w3.css' %}">
       <!--bootstrap css-->
       <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
       <!--animate css-->
@@ -37,63 +41,139 @@
                         </button>
                         <a href="\index\" class="navbar-brand"><img src="{% static 'images/logo.png' %}" alt="" /></a>
                      </div>
+
+                     
+
                   </div>
                   <div class="col-md-8 col-sm-12">
                      <div class="right-nav">
-                        <div class="login-sr">
-                           <div class="login-signup">
-                              <ul>
-                                 <li>
-                                    <form>
-                                       <input class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;" type="submit" value="Back">
-                                    </form>
-                                 </li>
+                  <ul>
+                    <li>
+                      <form action="/backtoadmindash/" method="POST">
+                        <input class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;" type="submit" value="Back">
+                      </form>
+                    </li>
                               </ul>
                            </div>
                         </div>
                         
                      </div>
                   </div>
+
+
                </div>
             </div>
             <!--/.container-fluid --> 
          </nav>
       </header>
-      <div id="sidebar" class="top-nav">
-         <ul id="sidebar-nav" class="sidebar-nav">
-            <li>
-               <form>
-                  <input class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;" type="submit" value="Back">
-               </form>
-            </li>
-         </ul>
-      </div>
+
+      <!-- Modal -->
+      
+         
+      
+
       <div class="terms-conditions">
          <div class="terms-title">
             <div class="container">
                <div class="row">
                   <ol class="breadcrumb">
-                     <li class="active">Admin Dashboard</li>
+                     
+                     <li class="active">Admin Login</li>
+                     <li>Reseller's Data</li>
+
                   </ol>
                </div>
             </div>
          </div>
-         <div class="container">
-            <div class="w3-bar">
-               <form action="/addproducts/" method="POST">
-                  <input type="submit" value="Add Product" class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:20px;">
-               </form>
-               <form action="/addpapertype/" method="POST">
-                  <input type="submit" value="Add Paper Type" class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:20px;margin-top:10px;">
-               </form>
-               <form action="/adddesigns/" method="POST">
-                  <input type="submit" value="Add Designs to Products" class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:20px;margin-top:10px;">
-               </form>
-               <form action="/resellerdata/" method="POST">
-                  <input type="submit" value="Resellers Here" class="w3-button w3-red w3-hover-black" style="width:100%;font-size:20px;border-radius:20px;margin-top:10px;">
-               </form>
+       <div class="container">
+         <div class="row">
+            <div class="column" style="margin-top:20px;">
+               <label style="margin-bottom:15px;font-size:20px;color:green;">Active Reseller List</label>
+               <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+                 <tr class="w3-black">
+                   <th>ID</th>
+                   <th>Name</th>
+                   <th>Gender</th>
+                   <th>Email</th>
+                   <th>Phone</th>
+                   <th>Address</th>
+                   <th>City</th>
+                   <th>State</th>
+                   <th>GSTIN</th>
+                   <th>PAN Number</th>
+                   <th>Adhaar</th>
+                   <th>Photo</th>
+                   <th>Change Status</th>
+                 </tr>
+                 {% for x in adata %}
+                 <tr>
+                   <td>{{ x.Reseller_ID|safe }}</td>
+                   <td>{{ x.Reseller_First_Name|safe }} {{ x.Reseller_Last_Name|safe }}</td>
+                   <td>{{ x.Reseller_Gender|safe }}</td>
+                   <td>{{ x.Reseller_Email|safe }}</td>
+                   <td>{{ x.Reseller_Phone|safe }}</td>
+                   <td>{{ x.Reseller_Address|safe }}</td>
+                   <td>{{ x.Reseller_City|safe }}</td>
+                   <td>{{ x.Reseller_State|safe }}</td>
+                   <td>{{ x.Reseller_GSTIN|safe }}</td>
+                   <td>{{ x.Reseller_PAN|safe }}</td>
+                   <td><img style="width:500px;" src="{{ x.Adhaar.url|safe }}"></td>
+                   <td><img style="width:200px;" src="{{ x.Profile.url|safe }}"></td>
+                   <td>
+                     <form action="/resellerdeactive/" method="POST">
+                       <input type="hidden" name="id" value="{{ x.Reseller_ID|safe }}">
+                       <button type="submit" class="w3-button w3-red w3-hover-black" style="font-size:15px;border-radius:20px;">Deactive</button>
+                     </form>
+                  </td>
+                 </tr>  
+                 {% endfor %}
+               </table>
+            </div>
+            <div class="column" style="margin-top:20px;">
+               <label style="margin-bottom:15px;font-size:20px;color:green;">Deactive Reseller List</label>
+               <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+                 <tr class="w3-black">
+                   <th>ID</th>
+                   <th>Name</th>
+                   <th>Gender</th>
+                   <th>Email</th>
+                   <th>Phone</th>
+                   <th>Address</th>
+                   <th>City</th>
+                   <th>State</th>
+                   <th>GSTIN</th>
+                   <th>PAN Number</th>
+                   <th>Adhaar</th>
+                   <th>Photo</th>
+                   <th>Change Status</th>
+                 </tr>
+                 {% for x in ddata %}
+                 <tr>
+                   <td>{{ x.Reseller_ID|safe }}</td>
+                   <td>{{ x.Reseller_First_Name|safe }} {{ x.Reseller_Last_Name|safe }}</td>
+                   <td>{{ x.Reseller_Gender|safe }}</td>
+                   <td>{{ x.Reseller_Email|safe }}</td>
+                   <td>{{ x.Reseller_Phone|safe }}</td>
+                   <td>{{ x.Reseller_Address|safe }}</td>
+                   <td>{{ x.Reseller_City|safe }}</td>
+                   <td>{{ x.Reseller_State|safe }}</td>
+                   <td>{{ x.Reseller_GSTIN|safe }}</td>
+                   <td>{{ x.Reseller_PAN|safe }}</td>
+                   <td><img style="width:500px;" src="{{ x.Adhaar.url|safe }}"></td>
+                   <td><img style="width:200px;" src="{{ x.Profile.url|safe }}"></td>
+                   <td>
+                     <form action="/reselleractive/" method="POST">
+                       <input type="hidden" name="id" value="{{ x.Reseller_ID|safe }}">
+                       <button type="submit" class="w3-button w3-green w3-hover-black" style="font-size:15px;border-radius:20px;">Active</button>
+                     </form>
+                  </td>
+                 </tr>  
+                 {% endfor %}
+               </table>
             </div>
          </div>
+
+      </div>  
       </div>
       <footer>
          <div class="main-footer">
