@@ -14,8 +14,8 @@ from printapp.form import *
 
 def index(request):
 	dic={'session':CheckUserSession(request),
-		'checksession':1}
-	return render(request, 'index.html', dic)
+			'checksession':1}
+	return render(request, 'index.html', dic)		
 def aboutus(request):
 	return render(request, 'about-us.html',{})
 def allproducts(request):
@@ -338,22 +338,23 @@ def myorders(request):
 def myordersdetails(request):
 	return render(request, 'myordersdetails.html',{})
 def myuseraccount(request):
-	if UserData.objects.filter(User_Email=request.session['user_email']).exists():
-		dic={}
-		obj=UserData.objects.filter(User_Email=request.session['user_email'])
-		for x in obj:
-			dic={'fname': x.User_First_Name,
-				'lname': x.User_Last_Name,
-				'email': x.User_Email,
-				'phone': x.User_Phone,
-				'address': x.User_Address,
-				'city': x.User_City,
-				'state': x.User_State,
-				'session':CheckUserSession(request),
-				'checksession':1
-			}
-		return render(request,'profile.html',dic)
-	else:
+	try:
+		if UserData.objects.filter(User_Email=request.session['user_email']).exists():
+			dic={}
+			obj=UserData.objects.filter(User_Email=request.session['user_email'])
+			for x in obj:
+				dic={'fname': x.User_First_Name,
+					'lname': x.User_Last_Name,
+					'email': x.User_Email,
+					'phone': x.User_Phone,
+					'address': x.User_Address,
+					'city': x.User_City,
+					'state': x.User_State,
+					'session':CheckUserSession(request),
+					'checksession':1
+				}
+			return render(request,'profile.html',dic)	
+	except:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 @csrf_exempt
 def adddesigns(request):
@@ -374,8 +375,21 @@ def savedesigns(request):
 				Design_Image=m
 				)
 			obj.save()
-		dic={'prod':ProductData.objects.filter(Product_Status="Active"),
-			'msg':'Saved'}
-		return render(request, 'adddesigns.html',dic)
+			dic={'prod':ProductData.objects.filter(Product_Status="Active"),
+				'msg':'Saved',
+				'data':GetDesignImageCount()}
+			return render(request, 'adddesigns.html',dic)
+		else:
+			return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+@csrf_exempt
+def logout(request):
+	try:	
+		del request.session['user_email']
+		request.session.flush()
+		dic={'session':CheckUserSession(request),
+			'checksession':1}
+		return render(request, 'index.html',dic)
+	except:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')

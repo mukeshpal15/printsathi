@@ -24,7 +24,7 @@ class ProductData(models.Model):
 	class Meta:
 		db_table="ProductData"
 
-class PropertyDesignData(models.Model):
+class ProductDesignData(models.Model):
 	Product_ID=models.CharField(max_length=100)
 	Design_Image=models.ImageField(upload_to="productdesignes/")
 	class Meta:

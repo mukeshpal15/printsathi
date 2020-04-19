@@ -96,18 +96,12 @@
                <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
                  <tr class="w3-black">
                    <th>Product ID</th>
-                   <th>Product Name</th>
                    <th>Number Designs Uploaded</th>
                  </tr>
                  {% for x in data %}
                  <tr>
-                   <td>{{ x.Paper_ID|safe }}</td>
-                   <td>{{ x.Paper_Name|safe }}</td>
-                   <td>{% csrf_token %}
-                     <form action="/deletepapertype/" method="POST">
-                       <input type="hidden" name="delete" value="{{ x.Paper_ID|safe }}">
-                       <button type="submit" class="w3-button w3-red w3-hover-black" style="font-size:15px;border-radius:20px;">Delete</button>
-                     </form></td>
+                   <td>{{ x.id|safe }}</td>
+                   <td>{{ x.count|safe }}</td>
                  </tr>
                  {% endfor %}
                </table>
