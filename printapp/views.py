@@ -14,7 +14,7 @@ from printapp.form import *
 
 def index(request):
 	dic={'session':CheckUserSession(request),
-			'checksession':1}
+			'checksession':1,'detail':GetProductDetail()}
 	return render(request, 'index.html', dic)		
 def aboutus(request):
 	return render(request, 'about-us.html',{})
@@ -31,7 +31,9 @@ def howitworks(request):
 def pricing(request):
 	return render(request, 'pricing.html',{})
 def productdetails(request):
-	return render(request, 'productdetails.html',{})
+	detail=request.GET.get('cname')
+	dic1=GetAgainProductDetail(detail)
+	return render(request, 'productdetails.html',dic1)
 def adminlogin(request):
 	return render(request,'adminlogin.html',{})
 def addproducts(request):
@@ -392,4 +394,172 @@ def logout(request):
 			'checksession':1}
 		return render(request, 'index.html',dic)
 	except:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+def resellersignup(request):
+	return render(request,'resellerregistration.html',{})
+
+def Resellerenter(request):
+	if request.method=="POST":
+		u="RE00"
+		x=1
+		uid=u+str(x)
+		while ResellerData.objects.filter(Email=request.POST.get('email')).exists():
+			x=x+1
+			pid=p+str(x)
+		x=int(x)
+		if ResellerData.objects.filter(Email=request.POST.get('Email'),Phone=request.POST.get('Phone Number')).exists():
+			dic={'msg':"User Already Registered"}
+			return render(request, 'resellerregistration.html',dic)
+		else:
+			otp=uuid.uuid5(uuid.NAMESPACE_DNS, request.POST.get('Email')+uid)
+			password=str(otp)
+			password=password.upper()[0:8]
+			obj=ResellerData(
+				Reseller_ID=uid,
+				Reseller_fullname=request.POST.get('fullname'),
+				Gender=request.POST.get('Gender'),
+				Business_Name=request.POST.get('Business'),
+				Business_Type=request.POST.get('Businesstype'),
+				Gstn=request.POST.get('gstn'),
+				Pancard_No=request.POST.get('pancard'),
+				Email=request.POST.get('Email'),
+				Phone=request.POST.get('Phone'),
+				Address=request.POST.get('Address'),
+				City=request.POST.get('City'),
+				State=request.POST.get('state'),
+				pincode=request.POST.get('Pincode'),
+				Establish=request.POST.get('establish'),
+				image=request.FILES['image'],
+				Password=password
+			)
+			obj.save()
+			msg = '''Hi there!
+Your account has been Successfully created on Printsathi. Your account credentials are as below,
+Email : '''+request.POST.get('Email')+'''
+Password : '''+password+'''
+
+Thanks & Regards,
+Printsathi'''
+			sub='Welcome to Printsathi'
+			email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
+			email.send()
+			dic={'msg':"Successfully Registered",
+				'msg1':'You will get you account credentials on your mail soon.'}
+			return render(request, 'resellerregistration.html',dic)
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+def resellerlogin(request):
+	return render(request, 'resellerlogin.html',{})
+
+@csrf_exempt
+def resellerlog(request):
+	if request.method=='POST':
+		check=1
+		dic={}
+		if ResellerData.objects.filter(Email=request.POST.get('email'),Password=request.POST.get('pass')).exists():
+			request.session['re_email'] = request.POST.get('email')
+			for x in ResellerData.objects.filter(Email=request.POST.get('email')):
+				dic={'fname': x.Reseller_fullname,
+					'lname': x.Business_Name,
+					'email': x.Email,
+					'phone': x.Phone,
+					'address': x.Address,
+					'city': x.City,
+					'state': x.State,
+					'session':CheckUserSession(request),
+					'checksession':1}
+			return render(request,'resellerprofile.html',dic)
+		else:
+			dic={'msg':'Incorrect Email or Password',}
+			return render(request,'resellerlogin.html',dic)
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+
+@csrf_exempt
+def changeresellerdetails(request):
+	if request.method=="POST":
+		dic={}
+		obj=ResellerData.objects.filter(Email=request.session['re_email'])
+		obj.update(
+			Phone=request.POST.get('Phone'),
+			Address=request.POST.get('Address'),
+			City=request.POST.get('City'),
+			State=request.POST.get('State')
+			)
+		for x in obj:
+			dic={'fname': x.Reseller_fullname,
+				'lname': x.Business_Name,
+				'email': x.Email,
+				'phone': x.Phone,
+				'address': x.Address,
+				'city': x.City,
+				'state': x.State,
+				'session':CheckUserSession(request),
+				'checksession':1
+			}
+		b1='''<script type="text/javascript">
+		alert("'''
+		b2='''");</script>'''
+		alert=b1+'Changes Saved Successfully'+b2
+		dic.update({'alert':alert})
+		return render(request,'resellerprofile.html',dic)
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+@csrf_exempt
+def changeresellerpassword(request):
+	if request.method=="POST":
+		dic={}
+		n=request.session['re_email']
+		if ResellerData.objects.filter(Email=request.session['re_email'],Password=request.POST.get('opass')).exists():
+			obj=ResellerData.objects.filter(Email=request.session['re_email'],Password=request.POST.get('opass'))
+			obj.update(Password=request.POST.get('npass'))
+			for x in obj:
+				dic={'fname': x.Reseller_fullname,
+				'lname': x.Business_Name,
+				'email': x.Email,
+				'phone': x.Phone,
+				'address': x.Address,
+				'city': x.City,
+				'state': x.State,
+				'session':CheckUserSession(request),
+				'checksession':1
+				}
+			b1='''<script type="text/javascript">
+			alert("'''
+			b2='''");</script>'''
+			alert=b1+'Password Changed Successfully'+b2
+			dic.update({'alert':alert})
+			msg = '''Hi there!
+Your account's password has been changed,
+
+New Password : '''+request.POST.get('npass')+'''
+
+If this was not you report us now!
+
+Thanks & Regards,
+Printsathi'''
+			sub='Alert! Your Password Has Been Changed'
+			email = EmailMessage(sub, msg, to=[n])
+			email.send()
+			return render(request,'resellerprofile.html',dic)
+		else:
+			obj=ResellerData.objects.filter(Email=request.session['re_email'])
+			for x in obj:
+				dic={'fname': x.Reseller_fullname,
+				'lname': x.Business_Name,
+				'email': x.Email,
+				'phone': x.Phone,
+				'address': x.Address,
+				'city': x.City,
+				'state': x.State,
+				'session':CheckUserSession(request),
+				'checksession':1
+				}
+			b1='''<script type="text/javascript">
+			alert("'''
+			b2='''");</script>'''
+			alert=b1+'Incorrect Password'+b2
+			dic.update({'alert':alert})
+			return render(request,'resellerprofile.html',dic)
+	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')

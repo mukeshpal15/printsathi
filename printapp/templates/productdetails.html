@@ -141,20 +141,15 @@
                <div class="col-md-7 col-sm-8">
                   <div class="md-prod-page">
                      <div class="md-prod-page-in">
+                        
                         <div class="page-preview">
-                           <div class="preview">
+                           <div class="preview">{% for i in image %}
                               <div class="preview-pic tab-content">
-                                 <div class="tab-pane active" id="pic-1"><img src="{% static 'images/lag-60.png' %}" alt="#" /></div>
-                                 <div class="tab-pane" id="pic-2"><img src="{% static 'images/lag-61.png' %}" alt="#" /></div>
-                                 <div class="tab-pane" id="pic-3"><img src="{% static 'images/lag-60.png' %}" alt="#" /></div>
-                                 <div class="tab-pane" id="pic-4"><img src="{% static 'images/lag-61.png' %}" alt="#" /></div>
-                              </div>
+                                 <div class="tab-pane" id="pic-4"><img src="{{ i.Design_Image |safe}}" alt="#" /></div>
+                              </div>{% endfor %}{% for i in image %}
                               <ul class="preview-thumbnail nav nav-tabs">
-                                 <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="{% static 'images/lag-60.png' %}" alt="#" /></a></li>
-                                 <li><a data-target="#pic-2" data-toggle="tab"><img src="{% static 'images/lag-61.png' %}" alt="#" /></a></li>
-                                 <li><a data-target="#pic-3" data-toggle="tab"><img src="{% static 'images/lag-60.png' %}" alt="#" /></a></li>
-                                 <li><a data-target="#pic-4" data-toggle="tab"><img src="{% static 'images/lag-61.png' %}" alt="#" /></a></li>
-                              </ul>
+                                 <li><a data-target="#pic-4" data-toggle="tab"><img src="{{ i.Design_Image |safe}}" alt="#" /></a></li>
+                              </ul>{% endfor %}
                            </div>
                         </div>
                         <div class="btn-dit-list clearfix">
@@ -198,9 +193,9 @@
                         <div class="dex-a">
                            <h4>Description</h4>
                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                              lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                              when an unknown printer took a galley of type and scrambled it to make a 
-                              type specimen book..
+                                                                                    lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                                                                                    when an unknown printer took a galley of type and scrambled it to make a 
+                                                                                    type specimen book..
                            </p>
                            <br>
                            <p>Small: H 25 cm / &Oslash; 12 cm</p>
@@ -214,63 +209,63 @@
                                     <h5>Measurments</h5>
                                  </div>
                                  <div class="col-md-8">
-                                    <p>H25 cm / 0 12 cm and H 24 cm / 0 25 cm</p>
+                                    <p>{{Product_Size}}</p>
                                  </div>
                               </li>
                               <li class="clearfix">
                                  <div class="col-md-4">
-                                    <h5>Material</h5>
+                                    <h5>Paper Type</h5>
                                  </div>
                                  <div class="col-md-8">
-                                    <p>Material Name</p>
+                                    <p>{{Product_Paper_Type | safe }}</p>
                                  </div>
                               </li>
                               <li class="clearfix">
                                  <div class="col-md-4">
-                                    <h5>Wire</h5>
+                                    <h5>Thickness</h5>
                                  </div>
                                  <div class="col-md-8">
-                                    <p>Wire Name</p>
+                                    <p>{{Product_Thickness | safe }}</p>
                                  </div>
                               </li>
                               <li class="clearfix">
                                  <div class="col-md-4">
-                                    <h5>Comdition</h5>
+                                    <h5>Lamination</h5>
                                  </div>
                                  <div class="col-md-8">
-                                    <p>Brand new</p>
+                                    <p>{{Product_Lamination | safe }}</p>
                                  </div>
                               </li>
                               <li class="clearfix">
                                  <div class="col-md-4">
-                                    <h5>SKU number</h5>
+                                    <h5>Quantity</h5>
                                  </div>
                                  <div class="col-md-8">
-                                    <p>SKU number</p>
+                                    <p>{{Product_Quantity}}</p>
                                  </div>
                               </li>
                               <li class="clearfix">
                                  <div class="col-md-4">
-                                    <h5>Shipping</h5>
+                                    <h5>Colour</h5>
                                  </div>
                                  <div class="col-md-8">
-                                    <p>Shipping worldwide</p>
+                                    <p>{{Product_Color}}</p>
                                  </div>
                               </li>
                               <li class="clearfix">
                                  <div class="col-md-4">
-                                    <h5>Warranty</h5>
+                                    <h5>Print Side</h5>
                                  </div>
                                  <div class="col-md-8">
-                                    <p>1 years</p>
+                                    <p>{{Product_Print_Sides}}</p>
                                  </div>
                               </li>
                               <li class="clearfix">
                                  <div class="col-md-4">
-                                    <h5>Delivery</h5>
+                                    <h5>Lamination</h5>
                                  </div>
                                  <div class="col-md-8">
-                                    <p>Choose country</p>
+                                    <p>{{Product_Lamination}}</p>
                                  </div>
                               </li>
                            </ul>

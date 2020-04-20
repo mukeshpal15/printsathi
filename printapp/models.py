@@ -43,3 +43,24 @@ class UserData(models.Model):
 	User_Password=models.CharField(max_length=100)
 	class Meta:
 		db_table="UserData"
+
+class ResellerData(models.Model):
+	Reseller_ID=models.CharField(max_length=100)
+	Reseller_fullname=models.CharField(max_length=100)
+	Gender=models.CharField(max_length=100)
+	Business_Name=models.CharField(max_length=100)
+	Business_Type=models.CharField(max_length=100)
+	Gstn=models.CharField(max_length=100)
+	Pancard_No=models.CharField(max_length=100)
+	Email=models.CharField(max_length=100)
+	Phone=models.CharField(max_length=100)
+	Address=models.CharField(max_length=200)
+	City=models.CharField(max_length=100)
+	State=models.CharField(max_length=100)
+	pincode=models.CharField(max_length=100)
+	Establish=models.CharField(max_length=100)
+	image=models.ImageField(upload_to='Resellerpic')
+	Password=models.CharField(max_length=100)
+	class Meta:
+		db_table="ResellerData"
+	
