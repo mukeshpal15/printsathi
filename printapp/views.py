@@ -184,9 +184,9 @@ def saveuser(request):
 		u="U00"
 		x=1
 		uid=u+str(x)
-		while UserData.objects.filter(User_Email=request.POST.get('email')).exists():
+		while UserData.objects.filter(User_ID=uid).exists():
 			x=x+1
-			pid=p+str(x)
+			uid=u+str(x)
 		x=int(x)
 		if UserData.objects.filter(User_Email=request.POST.get('Email'),User_Phone=request.POST.get('Phone Number')).exists():
 			dic={'msg':"User Already Registered"}
@@ -395,6 +395,7 @@ def logout(request):
 		return render(request, 'index.html',dic)
 	except:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+
 def resellersignup(request):
 	return render(request,'resellerregistration.html',{})
 
@@ -409,29 +410,42 @@ def Resellerenter(request):
 		x=int(x)
 		if ResellerData.objects.filter(Email=request.POST.get('Email'),Phone=request.POST.get('Phone Number')).exists():
 			dic={'msg':"User Already Registered"}
+
+def resellerregistration(request):
+	return render(request,'resellerregistration.html',{})
+@csrf_exempt
+def savereseller(request):
+	if request.method=="POST":
+		u="R00"
+		x=1
+		uid=u+str(x)
+		while ResellerData.objects.filter(Reseller_ID=uid).exists():
+			x=x+1
+			uid=u+str(x)
+		x=int(x)
+		if ResellerData.objects.filter(Reseller_Email=request.POST.get('Email'), Reseller_Phone=request.POST.get('Phone Number')):
+			dic={'msg':"Reseller Already Registered"}
 			return render(request, 'resellerregistration.html',dic)
 		else:
 			otp=uuid.uuid5(uuid.NAMESPACE_DNS, request.POST.get('Email')+uid)
 			password=str(otp)
 			password=password.upper()[0:8]
-			obj=ResellerData(
-				Reseller_ID=uid,
-				Reseller_fullname=request.POST.get('fullname'),
-				Gender=request.POST.get('Gender'),
-				Business_Name=request.POST.get('Business'),
-				Business_Type=request.POST.get('Businesstype'),
-				Gstn=request.POST.get('gstn'),
-				Pancard_No=request.POST.get('pancard'),
-				Email=request.POST.get('Email'),
-				Phone=request.POST.get('Phone'),
-				Address=request.POST.get('Address'),
-				City=request.POST.get('City'),
-				State=request.POST.get('state'),
-				pincode=request.POST.get('Pincode'),
-				Establish=request.POST.get('establish'),
-				image=request.FILES['image'],
-				Password=password
-			)
+			obj=ResellerData(Reseller_ID=uid,
+							Reseller_First_Name=request.POST.get('First Name'),
+							Reseller_Last_Name=request.POST.get('Last Name'),
+							Reseller_Gender=request.POST.get('Gender'),
+							Reseller_Email=request.POST.get('Email'),
+							Reseller_Phone=request.POST.get('Phone Number'),
+							Reseller_Address=request.POST.get('Address'),
+							Reseller_City=request.POST.get('City'),
+							Reseller_State=request.POST.get('State'),
+							Reseller_GSTIN=request.POST.get('GSTIN'),
+							Reseller_PAN=request.POST.get('PAN'),
+							Reseller_Password=password,
+							Reseller_Status='Deactive',
+							Adhaar=request.FILES['adhaar'],
+							Profile=request.FILES['profile']	
+							)
 			obj.save()
 			msg = '''Hi there!
 Your account has been Successfully created on Printsathi. Your account credentials are as below,
@@ -443,8 +457,8 @@ Printsathi'''
 			sub='Welcome to Printsathi'
 			email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
 			email.send()
-			dic={'msg':"Successfully Registered",
-				'msg1':'You will get you account credentials on your mail soon.'}
+			dic={'msg':"Reseller Registered Successfully",
+				'msg1':"Your password has been sent to your email."}
 			return render(request, 'resellerregistration.html',dic)
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
@@ -454,24 +468,37 @@ def resellerlogin(request):
 @csrf_exempt
 def resellerlog(request):
 	if request.method=='POST':
+		d='Deactive'
 		check=1
 		dic={}
-		if ResellerData.objects.filter(Email=request.POST.get('email'),Password=request.POST.get('pass')).exists():
+		if ResellerData.objects.filter(Reseller_Email=request.POST.get('email'),Reseller_Password=request.POST.get('pass')):
 			request.session['re_email'] = request.POST.get('email')
-			for x in ResellerData.objects.filter(Email=request.POST.get('email')):
-				dic={'fname': x.Reseller_fullname,
-					'lname': x.Business_Name,
-					'email': x.Email,
-					'phone': x.Phone,
-					'address': x.Address,
-					'city': x.City,
-					'state': x.State,
-					'session':CheckUserSession(request),
-					'checksession':1}
-			return render(request,'resellerprofile.html',dic)
+			if ResellerData.objects.filter(Reseller_Status=d).exists():
+				dic={'msg':'Your account is deactivated. Please wait admin response',}
+				return render(request,'resellerlogin.html',dic)
+			else:
+				for x in ResellerData.objects.filter(Reseller_Email=request.session['re_email']):
+					dic={'fname': x.Reseller_First_Name,
+						'lname': x.Reseller_Last_Name,
+						'email': x.Reseller_Email,
+						'phone': x.Reseller_Phone,
+						'address': x.Reseller_Address,
+						'city': x.Reseller_City,
+						'state': x.Reseller_State,
+						'session':CheckUserSession(request),
+						'checksession':1}
+				return render(request,'resellerprofile.html',dic)
 		else:
 			dic={'msg':'Incorrect Email or Password',}
 			return render(request,'resellerlogin.html',dic)
+
+
+@csrf_exempt
+def resellerdata(request):
+	if request.method=="POST":
+		dic={'adata':ResellerData.objects.filter(Reseller_Status="Active"),
+			'ddata':ResellerData.objects.filter(Reseller_Status="Deactive")}
+		return render(request,'resellerdata.html',dic)
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 
@@ -479,21 +506,21 @@ def resellerlog(request):
 def changeresellerdetails(request):
 	if request.method=="POST":
 		dic={}
-		obj=ResellerData.objects.filter(Email=request.session['re_email'])
+		obj=ResellerData.objects.filter(Reseller_Email=request.session['re_email'])
 		obj.update(
-			Phone=request.POST.get('Phone'),
-			Address=request.POST.get('Address'),
-			City=request.POST.get('City'),
-			State=request.POST.get('State')
+			Reseller_Phone=request.POST.get('Phone'),
+			Reseller_Address=request.POST.get('Address'),
+			Reseller_City=request.POST.get('City'),
+			Reseller_Status=request.POST.get('State')
 			)
 		for x in obj:
-			dic={'fname': x.Reseller_fullname,
-				'lname': x.Business_Name,
-				'email': x.Email,
-				'phone': x.Phone,
-				'address': x.Address,
-				'city': x.City,
-				'state': x.State,
+			dic={'fname': x.Reseller_First_Name,
+				'lname': x.Reseller_Last_Name,
+				'email': x.Reseller_Email,
+				'phone': x.Reseller_Phone,
+				'address': x.Reseller_Address,
+				'city': x.Reseller_City,
+				'state': x.Reseller_Status,
 				'session':CheckUserSession(request),
 				'checksession':1
 			}
@@ -510,17 +537,17 @@ def changeresellerpassword(request):
 	if request.method=="POST":
 		dic={}
 		n=request.session['re_email']
-		if ResellerData.objects.filter(Email=request.session['re_email'],Password=request.POST.get('opass')).exists():
-			obj=ResellerData.objects.filter(Email=request.session['re_email'],Password=request.POST.get('opass'))
-			obj.update(Password=request.POST.get('npass'))
+		if ResellerData.objects.filter(Reseller_Email=request.session['re_email'],Reseller_Password=request.POST.get('opass')).exists():
+			obj=ResellerData.objects.filter(Reseller_Email=request.session['re_email'],Reseller_Password=request.POST.get('opass'))
+			obj.update(Reseller_Password=request.POST.get('npass'))
 			for x in obj:
-				dic={'fname': x.Reseller_fullname,
-				'lname': x.Business_Name,
-				'email': x.Email,
-				'phone': x.Phone,
-				'address': x.Address,
-				'city': x.City,
-				'state': x.State,
+				dic={'fname': x.Reseller_First_Name,
+				'lname': x.Reseller_Last_Name,
+				'email': x.Reseller_Email,
+				'phone': x.Reseller_Phone,
+				'address': x.Reseller_Address,
+				'city': x.Reseller_City,
+				'state': x.Reseller_State,
 				'session':CheckUserSession(request),
 				'checksession':1
 				}
@@ -543,15 +570,15 @@ Printsathi'''
 			email.send()
 			return render(request,'resellerprofile.html',dic)
 		else:
-			obj=ResellerData.objects.filter(Email=request.session['re_email'])
+			obj=ResellerData.objects.filter(Reseller_Email=request.session['re_email'])
 			for x in obj:
-				dic={'fname': x.Reseller_fullname,
-				'lname': x.Business_Name,
-				'email': x.Email,
-				'phone': x.Phone,
-				'address': x.Address,
-				'city': x.City,
-				'state': x.State,
+				dic={'fname': x.Reseller_First_Name,
+				'lname': x.Reseller_Last_Name,
+				'email': x.Reseller_Email,
+				'phone': x.Reseller_Phone,
+				'address': x.Reseller_Address,
+				'city': x.Reseller_City,
+				'state': x.Reseller_State,
 				'session':CheckUserSession(request),
 				'checksession':1
 				}
@@ -563,3 +590,41 @@ Printsathi'''
 			return render(request,'resellerprofile.html',dic)
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+
+def reselleractive(request):
+	if request.method=="POST":
+		obj=ResellerData.objects.filter(Reseller_ID=request.POST.get('id'))
+		obj.update(Reseller_Status="Active")
+		e=''
+		p=''
+		for x in obj:
+			e=x.Reseller_Email
+			p=x.Reseller_Password
+			break
+		msg = '''Hi there!
+Your Reseller Account has been activated successfully,
+
+Password : '''+p+'''
+
+Thanks & Regards,
+Printsathi'''
+		sub='Congratulations! Reseller Account Activated Successfully'
+		email = EmailMessage(sub, msg, to=[e])
+		email.send()
+		dic={'adata':ResellerData.objects.filter(Reseller_Status="Active"),
+			'ddata':ResellerData.objects.filter(Reseller_Status="Deactive")}
+		return render(request,'resellerdata.html',dic)
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+
+@csrf_exempt
+def resellerdeactive(request):
+	if request.method=="POST":
+		obj=ResellerData.objects.filter(Reseller_ID=request.POST.get('id'))
+		obj.update(Reseller_Status="Deactive")
+		dic={'adata':ResellerData.objects.filter(Reseller_Status="Active"),
+			'ddata':ResellerData.objects.filter(Reseller_Status="Deactive")}
+		return render(request,'resellerdata.html',dic)
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+

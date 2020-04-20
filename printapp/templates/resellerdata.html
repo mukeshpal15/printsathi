@@ -3,7 +3,11 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8">
-      <title>Printsathi - Reseller Registration</title>
+
+      
+
+      <title>Printsathi - Add Products</title>
+
       <link rel="stylesheet" href="{% static 'w3.css' %}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <!--enable mobile device-->
@@ -37,133 +41,140 @@
                         </button>
                         <a href="\index\" class="navbar-brand"><img src="{% static 'images/logo.png' %}" alt="" /></a>
                      </div>
-                     <form class="navbar-form navbar-left web-sh">
-                        <div class="form">
-                           <input type="text" class="form-control" placeholder="Search for products or companies">
-                        </div>
-                     </form>
+
+                     
+
                   </div>
                   <div class="col-md-8 col-sm-12">
                      <div class="right-nav">
-                        <div class="login-sr">
-                           <div class="login-signup">
-                              <ul>
-                                 <li><a href="#">Login</a></li>
-                                 <li><a class="custom-b" href="#">Sign up</a></li>
+                  <ul>
+                    <li>
+                      <form action="/backtoadmindash/" method="POST">
+                        <input class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;" type="submit" value="Back">
+                      </form>
+                    </li>
                               </ul>
                            </div>
                         </div>
-                        <div class="help-r hidden-xs">
-                           <div class="help-box">
-                              <ul>
-                                 <li> <a data-toggle="modal" data-target="#myModal" href="#"> <span>Change</span> <img src="{% static 'images/flag.png' %}" alt="" /> </a> </li>
-                                 <li> <a href="#"><img class="h-i" src="{% static 'images/help-icon.png' %}" alt="" /> Help </a> </li>
-                              </ul>
-                           </div>
-                        </div>
-                        <div class="nav-b hidden-xs">
-                           <div class="nav-box">
-                              <ul>
-                                 <li><a href="howitworks.html">How it works</a></li>
-                                 <li><a href="\about\">Chamb for Business</a></li>
-                              </ul>
-                           </div>
-                        </div>
+                        
                      </div>
                   </div>
+
+
                </div>
             </div>
             <!--/.container-fluid --> 
          </nav>
       </header>
+
       <!-- Modal -->
-      <div class="modal fade lug" id="myModal" role="dialog">
-         <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Change</h4>
-               </div>
-               <div class="modal-body">
-                  <ul>
-                     <li><a href="#"><img src="{% static 'images/flag-up-1.png' %}" alt="" /> United States</a></li>
-                     <li><a href="#"><img src="{% static 'images/flag-up-2.png' %}" alt="" /> France </a></li>
-                  </ul>
+      
+         
+      
+
+      <div class="terms-conditions">
+         <div class="terms-title">
+            <div class="container">
+               <div class="row">
+                  <ol class="breadcrumb">
+                     
+                     <li class="active">Admin Login</li>
+                     <li>Reseller's Data</li>
+
+                  </ol>
                </div>
             </div>
-         </div>
-      </div>
-      <div id="sidebar" class="top-nav">
-         <ul id="sidebar-nav" class="sidebar-nav">
-            <li><a href="#">Help</a></li>
-            <li><a href="#">How it works</a></li>
-            <li><a href="#">Chamb for Business</a></li>
-         </ul>
-      </div>
-      <div class="terms-conditions" style="background-size:100% auto;background-image: url({% static 'images/39e8e6ebcec0d5a42b5998857571fbde.jpg' %})">
-         <div class="terms-title">
-            
          </div>
        <div class="container">
-                  <div class="w3-card-4" style="width:50%;border-radius:20px;background-color:white;">
-
-            <div class="w3-container w3-blue" style="padding-top:10px;padding-bottom:10px;border-radius:20px;">
-            <h2>Reseller Registration</h2>
+         <div class="row">
+            <div class="column" style="margin-top:20px;">
+               <label style="margin-bottom:15px;font-size:20px;color:green;">Active Reseller List</label>
+               <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+                 <tr class="w3-black">
+                   <th>ID</th>
+                   <th>Name</th>
+                   <th>Gender</th>
+                   <th>Email</th>
+                   <th>Phone</th>
+                   <th>Address</th>
+                   <th>City</th>
+                   <th>State</th>
+                   <th>GSTIN</th>
+                   <th>PAN Number</th>
+                   <th>Adhaar</th>
+                   <th>Photo</th>
+                   <th>Change Status</th>
+                 </tr>
+                 {% for x in adata %}
+                 <tr>
+                   <td>{{ x.Reseller_ID|safe }}</td>
+                   <td>{{ x.Reseller_First_Name|safe }} {{ x.Reseller_Last_Name|safe }}</td>
+                   <td>{{ x.Reseller_Gender|safe }}</td>
+                   <td>{{ x.Reseller_Email|safe }}</td>
+                   <td>{{ x.Reseller_Phone|safe }}</td>
+                   <td>{{ x.Reseller_Address|safe }}</td>
+                   <td>{{ x.Reseller_City|safe }}</td>
+                   <td>{{ x.Reseller_State|safe }}</td>
+                   <td>{{ x.Reseller_GSTIN|safe }}</td>
+                   <td>{{ x.Reseller_PAN|safe }}</td>
+                   <td><img style="width:500px;" src="{{ x.Adhaar.url|safe }}"></td>
+                   <td><img style="width:200px;" src="{{ x.Profile.url|safe }}"></td>
+                   <td>
+                     <form action="/resellerdeactive/" method="POST">{% csrf_token %}
+                       <input type="hidden" name="id" value="{{ x.Reseller_ID|safe }}">
+                       <button type="submit" class="w3-button w3-red w3-hover-black" style="font-size:15px;border-radius:20px;">Deactive</button>
+                     </form>
+                  </td>
+                 </tr>  
+                 {% endfor %}
+               </table>
             </div>
-               <label style="margin-bottom:15px;color:green;font-size:18px;">Required Fields Marked With *</label><br>
-
-               <form class="w3-container" action="/savereseller/" method="POST" style="margin-top:20px;margin-bottom:20px;" enctype="multipart/form-data">{% csrf_token %}
-                  <label style="margin-bottom:15px;color:green;font-size:15px;">{{ msg|safe }}</label><br>
-
-                  <label style="margin-bottom:15px;color:green;font-size:15px;">{{ msg1|safe }}</label>
-
-
-                  <input class="w3-input" type="text" name="First Name" style="margin-bottom:20px;" placeholder="First Name*" required>
-                  
-                  <input class="w3-input" type="text" name="Last Name" style="margin-bottom:20px;" placeholder="Last Name*" required>
-
-                  <select class="w3-input" name="Gender" style="margin-bottom:20px;">
-                     <option required="required" disabled="disabled" selected="selected">Gender*</option>
-                     <option value="Male">Male</option>
-                     <option value="Female">Female</option>
-                  </select>
-
-                  
-                  <input class="w3-input" type="Number" name="Phone Number" style="margin-bottom:20px;" placeholder="Phone Number*" required>
-
-                  <input class="w3-input" type="email" name="Email" style="margin-bottom:20px;" placeholder="Email*" required>
-
-                  <textarea class="w3-input" type="text" name="Address" style="margin-bottom:20px;" placeholder="Address*" required></textarea>
-                  
-                  <input class="w3-input" type="text" name="City" style="margin-bottom:20px;" placeholder="City*" required>
-
-                  <input class="w3-input" type="number" name="Pincode" style="margin-bottom:20px;" placeholder="Pincode*" required>
-
-                  <input class="w3-input" type="number" name="establish" style="margin-bottom:20px;" placeholder="Establish Year*" >
-
-                  <input class="w3-input" type="text" name="State" style="margin-bottom:20px;" placeholder="State*" required>
-
-                  <input class="w3-input" type="text" name="GSTIN" style="margin-bottom:20px;" placeholder="GSTIN*" required>
-
-                  <input class="w3-input" type="text" name="PAN" style="margin-bottom:20px;" placeholder="PAN Number*" required>
-
-                  <label>Adhaar Upload*</label>
-                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" type="file" name="adhaar" accept="image/*" required id="id_image">
-
-                  <label>Profile Photo Upload*</label>
-                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" type="file" name="profile" accept="image/*" required id="id_image">
-
-                  <input type="submit" value="Register" class="w3-button w3-red w3-hover-black" style="font-size:20px;border-radius:20px;margin-bottom:20px;">
-
-
-               </form>
-
+            <div class="column" style="margin-top:20px;">
+               <label style="margin-bottom:15px;font-size:20px;color:green;">Deactive Reseller List</label>
+               <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+                 <tr class="w3-black">
+                   <th>ID</th>
+                   <th>Name</th>
+                   <th>Gender</th>
+                   <th>Email</th>
+                   <th>Phone</th>
+                   <th>Address</th>
+                   <th>City</th>
+                   <th>State</th>
+                   <th>GSTIN</th>
+                   <th>PAN Number</th>
+                   <th>Adhaar</th>
+                   <th>Photo</th>
+                   <th>Change Status</th>
+                 </tr>
+                 {% for x in ddata %}
+                 <tr>
+                   <td>{{ x.Reseller_ID|safe }}</td>
+                   <td>{{ x.Reseller_First_Name|safe }} {{ x.Reseller_Last_Name|safe }}</td>
+                   <td>{{ x.Reseller_Gender|safe }}</td>
+                   <td>{{ x.Reseller_Email|safe }}</td>
+                   <td>{{ x.Reseller_Phone|safe }}</td>
+                   <td>{{ x.Reseller_Address|safe }}</td>
+                   <td>{{ x.Reseller_City|safe }}</td>
+                   <td>{{ x.Reseller_State|safe }}</td>
+                   <td>{{ x.Reseller_GSTIN|safe }}</td>
+                   <td>{{ x.Reseller_PAN|safe }}</td>
+                   <td><img style="width:500px;" src="{{ x.Adhaar.url|safe }}"></td>
+                   <td><img style="width:200px;" src="{{ x.Profile.url|safe }}"></td>
+                   <td>
+                     <form action="/reselleractive/" method="POST">{% csrf_token %}
+                       <input type="hidden" name="id" value="{{ x.Reseller_ID|safe }}">
+                       <button type="submit" class="w3-button w3-green w3-hover-black" style="font-size:15px;border-radius:20px;">Active</button>
+                     </form>
+                  </td>
+                 </tr>  
+                 {% endfor %}
+               </table>
             </div>
-         
+         </div>
+
       </div>  
-   </div>
-
+      </div>
       <footer>
          <div class="main-footer">
             <div class="container">

@@ -37,13 +37,17 @@ urlpatterns = [
     path('myuseraccount/',myuseraccount),
     path('adddesigns/',adddesigns),
     path('savedesigns/',savedesigns),
-    path('resellersignup/',resellersignup),
     path('Resellerenter/',Resellerenter),
     path('resellerlogin/',resellerlogin),
     path('resellerlog/',resellerlog),
     path('changeresellerdetails/',changeresellerdetails),
     path('changeresellerpassword/',changeresellerpassword),
     path('logout/',logout),
+    path('resellerregistration/',resellerregistration),
+    path('savereseller/',savereseller),
+    path('resellerdata/',resellerdata),
+    path('reselleractive/',reselleractive),
+    path('resellerdeactive/',resellerdeactive),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

@@ -46,21 +46,20 @@ class UserData(models.Model):
 
 class ResellerData(models.Model):
 	Reseller_ID=models.CharField(max_length=100)
-	Reseller_fullname=models.CharField(max_length=100)
-	Gender=models.CharField(max_length=100)
-	Business_Name=models.CharField(max_length=100)
-	Business_Type=models.CharField(max_length=100)
-	Gstn=models.CharField(max_length=100)
-	Pancard_No=models.CharField(max_length=100)
-	Email=models.CharField(max_length=100)
-	Phone=models.CharField(max_length=100)
-	Address=models.CharField(max_length=200)
-	City=models.CharField(max_length=100)
-	State=models.CharField(max_length=100)
-	pincode=models.CharField(max_length=100)
-	Establish=models.CharField(max_length=100)
-	image=models.ImageField(upload_to='Resellerpic')
-	Password=models.CharField(max_length=100)
+	Reseller_First_Name=models.CharField(max_length=100)
+	Reseller_Last_Name=models.CharField(max_length=100)
+	Reseller_Gender=models.CharField(max_length=100)
+	Reseller_Email=models.CharField(max_length=100)
+	Reseller_Phone=models.CharField(max_length=100)
+	Reseller_Address=models.CharField(max_length=1000)
+	Reseller_City=models.CharField(max_length=100)
+	Reseller_State=models.CharField(max_length=100)
+	Reseller_GSTIN=models.CharField(max_length=100)
+	Reseller_PAN=models.CharField(max_length=100)
+	Reseller_Password=models.CharField(max_length=100)
+	Reseller_Status=models.CharField(max_length=100)
+	Adhaar=models.ImageField(upload_to="reselleradhaar/")
+	Profile=models.ImageField(upload_to="resellerprofile/")
 	class Meta:
 		db_table="ResellerData"
-	
+
