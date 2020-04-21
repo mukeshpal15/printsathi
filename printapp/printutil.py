@@ -33,17 +33,15 @@ def GetDesignImageCount():
 	icount=[]
 	for x in obj:
 		pid.append(x.Product_ID)
-		icount.append(GetCount(x.Product_ID))
-	pid=list(set(pid))
-	icount=list(set(icount))
-	for (a,b) in zip(pid,icount):
-		dic={'id':a,
-			'count':b,
-			}
-		lt.append(dic)
+	for a in list(set(zip(pid))):
+		for x in a:
+			dic={'id':x,
+				'count':GetCount(x),
+				}
+			lt.append(dic)
 	return lt
 def GetProductDetail():
-	obj=ProductData.objects.all()
+	obj=ProductData.objects.filter(Product_Status='Active')
 	lt1=[]
 	b=''
 	for i in obj:
@@ -57,13 +55,13 @@ def GetProductDetail():
 			'Product_Print_Sides':i.Product_Print_Sides,
 			'Product_Color':i.Product_Color,
 			'Product_Size':i.Product_Size,
-			'Product_Status':i.Product_Status
+			'Product_Price':i.Product_Price,
 		}
 		sub=ProductDesignData.objects.filter(Product_ID=i.Product_ID)
 		for j in sub:
 			b=j.Design_Image.url
+			break
 		dic.update({'image':b})
-
 		lt1.append(dic)	
 	return lt1
 
@@ -82,13 +80,20 @@ def GetAgainProductDetail(pid):
 			'Product_Print_Sides':i.Product_Print_Sides,
 			'Product_Color':i.Product_Color,
 			'Product_Size':i.Product_Size,
-			'Product_Status':i.Product_Status
+			'Product_Price':i.Product_Price,
 			}
 		sub=ProductDesignData.objects.filter(Product_ID=pid)
+		i=0
+		img={}
+		lt=[]
 		for j in sub:
-			lt.append(j.Design_Image.url)
-			
-		dic.update({'image':lt})
-
+			img.update({'image':j.Design_Image.url,
+						'imgid':str(i)})
+			i=i+1
+			lt.append(img)
+		dic.update({'img':lt})
+		for j in sub:
+			dic.update({'coverimage':j.Design_Image.url,
+						'coverid':'cover'})
+			break
 	return dic
-

@@ -98,6 +98,7 @@ def saveproducts(request):
 				Product_Print_Sides=request.POST.get('printside'),
 				Product_Color=request.POST.get('color'),
 				Product_Size=request.POST.get('size'),
+				Product_Price=request.POST.get('price'),
 				Product_Status='Active',
 				)
 			obj.save()
@@ -113,6 +114,7 @@ def saveproducts(request):
 def deleteproducts(request):
 	if request.method=="POST":
 		obj=ProductData.objects.filter(Product_ID=request.POST.get('delete')).delete()
+		obj2=ProductDesignData.objects.filter(Product_ID=request.POST.get('delete')).delete()
 		dic={'msg':"Deleted Successfully",
 		'data':PaperTypeData.objects.all(),
 		'adata':ProductData.objects.filter(Product_Status="Active"),
@@ -361,7 +363,8 @@ def myuseraccount(request):
 @csrf_exempt
 def adddesigns(request):
 	if request.method=="POST":
-		dic={'prod':ProductData.objects.filter(Product_Status="Active"),}
+		dic={'prod':ProductData.objects.filter(Product_Status='Active'),
+			'data':GetDesignImageCount()}
 		return render(request, 'adddesigns.html',dic)
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
@@ -377,7 +380,7 @@ def savedesigns(request):
 				Design_Image=m
 				)
 			obj.save()
-			dic={'prod':ProductData.objects.filter(Product_Status="Active"),
+			dic={'prod':ProductData.objects.filter(Product_Status='Active'),
 				'msg':'Saved',
 				'data':GetDesignImageCount()}
 			return render(request, 'adddesigns.html',dic)
@@ -627,4 +630,3 @@ def resellerdeactive(request):
 		return render(request,'resellerdata.html',dic)
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
-

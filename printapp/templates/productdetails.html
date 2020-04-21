@@ -3,11 +3,12 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8">
-      <title>Printsathi - Responsive E-commerce HTML5 Template</title>
+      <title>Printsathi - {{ Product_Name|safe }}</title>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <!--enable mobile device-->
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!--fontawesome css-->
+      <link rel="stylesheet" href="{% static 'w3.css' %}">
       <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
       <!--bootstrap css-->
       <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
@@ -106,10 +107,8 @@
             <div class="container">
                <div class="row">
                   <ol class="breadcrumb">
-                     <li><a href="#">Forntpage </a></li>
-                     <li class="active">Furniture</li>
-                     <li class="active">Sofa</li>
-                     <li><a href="#">All setup Sofa</a></li>
+                     <li><a href="/index/">Home</a></li>
+                     <li class="active">{{ Product_Name|safe }}</li>
                   </ol>
                </div>
             </div>
@@ -120,273 +119,64 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="prod-page-title">
-                     <h2>All setup Sofa</h2>
-                     <p>By <span>Dex Morgan Mobilya</span></p>
+                     <h2>{{ Product_Name|safe }}</h2>
+                     <p><span>{{ Product_Category|safe }}</span></p>
                   </div>
+
                </div>
             </div>
             <div class="row">
                <div class="col-md-2 col-sm-4">
                   <div class="left-profile-box-m prod-page">
                      <div class="pro-img">
-                        <img src="{% static 'images/150x150.png' %}" alt="#" />
+                        <img src="{{ coverimage|safe }}" alt="#" />
                      </div>
                      <div class="pof-text">
-                        <h3>Morgan Mobilya</h3>
+                        <h3>{{ Product_Name|safe }}</h3>
                         <div class="check-box"></div>
+                        <h4>Price</h4>
+                        <h3 style="font-size:20px;"><i class="fa fa-inr"></i> {{ Product_Price|safe }} <span>/-</span></h3>
                      </div>
-                     <a href="#">Visit store</a>
+                     <a class="w3-button w3-blue w3-hover-black" style="border-radius:5px;" href="#">Book Now</a>
+
                   </div>
                </div>
-               <div class="col-md-7 col-sm-8">
+               <div class="col-md-7 col-sm-8" style="width:80%;">
                   <div class="md-prod-page">
                      <div class="md-prod-page-in">
                         
                         <div class="page-preview">
-                           <div class="preview">{% for i in image %}
+                           <div class="preview">
                               <div class="preview-pic tab-content">
-                                 <div class="tab-pane" id="pic-4"><img src="{{ i.Design_Image |safe}}" alt="#" /></div>
-                              </div>{% endfor %}{% for i in image %}
+                                 <div class="tab-pane active" id="{{ coverid|safe }}"><img src="{{ coverimage|safe }}" alt="#" /></div>
+                                 {% for x in img %}
+                                 <div class="tab-pane" id="{{ x.imgid|safe }}"><img src="{{ x.image|safe }}" alt="#" /></div>
+                                 {% endfor %}
+                              </div>
                               <ul class="preview-thumbnail nav nav-tabs">
-                                 <li><a data-target="#pic-4" data-toggle="tab"><img src="{{ i.Design_Image |safe}}" alt="#" /></a></li>
-                              </ul>{% endfor %}
+                                 <li class="active"><a data-target="#{{ coverid|safe }}" data-toggle="tab"><img src="{{ coverimage|safe }}" alt="#" />
+                                 {% for x in img %}
+                                 <li><a data-target="#{{ x.imgid|safe }}" data-toggle="tab"><img src="{{ x.image|safe }}" alt="#" /></a></li>
+                                 {% endfor %}
+                              </ul>
                            </div>
                         </div>
-                        <div class="btn-dit-list clearfix">
-                           <div class="left-dit-p">
-                              <div class="prod-btn">
-                                 <a href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist</a>
-                                 <a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                                 <p>23 likes</p>
-                              </div>
-                           </div>
-                           <div class="right-dit-p">
-                              <div class="like-list">
-                                 <ul>
-                                    <li>
-                                       <div class="im-b"><img class="" src="{% static 'images/list-img-01.png' %}" alt=""></div>
-                                    </li>
-                                    <li>
-                                       <div class="im-b"><img src="{% static 'images/list-img-02.png' %}" alt=""></div>
-                                    </li>
-                                    <li>
-                                       <div class="im-b"><img src="{% static 'images/list-img-03.png' %}" alt=""></div>
-                                    </li>
-                                    <li>
-                                       <div class="im-b"><img src="{% static 'images/list-img-04.png' %}" alt=""></div>
-                                    </li>
-                                    <li>
-                                       <div class="im-b"><img src="{% static 'images/list-img-05.png' %}" alt=""></div>
-                                    </li>
-                                    <li>
-                                       <div class="im-b"><img src="{% static 'images/list-img-06.png' %}" alt=""></div>
-                                    </li>
-                                    <li>
-                                       <div class="im-b"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></div>
-                                    </li>
-                                 </ul>
-                              </div>
-                           </div>
                         </div>
                      </div>
                      <div class="description-box">
-                        <div class="dex-a">
-                           <h4>Description</h4>
-                           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                                                                    lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                                                                    when an unknown printer took a galley of type and scrambled it to make a 
-                                                                                    type specimen book..
-                           </p>
-                           <br>
-                           <p>Small: H 25 cm / &Oslash; 12 cm</p>
-                           <p>Large H 24 cm / &Oslash; 25 cm</p>
-                        </div>
-                        <div class="spe-a">
-                           <h4>Specifications</h4>
-                           <ul>
-                              <li class="clearfix">
-                                 <div class="col-md-4">
-                                    <h5>Measurments</h5>
-                                 </div>
-                                 <div class="col-md-8">
-                                    <p>{{Product_Size}}</p>
-                                 </div>
-                              </li>
-                              <li class="clearfix">
-                                 <div class="col-md-4">
-                                    <h5>Paper Type</h5>
-                                 </div>
-                                 <div class="col-md-8">
-                                    <p>{{Product_Paper_Type | safe }}</p>
-                                 </div>
-                              </li>
-                              <li class="clearfix">
-                                 <div class="col-md-4">
-                                    <h5>Thickness</h5>
-                                 </div>
-                                 <div class="col-md-8">
-                                    <p>{{Product_Thickness | safe }}</p>
-                                 </div>
-                              </li>
-                              <li class="clearfix">
-                                 <div class="col-md-4">
-                                    <h5>Lamination</h5>
-                                 </div>
-                                 <div class="col-md-8">
-                                    <p>{{Product_Lamination | safe }}</p>
-                                 </div>
-                              </li>
-                              <li class="clearfix">
-                                 <div class="col-md-4">
-                                    <h5>Quantity</h5>
-                                 </div>
-                                 <div class="col-md-8">
-                                    <p>{{Product_Quantity}}</p>
-                                 </div>
-                              </li>
-                              <li class="clearfix">
-                                 <div class="col-md-4">
-                                    <h5>Colour</h5>
-                                 </div>
-                                 <div class="col-md-8">
-                                    <p>{{Product_Color}}</p>
-                                 </div>
-                              </li>
-                              <li class="clearfix">
-                                 <div class="col-md-4">
-                                    <h5>Print Side</h5>
-                                 </div>
-                                 <div class="col-md-8">
-                                    <p>{{Product_Print_Sides}}</p>
-                                 </div>
-                              </li>
-                              <li class="clearfix">
-                                 <div class="col-md-4">
-                                    <h5>Lamination</h5>
-                                 </div>
-                                 <div class="col-md-8">
-                                    <p>{{Product_Lamination}}</p>
-                                 </div>
-                              </li>
-                           </ul>
-                        </div>
+                        <ul class="w3-ul">
+                          <li class="w3-hover-blue" style="font-size:18px;">Measurment : <strong>{{Product_Size}}</strong></li>
+                          <li class="w3-hover-blue" style="font-size:18px;">Paper Type : <strong>{{ Product_Paper_Type|safe }}</strong></li>
+                          <li class="w3-hover-blue" style="font-size:18px;">Thickness : <strong>{{ Product_Thickness|safe }} gsm</strong></li>
+                          <li class="w3-hover-blue" style="font-size:18px;">Lamination : <strong>{{ Product_Lamination|safe }}</strong></li>
+                          <li class="w3-hover-blue" style="font-size:18px;">Quantity : <strong>{{ Product_Quantity|safe }}</strong></li>
+                          <li class="w3-hover-blue" style="font-size:18px;">Color : <strong>{{ Product_Color|safe }}</strong></li>
+                          <li class="w3-hover-blue" style="font-size:18px;">Print Side : <strong>{{ Product_Print_Sides|safe }}</strong></li>
+                        </ul>
                      </div>
                   </div>
                   <div class="similar-box">
-                     <h2>Similiar products from Morgan Mobilya</h2>
-                     <div class="row cat-pd">
-                        <div class="col-md-6">
-                           <div class="small-box-c">
-                              <div class="small-img-b">
-                                 <img class="img-responsive" src="{% static 'images/tr1.png' %}" alt="#" />
-                              </div>
-                              <div class="dit-t clearfix">
-                                 <div class="left-ti">
-                                    <h4>Product</h4>
-                                    <p>By <span>Beko</span> under <span>Lights</span></p>
-                                 </div>
-                                 <a href="#" tabindex="0">$1220</a>
-                              </div>
-                              <div class="prod-btn">
-                                 <a href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist</a>
-                                 <a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                                 <p>23 likes</p>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-md-6">
-                           <div class="small-box-c">
-                              <div class="small-img-b">
-                                 <img class="img-responsive" src="{% static 'images/tr2.png' %}" alt="#" />
-                              </div>
-                              <div class="dit-t clearfix">
-                                 <div class="left-ti">
-                                    <h4>Product</h4>
-                                    <p>By <span>Beko</span> under <span>Chairs</span></p>
-                                 </div>
-                                 <a href="#" tabindex="0">$1220</a>
-                              </div>
-                              <div class="prod-btn">
-                                 <a href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist</a>
-                                 <a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                                 <p>23 likes</p>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="row cat-pd">
-                        <div class="col-md-6">
-                           <div class="small-box-c">
-                              <div class="small-img-b">
-                                 <img class="img-responsive" src="{% static 'images/tr3.png' %}" alt="#" />
-                              </div>
-                              <div class="dit-t clearfix">
-                                 <div class="left-ti">
-                                    <h4>Product</h4>
-                                    <p>By <span>Beko</span> under <span>Lights</span></p>
-                                 </div>
-                                 <a href="#" tabindex="0">$1220</a>
-                              </div>
-                              <div class="prod-btn">
-                                 <a href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist</a>
-                                 <a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                                 <p>23 likes</p>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-md-6">
-                           <div class="small-box-c">
-                              <div class="small-img-b">
-                                 <img class="img-responsive" src="{% static 'images/tr4.png' %}" alt="#" />
-                              </div>
-                              <div class="dit-t clearfix">
-                                 <div class="left-ti">
-                                    <h4>Product</h4>
-                                    <p>By <span>Beko</span> under <span>Chairs</span></p>
-                                 </div>
-                                 <a href="#" tabindex="0">$1220</a>
-                              </div>
-                              <div class="prod-btn">
-                                 <a href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist</a>
-                                 <a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                                 <p>23 likes</p>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-3 col-sm-12">
-                  <div class="price-box-right">
-                     <h4>Price</h4>
-                     <h3>$1.320 <span>pr.peice</span></h3>
-                     <p>Option</p>
-                     <select class="form-control select2">
-                        <option>Flying Carpet Green rug</option>
-                        <option value="AK">Alaska</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="CA">California</option>
-                        <option value="NV">Nevada</option>
-                        <option value="OR">Oregon</option>
-                        <option value="WA">Washington</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="CO">Colorado</option>
-                        <option value="ID">Idaho</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="UT">Utah</option>
-                        <option value="WY">Wyoming</option>
-                        <option value="AL">Alabama</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="IL">Illinois</option>
-                        <option value="IA">Iowa</option>
-                        <option value="KS">Kansas</option>
-                        <option value="KY">Kentucky</option>
-                     </select>
-                     <a href="#">Contact company</a>
-                     <h5><i class="fa fa-clock-o" aria-hidden="true"></i> <strong>16 hours</strong> avg. responsive time</h5>
+                     
                   </div>
                </div>
             </div>

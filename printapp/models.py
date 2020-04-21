@@ -20,6 +20,7 @@ class ProductData(models.Model):
 	Product_Print_Sides=models.CharField(max_length=100)
 	Product_Color=models.CharField(max_length=100)
 	Product_Size=models.CharField(max_length=100)
+	Product_Price=models.CharField(max_length=100)
 	Product_Status=models.CharField(max_length=100)
 	class Meta:
 		db_table="ProductData"

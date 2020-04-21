@@ -48,10 +48,11 @@
                   <div class="col-md-8 col-sm-12">
                      <div class="right-nav">
                   <ul>
-
-                                 <li><form action="/backtoadmindash/" method="POST">
-                                       <input class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;" type="submit" value="Back">
-                                    </form></li>
+                    <li>
+                      <form action="/backtoadmindash/" method="POST">
+                        <input class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;" type="submit" value="Back">
+                      </form>
+                    </li>
                               </ul>
                            </div>
                         </div>
@@ -60,8 +61,6 @@
                   </div>
 
 
-               </div>
-            </div>
             <!--/.container-fluid --> 
          </nav>
       </header>
@@ -76,8 +75,7 @@
             <div class="container">
                <div class="row">
                   <ol class="breadcrumb">
-                     
-                     <li class="active">Admin Login</li>
+
                      <li class="active">Admin Login</li>
                      <li>Add Product</li>
 
@@ -92,48 +90,51 @@
 
                   <label style="margin-bottom:15px;font-size:20px;color:green;">{{ msg|safe }}</label>
                   
-                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" placeholder="Name" name="name" type="text">
+                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" placeholder="Name" name="name" type="text" required>
 
-                  <select style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="ptype">
+                  <select style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="ptype" required>
                      <option disabled="disabled" selected="selected" >Select Paper Type</option>
                      {% for x in data %}
                         <option value="{{ x.Paper_Name|safe }}">{{ x.Paper_Name|safe }}</option>
                      {% endfor %}
                   </select>
 
-                  <select style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="category">
+                  <select style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="category" required>
                      <option disabled="disabled" selected="selected" >Select Product Category</option>
                      <option value="Business Cards">Business Cards</option>
-                     <option value="Letter Head">Letter Head</option>
-                     <option value="Flyer">Flyer</option>
-                     <option value="Envelope">Envelope</option>
-                     <option value="Brochure">Brochure</option>
+                     <option value="Office Stationary">Office Stationary</option>
+                     <option value="Marketing Tool">Marketing Tool</option>
+                     <option value="Doctor Tools">Doctoor Tools</option>
+                     <option value="Invitation Cards">Invitation Cards</option>
+                     <option value="Apparels/Gifts">Apparels/Gifts</option>
                   </select>
 
-                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" placeholder="Thickness" type="text" name="thickness">
+                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" placeholder="Thickness" type="text" name="thickness" required>
 
-                  <select style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="lamination">
+                  <select style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="lamination" required>
                      <option disabled="disabled" selected="selected" >Select Lamination</option>
                      <option value="Gloss">Gloss</option>
                      <option value="Met">Met</option>
                      <option value="No Lamination">No Lamination</option>
                   </select>
 
-                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" placeholder="Quantity" type="number" name="quantity">
+                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" placeholder="Quantity" type="number" name="quantity" required>
 
-                  <select style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="printside">
+                  <select style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="printside" required>
                      <option disabled="disabled" selected="selected" >Select Print Sides</option>
                      <option value="Both Sides">Both Sides</option>
                      <option value="Single Sides">Single Side</option>
                   </select>
 
-                  <select style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="color">
+                  <select style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="color" required>
                      <option disabled="disabled" selected="selected" >Select Color</option>
                      <option value="Multicolor">Multicolor</option>
                      <option value="Singlecolor">Singlecolor</option>
                   </select>
 
-                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" placeholder="Paper Size in Height X Width Format" type="text" name="size">
+                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" placeholder="Paper Size in Height X Width Format" type="text" name="size" required>
+
+                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" placeholder="Price in (Rupees)" type="number" name="price" required>
 
                   <input type="submit" value="Add Product" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;">
                </form>
@@ -152,6 +153,7 @@
                    <th>Print Sides</th>
                    <th>Color</th>
                    <th>Size</th>
+                   <th>Price</th>
                    <th>Status</th>
                    <th>Remove</th>
                  </tr>
@@ -167,6 +169,7 @@
                    <td>{{ x.Product_Print_Sides|safe }}</td>
                    <td>{{ x.Product_Color|safe }}</td>
                    <td>{{ x.Product_Size|safe }}</td>
+                   <td>{{ x.Product_Price|safe }}</td>
                    <td>
                      <form action="/deactiveproducts/" method="POST">
                        <input type="hidden" name="delete" value="{{ x.Product_ID|safe }}">
@@ -197,6 +200,7 @@
                    <th>Print Sides</th>
                    <th>Color</th>
                    <th>Size</th>
+                   <th>Price</th>
                    <th>Status</th>
                    <th>Remove</th>
                  </tr>
@@ -212,6 +216,7 @@
                    <td>{{ x.Product_Print_Sides|safe }}</td>
                    <td>{{ x.Product_Color|safe }}</td>
                    <td>{{ x.Product_Size|safe }}</td>
+                   <td>{{ x.Product_Price|safe }}</td>
                    <td>
                      <form action="/deactiveproducts/" method="POST">
                        <input type="hidden" name="delete" value="{{ x.Product_ID|safe }}">
