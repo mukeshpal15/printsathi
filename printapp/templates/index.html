@@ -58,8 +58,6 @@
                            <div class="nav-box">
                               <ul>
                                  <li><a href="/index/">Home</a></li>
-                                 <li><a href="/resellerregistration/">Reseller signup</a></li>
-                                 <li><a href="/resellerlogin/">Reseller Login</a></li>
                                  <li><a href="/about/">About</a></li>
                                  <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</li>
                               </ul>
@@ -87,7 +85,7 @@
                      <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Business Cards">Business Cards</a></li><br>
                      <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Office Stationary">Office Stationary</a></li><br>
                      <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Marketing Tool">Marketing Tool</a></li><br>
-                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Marketing Tool">Doctoor Tools</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Doctoor Tools">Doctoor Tools</a></li><br>
                      <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Invitation Cards">Invitation Cards</a></li><br>
                      <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Apparels/Gifts">Apparels/Gifts</a></li><br>
                   </ul>
@@ -98,8 +96,9 @@
       <!--/.mobile menu -->
       <div id="sidebar" class="top-nav">
          <ul id="sidebar-nav" class="sidebar-nav">
-            <li><a href="howitworks.html">How it works</a></li>
-            <li><a href="#">chamb for Business</a></li>
+            <li><a href="/index/">Home</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</li>
          </ul>
       </div>
 
@@ -119,62 +118,77 @@
       </div>
       <div class="cat-main-box">
          <div class="container">
+
             <div class="row panel-row">
                
-               <a href="">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="width:230px;margin-bottom:20px;" data-wow-delay="0.0s">
+               <a href="/opencategory/?cname=Business Cards">
+               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
                   <div class="panel panel-default" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
-                        <img style="border-radius:10px;width:100%;height:100%;" src="{% static 'images/Visiting-Cards-BIG.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <img style="border-radius:10px;width:300px;height:300px;" src="{% static 'images/Visiting-Cards-BIG.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
                         <center><h4>Business Cards</h4></center>
                      </div>
                   </div>
                </div>
                </a>
 
-               <a href="">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="width:230px;margin-bottom:20px;" data-wow-delay="0.0s">
+               <a href="/opencategory/?cname=Office Stationary">
+               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
                   <div class="panel panel-default" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
-                        <img style="border-radius:10px;width:100%;height:100%;" src="{% static 'images/Visiting-Cards-BIG.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
-                        <center><h4>Business Cards</h4></center>
+                        <img style="border-radius:10px;width:300px;height:300px;" src="{% static 'images/40307043-back-to-school-blackboard-with-pencilbox-and-school-equipment-on-table.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <center><h4>Office Stationary</h4></center>
                      </div>
                   </div>
                </div>
                </a>
 
-               <a href="">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="width:230px;margin-bottom:20px;" data-wow-delay="0.0s">
+               <a href="/opencategory/?cname=Marketing Tool">
+               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
                   <div class="panel panel-default" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
-                        <img style="border-radius:10px;width:100%;height:100%;" src="{% static 'images/Visiting-Cards-BIG.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
-                        <center><h4>Business Cards</h4></center>
+                        <img style="border-radius:10px;width:300px;height:300px;" src="{% static 'images/pexels-photo-313691-1024x768.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <center><h4>Marketing Tool</h4></center>
+                     </div>
+                  </div>
+               </div>
+               </a>
+               </div>
+
+               <div class="row panel-row">
+               <a href="/opencategory/?cname=Doctoor Tools">
+               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
+                  <div class="panel panel-default" style="box-shadow: 5px 5px 12px">
+                     <div class="panel-body">
+                        <img style="border-radius:10px;width:300px;height:300px;" src="{% static 'images/download.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <center><h4>Doctoor Tools</h4></center>
                      </div>
                   </div>
                </div>
                </a>
 
-               <a href="">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="width:230px;margin-bottom:20px;" data-wow-delay="0.0s">
+               <a href="/opencategory/?cname=Invitation Cards">
+               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
                   <div class="panel panel-default" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
-                        <img style="border-radius:10px;width:100%;height:100%;" src="{% static 'images/Visiting-Cards-BIG.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
-                        <center><h4>Business Cards</h4></center>
+                        <img style="border-radius:10px;width:300px;height:300px;" src="{% static 'images/47227_invitation-card-wedding-wallpapers-invitation-card-wedding_1600x1200_h.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <center><h4>Invitation Cards</h4></center>
                      </div>
                   </div>
                </div>
                </a>
 
-               <a href="">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="width:230px;margin-bottom:20px;" data-wow-delay="0.0s">
+               <a href="\opencategory\?cname=Apparels/Gifts">
+               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
                   <div class="panel panel-default" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
-                        <img style="border-radius:10px;width:100%;height:100%;" src="{% static 'images/Visiting-Cards-BIG.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
-                        <center><h4>Business Cards</h4></center>
+                        <img style="border-radius:10px;width:300px;height:300px;" src="{% static 'images/pexels-photo-264787.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <center><h4>Apparels/Gifts</h4></center>
                      </div>
                   </div>
                </div>
                </a>
+               </div>
 
             </div>
          </div>
@@ -313,7 +327,7 @@
                   </div>
                </div>
             </div>
-            <div class="row">
+            <div class="row" style="margin-bottom:150px;">
                <div class="bg_img_right"><img src="{% static 'images/bg_img1.png' %}" alt="#" /></div>
                <div class="main-start-box">
                   <div class="container">
@@ -342,156 +356,7 @@
             </div>
          </div>
       </div>
-      <div class="products">
-         <div class="main-products">
-            <h2>TRENDING PRODUCTS ON CHAMB</h2>
-            <div class="product-slidr">
-               <div class="slider">
-                  <div>
-                     <div class="prod-box">
-                        <div class="prod-i">
-                           <img src="{% static 'images/tr1.png' %}" alt="#" />
-                        </div>
-                        <div class="prod-dit clearfix">
-                           <div class="dit-t clearfix">
-                              <div class="left-ti">
-                                 <h4>Table with Lights</h4>
-                                 <p>By <span>Beko</span> under <span>Lights</span></p>
-                              </div>
-                              <a href="#">$1220</a>
-                           </div>
-                           <div class="dit-btn clearfix">
-                              <a class="wis" href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist </a>
-                              <a class="thi" href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div>
-                     <div class="prod-box">
-                        <div class="prod-i">
-                           <img src="{% static 'images/tr2.png' %}" alt="#" />
-                        </div>
-                        <div class="prod-dit clearfix">
-                           <div class="dit-t clearfix">
-                              <div class="left-ti">
-                                 <h4>Treehouse Bed</h4>
-                                 <p>By <span>Beko</span> under <span>Lights</span></p>
-                              </div>
-                              <a href="#">$1220</a>
-                           </div>
-                           <div class="dit-btn clearfix">
-                              <a class="wis" href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist </a>
-                              <a class="thi" href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div>
-                     <div class="prod-box">
-                        <div class="prod-i">
-                           <img src="{% static 'images/tr3.png' %}" alt="#" />
-                        </div>
-                        <div class="prod-dit clearfix">
-                           <div class="dit-t clearfix">
-                              <div class="left-ti">
-                                 <h4>Wood Sofaplatform</h4>
-                                 <p>By <span>Beko</span> under <span>Lights</span></p>
-                              </div>
-                              <a href="#">$1220</a>
-                           </div>
-                           <div class="dit-btn clearfix">
-                              <a class="wis" href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist </a>
-                              <a class="thi" href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div>
-                     <div class="prod-box">
-                        <div class="prod-i">
-                           <img src="{% static 'images/tr4.png' %}" alt="#" />
-                        </div>
-                        <div class="prod-dit clearfix">
-                           <div class="dit-t clearfix">
-                              <div class="left-ti">
-                                 <h4>Wall Sticker</h4>
-                                 <p>By <span>Beko</span> under <span>Lights</span></p>
-                              </div>
-                              <a href="#">$1220</a>
-                           </div>
-                           <div class="dit-btn clearfix">
-                              <a class="wis" href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist </a>
-                              <a class="thi" href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div>
-                     <div class="prod-box">
-                        <div class="prod-i">
-                           <img src="{% static 'images/tr1.png' %}" alt="#" />
-                        </div>
-                        <div class="prod-dit clearfix">
-                           <div class="dit-t clearfix">
-                              <div class="left-ti">
-                                 <h4>Treehouse Bed</h4>
-                                 <p>By <span>Beko</span> under <span>Lights</span></p>
-                              </div>
-                              <a href="#">$1220</a>
-                           </div>
-                           <div class="dit-btn clearfix">
-                              <a class="wis" href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist </a>
-                              <a class="thi" href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div>
-                     <div class="prod-box">
-                        <div class="prod-i">
-                           <img src="{% static 'images/tr2.png' %}" alt="#" />
-                        </div>
-                        <div class="prod-dit clearfix">
-                           <div class="dit-t clearfix">
-                              <div class="left-ti">
-                                 <h4>Treehouse Bed</h4>
-                                 <p>By <span>Beko</span> under <span>Lights</span></p>
-                              </div>
-                              <a href="#">$1220</a>
-                           </div>
-                           <div class="dit-btn clearfix">
-                              <a class="wis" href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist </a>
-                              <a class="thi" href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div>
-                     <div class="prod-box">
-                        <div class="prod-i">
-                           <img src="{% static 'images/tr3.png' %}" alt="#" />
-                        </div>
-                        <div class="prod-dit clearfix">
-                           <div class="dit-t clearfix">
-                              <div class="left-ti">
-                                 <h4>Treehouse Bed</h4>
-                                 <p>By <span>Beko</span> under <span>Lights</span></p>
-                              </div>
-                              <a href="#">$1220</a>
-                           </div>
-                           <div class="dit-btn clearfix">
-                              <a class="wis" href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist </a>
-                              <a class="thi" href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-
+      
       <footer>
          <div class="main-footer">
             <div class="container">
