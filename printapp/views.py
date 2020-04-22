@@ -644,3 +644,5 @@ def opencategory(request):
 			'clen':len(GetProductDetailByCategory(cname))
 			})
 	return render(request,'allproducts.html',dic)
+def orderdetails(request):
+	return render(request,'orderdetails.html',{})

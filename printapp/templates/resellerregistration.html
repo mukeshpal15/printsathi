@@ -59,7 +59,7 @@
                               <ul>
                                  <li><a href="/index/">Home</a></li>
                                  <li><a href="/about/">About</a></li>
-                                 <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</li>
+                                 <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</a></li>
                               </ul>
                            </div>
                         </div>
@@ -98,20 +98,18 @@
          <ul id="sidebar-nav" class="sidebar-nav">
             <li><a href="/index/">Home</a></li>
             <li><a href="/about/">About</a></li>
-            <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</li>
+            <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</a></li>
          </ul>
       </div>
       <div class="terms-conditions" style="background-size:100% auto;background-image: url({% static 'images/39e8e6ebcec0d5a42b5998857571fbde.jpg' %})">
-         <div class="terms-title">
-            
-         </div>
+     
        <div class="container">
-                  <div class="w3-card-4" style="width:50%;border-radius:20px;background-color:white;">
+                  <div class="w3-card-4" style="margin-top:60px;width:50%;border-radius:20px;background-color:white;">
 
             <div class="w3-container w3-blue" style="padding-top:10px;padding-bottom:10px;border-radius:20px;">
             <h2>Reseller Registration</h2>
             </div>
-               <label style="margin-bottom:15px;color:green;font-size:18px;">Required Fields Marked With *</label><br>
+               <label style="margin-bottom:15px;color:green;font-size:18px;margin-top:20px;margin-left:20px;">Required Fields Marked With *</label><br>
 
                <form class="w3-container" action="/savereseller/" method="POST" style="margin-top:20px;margin-bottom:20px;" enctype="multipart/form-data">{% csrf_token %}
                   <label style="margin-bottom:15px;color:green;font-size:15px;">{{ msg|safe }}</label><br>
