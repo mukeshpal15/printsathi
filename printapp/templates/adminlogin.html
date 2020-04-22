@@ -38,73 +38,72 @@
                         <span class="icon-bar"></span> 
                         <span class="icon-bar"></span> 
                         </button>
-                        <a href="\index\" class="navbar-brand"><img src="{% static 'images/logo.png' %}" alt="" /></a>
+                        <a href="\index\" class="navbar-brand"><img src="{% static 'images/logo.png' %}" style="width:200px;" alt="" /></a>
                      </div>
-                     <form class="navbar-form navbar-left web-sh">
-                        <div class="form">
-                           <input type="text" class="form-control" placeholder="Search for products or companies">
-                        </div>
-                     </form>
                   </div>
                   <div class="col-md-8 col-sm-12">
                      <div class="right-nav">
+                        
                         <div class="login-sr">
                            <div class="login-signup">
                               <ul>
-                                 <li><a href="#">Login</a></li>
-                                 <li><a class="custom-b" href="#">Sign up</a></li>
+                                 {% if session == checksession %}
+                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
+                                 {% else %}
+                                    <li><a href="/userlogin/">Login</a></li>
+                                    <li><a class="custom-b" href="/userregistration/">Sign up</a></li>
+                                 {% endif %}
                               </ul>
                            </div>
                         </div>
-                        <div class="help-r hidden-xs">
-                           <div class="help-box">
-                              <ul>
-                                 <li> <a data-toggle="modal" data-target="#myModal" href="#"> <span>Change</span> <img src="{% static 'images/flag.png' %}" alt="" /> </a> </li>
-                                 <li> <a href="#"><img class="h-i" src="{% static 'images/help-icon.png' %}" alt="" /> Help </a> </li>
-                              </ul>
-                           </div>
-                        </div>
+
                         <div class="nav-b hidden-xs">
                            <div class="nav-box">
                               <ul>
-                                 <li><a href="howitworks.html">How it works</a></li>
-                                 <li><a href="\about\">Chamb for Business</a></li>
+                                 <li><a href="/index/">Home</a></li>
+                                 <li><a href="/about/">About</a></li>
+                                 <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</li>
                               </ul>
                            </div>
                         </div>
+
                      </div>
                   </div>
                </div>
             </div>
-            <!--/.container-fluid --> 
+            <!--/.container-fluid -->
          </nav>
       </header>
-      <!-- Modal -->
+
       <div class="modal fade lug" id="myModal" role="dialog">
          <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
                <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Change</h4>
+                  <h4 class="modal-title">Choose from Wide Range of Categories</h4>
                </div>
                <div class="modal-body">
                   <ul>
-                     <li><a href="#"><img src="{% static 'images/flag-up-1.png' %}" alt="" /> United States</a></li>
-                     <li><a href="#"><img src="{% static 'images/flag-up-2.png' %}" alt="" /> France </a></li>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Business Cards">Business Cards</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Office Stationary">Office Stationary</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Marketing Tool">Marketing Tool</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Marketing Tool">Doctoor Tools</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Invitation Cards">Invitation Cards</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Apparels/Gifts">Apparels/Gifts</a></li><br>
                   </ul>
                </div>
             </div>
          </div>
       </div>
+      <!--/.mobile menu -->
       <div id="sidebar" class="top-nav">
          <ul id="sidebar-nav" class="sidebar-nav">
-            <li><a href="#">Help</a></li>
-            <li><a href="#">How it works</a></li>
-            <li><a href="#">Chamb for Business</a></li>
+            <li><a href="/index/">Home</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</li>
          </ul>
-      </div>
-      <div class="terms-conditions">
+      </div>      <div class="terms-conditions">
          <div class="terms-title">
             <div class="container">
                <div class="row">
@@ -147,35 +146,14 @@
          <div class="main-footer">
             <div class="container">
                <div class="row">
-                  <div class="footer-top clearfix">
-                     <div class="col-md-2 col-sm-6">
-                        <h2>Start a free
-                           account today
-                        </h2>
-                     </div>
-                     <div class="col-md-6 col-sm-6">
-                        <div class="form-box">
-                           <input type="text" placeholder="Enter yopur e-mail" />
-                           <button>Continue</button>
-                        </div>
-                     </div>
-                     <div class="col-md-4 col-sm-12">
-                        <div class="help-box-f">
-                           <h4>Question? Call us on 12 34 56 78 for help</h4>
-                           <p>Easy setup - no payment fees - up to 100 products for free</p>
-                        </div>
-                     </div>
-                  </div>
                   <div class="footer-link-box clearfix">
                      <div class="col-md-6 col-sm-6">
                         <div class="left-f-box">
                            <div class="col-sm-4">
-                              <h2>SELL ON chamb</h2>
+                              <h2>Reseller's Counter</h2>
                               <ul>
-                                 <li><a href="#">Create account</a></li>
-                                 <li><a href="howitworks.html">How it works suppliers</a></li>
-                                 <li><a href="\pricing\">Pricing</a></li>
-                                 <li><a href="#">FAQ for Suppliers</a></li>
+                                 <li><a href="/resellerregistration/">Join as Reseller</a></li>
+                                 <li><a href="/resellerlogin/">Login</a></li>
                               </ul>
                            </div>
                            <div class="col-sm-4">
@@ -190,7 +168,7 @@
                            <div class="col-sm-4">
                               <h2>COMPANY</h2>
                               <ul>
-                                 <li><a href="\about\">About chamb</a></li>
+                                 <li><a href="about-us.html">About chamb</a></li>
                                  <li><a href="#">Contact us</a></li>
                                  <li><a href="#">Press</a></li>
                                  <li><a href="#">Careers</a></li>
@@ -232,7 +210,7 @@
             <div class="container">
                <div class="row">
                   <div class="col-md-8">
-                     <p><img width="90" src="{% static 'images/logo.png' %}" alt="#" style="margin-top: -5px;" /> All Rights Reserved. Company Name © 2018</p>
+                     <p><img width="90" src="{% static 'images/logo.png' %}" alt="#" style="margin-top: -5px;" /> All Rights Reserved. <a href="http://funtouchit.com/"> Funtouch IT Solutions © 2020</a></p>
                   </div>
                   <div class="col-md-4">
                      <ul class="list-inline socials">
@@ -257,14 +235,12 @@
                            </a>
                         </li>
                      </ul>
-                     <ul class="right-flag">
-                        <li><a href="#"><img src="{% static 'images/flag.png' %}" alt="" /> <span>Change</span></a></li>
-                     </ul>
                   </div>
                </div>
             </div>
          </div>
       </footer>
+
       <!--main js--> 
       <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script> 
       <!--bootstrap js--> 
