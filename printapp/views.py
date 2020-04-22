@@ -630,3 +630,17 @@ def resellerdeactive(request):
 		return render(request,'resellerdata.html',dic)
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+
+@csrf_exempt
+def opencategory(request):
+	cname=request.GET.get('cname')
+	print(cname)
+	dic={'data':GetProductDetailByCategory(cname)}
+	if cname=='Business Cards':
+		dic.update({
+			'cname':cname,
+			'cimage':'/static/images/cosmic-interactive-business-card.jpg',
+			'cpic':'/static/images/Visiting-Cards-BIG.jpg',
+			'clen':len(GetProductDetailByCategory(cname))
+			})
+	return render(request,'allproducts.html',dic)

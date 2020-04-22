@@ -67,7 +67,7 @@ def GetProductDetail():
 
 def GetAgainProductDetail(pid):
 	obj=ProductData.objects.filter(Product_ID=pid)
-	dic2={}
+	dic={}
 	lt=[]
 	for i in obj:
 		dic={'Product_ID':i.Product_ID,
@@ -85,7 +85,6 @@ def GetAgainProductDetail(pid):
 		sub=ProductDesignData.objects.filter(Product_ID=pid)
 		i=0
 		img={}
-		lt=[]
 		for j in sub:
 			img.update({'image':j.Design_Image.url,
 						'imgid':str(i)})
@@ -97,3 +96,28 @@ def GetAgainProductDetail(pid):
 						'coverid':'cover'})
 			break
 	return dic
+
+def GetProductDetailByCategory(cname):
+	obj=ProductData.objects.filter(Product_Status='Active',Product_Category=cname)
+	lt1=[]
+	b=''
+	for i in obj:
+		dic={'Product_ID':i.Product_ID,
+			'Product_Name':i.Product_Name,
+			'Product_Paper_Type':i.Product_Paper_Type,
+			'Product_Category':i.Product_Category,
+			'Product_Thickness':i.Product_Thickness,
+			'Product_Lamination':i.Product_Lamination,
+			'Product_Quantity':i.Product_Quantity,
+			'Product_Print_Sides':i.Product_Print_Sides,
+			'Product_Color':i.Product_Color,
+			'Product_Size':i.Product_Size,
+			'Product_Price':i.Product_Price,
+		}
+		sub=ProductDesignData.objects.filter(Product_ID=i.Product_ID)
+		for j in sub:
+			b=j.Design_Image.url
+			break
+		dic.update({'image':b})
+		lt1.append(dic)	
+	return lt1
