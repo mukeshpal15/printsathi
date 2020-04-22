@@ -114,6 +114,25 @@
          </ul>
       </div>
       <div class="terms-conditions">
+=======
+      <div id="sidebar" class="top-nav">
+         <ul id="sidebar-nav" class="sidebar-nav">
+            <li><a href="#">Help</a></li>
+            <li><a href="#">How it works</a></li>
+            <li><a href="#">Chamb for Business</a></li>
+         </ul>
+      </div>
+      <div class="terms-conditions">
+         <div class="terms-title">
+            <div class="container">
+               <div class="row">
+                  <ol class="breadcrumb">
+                     
+                     <li class="active">Order Details Form</li>
+                  </ol>
+               </div>
+            </div>
+         </div>
        <div class="container">
 
          
@@ -172,6 +191,33 @@
                   <input type="file" accept="image/*" name="upload file"  style="font-size:20px;border-radius:20px;margin-bottom:20px;" requird>
                   
                   <input type="submit" value="Proceed" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;margin-bottom:20px;">
+=======
+         <div class="w3-card-4" style="width:80%;border-radius:20px;">
+
+            <div class="w3-container w3-black" style="padding-top:10px;padding-bottom:10px;border-radius:20px;">
+            <h2>Order Details Form</h2>
+            </div>
+
+               <form class="w3-container" action="/admindash/" method="POST" style="margin-top:20px;margin-bottom:20px;">
+                  <label style="font-size:20px;">Choose Design</label><br>
+                  <label>
+                  <input class="w3-input" type="radio" name="design" style="margin-bottom:20px;position:absolute;opacity:0;height:0;width:0;cursor:pointer;" placeholder="Admin Password" required>
+                  <img style="height:200px;width:200px;cursor:pointer;margin:10px;border-radius:10px;"src="{% static 'images/A1F66eDDDnL._SL1500_.jpg' %}">
+                  </label>
+                  <label>
+                  <input class="w3-input" type="radio" name="design" style="margin-bottom:20px;position:absolute;opacity:0;height:0;width:0;cursor:pointer;" placeholder="Admin Password" required>
+                  <img style="height:200px;width:200px;cursor:pointer;margin:10px;border-radius:10px;"src="{% static 'images/A1F66eDDDnL._SL1500_.jpg' %}">
+                  </label>
+                  <input class="w3-input" type="text" name="Name" style="margin-bottom:20px;" placeholder="Name" required>
+                  <input class="w3-input" type="text" name="Email" style="margin-bottom:20px;" placeholder="Email" required>
+                  <input class="w3-input" type="number" name="phone number" style="margin-bottom:20px;" placeholder="phone number" required>
+                  <textarea class="w3-input" type="text" name="Address" style="margin-bottom:20px;" placeholder="Address"></textarea>
+                  <input class="w3-input" type="text" name="city" style="margin-bottom:20px;" placeholder="city" requird>
+                  <input class="w3-input" type="text" name="state" style="margin-bottom:20px;" placeholder="state" requird>
+                  <label>upload  file</label>
+                  <input class="w3-input" type="file" name="upload file" style="margin-bottom:20px;" placeholder="upload file" requird>
+                  <input type="submit" value="Proceed" class="w3-button w3-black w3-hover-blue" style="font-size:20px;border-radius:20px;margin-bottom:20px;">
+>>>>>>> 7f4ce53fbe8b6fa4048d44baa328f28db4da548a
 
                </form>
 

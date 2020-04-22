@@ -658,6 +658,7 @@ def opencategory(request):
 			'checksession':1
 			})
 	return render(request,'allproducts.html',dic)
+<<<<<<< HEAD
 def proceedfororder(request):
 	lt=[]
 	try:
