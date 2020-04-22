@@ -17,13 +17,21 @@ def index(request):
 			'checksession':1,'detail':GetProductDetail()}
 	return render(request, 'index.html', dic)		
 def aboutus(request):
-	return render(request, 'about-us.html',{})
+	dic={'session':CheckUserSession(request),
+			'checksession':1}
+	return render(request, 'about-us.html',dic)
 def allproducts(request):
-	return render(request, 'allproducts.html',{})
+	dic={'session':CheckUserSession(request),
+			'checksession':1}
+	return render(request, 'allproducts.html',dic)
 def category(request):
-	return render(request, 'category.html',{})
+	dic={'session':CheckUserSession(request),
+			'checksession':1}
+	return render(request, 'category.html',dic)
 def cms(request):
-	return render(request, 'cms.html',{})
+	dic={'session':CheckUserSession(request),
+			'checksession':1}
+	return render(request, 'cms.html',dic)
 def coomingsoon(request):
 	return render(request, 'cooming-soon.html',{})
 def howitworks(request):
@@ -33,15 +41,21 @@ def pricing(request):
 def productdetails(request):
 	detail=request.GET.get('cname')
 	dic1=GetAgainProductDetail(detail)
+	dic1.update({'session':CheckUserSession(request),
+				'checksession':1})
 	return render(request, 'productdetails.html',dic1)
 def adminlogin(request):
 	return render(request,'adminlogin.html',{})
 def addproducts(request):
 	return render(request, 'addproducts.html',{})
 def userlogin(request):
-	return render(request, 'userlogin.html',{})
+	dic={'session':CheckUserSession(request),
+		'checksession':1}
+	return render(request, 'userlogin.html',dic)
 def userregistration(request):
-	return render(request, 'userregistration.html',{})
+	dic={'session':CheckUserSession(request),
+		'checksession':1}
+	return render(request, 'userregistration.html',dic)
 @csrf_exempt
 def admindash(request):
 	if request.method=="POST":
@@ -221,7 +235,9 @@ Printsathi'''
 			email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
 			email.send()
 			dic={'msg':"Successfully Registered",
-				'msg1':'You will get you account credentials on your mail soon.'}
+				'msg1':'You will get you account credentials on your mail soon.',
+				'session':CheckUserSession(request),
+				'checksession':1}
 			return render(request, 'userregistration.html',dic)
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
@@ -375,7 +391,15 @@ def savedesigns(request):
 		form=ImageUploadForm(request.POST, request.FILES)
 		if form.is_valid():
 			m=form.cleaned_data['image']
+			u="D00"
+			x=1
+			uid=u+str(x)
+			while ResellerData.objects.filter(Reseller_ID=uid).exists():
+				x=x+1
+				uid=u+str(x)
+			x=int(x)
 			obj=ProductDesignData(
+				Design_ID=uid,
 				Product_ID=request.POST.get('Product'),
 				Design_Image=m
 				)
@@ -399,23 +423,10 @@ def logout(request):
 	except:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 
-def resellersignup(request):
-	return render(request,'resellerregistration.html',{})
-
-def Resellerenter(request):
-	if request.method=="POST":
-		u="RE00"
-		x=1
-		uid=u+str(x)
-		while ResellerData.objects.filter(Email=request.POST.get('email')).exists():
-			x=x+1
-			pid=p+str(x)
-		x=int(x)
-		if ResellerData.objects.filter(Email=request.POST.get('Email'),Phone=request.POST.get('Phone Number')).exists():
-			dic={'msg':"User Already Registered"}
-
 def resellerregistration(request):
-	return render(request,'resellerregistration.html',{})
+	dic={'session':CheckUserSession(request),
+		'checksession':1}
+	return render(request,'resellerregistration.html',dic)
 @csrf_exempt
 def savereseller(request):
 	if request.method=="POST":
@@ -451,9 +462,9 @@ def savereseller(request):
 							)
 			obj.save()
 			msg = '''Hi there!
-Your account has been Successfully created on Printsathi. Your account credentials are as below,
-Email : '''+request.POST.get('Email')+'''
-Password : '''+password+'''
+Your Reseller's Account has been successfully created. We are reviewing your details.
+
+Till then wait for our response.
 
 Thanks & Regards,
 Printsathi'''
@@ -466,7 +477,9 @@ Printsathi'''
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 def resellerlogin(request):
-	return render(request, 'resellerlogin.html',{})
+	dic={'session':CheckUserSession(request),
+		'checksession':1}
+	return render(request, 'resellerlogin.html',dic)
 
 @csrf_exempt
 def resellerlog(request):
@@ -597,7 +610,7 @@ Printsathi'''
 def reselleractive(request):
 	if request.method=="POST":
 		obj=ResellerData.objects.filter(Reseller_ID=request.POST.get('id'))
-		obj.update(Reseller_Status="Active")
+		obj.update(Reseller_Status='Active')
 		e=''
 		p=''
 		for x in obj:
@@ -634,13 +647,52 @@ def resellerdeactive(request):
 @csrf_exempt
 def opencategory(request):
 	cname=request.GET.get('cname')
-	print(cname)
 	dic={'data':GetProductDetailByCategory(cname)}
 	if cname=='Business Cards':
 		dic.update({
 			'cname':cname,
 			'cimage':'/static/images/cosmic-interactive-business-card.jpg',
 			'cpic':'/static/images/Visiting-Cards-BIG.jpg',
-			'clen':len(GetProductDetailByCategory(cname))
+			'clen':len(GetProductDetailByCategory(cname)),
+			'session':CheckUserSession(request),
+			'checksession':1
 			})
 	return render(request,'allproducts.html',dic)
+def proceedfororder(request):
+	lt=[]
+	try:
+		pid=request.GET.get('cid')
+		obj=UserData.objects.filter(User_Email=request.session['user_email'])
+		for x in obj:
+			dic={'fname': x.User_First_Name,
+				'lname': x.User_Last_Name,
+				'email': x.User_Email,
+				'phone': x.User_Phone,
+				'address': x.User_Address,
+				'city': x.User_City,
+				'state': x.User_State,
+				'session':CheckUserSession(request),
+				'checksession':1}
+		obj=ProductDesignData.objects.filter(Product_ID=pid)
+		for x in obj:
+			d={'did':x.Design_ID,
+				'image':x.Design_Image.url}
+			lt.append(d)
+		dic.update({'designs':lt})
+		obj=ProductData.objects.filter(Product_ID=pid)
+		for i in obj:
+			dic.update({
+			'Product_ID':i.Product_ID,
+			'Product_Name':i.Product_Name,
+			'Product_Paper_Type':i.Product_Paper_Type,
+			'Product_Category':i.Product_Category,
+			'Product_Thickness':i.Product_Thickness,
+			'Product_Lamination':i.Product_Lamination,
+			'Product_Quantity':i.Product_Quantity,
+			'Product_Print_Sides':i.Product_Print_Sides,
+			'Product_Color':i.Product_Color,
+			'Product_Size':i.Product_Size,
+			'Product_Price':i.Product_Price})
+		return render(request,'orderdetails.html', dic)	
+	except:
+		return redirect('/userlogin/')

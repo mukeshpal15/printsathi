@@ -5,7 +5,7 @@
       <meta charset="UTF-8">
 
      
-      <title>Printsathi - Adminlogin </title>
+      <title>Printsathi - Order Details</title>
 
       <link rel="stylesheet" href="{% static 'w3.css' %}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,6 +23,15 @@
       <link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
       <!--responsive css-->
       <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+      <style type="text/css">
+      
+         input[type=radio]:checked + img {
+           border: 8px solid black;
+           border-radius:10px;
+           box-shadow:5px 5px 10px;
+         }
+
+      </style>
    </head>
    <body>
       <header id="header" class="top-head">
@@ -103,36 +112,66 @@
             <li><a href="/about/">About</a></li>
             <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</a></li>
          </ul>
-      </div>      <div class="terms-conditions">
-         <div class="terms-title">
-            <div class="container">
-               <div class="row">
-                  <ol class="breadcrumb">
-                     
-                     <li class="active">Admin Login</li>
-                  </ol>
-               </div>
-            </div>
-         </div>
+      </div>
+      <div class="terms-conditions">
        <div class="container">
 
          
      
 
          <center>
-         <div class="w3-card-4" style="width:50%;border-radius:20px;">
+         <div class="w3-card-4" style="width:80%;border-radius:20px;margin-top:80px;">
 
             <div class="w3-container w3-blue" style="padding-top:10px;padding-bottom:10px;border-radius:20px;">
-            <h2>Admin Login</h2>
+            <h2>Order Details Form</h2>
             </div>
+               <label style="font-size:20px;margin-top:30px;">Product Details</label>
+               <table class="w3-table-all w3-hoverable" style="margin-top:10px;margin-bottom:40px;margin-left:40px;margin-right:40px;width:80%;">
+                 <tr class="w3-black">
+                   <th>Name</th>
+                   <th>Paper Type</th>
+                   <th>Category</th>
+                   <th>Thickness</th>
+                   <th>Lamination</th>
+                   <th>Quantity</th>
+                   <th>Print Sides</th>
+                   <th>Color</th>
+                   <th>Size</th>
+                 </tr>
+                 <tr>
+                   <td>{{ Product_Name|safe }}</td>
+                   <td>{{ Product_Paper_Type|safe }}</td>
+                   <td>{{ Product_Category|safe }}</td>
+                   <td>{{ Product_Thickness|safe }}</td>
+                   <td>{{ Product_Lamination|safe }}</td>
+                   <td>{{ Product_Quantity|safe }}</td>
+                   <td>{{ Product_Print_Sides|safe }}</td>
+                   <td>{{ Product_Color|safe }}</td>
+                   <td>{{ Product_Size|safe }}</td>
+                 </tr>
+               </table>
 
                <form class="w3-container" action="/admindash/" method="POST" style="margin-top:20px;margin-bottom:20px;">
-
-                  <input class="w3-input" type="text" name="email" style="margin-bottom:20px;" placeholder="Admin Email" required>
-
-                  <input class="w3-input" type="password" name="pass" style="margin-bottom:20px;" placeholder="Admin Password" required>
-
-                  <input type="submit" value="Login" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;margin-bottom:20px;">
+                  <label style="font-size:20px;">Choose Design</label><br>
+                  
+                  {% for x in designs %}
+                  <label>
+                  <input class="w3-input" type="radio" name="design" style="margin-bottom:20px;position:absolute;opacity:0;height:0;width:0;cursor:pointer;" value="{{ x.did|safe }}" required>
+                  <img style="height:200px;width:200px;cursor:pointer;margin:10px;border-radius:10px;"src="{{ x.image|safe }}">
+                  </label>
+                  {% endfor %}
+                  
+                  <input class="w3-input" type="text" name="name" style="margin-bottom:20px;" value="{{ fname|safe }} {{ lname|safe }}" disabled required>
+                  <input class="w3-input" type="text" name="email" style="margin-bottom:20px;" value="{{ email|safe }}" disabled required>
+                  <input class="w3-input" type="number" name="phone" style="margin-bottom:20px;" value="{{ phone|safe }}" disabled required>
+                  <input class="w3-input" type="text" name="Address" style="margin-bottom:20px;" value="{{ address|safe }}" disabled>
+                  <input class="w3-input" type="text" name="city" style="margin-bottom:20px;" value="{{ city|safe }}" disabled requird>
+                  <input class="w3-input" type="text" name="state" style="margin-bottom:20px;" value="{{ state|safe }}" disabled requird>
+                  
+                  <label style="font-size:20px;">Upload Detail File*</label>
+                  <input type="file" accept="image/*" name="upload file"  style="font-size:20px;border-radius:20px;margin-bottom:20px;" requird>
+                  
+                  <input type="submit" value="Proceed" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;margin-bottom:20px;">
 
                </form>
 
@@ -146,14 +185,35 @@
          <div class="main-footer">
             <div class="container">
                <div class="row">
+                  <div class="footer-top clearfix">
+                     <div class="col-md-2 col-sm-6">
+                        <h2>Start a free
+                           account today
+                        </h2>
+                     </div>
+                     <div class="col-md-6 col-sm-6">
+                        <div class="form-box">
+                           <input type="text" placeholder="Enter yopur e-mail" />
+                           <button>Continue</button>
+                        </div>
+                     </div>
+                     <div class="col-md-4 col-sm-12">
+                        <div class="help-box-f">
+                           <h4>Question? Call us on 12 34 56 78 for help</h4>
+                           <p>Easy setup - no payment fees - up to 100 products for free</p>
+                        </div>
+                     </div>
+                  </div>
                   <div class="footer-link-box clearfix">
                      <div class="col-md-6 col-sm-6">
                         <div class="left-f-box">
                            <div class="col-sm-4">
-                              <h2>Reseller's Counter</h2>
+                              <h2>SELL ON chamb</h2>
                               <ul>
-                                 <li><a href="/resellerregistration/">Join as Reseller</a></li>
-                                 <li><a href="/resellerlogin/">Login</a></li>
+                                 <li><a href="#">Create account</a></li>
+                                 <li><a href="howitworks.html">How it works suppliers</a></li>
+                                 <li><a href="\pricing\">Pricing</a></li>
+                                 <li><a href="#">FAQ for Suppliers</a></li>
                               </ul>
                            </div>
                            <div class="col-sm-4">
@@ -168,7 +228,7 @@
                            <div class="col-sm-4">
                               <h2>COMPANY</h2>
                               <ul>
-                                 <li><a href="about-us.html">About chamb</a></li>
+                                 <li><a href="\about\">About chamb</a></li>
                                  <li><a href="#">Contact us</a></li>
                                  <li><a href="#">Press</a></li>
                                  <li><a href="#">Careers</a></li>
@@ -210,7 +270,7 @@
             <div class="container">
                <div class="row">
                   <div class="col-md-8">
-                     <p><img width="90" src="{% static 'images/logo.png' %}" alt="#" style="margin-top: -5px;" /> All Rights Reserved. <a href="http://funtouchit.com/"> Funtouch IT Solutions © 2020</a></p>
+                     <p><img width="90" src="{% static 'images/logo.png' %}" alt="#" style="margin-top: -5px;" /> All Rights Reserved. Company Name © 2018</p>
                   </div>
                   <div class="col-md-4">
                      <ul class="list-inline socials">
@@ -235,12 +295,14 @@
                            </a>
                         </li>
                      </ul>
+                     <ul class="right-flag">
+                        <li><a href="#"><img src="{% static 'images/flag.png' %}" alt="" /> <span>Change</span></a></li>
+                     </ul>
                   </div>
                </div>
             </div>
          </div>
       </footer>
-
       <!--main js--> 
       <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script> 
       <!--bootstrap js--> 

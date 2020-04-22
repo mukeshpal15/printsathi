@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/',index),
-    path('aboutus/',aboutus),
+    path('about/',aboutus),
     path('allproducts/',allproducts),
     path('category/',category),
     path('cms/',cms),
@@ -37,7 +37,6 @@ urlpatterns = [
     path('myuseraccount/',myuseraccount),
     path('adddesigns/',adddesigns),
     path('savedesigns/',savedesigns),
-    path('Resellerenter/',Resellerenter),
     path('resellerlogin/',resellerlogin),
     path('resellerlog/',resellerlog),
     path('changeresellerdetails/',changeresellerdetails),
@@ -49,6 +48,7 @@ urlpatterns = [
     path('reselleractive/',reselleractive),
     path('resellerdeactive/',resellerdeactive),
     path('opencategory/',opencategory),
+    path('proceedfororder/',proceedfororder),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
