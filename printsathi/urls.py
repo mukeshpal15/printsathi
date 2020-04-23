@@ -49,6 +49,9 @@ urlpatterns = [
     path('resellerdeactive/',resellerdeactive),
     path('opencategory/',opencategory),
     path('proceedfororder/',proceedfororder),
+    path('orderdatasave/',orderdatasave),
+    path('proceedtopay/',proceedtopay),
+    path('pay/',app_charge),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
