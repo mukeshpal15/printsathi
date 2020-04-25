@@ -45,8 +45,10 @@
                         <div class="login-sr">
                            <div class="login-signup">
                               <ul>
-                                 {% if session == checksession %}
+                                 {% if sessionre == checksessionre %}
                                     <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
+                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
+                                
                                  {% else %}
                                     <li><a href="/userlogin/">Login</a></li>
                                     <li><a class="custom-b" href="/userregistration/">Sign up</a></li>
@@ -162,14 +164,15 @@
                                                 <p style="font-size:15px;">Size : <strong>{{ x.Product_Size|safe }}</strong></p>
                                                 <p style="font-size:15px;">Quantity : <strong>{{ x.Product_Quantity|safe }}</strong></p>
                                              </div>
-                                          </div>
-                                          <a href="/productdetails/?cname={{ x.Product_ID|safe }}" class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:15px;border-radius:5px;"><i class="fa fa-inr"></i> {{ x.Product_Price|safe }}</a>
-                                       </div>
+                                          </div>{% if x.sessionre == x.checksessionre %}
+                                          <a href="/productdetails/?cname={{ x.Product_ID|safe }}" class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:15px;border-radius:5px;"><i class="fa fa-inr"></i>{{ x.Price|safe }} </a>{% else %}
+                                          <a href="/productdetails/?cname={{ x.Product_ID|safe }}" class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:15px;border-radius:5px;"><i class="fa fa-inr"></i>{{ x.Product_Price|safe }} </a>
+                                       </div>{% endif %}
                                     </div>
                                     </a>
-                                    {% endfor %}
+                                    
 
-                              </div>
+                              </div>{% endfor %}
                            </div>
                         </div>
                      </div>

@@ -49,6 +49,11 @@ urlpatterns = [
     path('resellerdeactive/',resellerdeactive),
     path('opencategory/',opencategory),
     path('proceedfororder/',proceedfororder),
+    path('resellerforgotpass/',resellerforgotpass),
+    path('reseller_send_pass/',reseller_send_pass),
+    path('userforgotpass/',userforgotpass),
+    path('user_send_pass/',user_send_pass),
+    
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

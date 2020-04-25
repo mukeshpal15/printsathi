@@ -12,11 +12,30 @@ from django.core.mail import EmailMessage
 
 def CheckUserSession(request):
 	try:
-		e=request.session['user_email']
-		if UserData.objects.filter(User_Email=e).exists():
+		if UserData.objects.filter(User_Email=request.session['user_email']).exists():
 			return 1
+		else:
+			return 0
 	except:
 		return 0
+
+def CheckResellerSession(n):
+	try:
+		if ResellerData.objects.filter(Reseller_Email=request.session['re_email']).exists():
+			return 2
+		else:
+			return 0
+	except:
+		return 0
+def delresellersession(request):
+	if ResellerData.objects.filter(Reseller_Email=request.session['re_email']).exists():
+		del request.session['re_email']
+		request.session.flush()
+		return 0
+	else:
+		request.session['re_email']=0
+		return 0
+
 def GetCount(pid):
 	obj=ProductDesignData.objects.filter(Product_ID=pid)
 	count=0
@@ -113,7 +132,9 @@ def GetProductDetailByCategory(cname):
 			'Product_Color':i.Product_Color,
 			'Product_Size':i.Product_Size,
 			'Product_Price':i.Product_Price,
+			'Price':(int(i.Product_Price)*90)/100,
 		}
+
 		sub=ProductDesignData.objects.filter(Product_ID=i.Product_ID)
 		for j in sub:
 			b=j.Design_Image.url
@@ -121,3 +142,91 @@ def GetProductDetailByCategory(cname):
 		dic.update({'image':b})
 		lt1.append(dic)	
 	return lt1
+	
+from twilio.rest import Client
+def send_sms(p,m):
+	account_sid = 'AC80c7b1700ce56e8c0a47a3c3195c35c7'
+	auth_token = '32926aeabd1e311c1bc60d07c26b3697'
+	client = Client(account_sid, auth_token)
+	message = client.messages \
+	    .create(
+	         body=m,
+	         messaging_service_sid='MGca893f5b3d0d38edf1ca1edd21b8c3a2',
+		 	 from_='+15592380575',
+	         to=p
+	     )
+	return (message.sid)
+
+
+
+def getdatacatagary(cname):
+
+	dic={'data':GetProductDetailByCategory(cname)}
+	if cname=='Business Cards':
+		dic.update({
+			'cname':cname,
+			'cimage':'/static/images/cosmic-interactive-business-card.jpg',
+			'cpic':'/static/images/Visiting-Cards-BIG.jpg',
+			'clen':len(GetProductDetailByCategory(cname)),
+			
+			
+			})
+		return dic
+
+	elif cname=='Office Stationary':
+		dic.update({
+			'cname':cname,
+			'cimage':'/static/images/cosmic-interactive-business-card.jpg',
+			'cpic':'/static/images/Visiting-Cards-BIG.jpg',
+			'clen':len(GetProductDetailByCategory(cname)),
+			
+			
+			
+			})
+		return dic
+
+	elif cname=='Marketing Tool':
+		dic.update({
+			'cname':cname,
+			'cimage':'/static/images/cosmic-interactive-business-card.jpg',
+			'cpic':'/static/images/Visiting-Cards-BIG.jpg',
+			'clen':len(GetProductDetailByCategory(cname)),
+			
+			
+			})
+		return dic
+
+	elif cname=='Doctoor Tools':
+		dic.update({
+			'cname':cname,
+			'cimage':'/static/images/cosmic-interactive-business-card.jpg',
+			'cpic':'/static/images/Visiting-Cards-BIG.jpg',
+			'clen':len(GetProductDetailByCategory(cname)),
+			
+			
+			})
+		return dic
+
+	elif cname=='Invitation Cards':
+		dic.update({
+			'cname':cname,
+			'cimage':'/static/images/cosmic-interactive-business-card.jpg',
+			'cpic':'/static/images/Visiting-Cards-BIG.jpg',
+			'clen':len(GetProductDetailByCategory(cname)),
+			
+			
+			})
+		return dic
+
+	elif cname=='Apparels/Gifts':
+		dic.update({
+			'cname':cname,
+			'cimage':'/static/images/cosmic-interactive-business-card.jpg',
+			'cpic':'/static/images/Visiting-Cards-BIG.jpg',
+			'clen':len(GetProductDetailByCategory(cname)),
+			
+			
+			})
+		return dic
+	else:
+		return 0
