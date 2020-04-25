@@ -53,7 +53,9 @@ urlpatterns = [
     path('reseller_send_pass/',reseller_send_pass),
     path('userforgotpass/',userforgotpass),
     path('user_send_pass/',user_send_pass),
-    
+    path('orderdatasave/',orderdatasave),
+    path('proceedtopay/',proceedtopay),
+    path('pay/',app_charge),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

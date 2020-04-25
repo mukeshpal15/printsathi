@@ -32,6 +32,16 @@ class ProductDesignData(models.Model):
 	class Meta:
 		db_table="PropertyDesignData"
 
+class OrderData(models.Model):
+	Order_ID=models.CharField(max_length=100)
+	Product_ID=models.CharField(max_length=100)
+	User_ID=models.CharField(max_length=100)
+	Design_ID=models.CharField(max_length=100)
+	Order_Status=models.CharField(max_length=100)
+	Detail_File=models.FileField(upload_to="orderdetailfile/")
+	class Meta:
+		db_table="OrderData"
+
 class UserData(models.Model):
 	User_ID=models.CharField(max_length=100)
 	User_First_Name=models.CharField(max_length=100)

@@ -5,7 +5,7 @@ from django.urls import path
 from printapp.models import *
 from django.conf import  settings
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import *
 import uuid
 from django.contrib.auth import logout
 from django.core.mail import EmailMessage
@@ -704,6 +704,7 @@ def resellerdeactive(request):
 @csrf_exempt
 def opencategory(request):
 	cname=request.GET.get('cname')
+
 	try:
 		try:
 			n=request.session['user_email']
@@ -722,7 +723,8 @@ def opencategory(request):
 	except:
 		dic=getdatacatagary(cname)
 		return render(request,'allproducts.html',dic)
-		
+	
+
 
 def proceedfororder(request):
 	lt=[]
@@ -730,13 +732,7 @@ def proceedfororder(request):
 		pid=request.GET.get('cid')
 		obj=UserData.objects.filter(User_Email=request.session['user_email'])
 		for x in obj:
-			dic={'fname': x.User_First_Name,
-				'lname': x.User_Last_Name,
-				'email': x.User_Email,
-				'phone': x.User_Phone,
-				'address': x.User_Address,
-				'city': x.User_City,
-				'state': x.User_State,
+			dic={'uid': x.User_ID,
 				'session':CheckUserSession(request),
 				'checksession':1,
 				'sessionre':CheckResellerSession(request),
@@ -764,6 +760,7 @@ def proceedfororder(request):
 		return render(request,'orderdetails.html', dic)	
 	except:
 		return redirect('/userlogin/')
+
 def userforgotpass(request):
 	return render(request, 'userforgotpass.html',{})
 
@@ -823,3 +820,95 @@ Printsathi'''
 			msg='Please enter the valid mail Id'
 			
 			return render(request,'resellerforgotpass.html',{'msg':msg})
+
+
+@csrf_exempt
+def orderdatasave(request):
+	if request.method=="POST":
+		did=request.POST.get('design')
+		uid=request.POST.get('uid')
+		pid=request.POST.get('pid')
+		dfile=request.FILES['detailfile']
+		o='OR00'
+		x=1
+		oid=o+str(x)
+		while OrderData.objects.filter(Order_ID=oid).exists():
+			x=x+1
+			oid=o+str(x)
+		x=int(x)
+		obj=OrderData(
+			Order_ID=oid,
+			Product_ID=pid,
+			User_ID=uid,
+			Design_ID=did,
+			Order_Status='Unpaid',
+			Detail_File=dfile
+			)
+		obj.save()
+		obj=ProductData.objects.filter(Product_ID=pid)
+		for x in obj:
+			amounttopay = (int(x.Product_Price)/100)*25
+			dic={'pid':pid,
+				'oid':oid,
+				'tamount':x.Product_Price,
+				'pamount':amounttopay,
+				'amounttopay':amounttopay*100,
+				'session':CheckUserSession(request),
+				'checksession':1}
+			request.session['amounttopay']=amounttopay*100
+		obj=UserData.objects.filter(User_Email=request.session['user_email'])
+		for x in obj:
+			dic.update({
+				'uname':x.User_First_Name+' '+x.User_Last_Name,
+				'uemail':x.User_Email,
+				'uphone':x.User_Phone
+				})
+		return render(request,'proceedtopay.html',dic)
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+
+#Payment Gateway Functions
+import razorpay
+#Working on Test Keys
+razorpay_client = razorpay.Client(auth=("rzp_test_30ncLAFfGjrh3N", "l6tOEr4l26jJqhTHwXhny0eX"))
+razorpay_client.set_app_details({"title" : "Printsathi", "version" : "1.0"})
+
+def proceedtopay(request):
+	return render(request,'proceedtopay.html',{})
+
+@csrf_protect
+@csrf_exempt
+def app_charge(request):
+    amount = request.session['amounttopay']
+    payment_id = request.POST.get('razorpay_payment_id')
+    razorpay_client.payment.capture(payment_id, amount)
+    dic=razorpay_client.payment.capture(payment_id, amount)
+    return HttpResponse(razorpay_client.payment.fetch(payment_id))
+'''
+Dictonary Returned By RazorPay
+{'id': 'pay_Ehv4okDsKdVexM',
+'entity': 'payment',
+'amount': 5100,
+'currency': 'INR',
+'status': 'captured',
+'order_id': None,
+'invoice_id': None,
+'international': False,
+'method': 'netbanking',
+'amount_refunded': 0,
+'refund_status': None,
+'captured': True,
+'description': 'Purchase Description',
+'card_id': None,
+'bank': 'SBIN',
+'wallet': None,
+'vpa': None,
+'email': 'harshil@razorpay.com',
+'contact': '+919999999999',
+'notes': {'shopping_order_id': '21'},
+'fee': 120,
+'tax': 18,
+'error_code': None,
+'error_description': None,
+'created_at': 1587643242}'''
+

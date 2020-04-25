@@ -164,10 +164,10 @@
                                                 <p style="font-size:15px;">Size : <strong>{{ x.Product_Size|safe }}</strong></p>
                                                 <p style="font-size:15px;">Quantity : <strong>{{ x.Product_Quantity|safe }}</strong></p>
                                              </div>
-                                          </div>{% if x.sessionre == x.checksessionre %}
-                                          <a href="/productdetails/?cname={{ x.Product_ID|safe }}" class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:15px;border-radius:5px;"><i class="fa fa-inr"></i>{{ x.Price|safe }} </a>{% else %}
+                                          </div>
                                           <a href="/productdetails/?cname={{ x.Product_ID|safe }}" class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:15px;border-radius:5px;"><i class="fa fa-inr"></i>{{ x.Product_Price|safe }} </a>
-                                       </div>{% endif %}
+                                          
+                                       </div>
                                     </div>
                                     </a>
                                     

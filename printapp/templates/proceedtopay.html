@@ -70,7 +70,6 @@
                               <ul>
                                  {% if session == checksession %}
                                     <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
-                                    <li><a class="custom-b" href="/logout/">My Account</a></li>
                                  {% else %}
                                     <li><a href="/userlogin/">Login</a></li>
                                     <li><a class="custom-b" href="/userregistration/">Sign up</a></li>
@@ -142,29 +141,51 @@
          <center>
          <div class="w3-card-4" style="width:80%;border-radius:20px;margin-top:80px;">
 
-            <div class="w3-container w3-blue" style="padding-top:10px;padding-bottom:10px;border-radius:20px;">
-            <h2>Order Details Form</h2>
+            <div class="w3-container w3-black" style="padding-top:10px;padding-bottom:10px;border-radius:20px;">
+            <h2>Payment Information</h2>
             </div>
 
-               <form class="w3-container" action="/orderdatasave/" method="POST" style="margin-top:20px;margin-bottom:20px;" enctype="multipart/form-data">
-                  <label style="font-size:20px;">Choose Design*</label><br>
-                  
-                  {% for x in designs %}
-                  <label>
-                  <input class="w3-input" type="radio" name="design" style="margin-bottom:20px;position:absolute;opacity:0;height:0;width:0;cursor:pointer;" value="{{ x.did|safe }}" required>
-                  <img style="height:150px;width:200px;cursor:pointer;margin:10px;border-radius:10px;"src="{{ x.image|safe }}">
-                  </label>
-                  {% endfor %}
-                  
-                  <input type="hidden" name="uid" value="{{ uid|safe }}">
+               <form class="w3-container" action="/pay/" method="POST" style="margin-top:20px;margin-bottom:20px;">
 
-                  <input type="hidden" name="pid" value="{{ Product_ID|safe }}"><br>
+                  <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+                    <tr style="font-size:18px;">
+                      <td>Product ID</td>
+                      <td>{{ pid|safe }}</td>
+                    </tr>
+                    <tr style="font-size:18px;">
+                      <td>Order ID</td>
+                      <td>{{ oid|safe }}</td>
+                    </tr>
+                    <tr style="font-size:20px;">
+                      <td>Total Amount</td>
+                      <td><i class="fa fa-inr"></i> {{ tamount|safe }}/-</td>
+                    </tr>
+                    <tr style="font-size:25px;font-weight:bold;">
+                      <td>Amount To Pay <sup><span data-toggle="tooltip" class="w3-green w3-hover-black tooltipcss" style="margin-left:5px;" title="You have to pay only 25% of the Total Amount of your order. Rest amount will be collected after the order completion">?</span></sup></td>
+                      <td><i class="fa fa-inr"></i> {{ pamount|safe }}/- <span style="font-size:18px;">(including of all taxes)</span></td>
+                    </tr>
+                  </table>
 
-                  <label style="font-size:20px;margin-bottom:20px;">Upload Detail File* <sup><span data-toggle="tooltip" class="w3-red w3-hover-black tooltipcss" style="margin-left:10px;" title="Detail must contain all the necessary information that you want to get printed on your order. Acceptable file formats are DOCX, DOC, PPT, PPTX and TXT">?</span></sup></label>
+                  <input type="hidden" name="uid" value="{{ uid|safe }}" disabled requird>
 
-                  <input type="file" name="detailfile" style="font-size:20px;border-radius:20px;margin-bottom:20px;" requird>
-                  
-                  <input type="submit" value="Proceed" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;margin-bottom:20px;">
+                  <input type="hidden" name="pid" value="{{ Product_ID|safe }}" disabled requird><br>
+
+                  <script src="https://checkout.razorpay.com/v1/checkout.js"
+                     data-key="rzp_test_30ncLAFfGjrh3N"
+                     data-amount="{{ amounttopay|safe }}"
+                     data-name="Printsathi"
+                     data-description="{{ pid|safe }}"
+                     data-image="{% static 'images/logo.png' %}"
+                     data-netbanking="true"
+                     data-description="Tron Legacy"
+                     data-prefill.name="{{ uname|safe }}"
+                     data-prefill.email="{{ uemail|safe }}"
+                     data-prefill.contact="{{ uphone|safe }}"
+                     data-notes.order_id="{{ oid|safe }}">
+                     document.getElementsById('pay')
+                 </script><br>
+
+                  <button id="pay" type="submit" class="w3-button w3-green w3-hover-black" style="font-size:20px;border-radius:20px;margin-top:10px;margin-bottom:20px;"><i class="fa fa-arrow-right"></i></button>
 
                </form>
 
@@ -305,5 +326,8 @@
       <script src="{% static 'js/wow.min.js' %}"></script>
       <!--custom js--> 
       <script src="{% static 'js/custom.js' %}"></script>
+
+                  
+
    </body>
 </html>
