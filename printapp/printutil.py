@@ -177,7 +177,7 @@ def getdatacatagary(cname):
 		dic.update({
 			'cname':cname,
 			'cimage':'/static/images/cosmic-interactive-business-card.jpg',
-			'cpic':'/static/images/Visiting-Cards-BIG.jpg',
+			'cpic':'/static/images/40307043-back-to-school-blackboard-with-pencilbox-and-school-equipment-on-table.jpg',
 			'clen':len(GetProductDetailByCategory(cname)),
 			
 			
@@ -189,7 +189,7 @@ def getdatacatagary(cname):
 		dic.update({
 			'cname':cname,
 			'cimage':'/static/images/cosmic-interactive-business-card.jpg',
-			'cpic':'/static/images/Visiting-Cards-BIG.jpg',
+			'cpic':'/static/images/pexels-photo-313691-1024x768.jpeg',
 			'clen':len(GetProductDetailByCategory(cname)),
 			
 			
@@ -200,7 +200,7 @@ def getdatacatagary(cname):
 		dic.update({
 			'cname':cname,
 			'cimage':'/static/images/cosmic-interactive-business-card.jpg',
-			'cpic':'/static/images/Visiting-Cards-BIG.jpg',
+			'cpic':'/static/images/download.jpg',
 			'clen':len(GetProductDetailByCategory(cname)),
 			
 			
@@ -211,7 +211,7 @@ def getdatacatagary(cname):
 		dic.update({
 			'cname':cname,
 			'cimage':'/static/images/cosmic-interactive-business-card.jpg',
-			'cpic':'/static/images/Visiting-Cards-BIG.jpg',
+			'cpic':'/static/images/47227_invitation-card-wedding-wallpapers-invitation-card-wedding_1600x1200_h.jpg',
 			'clen':len(GetProductDetailByCategory(cname)),
 			
 			
@@ -222,7 +222,7 @@ def getdatacatagary(cname):
 		dic.update({
 			'cname':cname,
 			'cimage':'/static/images/cosmic-interactive-business-card.jpg',
-			'cpic':'/static/images/Visiting-Cards-BIG.jpg',
+			'cpic':'/static/images/47227_invitation-card-wedding-wallpapers-invitation-card-wedding_1600x1200_h.jpg',
 			'clen':len(GetProductDetailByCategory(cname)),
 			
 			

@@ -242,7 +242,7 @@ Printsathi'''
 			sub='Welcome to Printsathi'
 			email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
 			email.send()
-			snp=send_sms(pp,msg)
+			#snp=send_sms(pp,msg)
 			dic={'msg':"Successfully Registered",
 				'msg1':'You will get you account credentials on your mail soon.',
 				'session':CheckUserSession(request),
@@ -514,7 +514,7 @@ Printsathi'''
 			sub='Welcome to Printsathi'
 			email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
 			email.send()
-			snp=send_sms(pp,msg)
+			#snp=send_sms(pp,msg)
 			dic={'msg':"Reseller Registered Successfully",
 				'msg1':"Your password has been sent to your email."}
 			return render(request, 'resellerregistration.html',dic)
@@ -638,7 +638,7 @@ Printsathi'''
 			sub='Alert! Your Password Has Been Changed'
 			email = EmailMessage(sub, msg, to=[n])
 			email.send()
-			snp=send_sms(pp,msg)
+			#snp=send_sms(pp,msg)
 			return render(request,'resellerprofile.html',dic)
 		else:
 			obj=ResellerData.objects.filter(Reseller_Email=request.session['re_email'])
@@ -683,7 +683,7 @@ Printsathi'''
 		sub='Congratulations! Reseller Account Activated Successfully'
 		email = EmailMessage(sub, msg, to=[e])
 		email.send()
-		snp=send_sms(pp,msg)
+		#snp=send_sms(pp,msg)
 		dic={'adata':ResellerData.objects.filter(Reseller_Status="Active"),
 			'ddata':ResellerData.objects.filter(Reseller_Status="Deactive")}
 		return render(request,'resellerdata.html',dic)
@@ -785,7 +785,7 @@ Printsathi'''
 			email = EmailMessage(sub, msg, to=[n])
 			email.send()
 			print(pp)
-			snp=send_sms(pp,msg)
+			#snp=send_sms(pp,msg)
 			return HttpResponse("<script> alert('Your Password has been sent to your mail Id and Phone'); window.location.replace('/userlogin/') </script>")
 		else:
 			msg='Please enter the valid mail Id'
@@ -814,7 +814,7 @@ Printsathi'''
 			sub='Your Account Password'
 			email = EmailMessage(sub, msg, to=[n])
 			email.send()
-			snp=send_sms(pp,msg)
+			#snp=send_sms(pp,msg)
 			return HttpResponse("<script> alert('Your Password has been sent to your mail Id and Phone'); window.location.replace('/resellerlogin/') </script>")
 		else:
 			msg='Please enter the valid mail Id'
