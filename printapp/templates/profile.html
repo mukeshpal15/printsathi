@@ -177,8 +177,7 @@
                            <h3>Hi! {{ fname|safe }}</h3>
                            <div class="check-box"></div>
                         </div>
-                        <a href="#">Contact company</a>
-                        <p><img src="images/report-icon.jpg" alt="" />Report this user</p>
+                        <a href="#tab3default" data-toggle="tab">View Profile</a>
                      </div>
                   </div>
                </div>
@@ -187,64 +186,45 @@
                      <div class="panel with-nav-tabs panel-default">
                         <div class="panel-heading clearfix">
                            <ul class="nav nav-tabs pull-left">
-                              <li class="active"><a href="#tab1default" data-toggle="tab">Products <span>321</span></a></li>
-                              <li><a href="#tab2default" data-toggle="tab">About</a></li>
+                              <li class="active"><a href="#tab1default" data-toggle="tab">My Orders</a></li>
                               <li><a href="#tab3default" data-toggle="tab">My Profile</a></li>
                            </ul>
-                           <ul class="nav nav-tabs pull-right right-t">
-                              <li class="dropdown">
-                                 <a href="#" data-toggle="dropdown">Sort <span class="caret"></span></a>
-                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#tab4default" data-toggle="tab">Default 4</a></li>
-                                 </ul>
-                              </li>
-                              <li><a href="#tab5default" data-toggle="tab"><i class="fa fa-sliders" aria-hidden="true"></i> Refine</a></li>
-                           </ul>
+                           
                         </div>
                         <div class="panel-body">
                            <div class="tab-content">
                               <div class="tab-pane fade in active" id="tab1default">
                                  <div class="product-box-main row">
+                                    {% for x in odata %}
                                     <div class="col-md-4 col-sm-6">
                                        <div class="small-box-c">
                                           <div class="small-img-b">
-                                             <img src="images/tr4.png" alt="#" />
+                                             <img src="{{ x.pimg|safe }}" alt="#" />
                                           </div>
                                           <div class="dit-t clearfix">
                                              <div class="left-ti">
-                                                <h4>Product</h4>
-                                                <p>Under <span>Sofa Corner</span></p>
+                                                <h4>{{ x.pname|safe }}</h4>
+                                                <p>{{ x.pcategory|safe }}</p>
                                              </div>
-                                             <a href="#" tabindex="0">$1220</a>
+                                             <a href="#"><i class="fa fa-inr"></i>{{ x.pprice|safe }}</a>
                                           </div>
-                                          <div class="prod-btn">
-                                             <a href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist</a>
-                                             <a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                                             <p>23 likes</p>
-                                          </div>
+                                          <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+                                            <tr class="w3-black">
+                                              <th>Order ID</th>
+                                              <th>{{ x.orderid|safe }}</th>
+                                            </tr>
+                                            <tr class="w3-black">
+                                              <th>Payment ID</th>
+                                              <th>{{ x.paymentid|safe }}</th>
+                                            </tr>
+                                            <tr class="w3-black">
+                                              <th>Payment Status</th>
+                                              <th>{{ x.status|safe }}</th>
+                                            </tr>
+                                          </table>
                                        </div>
                                     </div>
-                                 </div>
-                                 <div class="loding-box">
-                                    <a href="#">
-                                       <div class="sk-wave">
-                                          <div class="sk-rect sk-rect1"></div>
-                                          <div class="sk-rect sk-rect2"></div>
-                                          <div class="sk-rect sk-rect3"></div>
-                                          <div class="sk-rect sk-rect4"></div>
-                                          <div class="sk-rect sk-rect5"></div>
-                                       </div>
-                                       <span>Loding more awesome products...</span>
-                                    </a>
-                                 </div>
-                              </div>
-                              <div class="tab-pane fade" id="tab2default">
-                                 <div class="about-box">
-                                    <h2>What Does Chamb Do</h2>
-                                    <p>Chamb brings buyers and suppliers of goods together to create lasting profitable relationships. Through new connections, economic roads, and insightful associations, we want Chamb to help transform your business into the next Apple!</p>
-                                    <p>At Chamb we understand the old adage of ‘it’s not what you know, but Who you know’ is key to success. With that in mind, through much trial and just a little bit of error, we learned the one limiting factor of any business achieving its potential: Their connections.</p>
-                                    <p>Before Chamb existed, we noticed that though the power of the net rested at business’ finger tips, resources for discovering manufacturers and suppliers was limited at best and non-existent at worse. Smaller companies that housed great products and potential, were starving through a lack of connectivity.</p>
-                                    <p>We took it upon ourselves to change that. We developed a burning desire to create something to bridge the chasms between businesses across country and continent. So, with a goal in mind, a skilled team at hand, Chamb sprung forth: the website that helps discover and build profitable long-lasting networks amongst businesses around the world.</p>
+                                    {% endfor %}
                                  </div>
                               </div>
                               <div class="tab-pane fade" id="tab3default">

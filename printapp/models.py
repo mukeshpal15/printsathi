@@ -37,6 +37,7 @@ class OrderData(models.Model):
 	Product_ID=models.CharField(max_length=100)
 	User_ID=models.CharField(max_length=100)
 	Design_ID=models.CharField(max_length=100)
+	Payment_ID=models.CharField(max_length=100)
 	Order_Status=models.CharField(max_length=100)
 	Detail_File=models.FileField(upload_to="orderdetailfile/")
 	class Meta:

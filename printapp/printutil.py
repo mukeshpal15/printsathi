@@ -230,3 +230,27 @@ def getdatacatagary(cname):
 		return dic
 	else:
 		return 0
+def GetOrderDetails(userid):
+	obj=OrderData.objects.filter(User_ID=userid)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'orderid':x.Order_ID,
+		'paymentid':x.Payment_ID,
+		'status':x.Order_Status
+		}
+		obj1=ProductData.objects.filter(Product_ID=x.Product_ID)
+		for y in obj1:
+			dic.update({
+				'pname':y.Product_Name,
+				'pprice':y.Product_Price,
+				'pcategory':y.Product_Category
+				})
+		obj2=ProductDesignData.objects.filter(Design_ID=x.Design_ID)
+		for z in obj2:
+			dic.update({
+				'pimg':z.Design_Image.url
+				})
+		lt.append(dic)
+	return lt
