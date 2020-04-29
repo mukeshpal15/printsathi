@@ -242,7 +242,7 @@ Printsathi'''
 			sub='Welcome to Printsathi'
 			email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
 			email.send()
-			#snp=send_sms(pp,msg)
+			snp=send_sms(pp,msg)
 			dic={'msg':"Successfully Registered",
 				'msg1':'You will get you account credentials on your mail soon.',
 				'session':CheckUserSession(request),
@@ -267,8 +267,7 @@ def userlog(request):
 					'city': x.User_City,
 					'state': x.User_State,
 					'session':CheckUserSession(request),
-					'checksession':1,
-					'odata':GetOrderDetails(x.User_ID)}
+					'checksession':1}
 			return render(request,'profile.html',dic)
 		else:
 			dic={'msg':'Incorrect Email or Password',}
@@ -294,8 +293,7 @@ def changeuserpassword(request):
 				'city': x.User_City,
 				'state': x.User_State,
 				'session':CheckUserSession(request),
-				'checksession':1,
-				'odata':GetOrderDetails(x.User_ID)
+				'checksession':1
 				}
 			b1='''<script type="text/javascript">
 			alert("'''
@@ -327,8 +325,7 @@ Printsathi'''
 				'city': x.User_City,
 				'state': x.User_State,
 				'session':CheckUserSession(request),
-				'checksession':1,
-				'odata':GetOrderDetails(x.User_ID)
+				'checksession':1
 				}
 			b1='''<script type="text/javascript">
 			alert("'''
@@ -359,8 +356,7 @@ def changeuserdetails(request):
 				'city': x.User_City,
 				'state': x.User_State,
 				'session':CheckUserSession(request),
-				'checksession':1,
-				'odata':GetOrderDetails(x.User_ID)
+				'checksession':1
 			}
 		b1='''<script type="text/javascript">
 		alert("'''
@@ -389,10 +385,8 @@ def myuseraccount(request):
 						'city': x.User_City,
 						'state': x.User_State,
 						'session':CheckUserSession(request),
-						'checksession':1,
-						'odata':GetOrderDetails(x.User_ID)
+						'checksession':1
 					}
-				print('hello')
 				return render(request,'profile.html',dic)
 			else:
 				return HttpResponse('<h1>Error 404 NOT FOUND</h1>')	
@@ -520,7 +514,7 @@ Printsathi'''
 			sub='Welcome to Printsathi'
 			email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
 			email.send()
-			#snp=send_sms(pp,msg)
+			snp=send_sms(pp,msg)
 			dic={'msg':"Reseller Registered Successfully",
 				'msg1':"Your password has been sent to your email."}
 			return render(request, 'resellerregistration.html',dic)
@@ -644,7 +638,7 @@ Printsathi'''
 			sub='Alert! Your Password Has Been Changed'
 			email = EmailMessage(sub, msg, to=[n])
 			email.send()
-			#snp=send_sms(pp,msg)
+			snp=send_sms(pp,msg)
 			return render(request,'resellerprofile.html',dic)
 		else:
 			obj=ResellerData.objects.filter(Reseller_Email=request.session['re_email'])
@@ -689,7 +683,7 @@ Printsathi'''
 		sub='Congratulations! Reseller Account Activated Successfully'
 		email = EmailMessage(sub, msg, to=[e])
 		email.send()
-		#snp=send_sms(pp,msg)
+		snp=send_sms(pp,msg)
 		dic={'adata':ResellerData.objects.filter(Reseller_Status="Active"),
 			'ddata':ResellerData.objects.filter(Reseller_Status="Deactive")}
 		return render(request,'resellerdata.html',dic)
@@ -791,7 +785,7 @@ Printsathi'''
 			email = EmailMessage(sub, msg, to=[n])
 			email.send()
 			print(pp)
-			#snp=send_sms(pp,msg)
+			snp=send_sms(pp,msg)
 			return HttpResponse("<script> alert('Your Password has been sent to your mail Id and Phone'); window.location.replace('/userlogin/') </script>")
 		else:
 			msg='Please enter the valid mail Id'
@@ -809,7 +803,7 @@ def reseller_send_pass(request):
 				p=i.Reseller_Password
 				pp=i.Reseller_Phone
 				break
-			msg = '''Hi there!,
+			msg = '''hello sir,
 
 
 Your Password is : '''+p+'''
@@ -820,18 +814,14 @@ Printsathi'''
 			sub='Your Account Password'
 			email = EmailMessage(sub, msg, to=[n])
 			email.send()
-			#snp=send_sms(pp,msg)
+			snp=send_sms(pp,msg)
 			return HttpResponse("<script> alert('Your Password has been sent to your mail Id and Phone'); window.location.replace('/resellerlogin/') </script>")
 		else:
 			msg='Please enter the valid mail Id'
 			
 			return render(request,'resellerforgotpass.html',{'msg':msg})
 
-#Payment Gateway Functions
-import razorpay
-#Working on Test Keys
-razorpay_client = razorpay.Client(auth=("rzp_test_30ncLAFfGjrh3N", "l6tOEr4l26jJqhTHwXhny0eX"))
-razorpay_client.set_app_details({"title" : "Printsathi", "version" : "1.0"})
+
 @csrf_exempt
 def orderdatasave(request):
 	if request.method=="POST":
@@ -851,7 +841,6 @@ def orderdatasave(request):
 			Product_ID=pid,
 			User_ID=uid,
 			Design_ID=did,
-			Payment_ID='None',
 			Order_Status='Unpaid',
 			Detail_File=dfile
 			)
@@ -866,7 +855,7 @@ def orderdatasave(request):
 				'amounttopay':amounttopay*100,
 				'session':CheckUserSession(request),
 				'checksession':1}
-		request.session['order_id'] = oid
+			request.session['amounttopay']=amounttopay*100
 		obj=UserData.objects.filter(User_Email=request.session['user_email'])
 		for x in obj:
 			dic.update({
@@ -874,21 +863,15 @@ def orderdatasave(request):
 				'uemail':x.User_Email,
 				'uphone':x.User_Phone
 				})
-		order_amount = int(dic['amounttopay'])
-		order_currency = 'INR'
-		order_receipt = dic['oid'] 
-		options={
-			'amount':order_amount,
-			'currency':order_currency,
-			'receipt':order_receipt,
-			'payment_capture':'0'
-		}
-		dic.update(razorpay_client.order.create(options))
 		return render(request,'proceedtopay.html',dic)
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 
-
+#Payment Gateway Functions
+import razorpay
+#Working on Test Keys
+razorpay_client = razorpay.Client(auth=("rzp_test_30ncLAFfGjrh3N", "l6tOEr4l26jJqhTHwXhny0eX"))
+razorpay_client.set_app_details({"title" : "Printsathi", "version" : "1.0"})
 
 def proceedtopay(request):
 	return render(request,'proceedtopay.html',{})
@@ -896,41 +879,41 @@ def proceedtopay(request):
 @csrf_protect
 @csrf_exempt
 def app_charge(request):
-	razorpay_order_id = request.POST.get('razorpay_order_id')
-	razorpay_payment_id = request.POST.get('razorpay_payment_id')
-	razorpay_signature = request.POST.get('razorpay_signature')
-	params_dict = {
-    'razorpay_order_id': razorpay_order_id,
-    'razorpay_payment_id': razorpay_payment_id,
-    'razorpay_signature': razorpay_signature}
-	if razorpay_client.utility.verify_payment_signature(params_dict):
-		obj=OrderData.objects.filter(Order_ID=request.session['order_id'])
-		obj.update(Payment_ID=razorpay_payment_id,Order_Status='Paid')
-		dic={'oid':request.session['order_id'],
-			'pid':razorpay_payment_id}
-		msg = '''Hi there!,
-Your payment for Order ID '''+request.session['order_id']+'''is successful!
-Your Payment ID is '''+razorpay_payment_id+'''
-
-Thanks & Regards,
-Printsathi'''
-		sub='Printsathi - Payment Successful'
-		email = EmailMessage(sub, msg, to=[request.session['user_email']])
-		email.send()
-		return render(request,'paymentsuccess.html',dic)
-	else:
-		obj=OrderData.objects.filter(Order_ID=request.session['order_id'])
-		obj.update(Payment_ID=razorpay_payment_id,Order_Status='Failed')
-		dic={'oid':request.session['order_id'],
-			'pid':razorpay_payment_id}
-		msg = '''Hi there!,
-Your payment for Order ID '''+request.session['order_id']+'''is failed!
-Your Payment ID is '''+razorpay_payment_id+'''
-we apologize for this. Kindly send a mail to us regarding this problem.
-
-Thanks & Regards,
-Printsathi'''
-		sub='Printsathi - Payment Failed'
-		email = EmailMessage(sub, msg, to=[request.session['user_email']])
-		email.send()
-		return render(request,'paymentfailure.html',dic)
+    amount = request.session['amounttopay']
+    payment_id = request.POST.get('razorpay_payment_id')
+    razorpay_client.payment.capture(payment_id, amount)
+    dic=razorpay_client.payment.capture(payment_id, amount)
+    return HttpResponse(razorpay_client.payment.fetch(payment_id))
+'''
+Dictonary Returned By RazorPay
+{'id': 'pay_Ehv4okDsKdVexM',
+'entity': 'payment',
+'amount': 5100,
+'currency': 'INR',
+'status': 'captured',
+'order_id': None,
+'invoice_id': None,
+'international': False,
+'method': 'netbanking',
+'amount_refunded': 0,
+'refund_status': None,
+'captured': True,
+'description': 'Purchase Description',
+'card_id': None,
+'bank': 'SBIN',
+'wallet': None,
+'vpa': None,
+'email': 'harshil@razorpay.com',
+'contact': '+919999999999',
+'notes': {'shopping_order_id': '21'},
+'fee': 120,
+'tax': 18,
+'error_code': None,
+'error_description': None,
+'created_at': 1587643242}'''
+def cart(request):
+	return render(request,'cart.html',{})
+def deliveryboylogin(request):
+	return render(request,'deliveryboylogin.html',{})
+def deliveryboypannel(request):
+	return render(request,'deliveryboypannel.html',{})

@@ -1,0 +1,249 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>Printsathi - Delivery Boy Pannel</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!--enable mobile device-->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!--fontawesome css-->
+      <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+      <link rel="stylesheet" href="{% static 'w3.css' %}">
+      <!--bootstrap css-->
+      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+      <!--animate css-->
+      <link rel="stylesheet" href="{% static 'css/animate-wow.css' %}">
+      <!--main css-->
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      <link rel="stylesheet" href="{% static 'css/bootstrap-select.min.css' %}">
+      <link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
+      <!--responsive css-->
+      <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+   </head>
+   <body>
+      <header id="header" class="top-head">
+         <!-- Static navbar -->
+         <nav class="navbar navbar-default">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-md-4 col-sm-12 left-rs">
+                     <div class="navbar-header">
+                        <button type="button" id="top-menu" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"> 
+                        <span class="sr-only">Toggle navigation</span> 
+                        <span class="icon-bar"></span> 
+                        <span class="icon-bar"></span> 
+                        <span class="icon-bar"></span> 
+                        </button>
+                        <a href="\index\" class="navbar-brand"><img src="{% static 'images/logo.png' %}" alt="" /></a>
+                     </div>
+                  </div>
+                  <div class="col-md-8 col-sm-12">
+                     <div class="right-nav">
+                        <div class="login-sr">
+                           <div class="login-signup">
+                              <ul>
+                                 <li>
+                                    <form>
+                                       <input class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;" type="submit" value="Logout">
+                                    </form>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                        
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!--/.container-fluid --> 
+         </nav>
+      </header>
+      <div id="sidebar" class="top-nav">
+         <ul id="sidebar-nav" class="sidebar-nav">
+            <li>
+               <form>
+                  <input class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;" type="submit" value="Logout">
+               </form>
+            </li>
+         </ul>
+      </div>
+      <div class="terms-conditions">
+         <div class="terms-title">
+            <div class="container">
+               <div class="row">
+                  <ol class="breadcrumb">
+                     <li class="active">Delivery Boy Pannel</li>
+                  </ol>
+               </div>
+            </div>
+         </div>
+         <div class="container">
+          <h1>Undelivered Products</h1>
+          <div style="overflow-y:auto;height:200px;margin-top:20px;">
+          <table class="w3-table w3-hoverable">
+            <tr class="w3-black">
+               <th>Product Name</th>
+               <th>Category</th>
+               <th>Customer Name</th>
+               <th>Customer Phone</th>
+               <th>Customer Address</th>
+               <th>Total Amount</th>
+               <th>Rest Amount</th>
+               <th>Payment Status</th>
+               <th>Delivery Status</th>
+
+            </tr>
+            <tr>
+               <td>luvyansh</td>
+               <td>Himanshi</td>
+               <td>Himanshu</td>
+               <td>Himanshu</td>
+               <td>Himanshu</td>
+               <td>Himanshu</td>
+               <td>Aryan</td>
+               <td>Arab</td>
+               <td><button style="border-radius:10px;"class="w3-button w3-green w3-hover-black">Delivered</button></td>
+            </tr>
+            
+          </table>
+          </div>  
+          <h1>Delivered Products</h1>
+          <div style="overflow-y:auto;height:200px;margin-top:20px;">
+          <table class="w3-table w3-hoverable">
+            <tr class="w3-black">
+               <th>Product Name</th>
+               <th>Category</th>
+               <th>Customer Name</th>
+               <th>Customer Phone</th>
+               <th>Customer Address</th>
+               <th>Total Amount</th>
+               <th>Payment Status</th>
+               
+
+            </tr>
+            <tr>
+               <td>luvyansh</td>
+               <td>Himanshi</td>
+               <td>Himanshu</td>
+               <td>Himanshu</td>
+               <td>Himanshu</td>
+               <td>Aryan</td>
+               <td>Arab</td>
+            </tr>
+            
+          </table>
+          </div>  
+
+         </div>
+      </div>
+<footer>
+         <div class="main-footer">
+            <div class="container">
+               <div class="row">
+                  <div class="footer-link-box clearfix">
+                     <div class="col-md-6 col-sm-6">
+                        <div class="left-f-box">
+                           <div class="col-sm-4">
+                              <h2>Reseller's Counter</h2>
+                              <ul>
+                                 <li><a href="/resellerregistration/">Join as Reseller</a></li>
+                                 <li><a href="/resellerlogin/">Login</a></li>
+                              </ul>
+                           </div>
+                           <div class="col-sm-4">
+                              <h2>BUY ON chamb</h2>
+                              <ul>
+                                 <li><a href="#">Create account</a></li>
+                                 <li><a href="#">How it works buyers</a></li>
+                                 <li><a href="#">Categories</a></li>
+                                 <li><a href="#">FAQ for buyers</a></li>
+                              </ul>
+                           </div>
+                           <div class="col-sm-4">
+                              <h2>COMPANY</h2>
+                              <ul>
+                                 <li><a href="about-us.html">About chamb</a></li>
+                                 <li><a href="#">Contact us</a></li>
+                                 <li><a href="#">Press</a></li>
+                                 <li><a href="#">Careers</a></li>
+                                 <li><a href="#">Terms of use</a></li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-sm-6">
+                        <div class="right-f-box">
+                           <h2>INDUSTRIES</h2>
+                           <ul class="col-sm-4">
+                              <li><a href="#">Textiles</a></li>
+                              <li><a href="#">Furniture</a></li>
+                              <li><a href="#">Leather</a></li>
+                              <li><a href="#">Agriculture</a></li>
+                              <li><a href="#">Food & drinks</a></li>
+                           </ul>
+                           <ul class="col-sm-4">
+                              <li><a href="#">Office</a></li>
+                              <li><a href="#">Decoratives</a></li>
+                              <li><a href="#">Electronics</a></li>
+                              <li><a href="#">Machines</a></li>
+                              <li><a href="#">Building</a></li>
+                           </ul>
+                           <ul class="col-sm-4">
+                              <li><a href="#">Cosmetics</a></li>
+                              <li><a href="#">Health</a></li>
+                              <li><a href="#">Jewelry</a></li>
+                              <li><a href="#">See all here</a></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="copyright">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-8">
+                     <p><img width="90" src="{% static 'images/logo.png' %}" alt="#" style="margin-top: -5px;" /> All Rights Reserved. <a href="http://funtouchit.com/"> Funtouch IT Solutions © 2020</a></p>
+                  </div>
+                  <div class="col-md-4">
+                     <ul class="list-inline socials">
+                        <li>
+                           <a href="">
+                           <i class="fa fa-facebook" aria-hidden="true"></i>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="">
+                           <i class="fa fa-twitter" aria-hidden="true"></i>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="">
+                           <i class="fa fa-instagram" aria-hidden="true"></i>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                           <i class="fa fa-linkedin" aria-hidden="true"></i>
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+
+      <!--main js--> 
+      <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script> 
+      <!--bootstrap js--> 
+      <script src="{% static 'js/bootstrap.min.js' %}"></script> 
+      <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
+      <script src="{% static 'js/slick.min.js' %}"></script> 
+      <script src="{% static 'js/wow.min.js' %}"></script>
+      <!--custom js--> 
+      <script src="{% static 'js/custom.js' %}"></script>
+   </body>
+</html>
