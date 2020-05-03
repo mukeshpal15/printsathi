@@ -149,12 +149,8 @@
 
                   <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
                     <tr style="font-size:18px;">
-                      <td>Product ID</td>
-                      <td>{{ pid|safe }}</td>
-                    </tr>
-                    <tr style="font-size:18px;">
-                      <td>Order ID</td>
-                      <td>{{ oid|safe }}</td>
+                      <td>Cart ID</td>
+                      <td>{{ cid|safe }}</td>
                     </tr>
                     <tr style="font-size:20px;">
                       <td>Total Amount</td>
@@ -176,14 +172,14 @@
                      data-currency="INR"
                      data-order_id="{{ id|safe }}"
                      data-name="Printsathi"
-                     data-description="{{ pid|safe }}"
+                     data-description="{{ cid|safe }}"
                      data-image="{% static 'images/logo.png' %}"
                      data-netbanking="true"
                      data-description="Tron Legacy"
                      data-prefill.name="{{ uname|safe }}"
                      data-prefill.email="{{ uemail|safe }}"
                      data-prefill.contact="{{ uphone|safe }}"
-                     data-theme.color="#F37254">
+                     data-theme.color="blue">
                      document.getElementsById('pay')
                  </script><br>
 

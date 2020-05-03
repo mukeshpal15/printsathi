@@ -3,10 +3,7 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8">
-
-     
-      <title>Printsathi - Order Details</title>
-
+      <title>Printsathi - Cart</title>
       <link rel="stylesheet" href="{% static 'w3.css' %}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <!--enable mobile device-->
@@ -23,27 +20,6 @@
       <link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
       <!--responsive css-->
       <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-      <style type="text/css">
-      
-         input[type=radio]:checked + img {
-           border: 8px solid black;
-           border-radius:10px;
-           box-shadow:5px 5px 10px;
-         }
-         .tooltipcss{
-            color:white;
-            padding-top:5px;
-            padding-bottom:5px;
-            padding-left:10px;
-            padding-right:10px;
-            cursor:pointer;
-            border-radius:50%;
-            font-size:12px;
-         }
-
-      </style>
-
-
    </head>
    <body>
       <header id="header" class="top-head">
@@ -124,81 +100,68 @@
             <li><a href="/about/">About</a></li>
             <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</a></li>
          </ul>
-      </div>
-      <div id="sidebar" class="top-nav">
-         <ul id="sidebar-nav" class="sidebar-nav">
-            <li><a href="#">Help</a></li>
-            <li><a href="#">How it works</a></li>
-            <li><a href="#">Chamb for Business</a></li>
-         </ul>
-      </div>
-      <div class="terms-conditions">
+      </div>    
+         <div class="terms-conditions">
+
        <div class="container">
+        <h1 style="margin-top:20px;font-size:40px;"><i class="fa fa-shopping-cart"></i> Cart <span>({{ count|safe }})</span></h1> 
+   <div style="background-color:white;border-radius:15px;padding:40px;margin-top:20px;"class="w3-card-4">
+      <table class="w3-table w3-striped">
+         <tr class="w3-black">
+            <th>Design</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th></th>
+         </tr>
 
+         {% for x in cartdata %}
+         <tr>
+            <td>
+               <img style="height:100px;width:150px;border-radius:15px;"src="{{ x.image|safe }}">
+            </td>
+            <td style="font-size:25px;font-weight:bold;">
+               {{ x.name|safe }}<br>
+               <span style="font-size:15px;color:grey;">{{ x.category|safe }}</span>
+            </td>
+            <td style="font-size:25px;font-weight:bold;">
+               {{ x.quantity|safe }}<br>
+            </td>
+            <td style="font-size:20px;font-weight:bold;">
+               <i class="fa fa-inr"></i> {{ x.price|safe }}
+            </td>
+            <td>
+               <a class="w3-button w3-red w3-hover-black" style="font-size:18px;border-radius:50px;">
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+               </a>
+            </td>
+         </tr>
+         {% endfor %}
          
-     
-
-         <center>
-         <div class="w3-card-4" style="width:80%;border-radius:20px;margin-top:80px;">
-
-            <div class="w3-container w3-black" style="padding-top:10px;padding-bottom:10px;border-radius:20px;">
-            <h2>Payment Information</h2>
-            </div>
-
-                  <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
-                    <tr style="font-size:18px;">
-                      <td>Cart ID</td>
-                      <td>{{ cid|safe }}</td>
-                    </tr>
-                    <tr style="font-size:18px;">
-                      <td>Payment ID</td>
-                      <td>{{ pid|safe }}</td>
-                    </tr>
-                  </table>
-
-                  <button class="w3-button w3-red w3-hover-black" style="font-size:35px;border-radius:20px;margin-top:10px;margin-bottom:20px;"><i class="fa fa-times"></i> Payment Failed</button>
-
-               </form>
-
-            </div>
-         </center>
-      </div>  
+      </table>
+      <hr style="border:2px solid green;">
+      <table class="w3-table w3-striped">
+         <tr>
+            <td style="font-size:35px;font-weight:bold;">Total Amount</td>
+            <td class="w3-right-align" style="font-size:35px;font-weight:bold;"><i class="fa fa-inr"></i> {{ totalamount|safe }}</td>
+         </tr>
+      </table>
+      <a style="width:100%;font-size:25px;border-radius:15px;" class="w3-button w3-blue w3-hover-black" href="/proceedtopay/">Proceed to Pay</a>
+   </div>      
    </div>
-
-
-      <footer>
+</div>
+<footer>
          <div class="main-footer">
             <div class="container">
                <div class="row">
-                  <div class="footer-top clearfix">
-                     <div class="col-md-2 col-sm-6">
-                        <h2>Start a free
-                           account today
-                        </h2>
-                     </div>
-                     <div class="col-md-6 col-sm-6">
-                        <div class="form-box">
-                           <input type="text" placeholder="Enter yopur e-mail" />
-                           <button>Continue</button>
-                        </div>
-                     </div>
-                     <div class="col-md-4 col-sm-12">
-                        <div class="help-box-f">
-                           <h4>Question? Call us on 12 34 56 78 for help</h4>
-                           <p>Easy setup - no payment fees - up to 100 products for free</p>
-                        </div>
-                     </div>
-                  </div>
                   <div class="footer-link-box clearfix">
                      <div class="col-md-6 col-sm-6">
                         <div class="left-f-box">
                            <div class="col-sm-4">
-                              <h2>SELL ON chamb</h2>
+                              <h2>Reseller's Counter</h2>
                               <ul>
-                                 <li><a href="#">Create account</a></li>
-                                 <li><a href="howitworks.html">How it works suppliers</a></li>
-                                 <li><a href="\pricing\">Pricing</a></li>
-                                 <li><a href="#">FAQ for Suppliers</a></li>
+                                 <li><a href="/resellerregistration/">Join as Reseller</a></li>
+                                 <li><a href="/resellerlogin/">Login</a></li>
                               </ul>
                            </div>
                            <div class="col-sm-4">
@@ -213,7 +176,7 @@
                            <div class="col-sm-4">
                               <h2>COMPANY</h2>
                               <ul>
-                                 <li><a href="\about\">About chamb</a></li>
+                                 <li><a href="about-us.html">About chamb</a></li>
                                  <li><a href="#">Contact us</a></li>
                                  <li><a href="#">Press</a></li>
                                  <li><a href="#">Careers</a></li>
@@ -255,7 +218,7 @@
             <div class="container">
                <div class="row">
                   <div class="col-md-8">
-                     <p><img width="90" src="{% static 'images/logo.png' %}" alt="#" style="margin-top: -5px;" /> All Rights Reserved. Company Name © 2018</p>
+                     <p><img width="90" src="{% static 'images/logo.png' %}" alt="#" style="margin-top: -5px;" /> All Rights Reserved. <a href="http://funtouchit.com/"> Funtouch IT Solutions © 2020</a></p>
                   </div>
                   <div class="col-md-4">
                      <ul class="list-inline socials">
@@ -280,14 +243,12 @@
                            </a>
                         </li>
                      </ul>
-                     <ul class="right-flag">
-                        <li><a href="#"><img src="{% static 'images/flag.png' %}" alt="" /> <span>Change</span></a></li>
-                     </ul>
                   </div>
                </div>
             </div>
          </div>
       </footer>
+
       <!--main js--> 
       <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script> 
       <!--bootstrap js--> 
@@ -297,8 +258,5 @@
       <script src="{% static 'js/wow.min.js' %}"></script>
       <!--custom js--> 
       <script src="{% static 'js/custom.js' %}"></script>
-
-                  
-
    </body>
 </html>

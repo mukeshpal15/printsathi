@@ -730,43 +730,6 @@ def opencategory(request):
 		dic=getdatacatagary(cname)
 		return render(request,'allproducts.html',dic)
 	
-
-
-def proceedfororder(request):
-	lt=[]
-	try:
-		pid=request.GET.get('cid')
-		obj=UserData.objects.filter(User_Email=request.session['user_email'])
-		for x in obj:
-			dic={'uid': x.User_ID,
-				'session':CheckUserSession(request),
-				'checksession':1,
-				'sessionre':CheckResellerSession(request),
-				'checksessionre':2}
-		obj=ProductDesignData.objects.filter(Product_ID=pid)
-		for x in obj:
-			d={'did':x.Design_ID,
-				'image':x.Design_Image.url}
-			lt.append(d)
-		dic.update({'designs':lt})
-		obj=ProductData.objects.filter(Product_ID=pid)
-		for i in obj:
-			dic.update({
-			'Product_ID':i.Product_ID,
-			'Product_Name':i.Product_Name,
-			'Product_Paper_Type':i.Product_Paper_Type,
-			'Product_Category':i.Product_Category,
-			'Product_Thickness':i.Product_Thickness,
-			'Product_Lamination':i.Product_Lamination,
-			'Product_Quantity':i.Product_Quantity,
-			'Product_Print_Sides':i.Product_Print_Sides,
-			'Product_Color':i.Product_Color,
-			'Product_Size':i.Product_Size,
-			'Product_Price':i.Product_Price})
-		return render(request,'orderdetails.html', dic)	
-	except:
-		return redirect('/userlogin/')
-
 def userforgotpass(request):
 	return render(request, 'userforgotpass.html',{})
 
@@ -832,6 +795,44 @@ import razorpay
 #Working on Test Keys
 razorpay_client = razorpay.Client(auth=("rzp_test_30ncLAFfGjrh3N", "l6tOEr4l26jJqhTHwXhny0eX"))
 razorpay_client.set_app_details({"title" : "Printsathi", "version" : "1.0"})
+
+#Step 1
+def proceedfororder(request):
+	lt=[]
+	try:
+		pid=request.GET.get('cid')
+		obj=UserData.objects.filter(User_Email=request.session['user_email'])
+		for x in obj:
+			dic={'uid': x.User_ID,
+				'session':CheckUserSession(request),
+				'checksession':1,
+				'sessionre':CheckResellerSession(request),
+				'checksessionre':2}
+		obj=ProductDesignData.objects.filter(Product_ID=pid)
+		for x in obj:
+			d={'did':x.Design_ID,
+				'image':x.Design_Image.url}
+			lt.append(d)
+		dic.update({'designs':lt})
+		obj=ProductData.objects.filter(Product_ID=pid)
+		for i in obj:
+			dic.update({
+			'Product_ID':i.Product_ID,
+			'Product_Name':i.Product_Name,
+			'Product_Paper_Type':i.Product_Paper_Type,
+			'Product_Category':i.Product_Category,
+			'Product_Thickness':i.Product_Thickness,
+			'Product_Lamination':i.Product_Lamination,
+			'Product_Quantity':i.Product_Quantity,
+			'Product_Print_Sides':i.Product_Print_Sides,
+			'Product_Color':i.Product_Color,
+			'Product_Size':i.Product_Size,
+			'Product_Price':i.Product_Price})
+		return render(request,'orderdetails.html', dic)	
+	except:
+		return redirect('/userlogin/')
+
+#Step 2
 @csrf_exempt
 def orderdatasave(request):
 	if request.method=="POST":
@@ -853,10 +854,44 @@ def orderdatasave(request):
 			Design_ID=did,
 			Payment_ID='None',
 			Order_Status='Unpaid',
-			Detail_File=dfile
+			Detail_File=dfile,
+			Total_Amount='0',
+			Amount_to_Pay='0',
+			Rest_Amount='0'
 			)
 		obj.save()
-		obj=ProductData.objects.filter(Product_ID=pid)
+		lt=[]
+		dic={}
+		userid=''
+		tm=0
+		obj1=UserData.objects.filter(User_Email=request.session['user_email'])
+		for x in obj1:
+			userid=x.User_ID
+			break
+		obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
+		for z in obj1:
+			obj=ProductData.objects.filter(Product_ID=z.Product_ID)
+			for x in obj:
+				dic={
+					'orderid':z.Order_ID,
+					'name':x.Product_Name,
+					'category':x.Product_Category,
+					'price':x.Product_Price,
+					'quantity':x.Product_Quantity,
+				}
+				tm=tm+int(x.Product_Price)
+				obj2=ProductDesignData.objects.filter(Design_ID=did)
+				for y in obj2:
+					dic.update({
+						'image':y.Design_Image.url,
+						})
+				lt.append(dic)
+		obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
+		obj1.update(Total_Amount=str(tm),
+			Amount_to_Pay=str((tm/100)*25),
+			Rest_Amount=str(tm-((tm/100)*25)))
+		return render(request,'cart.html',{'cartdata':lt,'totalamount':tm,'count':len(lt)})
+		'''obj=ProductData.objects.filter(Product_ID=pid)
 		for x in obj:
 			amounttopay = (int(x.Product_Price)/100)*25
 			dic={'pid':pid,
@@ -883,19 +918,63 @@ def orderdatasave(request):
 			'receipt':order_receipt,
 			'payment_capture':'0'
 		}
-		dic.update(razorpay_client.order.create(options))
-		return render(request,'proceedtopay.html',dic)
+		dic.update(razorpay_client.order.create(options))'''
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 
-
-
+@csrf_exempt
 def proceedtopay(request):
-	return render(request,'proceedtopay.html',{})
-
+	try:
+		if UserData.objects.filter(User_Email=request.session['user_email']).exists():
+			CartData.objects.all().delete()
+			userid=''
+			dic={}
+			obj1=UserData.objects.filter(User_Email=request.session['user_email'])
+			for x in obj1:
+				userid=x.User_ID
+				break
+			o='CRT00'
+			x=1
+			oid=o+str(x)
+			while CartData.objects.filter(Cart_ID=oid).exists():
+				x=x+1
+				oid=o+str(x)
+			x=int(x)
+			obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
+			for z in obj1:
+				CartData(Cart_ID=oid,Order_ID=z.Order_ID).save()
+				dic={'cid':oid,
+					'tamount':z.Total_Amount,
+					'pamount':z.Amount_to_Pay,
+					'amounttopay':float(z.Amount_to_Pay)*100,
+					'session':CheckUserSession(request),
+					'checksession':1}
+				request.session['cartid'] = oid
+				obj=UserData.objects.filter(User_Email=request.session['user_email'])
+				for x in obj:
+					dic.update({
+						'uname':x.User_First_Name+' '+x.User_Last_Name,
+						'uemail':x.User_Email,
+						'uphone':x.User_Phone
+						})
+				order_amount = int(dic['amounttopay'])
+				order_currency = 'INR'
+				order_receipt = dic['cid'] 
+				options={
+					'amount':order_amount,
+					'currency':order_currency,
+					'receipt':order_receipt,
+					'payment_capture':'0'
+				}
+				dic.update(razorpay_client.order.create(options))
+			return render(request,'proceedtopay.html',dic)
+	except:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+#Step 4
 @csrf_protect
 @csrf_exempt
 def app_charge(request):
+	dic={}
 	razorpay_order_id = request.POST.get('razorpay_order_id')
 	razorpay_payment_id = request.POST.get('razorpay_payment_id')
 	razorpay_signature = request.POST.get('razorpay_signature')
@@ -904,12 +983,14 @@ def app_charge(request):
     'razorpay_payment_id': razorpay_payment_id,
     'razorpay_signature': razorpay_signature}
 	if razorpay_client.utility.verify_payment_signature(params_dict):
-		obj=OrderData.objects.filter(Order_ID=request.session['order_id'])
-		obj.update(Payment_ID=razorpay_payment_id,Order_Status='Paid')
-		dic={'oid':request.session['order_id'],
-			'pid':razorpay_payment_id}
+		obj=CartData.objects.filter(Cart_ID=request.session['cartid'])
+		for x in obj:
+			obj1=OrderData.objects.filter(Order_ID=x.Order_ID)
+			obj1.update(Payment_ID=razorpay_payment_id,Order_Status='Paid')
+			dic={'cid':x.Cart_ID,'pid':razorpay_payment_id}
+		obj.delete()
 		msg = '''Hi there!,
-Your payment for Order ID '''+request.session['order_id']+'''is successful!
+Your payment for Cart ID '''+request.session['cartid']+'''is successful!
 Your Payment ID is '''+razorpay_payment_id+'''
 
 Thanks & Regards,
@@ -919,10 +1000,12 @@ Printsathi'''
 		email.send()
 		return render(request,'paymentsuccess.html',dic)
 	else:
-		obj=OrderData.objects.filter(Order_ID=request.session['order_id'])
-		obj.update(Payment_ID=razorpay_payment_id,Order_Status='Failed')
-		dic={'oid':request.session['order_id'],
-			'pid':razorpay_payment_id}
+		obj=CartData.objects.filter(Cart_ID=request.session['cartid'])
+		for x in obj:
+			print(x.Order_ID)
+			obj1=OrderData.objects.filter(Order_ID=x.Order_ID)
+			obj1.update(Payment_ID=razorpay_payment_id,Order_Status='Payment Failed')
+			dic={'cid':x.Cart_ID,'pid':razorpay_payment_id}
 		msg = '''Hi there!,
 Your payment for Order ID '''+request.session['order_id']+'''is failed!
 Your Payment ID is '''+razorpay_payment_id+'''
@@ -934,3 +1017,10 @@ Printsathi'''
 		email = EmailMessage(sub, msg, to=[request.session['user_email']])
 		email.send()
 		return render(request,'paymentfailure.html',dic)
+
+def cart(request):
+	return render(request,'cart.html',{})
+def deliveryboylogin(request):
+	return render(request,'deliveryboylogin.html',{})
+def deliveryboypannel(request):
+	return render(request,'deliveryboypannel.html',{})

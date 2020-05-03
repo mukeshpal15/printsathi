@@ -40,8 +40,17 @@ class OrderData(models.Model):
 	Payment_ID=models.CharField(max_length=100)
 	Order_Status=models.CharField(max_length=100)
 	Detail_File=models.FileField(upload_to="orderdetailfile/")
+	Total_Amount=models.CharField(max_length=100)
+	Amount_to_Pay=models.CharField(max_length=100)
+	Rest_Amount=models.CharField(max_length=100)
 	class Meta:
 		db_table="OrderData"
+
+class CartData(models.Model):
+	Cart_ID=models.CharField(max_length=100)
+	Order_ID=models.CharField(max_length=50)
+	class Meta:
+		db_table="CartData"
 
 class UserData(models.Model):
 	User_ID=models.CharField(max_length=100)
