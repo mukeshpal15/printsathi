@@ -242,7 +242,7 @@ Printsathi'''
 			sub='Welcome to Printsathi'
 			email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
 			email.send()
-			#snp=send_sms(pp,msg)
+			snp=send_sms(pp,msg)
 			dic={'msg':"Successfully Registered",
 				'msg1':'You will get you account credentials on your mail soon.',
 				'session':CheckUserSession(request),
@@ -267,8 +267,7 @@ def userlog(request):
 					'city': x.User_City,
 					'state': x.User_State,
 					'session':CheckUserSession(request),
-					'checksession':1,
-					'odata':GetOrderDetails(x.User_ID)}
+					'checksession':1}
 			return render(request,'profile.html',dic)
 		else:
 			dic={'msg':'Incorrect Email or Password',}
@@ -294,8 +293,7 @@ def changeuserpassword(request):
 				'city': x.User_City,
 				'state': x.User_State,
 				'session':CheckUserSession(request),
-				'checksession':1,
-				'odata':GetOrderDetails(x.User_ID)
+				'checksession':1
 				}
 			b1='''<script type="text/javascript">
 			alert("'''
@@ -327,8 +325,7 @@ Printsathi'''
 				'city': x.User_City,
 				'state': x.User_State,
 				'session':CheckUserSession(request),
-				'checksession':1,
-				'odata':GetOrderDetails(x.User_ID)
+				'checksession':1
 				}
 			b1='''<script type="text/javascript">
 			alert("'''
@@ -359,8 +356,7 @@ def changeuserdetails(request):
 				'city': x.User_City,
 				'state': x.User_State,
 				'session':CheckUserSession(request),
-				'checksession':1,
-				'odata':GetOrderDetails(x.User_ID)
+				'checksession':1
 			}
 		b1='''<script type="text/javascript">
 		alert("'''
@@ -389,10 +385,8 @@ def myuseraccount(request):
 						'city': x.User_City,
 						'state': x.User_State,
 						'session':CheckUserSession(request),
-						'checksession':1,
-						'odata':GetOrderDetails(x.User_ID)
+						'checksession':1
 					}
-				print('hello')
 				return render(request,'profile.html',dic)
 			else:
 				return HttpResponse('<h1>Error 404 NOT FOUND</h1>')	
@@ -520,7 +514,7 @@ Printsathi'''
 			sub='Welcome to Printsathi'
 			email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
 			email.send()
-			#snp=send_sms(pp,msg)
+			snp=send_sms(pp,msg)
 			dic={'msg':"Reseller Registered Successfully",
 				'msg1':"Your password has been sent to your email."}
 			return render(request, 'resellerregistration.html',dic)
@@ -644,7 +638,7 @@ Printsathi'''
 			sub='Alert! Your Password Has Been Changed'
 			email = EmailMessage(sub, msg, to=[n])
 			email.send()
-			#snp=send_sms(pp,msg)
+			snp=send_sms(pp,msg)
 			return render(request,'resellerprofile.html',dic)
 		else:
 			obj=ResellerData.objects.filter(Reseller_Email=request.session['re_email'])
@@ -689,7 +683,7 @@ Printsathi'''
 		sub='Congratulations! Reseller Account Activated Successfully'
 		email = EmailMessage(sub, msg, to=[e])
 		email.send()
-		#snp=send_sms(pp,msg)
+		snp=send_sms(pp,msg)
 		dic={'adata':ResellerData.objects.filter(Reseller_Status="Active"),
 			'ddata':ResellerData.objects.filter(Reseller_Status="Deactive")}
 		return render(request,'resellerdata.html',dic)
@@ -754,7 +748,7 @@ Printsathi'''
 			email = EmailMessage(sub, msg, to=[n])
 			email.send()
 			print(pp)
-			#snp=send_sms(pp,msg)
+			snp=send_sms(pp,msg)
 			return HttpResponse("<script> alert('Your Password has been sent to your mail Id and Phone'); window.location.replace('/userlogin/') </script>")
 		else:
 			msg='Please enter the valid mail Id'
@@ -772,7 +766,7 @@ def reseller_send_pass(request):
 				p=i.Reseller_Password
 				pp=i.Reseller_Phone
 				break
-			msg = '''Hi there!,
+			msg = '''hello sir,
 
 
 Your Password is : '''+p+'''
@@ -783,13 +777,14 @@ Printsathi'''
 			sub='Your Account Password'
 			email = EmailMessage(sub, msg, to=[n])
 			email.send()
-			#snp=send_sms(pp,msg)
+			snp=send_sms(pp,msg)
 			return HttpResponse("<script> alert('Your Password has been sent to your mail Id and Phone'); window.location.replace('/resellerlogin/') </script>")
 		else:
 			msg='Please enter the valid mail Id'
 			
 			return render(request,'resellerforgotpass.html',{'msg':msg})
 
+<<<<<<< HEAD
 #Payment Gateway Functions
 import razorpay
 #Working on Test Keys
@@ -833,6 +828,9 @@ def proceedfororder(request):
 		return redirect('/userlogin/')
 
 #Step 2
+=======
+
+>>>>>>> 05f2e99d0e50dcae027bc1902516313a4a4e84b4
 @csrf_exempt
 def orderdatasave(request):
 	if request.method=="POST":
@@ -852,7 +850,6 @@ def orderdatasave(request):
 			Product_ID=pid,
 			User_ID=uid,
 			Design_ID=did,
-			Payment_ID='None',
 			Order_Status='Unpaid',
 			Detail_File=dfile,
 			Total_Amount='0',
@@ -901,7 +898,7 @@ def orderdatasave(request):
 				'amounttopay':amounttopay*100,
 				'session':CheckUserSession(request),
 				'checksession':1}
-		request.session['order_id'] = oid
+			request.session['amounttopay']=amounttopay*100
 		obj=UserData.objects.filter(User_Email=request.session['user_email'])
 		for x in obj:
 			dic.update({
@@ -909,6 +906,7 @@ def orderdatasave(request):
 				'uemail':x.User_Email,
 				'uphone':x.User_Phone
 				})
+<<<<<<< HEAD
 		order_amount = int(dic['amounttopay'])
 		order_currency = 'INR'
 		order_receipt = dic['oid'] 
@@ -923,6 +921,18 @@ def orderdatasave(request):
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 
 @csrf_exempt
+=======
+		return render(request,'proceedtopay.html',dic)
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+
+#Payment Gateway Functions
+import razorpay
+#Working on Test Keys
+razorpay_client = razorpay.Client(auth=("rzp_test_30ncLAFfGjrh3N", "l6tOEr4l26jJqhTHwXhny0eX"))
+razorpay_client.set_app_details({"title" : "Printsathi", "version" : "1.0"})
+
+>>>>>>> 05f2e99d0e50dcae027bc1902516313a4a4e84b4
 def proceedtopay(request):
 	try:
 		if UserData.objects.filter(User_Email=request.session['user_email']).exists():
