@@ -254,3 +254,14 @@ def GetOrderDetails(userid):
 				})
 		lt.append(dic)
 	return lt
+
+def GetCartCount(request):
+	try:
+		obj=UserData.objects.filter(User_Email=request.session['user_email'])
+		userid=''
+		for x in obj:
+			userid=x.User_ID
+		obj=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
+		return len(obj)
+	except:
+		return 0

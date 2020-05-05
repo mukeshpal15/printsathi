@@ -49,6 +49,7 @@ class OrderData(models.Model):
 class CartData(models.Model):
 	Cart_ID=models.CharField(max_length=100)
 	Order_ID=models.CharField(max_length=50)
+	User_Email=models.CharField(max_length=100)
 	class Meta:
 		db_table="CartData"
 

@@ -16,7 +16,8 @@ def index(request):
 	dic={'session':CheckUserSession(request),
 			'checksession':1,
 			'sessionre':CheckResellerSession(request),
-			'checksessionre':2,'detail':GetProductDetail()}
+			'checksessionre':2,'detail':GetProductDetail(),
+			'cartcount':GetCartCount(request)}
 	return render(request, 'index.html', dic)		
 def aboutus(request):
 	dic={'session':CheckUserSession(request),
@@ -385,7 +386,8 @@ def myuseraccount(request):
 						'city': x.User_City,
 						'state': x.User_State,
 						'session':CheckUserSession(request),
-						'checksession':1
+						'checksession':1,
+						'odata':GetOrderDetails(x.User_ID)
 					}
 				return render(request,'profile.html',dic)
 			else:
@@ -784,7 +786,6 @@ Printsathi'''
 			
 			return render(request,'resellerforgotpass.html',{'msg':msg})
 
-<<<<<<< HEAD
 #Payment Gateway Functions
 import razorpay
 #Working on Test Keys
@@ -828,9 +829,6 @@ def proceedfororder(request):
 		return redirect('/userlogin/')
 
 #Step 2
-=======
-
->>>>>>> 05f2e99d0e50dcae027bc1902516313a4a4e84b4
 @csrf_exempt
 def orderdatasave(request):
 	if request.method=="POST":
@@ -888,41 +886,6 @@ def orderdatasave(request):
 			Amount_to_Pay=str((tm/100)*25),
 			Rest_Amount=str(tm-((tm/100)*25)))
 		return render(request,'cart.html',{'cartdata':lt,'totalamount':tm,'count':len(lt)})
-		'''obj=ProductData.objects.filter(Product_ID=pid)
-		for x in obj:
-			amounttopay = (int(x.Product_Price)/100)*25
-			dic={'pid':pid,
-				'oid':oid,
-				'tamount':x.Product_Price,
-				'pamount':amounttopay,
-				'amounttopay':amounttopay*100,
-				'session':CheckUserSession(request),
-				'checksession':1}
-			request.session['amounttopay']=amounttopay*100
-		obj=UserData.objects.filter(User_Email=request.session['user_email'])
-		for x in obj:
-			dic.update({
-				'uname':x.User_First_Name+' '+x.User_Last_Name,
-				'uemail':x.User_Email,
-				'uphone':x.User_Phone
-				})
-<<<<<<< HEAD
-		order_amount = int(dic['amounttopay'])
-		order_currency = 'INR'
-		order_receipt = dic['oid'] 
-		options={
-			'amount':order_amount,
-			'currency':order_currency,
-			'receipt':order_receipt,
-			'payment_capture':'0'
-		}
-		dic.update(razorpay_client.order.create(options))'''
-	else:
-		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
-
-@csrf_exempt
-=======
-		return render(request,'proceedtopay.html',dic)
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 
@@ -932,11 +895,9 @@ import razorpay
 razorpay_client = razorpay.Client(auth=("rzp_test_30ncLAFfGjrh3N", "l6tOEr4l26jJqhTHwXhny0eX"))
 razorpay_client.set_app_details({"title" : "Printsathi", "version" : "1.0"})
 
->>>>>>> 05f2e99d0e50dcae027bc1902516313a4a4e84b4
 def proceedtopay(request):
 	try:
 		if UserData.objects.filter(User_Email=request.session['user_email']).exists():
-			CartData.objects.all().delete()
 			userid=''
 			dic={}
 			obj1=UserData.objects.filter(User_Email=request.session['user_email'])
@@ -952,7 +913,8 @@ def proceedtopay(request):
 			x=int(x)
 			obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
 			for z in obj1:
-				CartData(Cart_ID=oid,Order_ID=z.Order_ID).save()
+				obj=CartData(Cart_ID=oid,Order_ID=z.Order_ID,User_Email=request.session['user_email'])
+				obj.save()
 				dic={'cid':oid,
 					'tamount':z.Total_Amount,
 					'pamount':z.Amount_to_Pay,

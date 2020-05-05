@@ -45,10 +45,12 @@
                            <div class="login-signup">
                               <ul>
                                  {% if session == checksession  %}
+                                    <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/userregistration/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
                                     <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
                                     <li><a class="custom-b" href="/logout/">Logout</a></li>
                                   {% elif sessionre == checksessionre %}
-                                  <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
+                                    <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/userregistration/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
+                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
                                     <li><a class="custom-b" href="/logout/">Logout</a></li>
                                  {% else %}
                                     <li><a href="/userlogin/">Login</a></li>
@@ -119,16 +121,16 @@
             </div>
          </div>
       </div>
-      <div class="cat-main-box">
+      <div class="cat-main-box" style="padding-bottom:0px;">
          <div class="container">
 
-            <div class="row panel-row">
+            <div class="row panel-row" style="margin-left:20px;">
                
                <a href="/opencategory/?cname=Business Cards">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
-                  <div class="panel panel-default" style="box-shadow: 5px 5px 12px">
+               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;width:16%;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-blue" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
-                        <img style="border-radius:10px;width:300px;height:300px;" src="{% static 'images/Visiting-Cards-BIG.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <img style="border-radius:10px;width:300px;height:100px;" src="{% static 'images/Visiting-Cards-BIG.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
                         <center><h4>Business Cards</h4></center>
                      </div>
                   </div>
@@ -136,10 +138,10 @@
                </a>
 
                <a href="/opencategory/?cname=Office Stationary">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
-                  <div class="panel panel-default" style="box-shadow: 5px 5px 12px">
+               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;width:16%;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-red" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
-                        <img style="border-radius:10px;width:300px;height:300px;" src="{% static 'images/40307043-back-to-school-blackboard-with-pencilbox-and-school-equipment-on-table.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <img style="border-radius:10px;width:300px;height:100px;" src="{% static 'images/40307043-back-to-school-blackboard-with-pencilbox-and-school-equipment-on-table.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
                         <center><h4>Office Stationary</h4></center>
                      </div>
                   </div>
@@ -147,23 +149,21 @@
                </a>
 
                <a href="/opencategory/?cname=Marketing Tool">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
-                  <div class="panel panel-default" style="box-shadow: 5px 5px 12px">
+               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;width:16%;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-green" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
-                        <img style="border-radius:10px;width:300px;height:300px;" src="{% static 'images/pexels-photo-313691-1024x768.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <img style="border-radius:10px;width:300px;height:100px;" src="{% static 'images/pexels-photo-313691-1024x768.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
                         <center><h4>Marketing Tool</h4></center>
                      </div>
                   </div>
                </div>
                </a>
-               </div>
 
-               <div class="row panel-row">
                <a href="/opencategory/?cname=Doctoor Tools">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
-                  <div class="panel panel-default" style="box-shadow: 5px 5px 12px">
+               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;width:16%;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-orange" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
-                        <img style="border-radius:10px;width:300px;height:300px;" src="{% static 'images/download.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <img style="border-radius:10px;width:300px;height:100px;" src="{% static 'images/download.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
                         <center><h4>Doctoor Tools</h4></center>
                      </div>
                   </div>
@@ -171,10 +171,10 @@
                </a>
 
                <a href="/opencategory/?cname=Invitation Cards">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
-                  <div class="panel panel-default" style="box-shadow: 5px 5px 12px">
+               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;width:16%;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-yellow" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
-                        <img style="border-radius:10px;width:300px;height:300px;" src="{% static 'images/47227_invitation-card-wedding-wallpapers-invitation-card-wedding_1600x1200_h.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <img style="border-radius:10px;width:300px;height:100px;" src="{% static 'images/47227_invitation-card-wedding-wallpapers-invitation-card-wedding_1600x1200_h.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
                         <center><h4>Invitation Cards</h4></center>
                      </div>
                   </div>
@@ -182,11 +182,11 @@
                </a>
 
                <a href="\opencategory\?cname=Apparels/Gifts">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
-                  <div class="panel panel-default" style="box-shadow: 5px 5px 12px">
+               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;width:16%;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-light-green" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
-                        <img style="border-radius:10px;width:300px;height:300px;" src="{% static 'images/pexels-photo-264787.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
-                        <center><h4>Apparels/Gifts</h4></center>
+                        <img style="border-radius:10px;width:300px;height:100px;" src="{% static 'images/pexels-photo-264787.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <center><h4>Apparels / Gifts</h4></center>
                      </div>
                   </div>
                </div>
@@ -196,7 +196,7 @@
             </div>
          </div>
       </div>
-      <div class="products">
+      <div class="products" style="padding-top:0px;">
          <div class="main-products">
             <h2 style="font-size:30px;">OUR PRODUCTS</h2>
             <div class="product-slidr">

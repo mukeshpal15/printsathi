@@ -667,10 +667,10 @@ header .navbar-default .navbar-header {
 	margin-top: -80px;
 }
 
-.cat-main-box .panel .panel-body {
+.cat-main-box{
 	padding: 35px 40px;
-	background: #fff;
 }
+
 
 .cat-main-box .panel .icon-small {
 	margin-bottom: 15px;
