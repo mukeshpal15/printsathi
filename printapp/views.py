@@ -784,7 +784,7 @@ Printsathi'''
 			
 			return render(request,'resellerforgotpass.html',{'msg':msg})
 
-<<<<<<< HEAD
+
 #Payment Gateway Functions
 import razorpay
 #Working on Test Keys
@@ -828,9 +828,9 @@ def proceedfororder(request):
 		return redirect('/userlogin/')
 
 #Step 2
-=======
 
->>>>>>> 05f2e99d0e50dcae027bc1902516313a4a4e84b4
+
+
 @csrf_exempt
 def orderdatasave(request):
 	if request.method=="POST":
@@ -906,7 +906,7 @@ def orderdatasave(request):
 				'uemail':x.User_Email,
 				'uphone':x.User_Phone
 				})
-<<<<<<< HEAD
+
 		order_amount = int(dic['amounttopay'])
 		order_currency = 'INR'
 		order_receipt = dic['oid'] 
@@ -920,19 +920,13 @@ def orderdatasave(request):
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 
-@csrf_exempt
-=======
-		return render(request,'proceedtopay.html',dic)
-	else:
-		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
-
 #Payment Gateway Functions
 import razorpay
 #Working on Test Keys
 razorpay_client = razorpay.Client(auth=("rzp_test_30ncLAFfGjrh3N", "l6tOEr4l26jJqhTHwXhny0eX"))
 razorpay_client.set_app_details({"title" : "Printsathi", "version" : "1.0"})
 
->>>>>>> 05f2e99d0e50dcae027bc1902516313a4a4e84b4
+
 def proceedtopay(request):
 	try:
 		if UserData.objects.filter(User_Email=request.session['user_email']).exists():
