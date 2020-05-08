@@ -60,6 +60,9 @@ urlpatterns = [
     path('cart/',cart),
     path('deliveryboylogin/',deliveryboylogin),
     path('deliveryboypannel/',deliveryboypannel),
+
+    path('adminorderdetail/',adminorderdetail),
+
     path('adminorderdetails/',adminorderdetails),
     path('downloadfile/',downloadfile),
     path('removeorder/',removeorder),

@@ -848,6 +848,10 @@ Printsathi'''
 			
 			return render(request,'resellerforgotpass.html',{'msg':msg})
 
+
+
+
+
 #Payment Gateway Functions
 import razorpay
 #Working on Test Keys
@@ -892,6 +896,12 @@ def proceedfororder(request):
 		return redirect('/userlogin/')
 
 #Step 2
+
+
+
+
+
+
 @csrf_exempt
 def orderdatasave(request):
 	if request.method=="POST":
@@ -980,6 +990,10 @@ def opencart(request):
 					})
 			lt.append(dic)
 	return render(request,'cart.html',{'cartdata':lt,'totalamount':tm,'count':len(lt)})
+
+
+
+
 
 def proceedtopay(request):
 	try:
@@ -1082,3 +1096,5 @@ def deliveryboylogin(request):
 	return render(request,'deliveryboylogin.html',{})
 def deliveryboypannel(request):
 	return render(request,'deliveryboypannel.html',{})
+def adminorderdetail(request):
+	return render(request,'adminorderdetail.html',{})

@@ -6,7 +6,11 @@
 
       
 
+
+      <title>Printsathi - Add Products</title>
+
       <title>Printsathi - Order Details</title>
+
 
       <link rel="stylesheet" href="{% static 'w3.css' %}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -86,11 +90,18 @@
        <div class="container">
          <div class="row">
             <div class="column" style="margin-top:20px;">
+
+               <label style="margin-bottom:15px;font-size:20px;color:green;">Order List</label>
+               <div style="overflow-x:auto;overflow-y:auto;">
+               <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+                 <tr class="w3-black">
+
                <label style="margin-bottom:15px;font-size:20px;color:green;">Paid Order List</label>
                <div style="overflow-x:auto;overflow-y:auto;height:400px;">
                <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
                  <tr class="w3-black">
                    <th>Remove</th>
+
                    <th>Order ID</th>
                    <th>Order Date</th>
                    <th>Customer Name</th>
@@ -102,6 +113,35 @@
                    <th>Product Category</th>
                    <th>Total Amount</th>
                    <th>Amount Paid</th>
+
+                   <th>Payment Status</th>
+                   <th>Payment ID</th>
+                   <th>Delivery Status</th>
+                   <th>Document File</th>
+                 </tr>
+                 <tr>
+                   <td>GTF456</td>
+                   <td>02/05/2020</td>
+                   <td>Rajat Sharma</td>
+                   <td>rhv234@gmail.com</td>
+                   <td>9539594939</td>
+                   <td>sabudi road agra</td>
+                   <td>ASFG</td>
+                   <td><img src="{% static 'images/decor-paint-ideas-with-birds.jpg' %}" onclick="document.getElementById('modal01').style.display='block'" class="w3-hover-opacity">
+                <div id="modal01" class="w3-modal w3-animate-zoom" onclick="this.style.display='none'">
+                <img class="w3-modal-content" src="{% static 'images/decor-paint-ideas-with-birds.jpg' %}">
+                </div>
+                   </td>
+                   <td>MHGD</td>
+                   <td>1000</td>
+                   <td>5000</td>
+                   <td>HGT</td>
+                   <td>HYU456</td>
+                   <td>PP455</td>
+                   <td><button class="w3-button w3-green w3-hover-black">Download</button></td>
+                   
+                 </tr>  
+
                    <th>Payment ID</th>
                    <th>Payment Status</th>
                    <th>Document File</th>
@@ -200,6 +240,7 @@
                    
                  </tr>
                  {% endfor %}
+
                </table>
               </div>
             </div>
@@ -275,7 +316,7 @@
             <div class="container">
                <div class="row">
                   <div class="col-md-8">
-                     <p><img width="90" src="{% static 'images/logo.png' %}" alt="#" style="margin-top: -5px;" /> All Rights Reserved. <a href="http://funtouchit.com/"> Funtouch IT Solutions © 2020</a></p>
+                     <p><img width="90" src="{% static 'images/logo.png' %}" alt="#" style="margin-top: -5px;" /> All Rights Reserved. <a href="http://funtouchit.com/"> Funtouch IT Solution © 2020</a></p>
                   </div>
                   <div class="col-md-4">
                      <ul class="list-inline socials">
