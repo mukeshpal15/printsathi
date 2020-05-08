@@ -253,7 +253,7 @@ Printsathi'''
 			sub='Welcome to Printsathi'
 			email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
 			email.send()
-			snp=send_sms(pp,msg)
+			#snp=send_sms(pp,msg)
 			dic={'msg':"Successfully Registered",
 				'msg1':'You will get you account credentials on your mail soon.',
 				'session':CheckUserSession(request),
@@ -325,7 +325,7 @@ Printsathi'''
 			sub='Alert! Your Password Has Been Changed'
 			email = EmailMessage(sub, msg, to=[request.session['user_email']])
 			email.send()
-			snp=send_sms(pp,msg)
+			#snp=send_sms(pp,msg)
 			return render(request,'profile.html',dic)
 		else:
 			obj=UserData.objects.filter(User_Email=request.session['user_email'])
@@ -573,7 +573,7 @@ Printsathi'''
 			sub='Welcome to Printsathi'
 			email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
 			email.send()
-			snp=send_sms(pp,msg)
+			#snp=send_sms(pp,msg)
 			dic={'msg':"Reseller Registered Successfully",
 				'msg1':"Your password has been sent to your email."}
 			return render(request, 'resellerregistration.html',dic)
@@ -700,7 +700,7 @@ Printsathi'''
 			sub='Alert! Your Password Has Been Changed'
 			email = EmailMessage(sub, msg, to=[n])
 			email.send()
-			snp=send_sms(pp,msg)
+			#snp=send_sms(pp,msg)
 			return render(request,'resellerprofile.html',dic)
 		else:
 			obj=ResellerData.objects.filter(Reseller_Email=request.session['re_email'])
@@ -746,7 +746,7 @@ Printsathi'''
 		sub='Congratulations! Reseller Account Activated Successfully'
 		email = EmailMessage(sub, msg, to=[e])
 		email.send()
-		snp=send_sms(pp,msg)
+		#snp=send_sms(pp,msg)
 		dic={'adata':ResellerData.objects.filter(Reseller_Status="Active"),
 			'ddata':ResellerData.objects.filter(Reseller_Status="Deactive")}
 		return render(request,'resellerdata.html',dic)
@@ -811,8 +811,8 @@ Printsathi'''
 			sub='Your Account Password'
 			email = EmailMessage(sub, msg, to=[n])
 			email.send()
-			print(pp)
-			snp=send_sms(pp,msg)
+			#print(pp)
+			#snp=send_sms(pp,msg)
 			return HttpResponse("<script> alert('Your Password has been sent to your mail Id and Phone'); window.location.replace('/userlogin/') </script>")
 		else:
 			msg='Please enter the valid mail Id'
@@ -841,7 +841,7 @@ Printsathi'''
 			sub='Your Account Password'
 			email = EmailMessage(sub, msg, to=[n])
 			email.send()
-			snp=send_sms(pp,msg)
+			#snp=send_sms(pp,msg)
 			return HttpResponse("<script> alert('Your Password has been sent to your mail Id and Phone'); window.location.replace('/resellerlogin/') </script>")
 		else:
 			msg='Please enter the valid mail Id'
@@ -885,7 +885,8 @@ def proceedfororder(request):
 			'Product_Print_Sides':i.Product_Print_Sides,
 			'Product_Color':i.Product_Color,
 			'Product_Size':i.Product_Size,
-			'Product_Price':i.Product_Price})
+			'Product_Price':i.Product_Price,
+			'cartcount':GetCartCount(request)})
 		return render(request,'orderdetails.html', dic)	
 	except:
 		return redirect('/userlogin/')
@@ -947,15 +948,38 @@ def orderdatasave(request):
 		obj1.update(Total_Amount=str(tm),
 			Amount_to_Pay=str((tm/100)*25),
 			Rest_Amount=str(tm-((tm/100)*25)))
-		return render(request,'cart.html',{'cartdata':lt,'totalamount':tm,'count':len(lt)})
+		return render(request,'cart.html',{'cartcount':GetCartCount(request),'cartdata':lt,'totalamount':tm,'count':len(lt)})
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 
-#Payment Gateway Functions
-import razorpay
-#Working on Test Keys
-razorpay_client = razorpay.Client(auth=("rzp_test_30ncLAFfGjrh3N", "l6tOEr4l26jJqhTHwXhny0eX"))
-razorpay_client.set_app_details({"title" : "Printsathi", "version" : "1.0"})
+def opencart(request):
+	lt=[]
+	dic={}
+	userid=''
+	tm=0
+	useremail=request.session['user_email']
+	obj=UserData.objects.filter(User_Email=useremail)
+	for x in obj:
+		userid=x.User_ID
+	obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
+	for z in obj1:
+		obj=ProductData.objects.filter(Product_ID=z.Product_ID)
+		for x in obj:
+			dic={
+				'orderid':z.Order_ID,
+				'name':x.Product_Name,
+				'category':x.Product_Category,
+				'price':x.Product_Price,
+				'quantity':x.Product_Quantity,
+			}
+			tm=tm+int(x.Product_Price)
+			obj2=ProductDesignData.objects.filter(Design_ID=z.Design_ID)
+			for y in obj2:
+				dic.update({
+					'image':y.Design_Image.url,
+					})
+			lt.append(dic)
+	return render(request,'cart.html',{'cartdata':lt,'totalamount':tm,'count':len(lt)})
 
 def proceedtopay(request):
 	try:
