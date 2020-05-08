@@ -34,6 +34,7 @@ class ProductDesignData(models.Model):
 
 class OrderData(models.Model):
 	Order_ID=models.CharField(max_length=100)
+	Order_Date=models.DateField(auto_now=True)
 	Product_ID=models.CharField(max_length=100)
 	User_ID=models.CharField(max_length=100)
 	Design_ID=models.CharField(max_length=100)

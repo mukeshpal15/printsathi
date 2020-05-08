@@ -6,7 +6,11 @@
 
       
 
+
       <title>Printsathi - Add Products</title>
+
+      <title>Printsathi - Order Details</title>
+
 
       <link rel="stylesheet" href="{% static 'w3.css' %}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -86,10 +90,18 @@
        <div class="container">
          <div class="row">
             <div class="column" style="margin-top:20px;">
+
                <label style="margin-bottom:15px;font-size:20px;color:green;">Order List</label>
                <div style="overflow-x:auto;overflow-y:auto;">
                <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
                  <tr class="w3-black">
+
+               <label style="margin-bottom:15px;font-size:20px;color:green;">Paid Order List</label>
+               <div style="overflow-x:auto;overflow-y:auto;height:400px;">
+               <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+                 <tr class="w3-black">
+                   <th>Remove</th>
+
                    <th>Order ID</th>
                    <th>Order Date</th>
                    <th>Customer Name</th>
@@ -101,6 +113,7 @@
                    <th>Product Category</th>
                    <th>Total Amount</th>
                    <th>Amount Paid</th>
+
                    <th>Payment Status</th>
                    <th>Payment ID</th>
                    <th>Delivery Status</th>
@@ -128,6 +141,106 @@
                    <td><button class="w3-button w3-green w3-hover-black">Download</button></td>
                    
                  </tr>  
+
+                   <th>Payment ID</th>
+                   <th>Payment Status</th>
+                   <th>Document File</th>
+                 </tr>
+                 {% for x in data %}
+                 <tr>
+                   <td>
+                    <form action="/removeorder/" method="POST">
+                      <input type="hidden" name="oid" value="{{ x.orderid|safe }}">
+                      <input type="submit" value="X" style="border-radius:50px;" class="w3-button w3-red w3-hover-black">
+                    </form>
+                   </td>
+                   <td>{{ x.orderid|safe }}</td>
+                   <td>{{ x.orderdate|safe }}</td>
+                   <td>{{ x.cname|safe }}</td>
+                   <td>{{ x.cmail|safe }}</td>
+                   <td>{{ x.cphone|safe }}</td>
+                   <td>{{ x.caddress|safe }}<br>{{ x.ccity|safe }}, ({{ x.cstate|safe }})</td>
+                   <td>{{ x.pname|safe }}</td>
+                   <td>{{ x.pcategory|safe }}</td>
+                   <td>
+                    <img src="{{ x.design|safe }}" onclick="document.getElementById('modal01').style.display='block'" class="w3-hover-opacity">
+                    <div id="modal01" class="w3-modal w3-animate-zoom" onclick="this.style.display='none'">
+                    <img class="w3-modal-content" src="{{ x.design|safe }}">
+                    </div>
+                   </td>
+                   <td>{{ x.totalamount|safe }}</td>
+                   <td>{{ x.amounttopay|safe }}</td>
+                   <td>{{ x.payid|safe }}</td>
+                   <td>{{ x.status|safe }}</td>
+                   <td>
+                    <form action="/downloadfile/" method="POST">
+                      <input type="hidden" name="oid" value="{{ x.orderid|safe }}">
+                      <input type="submit" value="Download" class="w3-button w3-green w3-hover-black">
+                    </form>
+                  </td>
+                   
+                 </tr>
+                 {% endfor %}
+               </table>
+              </div>
+            </div>
+            <div class="column" style="margin-top:20px;">
+               <label style="margin-bottom:15px;font-size:20px;color:green;">Completed Order List</label>
+               <div style="overflow-x:auto;overflow-y:auto;height:400px;">
+               <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+                 <tr class="w3-black">
+                   <th>Remove</th>
+                   <th>Order ID</th>
+                   <th>Order Date</th>
+                   <th>Customer Name</th>
+                   <th>Customer Email</th>
+                   <th>Customer Phone</th>
+                   <th>Customer Address</th>
+                   <th>Product</th>
+                   <th>Design</th>
+                   <th>Product Category</th>
+                   <th>Total Amount</th>
+                   <th>Amount Paid</th>
+                   <th>Payment ID</th>
+                   <th>Payment Status</th>
+                   <th>Document File</th>
+                 </tr>
+                 {% for x in data2 %}
+                 <tr>
+                   <td>
+                    <form action="/removeorder/" method="POST">
+                      <input type="hidden" name="oid" value="{{ x.orderid|safe }}">
+                      <input type="submit" value="X" style="border-radius:50px;" class="w3-button w3-red w3-hover-black">
+                    </form>
+                   </td>
+                   <td>{{ x.orderid|safe }}</td>
+                   <td>{{ x.orderdate|safe }}</td>
+                   <td>{{ x.cname|safe }}</td>
+                   <td>{{ x.cmail|safe }}</td>
+                   <td>{{ x.cphone|safe }}</td>
+                   <td>{{ x.caddress|safe }}<br>{{ x.ccity|safe }}, ({{ x.cstate|safe }})</td>
+                   <td>{{ x.pname|safe }}</td>
+                   <td>{{ x.pcategory|safe }}</td>
+                   <td>
+                    <img src="{{ x.design|safe }}" onclick="document.getElementById('modal01').style.display='block'" class="w3-hover-opacity">
+                    <div id="modal01" class="w3-modal w3-animate-zoom" onclick="this.style.display='none'">
+                    <img class="w3-modal-content" src="{{ x.design|safe }}">
+                    </div>
+                   </td>
+                   <td>{{ x.totalamount|safe }}</td>
+                   <td>{{ x.amounttopay|safe }}</td>
+                   <td>{{ x.payid|safe }}</td>
+                   <td>{{ x.status|safe }}</td>
+                   <td>
+                    <form action="/downloadfile/" method="POST">
+                      <input type="hidden" name="oid" value="{{ x.orderid|safe }}">
+                      <input type="submit" value="Download" class="w3-button w3-green w3-hover-black">
+                    </form>
+                  </td>
+                   
+                 </tr>
+                 {% endfor %}
+
                </table>
               </div>
             </div>
@@ -203,7 +316,7 @@
             <div class="container">
                <div class="row">
                   <div class="col-md-8">
-                     <p><img width="90" src="{% static 'images/logo.png' %}" alt="#" style="margin-top: -5px;" /> All Rights Reserved. <a href="http://funtouchit.com/"> Funtouch IT Solutions © 2020</a></p>
+                     <p><img width="90" src="{% static 'images/logo.png' %}" alt="#" style="margin-top: -5px;" /> All Rights Reserved. <a href="http://funtouchit.com/"> Funtouch IT Solution © 2020</a></p>
                   </div>
                   <div class="col-md-4">
                      <ul class="list-inline socials">
