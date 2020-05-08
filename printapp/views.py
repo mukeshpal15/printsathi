@@ -11,6 +11,9 @@ from django.contrib.auth import logout
 from django.core.mail import EmailMessage
 from printapp.printutil import *
 from printapp.form import *
+from wsgiref.util import FileWrapper
+import mimetypes
+import os
 
 def index(request):
 	dic={'session':CheckUserSession(request),
@@ -22,22 +25,26 @@ def index(request):
 def aboutus(request):
 	dic={'session':CheckUserSession(request),
 			'checksession':1,
-			'checksessionre':2}
+			'checksessionre':2,
+			'cartcount':GetCartCount(request)}
 	return render(request, 'about-us.html',dic)
 def allproducts(request):
 	dic={'session':CheckUserSession(request),
 			'checksession':1,
-			'checksessionre':2}
+			'checksessionre':2,
+			'cartcount':GetCartCount(request)}
 	return render(request, 'allproducts.html',dic)
 def category(request):
 	dic={'session':CheckUserSession(request),
 			'checksession':1,
-			'checksessionre':2}
+			'checksessionre':2,
+			'cartcount':GetCartCount(request)}
 	return render(request, 'category.html',dic)
 def cms(request):
 	dic={'session':CheckUserSession(request),
 			'checksession':1,
-			'checksessionre':2}
+			'checksessionre':2,
+			'cartcount':GetCartCount(request)}
 	return render(request, 'cms.html',dic)
 def coomingsoon(request):
 	return render(request, 'cooming-soon.html',{})
@@ -50,7 +57,8 @@ def productdetails(request):
 	dic1=GetAgainProductDetail(detail)
 	dic1.update({'session':CheckUserSession(request),
 				'checksession':1,
-				'checksessionre':2})
+				'checksessionre':2,
+				'cartcount':GetCartCount(request)})
 	return render(request, 'productdetails.html',dic1)
 def adminlogin(request):
 	return render(request,'adminlogin.html',{})
@@ -58,11 +66,13 @@ def addproducts(request):
 	return render(request, 'addproducts.html',{})
 def userlogin(request):
 	dic={'session':CheckUserSession(request),
-		'checksession':1}
+		'checksession':1,
+		'cartcount':GetCartCount(request)}
 	return render(request, 'userlogin.html',dic)
 def userregistration(request):
 	dic={'session':CheckUserSession(request),
-		'checksession':1}
+		'checksession':1,
+		'cartcount':GetCartCount(request)}
 	return render(request, 'userregistration.html',dic)
 @csrf_exempt
 def admindash(request):
@@ -268,7 +278,8 @@ def userlog(request):
 					'city': x.User_City,
 					'state': x.User_State,
 					'session':CheckUserSession(request),
-					'checksession':1}
+					'checksession':1,
+					'cartcount':GetCartCount(request)}
 			return render(request,'profile.html',dic)
 		else:
 			dic={'msg':'Incorrect Email or Password',}
@@ -294,7 +305,8 @@ def changeuserpassword(request):
 				'city': x.User_City,
 				'state': x.User_State,
 				'session':CheckUserSession(request),
-				'checksession':1
+				'checksession':1,
+				'cartcount':GetCartCount(request)
 				}
 			b1='''<script type="text/javascript">
 			alert("'''
@@ -326,7 +338,8 @@ Printsathi'''
 				'city': x.User_City,
 				'state': x.User_State,
 				'session':CheckUserSession(request),
-				'checksession':1
+				'checksession':1,
+				'cartcount':GetCartCount(request)
 				}
 			b1='''<script type="text/javascript">
 			alert("'''
@@ -357,7 +370,8 @@ def changeuserdetails(request):
 				'city': x.User_City,
 				'state': x.User_State,
 				'session':CheckUserSession(request),
-				'checksession':1
+				'checksession':1,
+				'cartcount':GetCartCount(request)
 			}
 		b1='''<script type="text/javascript">
 		alert("'''
@@ -387,6 +401,7 @@ def myuseraccount(request):
 						'state': x.User_State,
 						'session':CheckUserSession(request),
 						'checksession':1,
+						'cartcount':GetCartCount(request),
 						'odata':GetOrderDetails(x.User_ID)
 					}
 				return render(request,'profile.html',dic)
@@ -405,7 +420,8 @@ def myuseraccount(request):
 						'city': x.Reseller_City,
 						'state': x.Reseller_State,
 						'sessionre':CheckResellerSession(request),
-						'checksessionre':2
+						'checksessionre':2,
+						'cartcount':GetCartCount(request)
 					}
 				return render(request,'resellerprofile.html',dic)
 			else:
@@ -448,6 +464,46 @@ def savedesigns(request):
 			return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+
+@csrf_exempt
+def adminorderdetails(request):
+	if request.method=="POST":
+		dic={'data':GetOrderDetailsAdmin(),
+			'data2':GetOrderDetailsAdmin2()}
+		return render(request, 'adminorderdetail.html',dic)
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+
+@csrf_exempt
+def downloadfile(request):
+	if request.method=="POST":
+		obj=OrderData.objects.filter(Order_ID=request.POST.get('oid'))
+		file_path=''
+		for x in obj:
+			file_name = x.Detail_File.name
+		file_path = settings.MEDIA_ROOT +'/'+ file_name
+		file_wrapper = FileWrapper(open(file_path,'rb'))
+		file_mimetype = mimetypes.guess_type(file_path)
+		response = HttpResponse(file_wrapper, content_type=file_mimetype )
+		response['X-Sendfile'] = file_path
+		response['Content-Length'] = os.stat(file_path).st_size
+		response['Content-Disposition'] = 'attachment; filename=%s' % file_name 
+		return response
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+
+@csrf_exempt
+def removeorder(request):
+	if request.method=="POST":
+		obj=OrderData.objects.filter(Order_ID=request.POST.get('oid'))
+		obj.update(Order_Status="Completed")
+		dic={'data':GetOrderDetailsAdmin(),
+			'data2':GetOrderDetailsAdmin2()}
+		return render(request, 'adminorderdetail.html',dic)
+	else:
+		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+
+
 @csrf_exempt
 def logout(request):
 	
@@ -464,7 +520,8 @@ def logout(request):
 	
 def resellerregistration(request):
 	dic={'sessionre':CheckUserSession(request),
-		'checksession':1}
+		'checksession':1,
+		'cartcount':GetCartCount(request)}
 	return render(request,'resellerregistration.html',dic)
 @csrf_exempt
 def savereseller(request):
@@ -551,7 +608,8 @@ def resellerlog(request):
 						'city': x.Reseller_City,
 						'state': x.Reseller_State,
 						'sessionre':CheckResellerSession(request),
-						'checksessionre':2}
+						'checksessionre':2,
+						'cartcount':GetCartCount(request)}
 					return render(request,'resellerprofile.html',dic)
 				
 			else:
@@ -591,7 +649,8 @@ def changeresellerdetails(request):
 				'city': x.Reseller_City,
 				'state': x.Reseller_Status,
 				'sessionre':CheckResellerSession(request),
-				'checksessionre':2
+				'checksessionre':2,
+				'cartcount':GetCartCount(request)
 			}
 		b1='''<script type="text/javascript">
 		alert("'''
@@ -621,7 +680,8 @@ def changeresellerpassword(request):
 				'city': x.Reseller_City,
 				'state': x.Reseller_State,
 				'sessionre':CheckResellerSession(request),
-				'checksessionre':2
+				'checksessionre':2,
+				'cartcount':GetCartCount(request)
 				}
 			b1='''<script type="text/javascript">
 			alert("'''
@@ -653,7 +713,8 @@ Printsathi'''
 				'city': x.Reseller_City,
 				'state': x.Reseller_State,
 				'sessionre':CheckResellerSession(request),
-				'checksessionre':2
+				'checksessionre':2,
+				'cartcount':GetCartCount(request)
 				}
 			b1='''<script type="text/javascript">
 			alert("'''
@@ -720,7 +781,8 @@ def opencategory(request):
 			if ResellerData.objects.filter(Reseller_Email=n).exists():
 				dic=getdatacatagary(cname)
 				dic.update({'sessionre':CheckResellerSession(n),
-							'checksessionre':2})
+							'checksessionre':2,
+							'cartcount':GetCartCount(request)})
 				return render(request,'allproducts.html',dic)
 	except:
 		dic=getdatacatagary(cname)

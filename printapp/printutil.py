@@ -265,3 +265,79 @@ def GetCartCount(request):
 		return len(obj)
 	except:
 		return 0
+
+def GetOrderDetailsAdmin():
+	dic={}
+	lt=[]
+	obj=OrderData.objects.filter(Order_Status='Paid')
+	for x in obj:
+		dic={
+		'orderid':x.Order_ID,
+		'orderdate':x.Order_Date,
+		'payid':x.Payment_ID,
+		'status':x.Order_Status,
+		'totalamount':x.Total_Amount,
+		'amounttopay':str((int(x.Total_Amount)/100)*25),
+		'restamount':x.Rest_Amount
+		}
+		obj1=UserData.objects.filter(User_ID=x.User_ID)
+		for y in obj1:
+			dic.update({
+				'cname':y.User_First_Name+' '+y.User_Last_Name,
+				'cmail':y.User_Email,
+				'cphone':y.User_Phone,
+				'caddress':y.User_Address,
+				'ccity':y.User_City,
+				'cstate':y.User_State,
+				})
+		obj2=ProductData.objects.filter(Product_ID=x.Product_ID)
+		for z in obj2:
+			dic.update({
+				'pname':z.Product_Name,
+				'pcategory':z.Product_Category,
+				})
+		obj3=ProductDesignData.objects.filter(Design_ID=x.Design_ID)
+		for w in obj3:
+			dic.update({
+				'design':w.Design_Image.url,
+				})
+		lt.append(dic)
+	return reversed(lt)
+
+def GetOrderDetailsAdmin2():
+	dic={}
+	lt=[]
+	obj=OrderData.objects.filter(Order_Status='Completed')
+	for x in obj:
+		dic={
+		'orderid':x.Order_ID,
+		'orderdate':x.Order_Date,
+		'payid':x.Payment_ID,
+		'status':x.Order_Status,
+		'totalamount':x.Total_Amount,
+		'amounttopay':str((int(x.Total_Amount)/100)*25),
+		'restamount':x.Rest_Amount
+		}
+		obj1=UserData.objects.filter(User_ID=x.User_ID)
+		for y in obj1:
+			dic.update({
+				'cname':y.User_First_Name+' '+y.User_Last_Name,
+				'cmail':y.User_Email,
+				'cphone':y.User_Phone,
+				'caddress':y.User_Address,
+				'ccity':y.User_City,
+				'cstate':y.User_State,
+				})
+		obj2=ProductData.objects.filter(Product_ID=x.Product_ID)
+		for z in obj2:
+			dic.update({
+				'pname':z.Product_Name,
+				'pcategory':z.Product_Category,
+				})
+		obj3=ProductDesignData.objects.filter(Design_ID=x.Design_ID)
+		for w in obj3:
+			dic.update({
+				'design':w.Design_Image.url,
+				})
+		lt.append(dic)
+	return reversed(lt)
