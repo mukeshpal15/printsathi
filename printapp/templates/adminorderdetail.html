@@ -3,7 +3,11 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8">
-      <title>Printsathi - Cart</title>
+
+      
+
+      <title>Printsathi - Add Products</title>
+
       <link rel="stylesheet" href="{% static 'w3.css' %}">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <!--enable mobile device-->
@@ -35,122 +39,103 @@
                         <span class="icon-bar"></span> 
                         <span class="icon-bar"></span> 
                         </button>
-                        <a href="\index\" class="navbar-brand"><img src="{% static 'images/logo.png' %}" style="width:200px;" alt="" /></a>
+                        <a href="\index\" class="navbar-brand"><img src="{% static 'images/logo.png' %}" alt="" /></a>
                      </div>
+
+                     
+
                   </div>
                   <div class="col-md-8 col-sm-12">
                      <div class="right-nav">
+                  <ul>
+                    <li>
+                      <form action="/backtoadmindash/" method="POST">
+                        <input class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;" type="submit" value="Back">
+                      </form>
+                    </li>
+                              </ul>
+                           </div>
+                        </div>
                         
-                        <div class="login-sr">
-                           <div class="login-signup">
-                              <ul>
-                                 {% if session == checksession %}
-                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
-                                 {% else %}
-                                    <li><a href="/userlogin/">Login</a></li>
-                                    <li><a class="custom-b" href="/userregistration/">Sign up</a></li>
-                                 {% endif %}
-                              </ul>
-                           </div>
-                        </div>
-
-                        <div class="nav-b hidden-xs">
-                           <div class="nav-box">
-                              <ul>
-                                 <li><a href="/index/">Home</a></li>
-                                 <li><a href="/about/">About</a></li>
-                                 <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</a></li>
-                              </ul>
-                           </div>
-                        </div>
-
                      </div>
                   </div>
-               </div>
-            </div>
-            <!--/.container-fluid -->
+
+
+            <!--/.container-fluid --> 
          </nav>
       </header>
 
-      <div class="modal fade lug" id="myModal" role="dialog">
-         <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Choose from Wide Range of Categories</h4>
-               </div>
-               <div class="modal-body">
-                  <ul>
-                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Business Cards">Business Cards</a></li><br>
-                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Office Stationary">Office Stationary</a></li><br>
-                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Marketing Tool">Marketing Tool</a></li><br>
-                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Marketing Tool">Doctoor Tools</a></li><br>
-                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Invitation Cards">Invitation Cards</a></li><br>
-                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Apparels/Gifts">Apparels/Gifts</a></li><br>
-                  </ul>
+      <!-- Modal -->
+      
+         
+      
+
+      <div class="terms-conditions">
+         <div class="terms-title">
+            <div class="container">
+               <div class="row">
+                  <ol class="breadcrumb">
+
+                     <li class="active">Admin Login</li>
+                     <li>Add Product</li>
+
+                  </ol>
                </div>
             </div>
          </div>
-      </div>
-      <!--/.mobile menu -->
-      <div id="sidebar" class="top-nav">
-         <ul id="sidebar-nav" class="sidebar-nav">
-            <li><a href="/index/">Home</a></li>
-            <li><a href="/about/">About</a></li>
-            <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</a></li>
-         </ul>
-      </div>    
-         <div class="terms-conditions">
-
        <div class="container">
-        <h1 style="margin-top:20px;font-size:40px;"><i class="fa fa-shopping-cart"></i> Cart <span>({{ count|safe }})</span></h1> 
-   <div style="background-color:white;border-radius:15px;padding:40px;margin-top:20px;"class="w3-card-4">
-      <table class="w3-table w3-striped">
-         <tr class="w3-black">
-            <th>Design</th>
-            <th>Product Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th></th>
-         </tr>
+         <div class="row">
+            <div class="column" style="margin-top:20px;">
+               <label style="margin-bottom:15px;font-size:20px;color:green;">Order List</label>
+               <div style="overflow-x:auto;overflow-y:auto;">
+               <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+                 <tr class="w3-black">
+                   <th>Order ID</th>
+                   <th>Order Date</th>
+                   <th>Customer Name</th>
+                   <th>Customer Email</th>
+                   <th>Customer Phone</th>
+                   <th>Customer Address</th>
+                   <th>Product</th>
+                   <th>Design</th>
+                   <th>Product Category</th>
+                   <th>Total Amount</th>
+                   <th>Amount Paid</th>
+                   <th>Payment Status</th>
+                   <th>Payment ID</th>
+                   <th>Delivery Status</th>
+                   <th>Document File</th>
+                 </tr>
+                 <tr>
+                   <td>GTF456</td>
+                   <td>02/05/2020</td>
+                   <td>Rajat Sharma</td>
+                   <td>rhv234@gmail.com</td>
+                   <td>9539594939</td>
+                   <td>sabudi road agra</td>
+                   <td>ASFG</td>
+                   <td><img src="{% static 'images/decor-paint-ideas-with-birds.jpg' %}" onclick="document.getElementById('modal01').style.display='block'" class="w3-hover-opacity">
+                <div id="modal01" class="w3-modal w3-animate-zoom" onclick="this.style.display='none'">
+                <img class="w3-modal-content" src="{% static 'images/decor-paint-ideas-with-birds.jpg' %}">
+                </div>
+                   </td>
+                   <td>MHGD</td>
+                   <td>1000</td>
+                   <td>5000</td>
+                   <td>HGT</td>
+                   <td>HYU456</td>
+                   <td>PP455</td>
+                   <td><button class="w3-button w3-green w3-hover-black">Download</button></td>
+                   
+                 </tr>  
+               </table>
+              </div>
+            </div>
+         </div>
 
-         {% for x in cartdata %}
-         <tr>
-            <td>
-               <img style="height:100px;width:150px;border-radius:15px;"src="{{ x.image|safe }}">
-            </td>
-            <td style="font-size:25px;font-weight:bold;">
-               {{ x.name|safe }}<br>
-               <span style="font-size:15px;color:grey;">{{ x.category|safe }}</span>
-            </td>
-            <td style="font-size:25px;font-weight:bold;">
-               {{ x.quantity|safe }}<br>
-            </td>
-            <td style="font-size:20px;font-weight:bold;">
-               <i class="fa fa-inr"></i> {{ x.price|safe }}
-            </td>
-            <td>
-               <a class="w3-button w3-red w3-hover-black" style="font-size:18px;border-radius:50px;">
-                  <i class="fa fa-trash-o" aria-hidden="true"></i>
-               </a>
-            </td>
-         </tr>
-         {% endfor %}
-      </table>
-         <table class="w3-table w3-striped">
-         <hr style="border:2px solid green;">
-         <tr>
-
-            <td style="font-size:35px;font-weight:bold;">Total Amount</td>
-            <td class="w3-right-align" style="font-size:35px;font-weight:bold;"><i class="fa fa-inr"></i> {{ totalamount|safe }}</td>
-         </tr>
-      </table>
-      <a style="width:100%;font-size:25px;border-radius:15px;" class="w3-button w3-blue w3-hover-black" href="/proceedtopay/">Proceed to Pay</a>
-   </div>      
-   </div>
-</div>
-<footer>
+      </div>  
+      </div>
+      <footer>
          <div class="main-footer">
             <div class="container">
                <div class="row">

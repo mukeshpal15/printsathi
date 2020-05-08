@@ -60,6 +60,7 @@ urlpatterns = [
     path('cart/',cart),
     path('deliveryboylogin/',deliveryboylogin),
     path('deliveryboypannel/',deliveryboypannel),
+    path('adminorderdetail/',adminorderdetail),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
