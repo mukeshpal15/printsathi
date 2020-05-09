@@ -44,11 +44,7 @@
                         <div class="login-sr">
                            <div class="login-signup">
                               <ul>
-                                 {% if session == checksession  %}
-                                    <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/opencart/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
-                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
-                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
-                                  {% elif sessionre == checksessionre %}
+                                 {% if sessionre == checksessionre %}
                                     <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
                                     <li><a class="custom-b" href="/logout/">Logout</a></li>
                                  {% else %}
