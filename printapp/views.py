@@ -767,25 +767,34 @@ def resellerdeactive(request):
 @csrf_exempt
 def opencategory(request):
 	cname=request.GET.get('cname')
-
 	try:
 		try:
 			n=request.session['user_email']
 			if UserData.objects.filter(User_Email=n).exists():
 				dic=getdatacatagary(cname)
 				dic.update({'session':CheckUserSession(request),
-							'checksession':1})
+							'checksession':1,
+							'cartcount':GetCartCount(request),
+							'sessionre':CheckResellerSession(n),
+							'checksessionre':2,})
 				return render(request,'allproducts.html',dic)
 		except:
 			n=request.session['re_email']
 			if ResellerData.objects.filter(Reseller_Email=n).exists():
 				dic=getdatacatagary(cname)
-				dic.update({'sessionre':CheckResellerSession(n),
-							'checksessionre':2,
-							'cartcount':GetCartCount(request)})
+				dic.update({'session':CheckUserSession(request),
+							'checksession':1,
+							'cartcount':GetCartCount(request),
+							'sessionre':CheckResellerSession(n),
+							'checksessionre':2,})
 				return render(request,'allproducts.html',dic)
 	except:
 		dic=getdatacatagary(cname)
+		dic.update({'session':CheckUserSession(request),
+					'checksession':1,
+					'cartcount':GetCartCount(request),
+					'sessionre':1,
+					'checksessionre':2,})
 		return render(request,'allproducts.html',dic)
 	
 def userforgotpass(request):
