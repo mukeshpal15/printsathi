@@ -14,6 +14,8 @@ from printapp.form import *
 from wsgiref.util import FileWrapper
 import mimetypes
 import os
+import json
+import urllib
 
 def index(request):
 	dic={'session':CheckUserSession(request),
@@ -77,14 +79,27 @@ def userregistration(request):
 @csrf_exempt
 def admindash(request):
 	if request.method=="POST":
-		e=request.POST.get('email')
-		p=request.POST.get('pass')
-		if e=="admin@printsathi.com" and p=="1234":
-			return render(request, 'admindash.html',{})
+		''' Begin reCAPTCHA validation '''
+		recaptcha_response = request.POST.get('g-recaptcha-response')
+		url = 'https://www.google.com/recaptcha/api/siteverify'
+		values = {
+				'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+				'response': recaptcha_response
+				}
+		data = urllib.parse.urlencode(values).encode()
+		req =  urllib.request.Request(url, data=data)
+		response = urllib.request.urlopen(req)
+		result = json.loads(response.read().decode())
+		''' End reCAPTCHA validation '''
+		if result['success']:
+			e=request.POST.get('email')
+			p=request.POST.get('pass')
+			if e=="admin@printsathi.com" and p=="1234":
+				return render(request, 'admindash.html',{})
+			else:
+				return HttpResponse('<h1>Error</h1>')
 		else:
-			return HttpResponse('<h1>Error</h1>')
-	else:
-		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+			return HttpResponse('<h1> Invalid RECAPTCHA </h1>')
 @csrf_exempt
 def backtoadmindash(request):
 	if request.method=="POST":
@@ -215,6 +230,18 @@ def DeletePaperType(request):
 @csrf_exempt
 def saveuser(request):
 	if request.method=="POST":
+		''' Begin reCAPTCHA validation '''
+		recaptcha_response = request.POST.get('g-recaptcha-response')
+		url = 'https://www.google.com/recaptcha/api/siteverify'
+		values = {
+				'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+				'response': recaptcha_response
+				}
+		data = urllib.parse.urlencode(values).encode()
+		req =  urllib.request.Request(url, data=data)
+		response = urllib.request.urlopen(req)
+		result = json.loads(response.read().decode())
+		''' End reCAPTCHA validation '''
 		u="U00"
 		x=1
 		uid=u+str(x)
@@ -223,42 +250,47 @@ def saveuser(request):
 			uid=u+str(x)
 		x=int(x)
 		pp='+91'+request.POST.get('Phone Number')
-		if UserData.objects.filter(User_Email=request.POST.get('Email'),User_Phone=pp).exists():
-			dic={'msg':"User Already Registered"}
-			return render(request, 'userregistration.html',dic)
-		else:
-			otp=uuid.uuid5(uuid.NAMESPACE_DNS, request.POST.get('Email')+uid)
-			password=str(otp)
-			password=password.upper()[0:8]
-			obj=UserData(
-				User_ID=uid,
-				User_First_Name=request.POST.get('First Name'),
-				User_Last_Name=request.POST.get('Last Name'),
-				User_Gender=request.POST.get('Gender'),
-				User_Email=request.POST.get('Email'),
-				User_Phone=pp,
-				User_Address=request.POST.get('Address'),
-				User_City=request.POST.get('City'),
-				User_State=request.POST.get('State'),
-				User_Password=password
-			)
-			obj.save()
-			msg = '''Hi there!
-Your account has been Successfully created on Printsathi. Your account credentials are as below,
-Email : '''+request.POST.get('Email')+'''
-Password : '''+password+'''
+		if result['success']:
+			if UserData.objects.filter(User_Email=request.POST.get('Email')).exists():
+				dic={'msg':"User Already Registered"}
+				return render(request, 'userregistration.html',dic)
+			else:
+				otp=uuid.uuid5(uuid.NAMESPACE_DNS, request.POST.get('Email')+uid)
+				password=str(otp)
+				password=password.upper()[0:8]
+				obj=UserData(
+					User_ID=uid,
+					User_First_Name=request.POST.get('First Name'),
+					User_Last_Name=request.POST.get('Last Name'),
+					User_Gender=request.POST.get('Gender'),
+					User_Email=request.POST.get('Email'),
+					User_Phone=pp,
+					User_Address=request.POST.get('Address'),
+					User_City=request.POST.get('City'),
+					User_State=request.POST.get('State'),
+					User_Password=password
+				)
+				obj.save()
+				msg = '''Hi there!
+	Your account has been Successfully created on Printsathi. Your account credentials are as below,
+	Email : '''+request.POST.get('Email')+'''
+	Password : '''+password+'''
 
-Thanks & Regards,
-Printsathi'''
-			sub='Welcome to Printsathi'
-			email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
-			email.send()
-			#snp=send_sms(pp,msg)
-			dic={'msg':"Successfully Registered",
-				'msg1':'You will get you account credentials on your mail soon.',
-				'session':CheckUserSession(request),
-				'checksession':1}
+	Thanks & Regards,
+	Printsathi'''
+				sub='Welcome to Printsathi'
+				email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
+				email.send()
+				#snp=send_sms(pp,msg)
+				dic={'msg':"Successfully Registered",
+					'msg1':'You will get you account credentials on your mail soon.',
+					'session':CheckUserSession(request),
+					'checksession':1}
+				return render(request, 'userregistration.html',dic)
+		else:
+			dic={'msg':"Invalid Recaptcha"}
 			return render(request, 'userregistration.html',dic)
+				
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 
@@ -267,25 +299,44 @@ def userlog(request):
 	if request.method=='POST':
 		check=1
 		dic={}
+		''' Begin reCAPTCHA validation '''
+		recaptcha_response = request.POST.get('g-recaptcha-response')
+		url = 'https://www.google.com/recaptcha/api/siteverify'
+		values = {
+				'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+				'response': recaptcha_response
+				}
+		data = urllib.parse.urlencode(values).encode()
+		req =  urllib.request.Request(url, data=data)
+		response = urllib.request.urlopen(req)
+		result = json.loads(response.read().decode())
+		''' End reCAPTCHA validation '''
+		
 		if UserData.objects.filter(User_Email=request.POST.get('email'),User_Password=request.POST.get('pass')).exists():
-			request.session['user_email'] = request.POST.get('email')
-			for x in UserData.objects.filter(User_Email=request.POST.get('email')):
-				dic={'fname': x.User_First_Name,
-					'lname': x.User_Last_Name,
-					'email': x.User_Email,
-					'phone': x.User_Phone,
-					'address': x.User_Address,
-					'city': x.User_City,
-					'state': x.User_State,
-					'session':CheckUserSession(request),
-					'checksession':1,
-					'cartcount':GetCartCount(request)}
-			return render(request,'profile.html',dic)
+			if result['success']:
+				request.session['user_email'] = request.POST.get('email')
+				for x in UserData.objects.filter(User_Email=request.POST.get('email')):
+					dic={'fname': x.User_First_Name,
+						'lname': x.User_Last_Name,
+						'email': x.User_Email,
+						'phone': x.User_Phone,
+						'address': x.User_Address,
+						'city': x.User_City,
+						'state': x.User_State,
+						'session':CheckUserSession(request),
+						'checksession':1,
+						'cartcount':GetCartCount(request)}
+				return render(request,'profile.html',dic)
+			else:
+				dic={'msg':'Invalid Recaptcha',}
+				return render(request,'userlogin.html',dic)
+
 		else:
 			dic={'msg':'Incorrect Email or Password',}
 			return render(request,'userlogin.html',dic)
 	else:
-		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+		dic={'msg':'Invalid data',}
+		return render(request,'userlogin.html',dic)
 @csrf_exempt
 def changeuserpassword(request):
 	if request.method=="POST":
@@ -526,6 +577,18 @@ def resellerregistration(request):
 @csrf_exempt
 def savereseller(request):
 	if request.method=="POST":
+		''' Begin reCAPTCHA validation '''
+		recaptcha_response = request.POST.get('g-recaptcha-response')
+		url = 'https://www.google.com/recaptcha/api/siteverify'
+		values = {
+				'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+				'response': recaptcha_response
+				}
+		data = urllib.parse.urlencode(values).encode()
+		req =  urllib.request.Request(url, data=data)
+		response = urllib.request.urlopen(req)
+		result = json.loads(response.read().decode())
+		''' End reCAPTCHA validation '''
 		u="R00"
 		D='Deactive'
 		x=1
@@ -535,48 +598,52 @@ def savereseller(request):
 			uid=u+str(x)
 		x=int(x)
 		pp='+91'+request.POST.get('Phone Number')
-		if ResellerData.objects.filter(Reseller_Email=request.POST.get('Email'), Reseller_Phone=pp).exists():
-			dic={'msg':"Reseller Already Registered"}
-			return render(request, 'resellerregistration.html',dic)
-		elif ResellerData.objects.filter(Reseller_Phone=pp).exists():
-			dic={'msg':"Reseller Already Registered"}
-			return render(request, 'resellerregistration.html',dic)
+		if result['success']:
+			if ResellerData.objects.filter(Reseller_Email=request.POST.get('Email')).exists():
+				dic={'msg':"Reseller Already Registered"}
+				return render(request, 'resellerregistration.html',dic)
+			elif ResellerData.objects.filter(Reseller_Phone=pp).exists():
+				dic={'msg':"Reseller Already Registered"}
+				return render(request, 'resellerregistration.html',dic)
 
+			else:
+				otp=uuid.uuid5(uuid.NAMESPACE_DNS, request.POST.get('Email')+uid)
+				password=str(otp)
+				password=password.upper()[0:8]
+				obj=ResellerData(Reseller_ID=uid,
+								Reseller_First_Name=request.POST.get('First Name'),
+								Reseller_Last_Name=request.POST.get('Last Name'),
+								Reseller_Gender=request.POST.get('Gender'),
+								Reseller_Email=request.POST.get('Email'),
+								Reseller_Phone=pp,
+								Reseller_Address=request.POST.get('Address'),
+								Reseller_City=request.POST.get('City'),
+								Reseller_State=request.POST.get('State'),
+								Reseller_GSTIN=request.POST.get('GSTIN'),
+								Reseller_PAN=request.POST.get('PAN'),
+								Reseller_Password=password,
+								Reseller_Status=D,
+								Adhaar=request.FILES['adhaar'],
+								Profile=request.FILES['profile']	
+								)
+				obj.save()
+				msg = '''Hi there!
+	Your Reseller's Account has been successfully created. We are reviewing your details.
+
+	Till then wait for our response.
+
+	Thanks & Regards,
+	Printsathi'''
+				sub='Welcome to Printsathi'
+				email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
+				email.send()
+				#snp=send_sms(pp,msg)
+				dic={'msg':"Reseller Registered Successfully",
+					'msg1':"Your password has been sent to your email."}
+				return render(request, 'resellerregistration.html',dic)
 		else:
-			otp=uuid.uuid5(uuid.NAMESPACE_DNS, request.POST.get('Email')+uid)
-			password=str(otp)
-			password=password.upper()[0:8]
-			obj=ResellerData(Reseller_ID=uid,
-							Reseller_First_Name=request.POST.get('First Name'),
-							Reseller_Last_Name=request.POST.get('Last Name'),
-							Reseller_Gender=request.POST.get('Gender'),
-							Reseller_Email=request.POST.get('Email'),
-							Reseller_Phone=pp,
-							Reseller_Address=request.POST.get('Address'),
-							Reseller_City=request.POST.get('City'),
-							Reseller_State=request.POST.get('State'),
-							Reseller_GSTIN=request.POST.get('GSTIN'),
-							Reseller_PAN=request.POST.get('PAN'),
-							Reseller_Password=password,
-							Reseller_Status=D,
-							Adhaar=request.FILES['adhaar'],
-							Profile=request.FILES['profile']	
-							)
-			obj.save()
-			msg = '''Hi there!
-Your Reseller's Account has been successfully created. We are reviewing your details.
-
-Till then wait for our response.
-
-Thanks & Regards,
-Printsathi'''
-			sub='Welcome to Printsathi'
-			email = EmailMessage(sub, msg, to=[request.POST.get('Email')])
-			email.send()
-			#snp=send_sms(pp,msg)
-			dic={'msg':"Reseller Registered Successfully",
-				'msg1':"Your password has been sent to your email."}
-			return render(request, 'resellerregistration.html',dic)
+			dic={'msg':"Invalid Recaptcha"}
+			return render(request, 'resellerregistration.html',dic)	
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 def resellerlogin(request):
@@ -587,34 +654,51 @@ def resellerlogin(request):
 @csrf_exempt
 def resellerlog(request):
 	if request.method=='POST':
+		''' Begin reCAPTCHA validation '''
+		recaptcha_response = request.POST.get('g-recaptcha-response')
+		url = 'https://www.google.com/recaptcha/api/siteverify'
+		values = {
+				'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+				'response': recaptcha_response
+				}
+		data = urllib.parse.urlencode(values).encode()
+		req =  urllib.request.Request(url, data=data)
+		response = urllib.request.urlopen(req)
+		result = json.loads(response.read().decode())
+		''' End reCAPTCHA validation '''
 		d='Active'
 		check=1
 		dic={}
 		e=request.POST.get('email')
 		p=request.POST.get('pass')
 		if ResellerData.objects.filter(Reseller_Email=e,Reseller_Password=p):
-			request.session['re_email'] = request.POST.get('email')
-			obj=ResellerData.objects.filter(Reseller_Email=e)
-			for i in obj:
-				a=i.Reseller_Status
-				break
-			if a==d:
-				for x in ResellerData.objects.filter(Reseller_Email=request.session['re_email']):
-					dic={'fname': x.Reseller_First_Name,
-						'lname': x.Reseller_Last_Name,
-						'email': x.Reseller_Email,
-						'phone': x.Reseller_Phone,
-						'address': x.Reseller_Address,
-						'city': x.Reseller_City,
-						'state': x.Reseller_State,
-						'sessionre':CheckResellerSession(request),
-						'checksessionre':2,
-						'cartcount':GetCartCount(request)}
-					return render(request,'resellerprofile.html',dic)
-				
+			if result['success']:
+				request.session['re_email'] = request.POST.get('email')
+				obj=ResellerData.objects.filter(Reseller_Email=e)
+				for i in obj:
+					a=i.Reseller_Status
+					break
+				if a==d:
+					for x in ResellerData.objects.filter(Reseller_Email=request.session['re_email']):
+						dic={'fname': x.Reseller_First_Name,
+							'lname': x.Reseller_Last_Name,
+							'email': x.Reseller_Email,
+							'phone': x.Reseller_Phone,
+							'address': x.Reseller_Address,
+							'city': x.Reseller_City,
+							'state': x.Reseller_State,
+							'sessionre':CheckResellerSession(request),
+							'checksessionre':2,
+							'cartcount':GetCartCount(request)}
+						return render(request,'resellerprofile.html',dic)
+					
+				else:
+					dic={'msg':'Your account is deactivated. Please wait admin response',}
+					return render(request,'resellerlogin.html',dic)
 			else:
-				dic={'msg':'Your account is deactivated. Please wait admin response',}
+				dic={'msg':'Invalid Recaptcha',}
 				return render(request,'resellerlogin.html',dic)
+
 		else:
 			dic={'msg':'Incorrect Email or Password',}
 			return render(request,'resellerlogin.html',dic)
@@ -802,60 +886,95 @@ def userforgotpass(request):
 
 def user_send_pass(request):
 	if request.method=="POST":
+		''' Begin reCAPTCHA validation '''
+		recaptcha_response = request.POST.get('g-recaptcha-response')
+		url = 'https://www.google.com/recaptcha/api/siteverify'
+		values = {
+				'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+				'response': recaptcha_response
+				}
+		data = urllib.parse.urlencode(values).encode()
+		req =  urllib.request.Request(url, data=data)
+		response = urllib.request.urlopen(req)
+		result = json.loads(response.read().decode())
+		''' End reCAPTCHA validation '''
 		n=request.POST.get('email')
-		if UserData.objects.filter(User_Email=n).exists():
-			obj=UserData.objects.filter(User_Email=n)
-			for i in obj:
-				p=i.User_Password
-				pp=i.User_Phone
-				break
-			msg = '''hello sir,
+		if result['success']:
+			if UserData.objects.filter(User_Email=n).exists():
+				obj=UserData.objects.filter(User_Email=n)
+				for i in obj:
+					p=i.User_Password
+					pp=i.User_Phone
+					break
+				msg = '''hello sir,
 
 
-Your Password is : '''+p+'''
+	Your Password is : '''+p+'''
 
 
-Thanks & Regards,
-Printsathi'''
-			sub='Your Account Password'
-			email = EmailMessage(sub, msg, to=[n])
-			email.send()
-			#print(pp)
-			#snp=send_sms(pp,msg)
-			return HttpResponse("<script> alert('Your Password has been sent to your mail Id and Phone'); window.location.replace('/userlogin/') </script>")
+	Thanks & Regards,
+	Printsathi'''
+				sub='Your Account Password'
+				email = EmailMessage(sub, msg, to=[n])
+				email.send()
+				#print(pp)
+				#snp=send_sms(pp,msg)
+				return HttpResponse("<script> alert('Your Password has been sent to your mail Id and Phone'); window.location.replace('/userlogin/') </script>")
+			else:
+				msg='Please enter the valid mail Id'
+				
+				return render(request,'userforgotpass.html',{'msg':msg})
 		else:
-			msg='Please enter the valid mail Id'
-			
+			msg='Invalid Recaptcha'
+				
 			return render(request,'userforgotpass.html',{'msg':msg})
+
 def resellerforgotpass(request):
 	return render(request, 'resellerforgotpass.html',{})
 
 def reseller_send_pass(request):
 	if request.method=="POST":
+		''' Begin reCAPTCHA validation '''
+		recaptcha_response = request.POST.get('g-recaptcha-response')
+		url = 'https://www.google.com/recaptcha/api/siteverify'
+		values = {
+				'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+				'response': recaptcha_response
+				}
+		data = urllib.parse.urlencode(values).encode()
+		req =  urllib.request.Request(url, data=data)
+		response = urllib.request.urlopen(req)
+		result = json.loads(response.read().decode())
+		''' End reCAPTCHA validation '''
 		n=request.POST.get('email')
-		if ResellerData.objects.filter(Reseller_Email=n).exists():
-			obj=ResellerData.objects.filter(Reseller_Email=n)
-			for i in obj:
-				p=i.Reseller_Password
-				pp=i.Reseller_Phone
-				break
-			msg = '''hello sir,
+		if result['success']:
+			if ResellerData.objects.filter(Reseller_Email=n).exists():
+				obj=ResellerData.objects.filter(Reseller_Email=n)
+				for i in obj:
+					p=i.Reseller_Password
+					pp=i.Reseller_Phone
+					break
+				msg = '''hello sir,
 
 
-Your Password is : '''+p+'''
+	Your Password is : '''+p+'''
 
 
-Thanks & Regards,
-Printsathi'''
-			sub='Your Account Password'
-			email = EmailMessage(sub, msg, to=[n])
-			email.send()
-			#snp=send_sms(pp,msg)
-			return HttpResponse("<script> alert('Your Password has been sent to your mail Id and Phone'); window.location.replace('/resellerlogin/') </script>")
+	Thanks & Regards,
+	Printsathi'''
+				sub='Your Account Password'
+				email = EmailMessage(sub, msg, to=[n])
+				email.send()
+				#snp=send_sms(pp,msg)
+				return HttpResponse("<script> alert('Your Password has been sent to your mail Id and Phone'); window.location.replace('/resellerlogin/') </script>")
+			else:
+				msg='Please enter the valid mail Id'
+				
+				return render(request,'resellerforgotpass.html',{'msg':msg})
 		else:
-			msg='Please enter the valid mail Id'
-			
+			msg='Invalid Recaptcha'		
 			return render(request,'resellerforgotpass.html',{'msg':msg})
+
 
 
 

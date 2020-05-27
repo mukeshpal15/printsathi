@@ -43,6 +43,17 @@
                         <div class="login-sr">
                            <div class="login-signup">
                               <ul>
+                                 
+                              </ul>
+                           </div>
+                        </div>
+
+                        <div class="nav-b hidden-xs">
+                           <div class="nav-box">
+                              <ul>
+                                 <li><a href="/index/">Home</a></li>
+                                 <li><a href="/about/">About</a></li>
+                                 <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</a></li>
                                  {% if session == checksession  %}
                                     <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/opencart/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
                                     <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
@@ -54,16 +65,6 @@
                                     <li><a href="/userlogin/">Login</a></li>
                                     <li><a class="custom-b" href="/userregistration/">Sign up</a></li>
                                  {% endif %}
-                              </ul>
-                           </div>
-                        </div>
-
-                        <div class="nav-b hidden-xs">
-                           <div class="nav-box">
-                              <ul>
-                                 <li><a href="/index/">Home</a></li>
-                                 <li><a href="/about/">About</a></li>
-                                 <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</a></li>
                               </ul>
                            </div>
                         </div>

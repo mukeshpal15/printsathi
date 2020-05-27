@@ -117,3 +117,7 @@ EMAIL_HOST='smtp.gmail.com'
 EMAIL_HOST_USER='testm1214@gmail.com'
 EMAIL_HOST_PASSWORD='rkarwexluyuvdune'
 EMAIL_PORT=587
+
+
+# recaptcha
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LdMv_wUAAAAACXy06WKaa8BHyN9JcYM4j74vadV'
