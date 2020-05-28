@@ -67,10 +67,8 @@ def adminlogin(request):
 def addproducts(request):
 	return render(request, 'addproducts.html',{})
 def userlogin(request):
-	dic={'session':CheckUserSession(request),
-		'checksession':1,
-		'cartcount':GetCartCount(request)}
-	return render(request, 'userlogin.html',dic)
+
+	return render(request, 'userlogin.html',{})
 def userregistration(request):
 	dic={'session':CheckUserSession(request),
 		'checksession':1,
