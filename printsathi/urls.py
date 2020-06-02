@@ -67,6 +67,7 @@ urlpatterns = [
     path('downloadfile/',downloadfile),
     path('removeorder/',removeorder),
     path('opencart/',opencart),
+    path('deleteitem/',deleteitem),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

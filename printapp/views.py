@@ -67,8 +67,10 @@ def adminlogin(request):
 def addproducts(request):
 	return render(request, 'addproducts.html',{})
 def userlogin(request):
-
-	return render(request, 'userlogin.html',{})
+	dic={'session':CheckUserSession(request),
+		'checksession':1,
+		'cartcount':GetCartCount(request)}
+	return render(request, 'userlogin.html',dic)
 def userregistration(request):
 	dic={'session':CheckUserSession(request),
 		'checksession':1,
@@ -999,6 +1001,7 @@ def proceedfororder(request):
 		obj=ProductDesignData.objects.filter(Product_ID=pid)
 		for x in obj:
 			d={'did':x.Design_ID,
+				'pid':pid,
 				'image':x.Design_Image.url}
 			lt.append(d)
 		dic.update({'designs':lt})
@@ -1054,49 +1057,18 @@ def orderdatasave(request):
 			Rest_Amount='0'
 			)
 		obj.save()
-		lt=[]
-		dic={}
-		userid=''
-		tm=0
-		obj1=UserData.objects.filter(User_Email=request.session['user_email'])
-		for x in obj1:
-			userid=x.User_ID
-			break
-		obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
-		for z in obj1:
-			obj=ProductData.objects.filter(Product_ID=z.Product_ID)
-			for x in obj:
-				dic={
-					'orderid':z.Order_ID,
-					'name':x.Product_Name,
-					'category':x.Product_Category,
-					'price':x.Product_Price,
-					'quantity':x.Product_Quantity,
-				}
-				tm=tm+int(x.Product_Price)
-				obj2=ProductDesignData.objects.filter(Design_ID=did)
-				for y in obj2:
-					dic.update({
-						'image':y.Design_Image.url,
-						})
-				lt.append(dic)
-		obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
-		obj1.update(Total_Amount=str(tm),
-			Amount_to_Pay=str((tm/100)*25),
-			Rest_Amount=str(tm-((tm/100)*25)))
-		return render(request,'cart.html',{'cartcount':GetCartCount(request),'cartdata':lt,'totalamount':tm,'count':len(lt)})
-	else:
-		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
+		return redirect('/opencart/')
 
 def opencart(request):
 	lt=[]
 	dic={}
+	did=''
 	userid=''
 	tm=0
-	useremail=request.session['user_email']
-	obj=UserData.objects.filter(User_Email=useremail)
-	for x in obj:
+	obj1=UserData.objects.filter(User_Email=request.session['user_email'])
+	for x in obj1:
 		userid=x.User_ID
+		break
 	obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
 	for z in obj1:
 		obj=ProductData.objects.filter(Product_ID=z.Product_ID)
@@ -1109,14 +1081,34 @@ def opencart(request):
 				'quantity':x.Product_Quantity,
 			}
 			tm=tm+int(x.Product_Price)
-			obj2=ProductDesignData.objects.filter(Design_ID=z.Design_ID)
+			obj2=ProductDesignData.objects.filter(Design_ID=did)
 			for y in obj2:
 				dic.update({
 					'image':y.Design_Image.url,
 					})
 			lt.append(dic)
-	return render(request,'cart.html',{'cartdata':lt,'totalamount':tm,'count':len(lt)})
+	obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
+	obj1.update(Total_Amount=str(tm),
+		Amount_to_Pay=str((tm/100)*25),
+		Rest_Amount=str(tm-((tm/100)*25)))
+	return render(request,'cart.html',{'cartcount':GetCartCount(request),'cartdata':lt,'totalamount':tm,'count':len(lt)})
 
+
+def deleteitem(request):
+	pid=request.GET.get('pname')
+	udata=UserData.objects.filter(User_Email=request.session['user_email'])
+	for i in udata:
+		uid=i.User_ID
+		break;
+	if OrderData.objects.filter(User_ID=uid).exists(): 
+		odata=OrderData.objects.filter(Order_ID=pid)
+		odata.delete()
+		return redirect('/opencart/')
+	else:
+		return HttpResponse("<script> alert('Sorry !, Order is not deleted'); window.location.replace('/opencart/') </script>")
+ 
+	
+	
 
 
 
