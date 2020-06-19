@@ -19,7 +19,7 @@ def CheckUserSession(request):
 	except:
 		return 0
 
-def CheckResellerSession(n):
+def CheckResellerSession(request):
 	try:
 		if ResellerData.objects.filter(Reseller_Email=request.session['re_email']).exists():
 			return 2
@@ -257,12 +257,20 @@ def GetOrderDetails(userid):
 
 def GetCartCount(request):
 	try:
-		obj=UserData.objects.filter(User_Email=request.session['user_email'])
-		userid=''
-		for x in obj:
-			userid=x.User_ID
-		obj=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
-		return len(obj)
+		try:
+			obj=UserData.objects.filter(User_Email=request.session['user_email'])
+			userid=''
+			for x in obj:
+				userid=x.User_ID
+			obj=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
+			return len(obj)
+		except:
+			obj=ResellerData.objects.filter(Reseller_Email=request.session['re_email'])
+			userid=''
+			for x in obj:
+				sellerid=x.Reseller_ID
+			obj=OrderData.objects.filter(User_ID=sellerid,Order_Status='Unpaid')
+			return len(obj)
 	except:
 		return 0
 

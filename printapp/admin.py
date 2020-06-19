@@ -7,3 +7,4 @@ admin.site.register(ProductData)
 admin.site.register(ProductDesignData) 
 admin.site.register(OrderData) 
 # Register your models here.
+admin.site.register(gallery)

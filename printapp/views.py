@@ -18,6 +18,7 @@ import json
 import urllib
 
 def index(request):
+
 	dic={'session':CheckUserSession(request),
 			'checksession':1,
 			'sessionre':CheckResellerSession(request),
@@ -36,6 +37,14 @@ def allproducts(request):
 			'checksessionre':2,
 			'cartcount':GetCartCount(request)}
 	return render(request, 'allproducts.html',dic)
+def allproductpage(request):
+	dic={'session':CheckUserSession(request),
+			'checksession':1,
+			'sessionre':CheckResellerSession(request),
+			'checksessionre':2,'detail':GetProductDetail(),
+			'cartcount':GetCartCount(request)}
+	return render(request, 'allproductpage.html', dic)
+
 def category(request):
 	dic={'session':CheckUserSession(request),
 			'checksession':1,
@@ -48,8 +57,16 @@ def cms(request):
 			'checksessionre':2,
 			'cartcount':GetCartCount(request)}
 	return render(request, 'cms.html',dic)
-def coomingsoon(request):
-	return render(request, 'cooming-soon.html',{})
+def gallerys(request):
+	obj = gallery.objects.all()
+
+	dic={'obj': obj,
+		'session':CheckUserSession(request),
+			'checksession':1,
+			'checksessionre':2,
+			'cartcount':GetCartCount(request)
+	}
+	return render(request, 'gallery.html', dic)
 def howitworks(request):
 	return render(request, 'howitworks.html',{})
 def pricing(request):
@@ -68,12 +85,16 @@ def addproducts(request):
 	return render(request, 'addproducts.html',{})
 def userlogin(request):
 	dic={'session':CheckUserSession(request),
-		'checksession':1,
+			'checksession':1,
+			'sessionre':CheckResellerSession(request),
+			'checksessionre':2,
 		'cartcount':GetCartCount(request)}
 	return render(request, 'userlogin.html',dic)
 def userregistration(request):
 	dic={'session':CheckUserSession(request),
-		'checksession':1,
+			'checksession':1,
+			'sessionre':CheckResellerSession(request),
+			'checksessionre':2,
 		'cartcount':GetCartCount(request)}
 	return render(request, 'userregistration.html',dic)
 @csrf_exempt
@@ -268,7 +289,8 @@ def saveuser(request):
 					User_Address=request.POST.get('Address'),
 					User_City=request.POST.get('City'),
 					User_State=request.POST.get('State'),
-					User_Password=password
+					User_Password=password,
+					conditions=request.POST.get('check')
 				)
 				obj.save()
 				msg = '''Hi there!
@@ -624,7 +646,8 @@ def savereseller(request):
 								Reseller_Password=password,
 								Reseller_Status=D,
 								Adhaar=request.FILES['adhaar'],
-								Profile=request.FILES['profile']	
+								Profile=request.FILES['profile'],
+								conditions=request.POST.get('check')	
 								)
 				obj.save()
 				msg = '''Hi there!
@@ -647,8 +670,10 @@ def savereseller(request):
 	else:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 def resellerlogin(request):
-	dic={'sessionre':CheckResellerSession(request),
-		'checksessionre':2}
+	dic={'session':CheckUserSession(request),
+			'checksession':1,
+			'sessionre':CheckResellerSession(request),
+			'checksessionre':2}
 	return render(request, 'resellerlogin.html',dic)
 
 @csrf_exempt
@@ -859,7 +884,7 @@ def opencategory(request):
 				dic.update({'session':CheckUserSession(request),
 							'checksession':1,
 							'cartcount':GetCartCount(request),
-							'sessionre':CheckResellerSession(n),
+							'sessionre':CheckResellerSession(request),
 							'checksessionre':2,})
 				return render(request,'allproducts.html',dic)
 		except:
@@ -869,7 +894,7 @@ def opencategory(request):
 				dic.update({'session':CheckUserSession(request),
 							'checksession':1,
 							'cartcount':GetCartCount(request),
-							'sessionre':CheckResellerSession(n),
+							'sessionre':CheckResellerSession(request),
 							'checksessionre':2,})
 				return render(request,'allproducts.html',dic)
 	except:
@@ -882,7 +907,11 @@ def opencategory(request):
 		return render(request,'allproducts.html',dic)
 	
 def userforgotpass(request):
-	return render(request, 'userforgotpass.html',{})
+	dic={'session':CheckUserSession(request),
+			'checksession':1,
+			'sessionre':CheckResellerSession(request),
+			'checksessionre':2}
+	return render(request, 'userforgotpass.html',dic)
 
 def user_send_pass(request):
 	if request.method=="POST":
@@ -930,7 +959,11 @@ def user_send_pass(request):
 			return render(request,'userforgotpass.html',{'msg':msg})
 
 def resellerforgotpass(request):
-	return render(request, 'resellerforgotpass.html',{})
+	dic={'session':CheckUserSession(request),
+			'checksession':1,
+			'sessionre':CheckResellerSession(request),
+			'checksessionre':2}
+	return render(request, 'resellerforgotpass.html',dic)
 
 def reseller_send_pass(request):
 	if request.method=="POST":
@@ -991,13 +1024,23 @@ def proceedfororder(request):
 	lt=[]
 	try:
 		pid=request.GET.get('cid')
-		obj=UserData.objects.filter(User_Email=request.session['user_email'])
-		for x in obj:
-			dic={'uid': x.User_ID,
-				'session':CheckUserSession(request),
-				'checksession':1,
-				'sessionre':CheckResellerSession(request),
-				'checksessionre':2}
+		try:
+			obj=UserData.objects.filter(User_Email=request.session['user_email'])
+			for x in obj:
+				dic={'uid': x.User_ID,
+					'session':CheckUserSession(request),
+					'checksession':1,
+					'sessionre':CheckResellerSession(request),
+					'checksessionre':2}
+		except:
+			obj=ResellerData.objects.filter(Reseller_Email=request.session['re_email'])
+			for x in obj:
+				dic={'uid': x.Reseller_ID,
+					'session':CheckUserSession(request),
+					'checksession':1,
+					'sessionre':CheckResellerSession(request),
+					'checksessionre':2}
+
 		obj=ProductDesignData.objects.filter(Product_ID=pid)
 		for x in obj:
 			d={'did':x.Design_ID,
@@ -1020,9 +1063,9 @@ def proceedfororder(request):
 			'Product_Size':i.Product_Size,
 			'Product_Price':i.Product_Price,
 			'cartcount':GetCartCount(request)})
-		return render(request,'orderdetails.html', dic)	
+		return render(request,'orderdetails2.html', dic)	
 	except:
-		return redirect('/userlogin/')
+		return redirect('/resellerlogin/')
 
 #Step 2
 
@@ -1037,21 +1080,41 @@ def orderdatasave(request):
 		did=request.POST.get('design')
 		uid=request.POST.get('uid')
 		pid=request.POST.get('pid')
-		dfile=request.FILES['detailfile']
+		nm=request.POST.get('name')
+		cnaam=request.POST.get('companyname')
+		cgmail=request.POST.get('cgmail')
+		gstn=request.POST.get('gstn')
+		ph1=request.POST.get('ph1')
+		ph2=request.POST.get('ph2')
+		address=request.POST.get('address')
+		other=request.POST.get('other')
+		file=request.POST['filedata']
+		
 		o='OR00'
 		x=1
 		oid=o+str(x)
+
 		while OrderData.objects.filter(Order_ID=oid).exists():
 			x=x+1
 			oid=o+str(x)
 		x=int(x)
+		
 		obj=OrderData(
 			Order_ID=oid,
 			Product_ID=pid,
 			User_ID=uid,
 			Design_ID=did,
+			Name=nm,
+			companyname=cnaam,
+			companygmail=cgmail,
+			GSTN=gstn,
+			ph1=ph1,
+			ph2=ph2,
+			address=address,
+			otherdetails=other,
+			Detail_File=file,
+			multiply_by_quantity='1',
 			Order_Status='Unpaid',
-			Detail_File=dfile,
 			Total_Amount='0',
 			Amount_to_Pay='0',
 			Rest_Amount='0'
@@ -1064,42 +1127,151 @@ def opencart(request):
 	dic={}
 	did=''
 	userid=''
+	mtp=0
 	tm=0
-	obj1=UserData.objects.filter(User_Email=request.session['user_email'])
-	for x in obj1:
-		userid=x.User_ID
-		break
-	obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
-	for z in obj1:
-		obj=ProductData.objects.filter(Product_ID=z.Product_ID)
-		for x in obj:
-			dic={
-				'orderid':z.Order_ID,
-				'name':x.Product_Name,
-				'category':x.Product_Category,
-				'price':x.Product_Price,
-				'quantity':x.Product_Quantity,
-			}
-			tm=tm+int(x.Product_Price)
-			obj2=ProductDesignData.objects.filter(Design_ID=did)
-			for y in obj2:
-				dic.update({
-					'image':y.Design_Image.url,
-					})
-			lt.append(dic)
-	obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
-	obj1.update(Total_Amount=str(tm),
-		Amount_to_Pay=str((tm/100)*25),
-		Rest_Amount=str(tm-((tm/100)*25)))
-	return render(request,'cart.html',{'cartcount':GetCartCount(request),'cartdata':lt,'totalamount':tm,'count':len(lt)})
+	qty=''
+	try:
+		qty=request.GET.get('quantity')
+		ooid=request.GET.get('oid')
+		obj4=OrderData.objects.filter(Order_ID=ooid)
+		obj4.update(multiply_by_quantity=qty)
 
+	except:
+		qty=1
+	try:
+		obj1=UserData.objects.filter(User_Email=request.session['user_email'])
+		for x in obj1:
+			userid=x.User_ID
+			break
+		obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
+		for z in obj1:
+			obj=ProductData.objects.filter(Product_ID=z.Product_ID)
+			obj2=ProductDesignData.objects.filter(Product_ID=z.Product_ID)
+			for x in obj:
+				for y in obj2:
+					dic={
+						'orderid':z.Order_ID,
+						'name':x.Product_Name,
+						'category':x.Product_Category,
+						'price':str(int(x.Product_Price)*int(z.multiply_by_quantity)),
+						'quantity':str(int(x.Product_Quantity)*int(z.multiply_by_quantity)),
+						'image':y.Design_Image.url
+					}
+					tm=tm+int(x.Product_Price)*int(z.multiply_by_quantity)
+				lt.append(dic)
+			mtp=int(z.multiply_by_quantity)
+		obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
+		obj1.update(Total_Amount=str(tm),
+			Amount_to_Pay=str((tm/100)*100),
+			Rest_Amount=str(tm-((tm*90)/100)))
+
+		return render(request,'cart.html',{'cartcount':GetCartCount(request),'cartdata':lt,'totalamount':tm,'count':len(lt)})
+
+	except:
+		obj1=ResellerData.objects.filter(Reseller_Email=request.session['re_email'])
+		for x in obj1:
+			userid=x.Reseller_ID
+			break
+		obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
+		for z in obj1:
+			obj=ProductData.objects.filter(Product_ID=z.Product_ID)
+			obj2=ProductDesignData.objects.filter(Product_ID=z.Product_ID)
+
+			for x in obj:
+				for y in obj2:
+					dic={
+						'orderid':z.Order_ID,
+						'name':x.Product_Name,
+						'category':x.Product_Category,
+						'price':str(int(x.Product_Price)*int(z.multiply_by_quantity)),
+						'quantity':str(int(x.Product_Quantity)*int(z.multiply_by_quantity)),
+						'image':y.Design_Image.url,
+					}
+					tm=tm+int(x.Product_Price)*int(z.multiply_by_quantity)
+					lt.append(dic)
+			mtp=int(z.multiply_by_quantity)
+		obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
+		obj1.update(Total_Amount=str(tm),
+			Amount_to_Pay=str((tm*90)/100),
+			Rest_Amount=str(tm-((tm*90)/100)))
+		return render(request,'cart.html',{'cartcount':GetCartCount(request),'cartdata':lt,'totalamount':tm,'count':len(lt)})
+
+def addquantity(request):
+	lt=[]
+	dic={}
+	did=''
+	userid=''
+	tm=0
+	cname=request.GET.get('pname')
+	try:
+		obj1=UserData.objects.filter(User_Email=request.session['user_email'])
+		for x in obj1:
+			userid=x.User_ID
+			break
+		obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid',Order_ID=cname)
+		for z in obj1:
+			obj=ProductData.objects.filter(Product_ID=z.Product_ID)
+			obj2=ProductDesignData.objects.filter(Product_ID=z.Product_ID)
+			for x in obj:
+				for y in obj2:
+					dic={
+						'orderid':z.Order_ID,
+						'name':x.Product_Name,
+						'category':x.Product_Category,
+						'price':str(int(x.Product_Price)*int(z.multiply_by_quantity)),
+						'quantity':str(int(x.Product_Quantity)*int(z.multiply_by_quantity)),
+						'image':y.Design_Image.url
+					}
+					tm=tm+int(x.Product_Price)*int(z.multiply_by_quantity)
+				lt.append(dic)
+		obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
+		obj1.update(Total_Amount=str(tm),
+			Amount_to_Pay=str((tm/100)*100),
+			Rest_Amount=str(tm-((tm*90)/100)))
+		return render(request,'cart.html',{'cartcount':GetCartCount(request),'cartdata':lt,'totalamount':tm,'count':len(lt)})
+
+	except:
+		obj1=ResellerData.objects.filter(Reseller_Email=request.session['re_email'])
+		for x in obj1:
+			userid=x.Reseller_ID
+			break
+		obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid', Order_ID=cname)
+		for z in obj1:
+			obj=ProductData.objects.filter(Product_ID=z.Product_ID)
+			obj2=ProductDesignData.objects.filter(Product_ID=z.Product_ID)
+			for x in obj:
+				for y in obj2:
+					dic={
+						'orderid':z.Order_ID,
+						'name':x.Product_Name,
+						'category':x.Product_Category,
+						'price':str(int(x.Product_Price)*int(z.multiply_by_quantity)),
+						'quantity':str(int(x.Product_Quantity)*int(z.multiply_by_quantity)),
+						'image':y.Design_Image.url,
+					}
+					tm=tm+int(x.Product_Price)*int(z.multiply_by_quantity)
+					lt.append(dic)
+		obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
+
+		obj1.update(Total_Amount=str(tm),
+			Amount_to_Pay=str((tm*90)/100),
+			Rest_Amount=str(tm-((tm*90)/100)),
+			)
+		return render(request,'addquantity.html',{'cartcount':GetCartCount(request),'cartdata':lt,'totalamount':tm,'count':len(lt)})
 
 def deleteitem(request):
 	pid=request.GET.get('pname')
-	udata=UserData.objects.filter(User_Email=request.session['user_email'])
-	for i in udata:
-		uid=i.User_ID
-		break;
+	uid=''
+	try:
+		udata=UserData.objects.filter(User_Email=request.session['user_email'])
+		for i in udata:
+			uid=i.User_ID
+			break;
+	except:
+		udata=ResellerData.objects.filter(Reseller_Email=request.session['re_email'])
+		for i in udata:
+			uid=i.Reseller_ID
+			break;
 	if OrderData.objects.filter(User_ID=uid).exists(): 
 		odata=OrderData.objects.filter(Order_ID=pid)
 		odata.delete()
@@ -1115,49 +1287,96 @@ def deleteitem(request):
 
 def proceedtopay(request):
 	try:
-		if UserData.objects.filter(User_Email=request.session['user_email']).exists():
-			userid=''
-			dic={}
-			obj1=UserData.objects.filter(User_Email=request.session['user_email'])
-			for x in obj1:
-				userid=x.User_ID
-				break
-			o='CRT00'
-			x=1
-			oid=o+str(x)
-			while CartData.objects.filter(Cart_ID=oid).exists():
-				x=x+1
+		try:
+			if UserData.objects.filter(User_Email=request.session['user_email']).exists():
+				userid=''
+				dic={}
+				obj1=UserData.objects.filter(User_Email=request.session['user_email'])
+				for x in obj1:
+					userid=x.User_ID
+					break
+				o='CRT00'
+				x=1
 				oid=o+str(x)
-			x=int(x)
-			obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
-			for z in obj1:
-				obj=CartData(Cart_ID=oid,Order_ID=z.Order_ID,User_Email=request.session['user_email'])
-				obj.save()
-				dic={'cid':oid,
-					'tamount':z.Total_Amount,
-					'pamount':z.Amount_to_Pay,
-					'amounttopay':float(z.Amount_to_Pay)*100,
-					'session':CheckUserSession(request),
-					'checksession':1}
-				request.session['cartid'] = oid
-				obj=UserData.objects.filter(User_Email=request.session['user_email'])
-				for x in obj:
-					dic.update({
-						'uname':x.User_First_Name+' '+x.User_Last_Name,
-						'uemail':x.User_Email,
-						'uphone':x.User_Phone
-						})
-				order_amount = int(dic['amounttopay'])
-				order_currency = 'INR'
-				order_receipt = dic['cid'] 
-				options={
-					'amount':order_amount,
-					'currency':order_currency,
-					'receipt':order_receipt,
-					'payment_capture':'0'
-				}
-				dic.update(razorpay_client.order.create(options))
-			return render(request,'proceedtopay.html',dic)
+				while CartData.objects.filter(Cart_ID=oid).exists():
+					x=x+1
+					oid=o+str(x)
+				x=int(x)
+				obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
+				for z in obj1:
+					obj=CartData(Cart_ID=oid,Order_ID=z.Order_ID,User_Email=request.session['user_email'])
+					obj.save()
+					dic={'cid':oid,
+						'tamount':z.Total_Amount,
+						'pamount':z.Amount_to_Pay,
+						'amounttopay':float(z.Amount_to_Pay)*100,
+						'session':CheckUserSession(request),
+						'checksession':1}
+					request.session['cartid'] = oid
+					obj=UserData.objects.filter(User_Email=request.session['user_email'])
+					for x in obj:
+						dic.update({
+							'uname':x.User_First_Name+' '+x.User_Last_Name,
+							'uemail':x.User_Email,
+							'uphone':x.User_Phone
+							})
+					order_amount = int(dic['amounttopay'])
+					order_currency = 'INR'
+					order_receipt = dic['cid'] 
+					options={
+						'amount':order_amount,
+						'currency':order_currency,
+						'receipt':order_receipt,
+						'payment_capture':'0'
+					}
+					dic.update(razorpay_client.order.create(options))
+				return render(request,'proceedtopay.html',dic)
+
+		except:
+			if ResellerData.objects.filter(Reseller_Email=request.session['re_email']).exists():
+				userid=''
+				dic={}
+				obj1=ResellerData.objects.filter(Reseller_Email=request.session['re_email'])
+				for x in obj1:
+					userid=x.Reseller_ID
+					break
+				o='CRT00'
+				x=1
+				oid=o+str(x)
+
+				while CartData.objects.filter(Cart_ID=oid).exists():
+					x=x+1
+					oid=o+str(x)
+				x=int(x)
+				obj1=OrderData.objects.filter(User_ID=userid,Order_Status='Unpaid')
+				for z in obj1:
+					obj=CartData(Cart_ID=oid,Order_ID=z.Order_ID,User_Email=request.session['re_email'])
+					obj.save()
+					dic={'cid':oid,
+						'tamount':z.Total_Amount,
+						'pamount':z.Amount_to_Pay,
+						'amounttopay':float(z.Amount_to_Pay)*100,
+						'session':CheckUserSession(request),
+						'checksession':1}
+					request.session['cartid'] = oid
+					obj=ResellerData.objects.filter(Reseller_Email=request.session['re_email'])
+					for x in obj:
+						dic.update({
+							'uname':x.Reseller_First_Name+' '+x.Reseller_Last_Name,
+							'uemail':x.Reseller_Email,
+							'uphone':x.Reseller_Phone
+							})
+					order_amount = int(dic['amounttopay'])
+					order_currency = 'INR'
+					order_receipt = dic['cid'] 
+					options={
+						'amount':order_amount,
+						'currency':order_currency,
+						'receipt':order_receipt,
+						'payment_capture':'0'
+					}
+					dic.update(razorpay_client.order.create(options))
+				return render(request,'proceedtopay.html',dic)
 	except:
 		return HttpResponse('<h1>Error 404 NOT FOUND</h1>')
 #Step 4
@@ -1172,24 +1391,49 @@ def app_charge(request):
     'razorpay_order_id': razorpay_order_id,
     'razorpay_payment_id': razorpay_payment_id,
     'razorpay_signature': razorpay_signature}
-	if razorpay_client.utility.verify_payment_signature(params_dict):
-		obj=CartData.objects.filter(Cart_ID=request.session['cartid'])
-		for x in obj:
-			obj1=OrderData.objects.filter(Order_ID=x.Order_ID)
-			obj1.update(Payment_ID=razorpay_payment_id,Order_Status='Paid')
-			dic={'cid':x.Cart_ID,'pid':razorpay_payment_id}
-		obj.delete()
-		msg = '''Hi there!,
-Your payment for Cart ID '''+request.session['cartid']+'''is successful!
-Your Payment ID is '''+razorpay_payment_id+'''
+	try:
+		email=request.session['user_email']
+	except:
+		email=request.session['re_email']
+	n= razorpay_client.utility.verify_payment_signature(params_dict)
+	try:
+		try: 
+			if	UserData.objects.filter(User_Email=request.session['user_email']):
+				obj=CartData.objects.filter(Cart_ID=request.session['cartid'])
+				for x in obj:
+					obj1=OrderData.objects.filter(Order_ID=x.Order_ID)
+					obj1.update(Payment_ID=razorpay_payment_id,Order_Status='Paid')
+					dic={'cid':x.Cart_ID,'pid':razorpay_payment_id}
+				obj.delete()
+				msg = '''Hi there!,
+		Your payment for Cart ID '''+request.session['cartid']+'''is successful!
+		Your Payment ID is '''+razorpay_payment_id+'''
 
-Thanks & Regards,
-Printsathi'''
-		sub='Printsathi - Payment Successful'
-		email = EmailMessage(sub, msg, to=[request.session['user_email']])
-		email.send()
-		return render(request,'paymentsuccess.html',dic)
-	else:
+		Thanks & Regards,
+		Printsathi'''
+				sub='Printsathi - Payment Successful'
+				email = EmailMessage(sub, msg, to=[email])
+				email.send()
+				return render(request,'paymentsuccess.html',dic)
+		except:
+			if ResellerData.objects.filter(Reseller_Email=request.session['re_email']):
+				obj=CartData.objects.filter(Cart_ID=request.session['cartid'])
+				for x in obj:
+					obj1=OrderData.objects.filter(Order_ID=x.Order_ID)
+					obj1.update(Payment_ID=razorpay_payment_id,Order_Status='Paid')
+					dic={'cid':x.Cart_ID,'pid':razorpay_payment_id}
+				obj.delete()
+				msg = '''Hi there!,
+		Your payment for Cart ID '''+request.session['cartid']+'''is successful!
+		Your Payment ID is '''+razorpay_payment_id+'''
+
+		Thanks & Regards,
+		Printsathi'''
+				sub='Printsathi - Payment Successful'
+				email = EmailMessage(sub, msg, to=[email])
+				email.send()
+				return render(request,'paymentsuccess.html',dic)
+	except:
 		obj=CartData.objects.filter(Cart_ID=request.session['cartid'])
 		for x in obj:
 			print(x.Order_ID)
@@ -1197,14 +1441,14 @@ Printsathi'''
 			obj1.update(Payment_ID=razorpay_payment_id,Order_Status='Payment Failed')
 			dic={'cid':x.Cart_ID,'pid':razorpay_payment_id}
 		msg = '''Hi there!,
-Your payment for Order ID '''+request.session['order_id']+'''is failed!
+Your payment for Order ID '''+razorpay_order_id+''' is failed!
 Your Payment ID is '''+razorpay_payment_id+'''
 we apologize for this. Kindly send a mail to us regarding this problem.
 
 Thanks & Regards,
 Printsathi'''
 		sub='Printsathi - Payment Failed'
-		email = EmailMessage(sub, msg, to=[request.session['user_email']])
+		email = EmailMessage(sub, msg, to=[email])
 		email.send()
 		return render(request,'paymentfailure.html',dic)
 

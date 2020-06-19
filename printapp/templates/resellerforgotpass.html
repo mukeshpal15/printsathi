@@ -20,6 +20,51 @@
       <link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
       <!--responsive css-->
       <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+      <style>
+.dropbtn {
+  background-color: white;
+  color: #636363;
+  padding: 0px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Raleway', sans-serif;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: white}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: white;
+}
+
+
+
+</style>
    </head>
    <body>
       <header id="header" class="top-head">
@@ -53,12 +98,44 @@
                            <div class="nav-box">
                               <ul>
                                  <li><a href="/index/">Home</a></li>
-                                 <li><a href="/about/">About</a></li>
-                                 <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</a></li>
+                                 <li><a href="/index/">Gallery</a></li>
+                                 <li><a href="/allproductpage/">All Products</a></li>
+                                 <li><a href="/opencategory/?cname=Business Cards">Business Card</a></li>
+                                 <li><a href="/index/">Inquiry</a></li>&nbsp&nbsp
+
+
+
+                                 {% if session == checksession  %}
+                                    <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/opencart/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
+                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
+                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
+                                  {% elif sessionre == checksessionre %}
+                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
+                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
+                                 {% else %}
+                                    
                                  
-                                    <li><a href="/userlogin/">Login</a></li>
-                                    <li><a class="custom-b" href="/userregistration/">Sign up</a></li>
-                                
+
+
+                                 <li class="dropdown">
+                                   <button class="dropbtn">Reseller</button>
+                                   <div class="dropdown-content">
+                                      <a   href="/resellerregistration/">Join as Reseller</a>
+                                       <a href="/resellerlogin/">Login</a>
+                                   </div>
+                                 </li>&nbsp&nbsp&nbsp&nbsp
+
+
+                                 <li class="dropdown">
+                                   <button class="dropbtn">User</button>
+                                   <div class="dropdown-content">
+                                       <a href="/userlogin/">Login</a>
+                                       <a class="custom-b" href="/userregistration/">Sign up</a>
+                                     
+                                   </div>
+                                 </li>
+
+                                 {% endif %}
                               </ul>
                            </div>
                         </div>
@@ -126,8 +203,8 @@
                <form class="w3-container" action="/reseller_send_pass/" method="POST" style="margin-top:20px;">
                      {% csrf_token %}
                   <label style="color:red;">{{ msg|safe }}</label>
-
-                  <input class="w3-input" type="email" name="email" style="margin-bottom:20px;" placeholder="Email" required>
+                  <input type="checkbox" name="">kje
+                  <input class="w3-input" type="email" name="email" style="margin-bottom:20px;, color:red;" placeholder="Email" required>
 
                   <div class="g-recaptcha" data-sitekey="6LdMv_wUAAAAAPF30NyWnOYImcVVAqN72aBCZFuw"></div>
 
@@ -139,6 +216,7 @@
                <a href="" style="margin-left:20px;font-size:15px;">Forget Password?</a><br>
                <a href="/resellerregistration/" class="w3-button w3-black w3-hover-blue" style="font-size:20px;border-radius:20px;margin-bottom:20px;margin-top:15px;">Create An Account</a>
                </center>
+          
             </div>
          
       </div>  
@@ -159,15 +237,9 @@
                               </ul>
                            </div>
                            <div class="col-sm-4">
-                              <h2>BUY ON Printsathi</h2>
+                              <h2>Products</h2>
                               <ul>
-                                 <li><a href="/userregistration/">Create account</a></li>
-                                 <li><a href="/userlogin/">Login</a></li>
-                              </ul>
-                           </div>
-                           <div class="col-sm-4">
-                              <h2>Categories</h2>
-                              <ul>
+                                 <li><a href="/allproductpage/">All Products</a></li>
                                  <li><a href="/opencategory/?cname=Business Cards">Business Cards</a></li>
                                  <li><a href="/opencategory/?cname=Office Stationary">Office Stationary</a></li>
                                  <li><a href="/opencategory/?cname=Marketing Tool">Marketing Tool</a></li>
@@ -176,14 +248,31 @@
                                  <li><a href="/opencategory/?cname=Apparels/Gifts">Apparels/Gifts</a></li>
                               </ul>
                            </div>
+                           <div class="col-sm-4">
+                              <h2>Useful Links</h2>
+                              <ul>
+                                 <li><a href="#">FAQs</a></li>
+                                 <li><a href="#">About Us</a></li>
+                                 <li><a href="#">Contact Us</a></li>
+                                 <li><a href="#">Terms & Conditions</a></li>
+                                 <li><a href="#">Privacy Policy</a></li>
+                                
+                              </ul>
+                           </div>>
+                           
                         </div>
                      </div>
                      <div class="col-md-6 col-sm-6">
                         <div class="left-f-box">
                            <div class="col-sm-4">
-                              <h2>CONTACT Us</h2>
+                              <h2>Quick Links</h2>
                               <ul>
-                                 <li><a href="#">Contact</a></li>
+                                 <li><a href="#">1 Side Visiting Card Designs</a></li>
+                                 <li><a href="#">2 Side Visiting Card Designs</a></li>
+                                 <li><a href="#">Single sided business cards</a></li>
+                                 <li><a href="#">Back to back business cards</a></li>
+                                 <li><a href="#">Business card templates</a></li>
+                                 <li><a href="#">Spot lamination visiting cards</a></li>
                                 
                               </ul>
                            </div>

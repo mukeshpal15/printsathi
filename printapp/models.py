@@ -39,8 +39,17 @@ class OrderData(models.Model):
 	User_ID=models.CharField(max_length=100)
 	Design_ID=models.CharField(max_length=100)
 	Payment_ID=models.CharField(max_length=100)
+	multiply_by_quantity=models.CharField(max_length=100)
+	Detail_File=models.FileField(upload_to="orderdetailfile/", default='')
+	Name=models.CharField(max_length=100, default='')
+	companyname=models.CharField(max_length=100, default='')
+	companygmail=models.CharField(max_length=100, default='')
+	GSTN=models.CharField(max_length=100, default='')
+	ph1=models.CharField(max_length=100, default='')
+	ph2=models.CharField(max_length=100, default='')
+	address=models.CharField(max_length=1000, default='')
+	otherdetails=models.CharField(max_length=1000, default='')
 	Order_Status=models.CharField(max_length=100)
-	Detail_File=models.FileField(upload_to="orderdetailfile/")
 	Total_Amount=models.CharField(max_length=100)
 	Amount_to_Pay=models.CharField(max_length=100)
 	Rest_Amount=models.CharField(max_length=100)
@@ -65,6 +74,7 @@ class UserData(models.Model):
 	User_City=models.CharField(max_length=100)
 	User_State=models.CharField(max_length=100)
 	User_Password=models.CharField(max_length=100)
+	conditions=models.CharField(max_length=100)
 	class Meta:
 		db_table="UserData"
 
@@ -84,6 +94,14 @@ class ResellerData(models.Model):
 	Reseller_Status=models.CharField(max_length=100)
 	Adhaar=models.ImageField(upload_to="reselleradhaar/")
 	Profile=models.ImageField(upload_to="resellerprofile/")
+	conditions=models.CharField(max_length=100)
 	class Meta:
 		db_table="ResellerData"
 
+
+
+class gallery(models.Model):
+	Design_ID=models.CharField(max_length=100)
+	galleryimage=models.ImageField(upload_to="gallerypics/")
+	class Meta:
+		db_table="gallery"
