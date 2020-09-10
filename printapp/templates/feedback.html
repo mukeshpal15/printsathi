@@ -1,0 +1,295 @@
+{% extends 'header.html' %}
+{% load static %}
+
+      <style>
+.dropbtn {
+  background-color: white;
+  color: #636363;
+  padding: 0px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Raleway', sans-serif;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: white}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: white;
+}
+</style>
+{% block container %}
+      <div class="modal fade lug" id="myModal" role="dialog">
+         <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Choose from Wide Range of Categories</h4>
+               </div>
+               <div class="modal-body">
+                  <ul>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Business Cards">Business Cards</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Office Stationary">Office Stationary</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Marketing Tool">Marketing Tool</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Marketing Tool">Doctoor Tools</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Invitation Cards">Invitation Cards</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Apparels/Gifts">Apparels/Gifts</a></li><br>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--/.mobile menu -->
+       <!--/.mobile menu -->
+
+      <div id="sidebar" class="top-nav">
+      
+         <ul id="sidebar-nav" class="sidebar-nav">
+            <li><a href="/index/">Home</a></li>
+                                 <li><a href="/gallerys/">Gallery</a></li>
+                                 <li><a href="/allproductpage/">All Products</a></li>
+                                 <li><a href="/opencategory/?cname=Business Cards">Business Card</a></li>
+                                 <li><a href="/inquiryform/">Inquiry</a></li>
+
+
+
+                                 {% if session == checksession  %}
+                                    <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/opencart/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
+                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
+                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
+                                  {% elif sessionre == checksessionre %}
+                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
+                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
+                                 {% else %}
+                                    
+                                 
+
+
+                                 <li >
+                                   <h2 style="color:black;">Reseller</h2>
+                                   
+                                    <li><a   href="/resellerregistration/">Join as Reseller</a></li>
+                                    <li>   <a href="/resellerlogin/">Login</a></li>
+                                   
+                                 </li>
+
+
+                                 <li>
+                                   <h2 style="color:black;">User</h2>
+                                   
+                                    <li><a href="/userlogin/">Login</a></li>
+                                    <li><a class="custom-b" href="/userregistration/">Sign up</a></li>
+                                
+                                 </li>
+
+                                 {% endif %}
+         </ul>
+      </div>
+
+
+<!-- #############################################form2######################################################-->  
+<section style="">
+    <div id='popupmain' style="display: none; position: fixed;  z-index: 1001;  height:; margin-top:1em; margin-left:4vw">
+      <div id="qq" style="margin-top: 10%;">
+                
+       <div style="">
+             
+                <div  style=";width: 92%" data-wow-delay="0.0s" style="padding: 0px;">
+                 <div style="">
+                     <div class="panel-body" style="padding: 0px; ">
+                     
+                        <center>
+
+
+
+<div class="container" style="border:5px; color: black;border: solid ;
+    border-color: lightgray;
+    padding: 15px; height: 50%; width: 50%; background-color: white">
+    <div class="row" style="   ">
+   
+    <div class="col-3" style="float: right; margin-right: 1em; margin-top: 0px;">
+          <button  id='exit' onclick="document.getElementById('popupmain').style.display='none'" aria-hidden="true" 
+                style=" 
+    font-family: 'Nunito', sans-serif;
+   
+    text-transform: uppercase;
+   
+    border: none;
+ 
+    z-index: 9;
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    margin-left: 14vw;
+    margin-top: 0px;
+       " value="X">x</button>
+          
+        </div>
+           <div class="col-6" style="float: left; margin-bottom: 5px;">
+      <label style="margin-left: 2em;"><h3>Printsathi Support</h3></label>
+        </div>
+    </div>
+<form  method="POST" action="\comment\"> {% csrf_token %}
+  <div class="form-row" style="   ">
+    <div class="form-group col-md-12">
+    <div class="form-group col-md-6">
+      <input type="text" class="form-control" id="inputEmail4" name="name" placeholder="Name" required>
+    </div>
+
+    <div class="form-group col-md-6" >
+      <input type="number" class="form-control" id="inputPassword4" name="phone" placeholder="Mobile" required>
+    </div>
+        <div class="form-group col-md-12">
+      <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Email" required>
+    </div>
+        <div class="form-group col-md-12">
+      <input type="text" class="form-control" id="inputEmail4" name="Subject" placeholder="Subject" required>
+    </div>
+ <div class="form-group" style="padding: 15px">
+       <textarea class="form-control" rows="5" id="comment" name="comment" placeholder="Comments"  required></textarea>
+
+  </div>
+
+   <div class="rate">
+    <input type="radio" id="star5" name="rate" value="5" />
+    <label for="star5" title="text">5 stars</label>
+    <input type="radio" id="star4" name="rate" value="4" />
+    <label for="star4" title="text">4 stars</label>
+    <input type="radio" id="star3" name="rate" value="3" />
+    <label for="star3" title="text">3 stars</label>
+    <input type="radio" id="star2" name="rate" value="2" />
+    <label for="star2" title="text">2 stars</label>
+    <input type="radio" id="star1" name="rate" value="1" />
+    <label for="star1" title="text">1 star</label>
+  </div>
+
+      <button class="btn btn-success">Save</button></div>
+</form>
+
+</div>
+
+</div>
+
+
+</center></div></div></div></div></div></div></section>
+
+<!-- ################################################################################ -->
+<!-- ##################################content########################################################-->
+<div class="container-fluid" style="font-size: 25px; margin: 1em;"><center > FEEDBACKS </center> </div>
+<div class="container" style="margin-top: 5vh; margin-bottom: 10vh; padding-left: 2em;">
+  <div class="row">
+    {% for i in rat %}
+    <div class="col-3" style="margin-top: 4vh;"> 
+      <img src="{% static 'images/list-img-06.png' %}" width="70">
+       <span class="col-8" style="margin-left: 1vw;">
+      <label>{{ i.name }}</label>
+    </span> 
+    
+    <span style="margin-left: 3vw">  rating {{ i.rat }}
+
+
+    </span>
+   
+    <div class="col-12" style="margin-left: 5vw; "> <p style=" font-size: 20px;">{{ i.cmt }}</p></div>
+    </div>
+    {% endfor %}
+    
+    
+  </div>
+<div style="margin-top: 15px;">
+<button onclick="document.getElementById('popupmain').style.display='block'"  class="btn btn-success">Add feedback</button>
+</div>
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style type="text/css">
+  *{
+    margin: 0;
+    padding: 0;
+}
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+/* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+</style>
+
+
+{% endblock container %}
+
+
+
+{% block footer %}
+<script src="{% static 'js/custom.js' %}"></script>
+  <script>
+  $(document).ready(function(){
+    setTimeout(function(){
+      $('#popupmain').css('display','block');},50);
+
+
+
+  });
+</script>
+
+{% endblock footer %}

@@ -1,76 +1,44 @@
+
+{% extends 'header.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <title>Printsathi</title>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <!--enable mobile device-->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!--fontawesome css-->
-      <link rel="stylesheet" href="{% static 'w3.css' %}">
-      <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-      <!--bootstrap css-->
-      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-      <!--animate css-->
-      <link rel="stylesheet" href="{% static 'css/animate-wow.css' %}">
-      <!--main css-->
-      <link rel="stylesheet" href="{% static 'css/style.css' %}">
-      <link rel="stylesheet" href="{% static 'css/bootstrap-select.min.css' %}">
-      <link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
-      <!--responsive css-->
-      <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-      <style>
-.dropbtn {
-  background-color: white;
-  color: #636363;
-  padding: 0px;
-  font-size: 14px;
-  border: none;
-  cursor: pointer;
-  font-family: 'Raleway', sans-serif;
+<style>
+element.style {
+}
+@media screen and (min-width: 320px){
+.go {
+        width: 100%;
+         height:30em; 
+}
+}
+@media screen and (min-width: 1080px){
+.carousel-inner {
+        width: 100%;
+         height:30em; 
+}
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
+@media screen and (min-width: 360px){
+.go {
+        width: 100%;
+         height:30em; 
+}
+}
+@media screen and (min-width: 1080px){
+.carousel-inner {
+        width: 100%;
+         height:30em; 
+}
 }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {background-color: white}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown:hover .dropbtn {
-  background-color: white;
-}
 </style>
-   </head>
-   <body>
-   <!-- ###############################################################################################  -->
+{% block container %}
+{% load static %}
 
+<!--
 <section >
-    <div id='popupmain' style="display: none; position: fixed;width: 0%;  z-index: 1001; float:right; height:0px; margin-top:55vh; margin-left:53vw">
-      <div id="qq" style="width: 15%;margin-top: 20%;">
+    <div id='popupmain' style="display: none; position: fixed;width:50%;  z-index: 1001; float:right; height:0px; margin-top:5vh; margin-left:48vw">
+      <div id="qq" style="float:right; width: 30%;margin-top: 10%;">
                 <button  id='exit' onclick="document.getElementById('popupmain').style.display='none'" aria-hidden="true" 
                 style=" 
     font-family: 'Nunito', sans-serif;
@@ -78,109 +46,130 @@
     text-transform: uppercase;
    
     
-    color: #313133;
-    background: #4dc47d;
-    background: linear-gradient(90deg, red 0%, #f5f5f5 100%);
+   
+
+   
     border: none;
-    border-radius: 1000px;
-    box-shadow: 12px 12px 24px #f5f5f5;
+ 
+    z-index: 9;
     transition: all 0.3s ease-in-out 0s;
     cursor: pointer;
     outline: none;
     position: relative;
-    margin-left: 43vw;
+    margin-left: 14vw;
     margin-top: 10px;
        " value="X">x</button>
-                <img class="img-responsive" src="{% static 'images/logo.png' %}" style="width:45vw; height:30vh; background-color:gray;">
-                <input type="checkbox" name="">
+       <div style="background-color:">
+             
+                <div  style=";width:300px; margin-right:8vw: " data-wow-delay="0.0s" style="padding: 0px;">
+                 <div style="background-color: white">
+                     <div class="panel-body" style="padding: 0px; margin-right: 7em;">
+                     
+                        <center><img  class="img-responsive" style="border-radius:10px;width:20em; height:20em; margin-right: 100px: " src="{{ bnnr.bnnr1}}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                       <h5>Flex | Banner</h5><div>Standy | Kenopy | Sign Boards</div>--></center> <!--
+                     </div>
+                 </div>
+               </div>                            
+             
+                <div  style=";width:300px; margin-right:8vw: " data-wow-delay="0.0s" style="margin-top: 20px:">
+                 <div style="background-color: white; margin-top: 20px;" >
+                     <div class="panel-body" style="padding: 0px; margin-right: 7em;">
+                        <center><img  class="img-responsive" style="border-radius:10px;width:20em; height:20em; margin-right: 100px: margin-top:20px; " src="{{ bnnr.bnnr2}}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+<!--                        <h5>Digital Marketing</h5><div>Social Media Ad | Video Ad etc</div></center>
+                     </div>
+                 </div>
+               </div>
+             
       </div>
       </div>
     </div>
+ 
+  </section>
+-->
+  
+
+<!-- ###################### popup ######################################### -->
+<section >
+    <div id='popupmain2' style="display: none; position: fixed;width:50%;  z-index: 1002; float:right; height:0px; margin-top:60vh; margin-left:48vw">
+      <div id="qq" style="float:right; width: 12em;margin-top: 20%; background-color: black; border-radius: 34px; height: 51px;" >
+
+  
+</div>
+  <a href="https://wa.me/916232114410?text=Hello Sir" class="mr-3" >
+    <div class="col-md-2 col-sm-6 left-rs" style="float:right;margin-top: 20%; margin-right: -7em;">
+      <img  class="img-responsive" src="{% static 'images/wht.png' %}" style="margin-top: -5px;
+    height: 61px;
+    margin-right: 2em;
+    margin-left: -5px;
+    color: white;" 
+    >
+    </div >
+    <div class="col-md-4 col-sm-6 left-rs" style="float:right;margin-top: 21%; margin-right:-12.5em; color: white;   font-size:25px;" > Live Chat</div></a>
+             
+      </div>
+      </div>
+ 
   </section>
 
+  <!--##################### whatsapp ############################################# -->
+<section >
+    <div id='popupmain3' style="display: none; position: fixed;width:50%;  z-index: 1002;  height:0px; margin-top:74vh;">
+      <div id="qq" style=" width: 25%;margin-top: 20%; height: 30px;">
 
-    <!-- ###############################################################################################  -->
+  <div style="background: white;" class="col-2"> Googal Rating
+  {% if rate.star == 1 %}
+  <span class="fa fa-star checked" style="color: orange;"></span>
+  <span class="fa fa-star checked" ></span>
+  <span class="fa fa-star checked" ></span>
+  <span class="fa fa-star checked" ></span>
+  <span class="fa fa-star checked" ></span>
+  {% elif rate.star == 2 %}
+  <span class="fa fa-star checked" style="color: orange;"></span>
+  <span class="fa fa-star checked" style="color: orange;"></span>
+  <span class="fa fa-star checked" ></span>
+  <span class="fa fa-star checked" ></span>
+  <span class="fa fa-star checked" ></span>
+  {% elif rate.star == 3 %}
+  <span class="fa fa-star checked" style="color: orange;"></span>
+  <span class="fa fa-star checked" style="color: orange;"></span>
+  <span class="fa fa-star checked" style="color: orange;"></span>
+  <span class="fa fa-star checked" ></span>
+  <span class="fa fa-star checked" ></span>
 
-      <header id="header" class="top-head">
-         <!-- Static navbar -->
-         <nav class="navbar navbar-default">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-md-4 col-sm-12 left-rs">
-                     <div class="navbar-header">
-                        <button type="button" id="top-menu" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"> 
-                        <span class="sr-only">Toggle navigation</span> 
-                        <span class="icon-bar"></span> 
-                        <span class="icon-bar"></span> 
-                        <span class="icon-bar"></span> 
-                        </button>
-                        <a href="\index\" class="navbar-brand"><img src="{% static 'images/logo.png' %}" style="width:200px;" alt="" /></a>
-                     </div>
-                  </div>
-                  <div class="col-md-8 col-sm-12">
-                     <div class="right-nav">
-                        
-                        
+  {% elif rate.star == 4 %}
+  <span class="fa fa-star checked" style="color: orange;"></span>
+  <span class="fa fa-star checked" style="color: orange;"></span>
+  <span class="fa fa-star checked" style="color: orange;"></span>
+  <span class="fa fa-star checked" style="color: orange;"></span>
+  <span class="fa fa-star checked" ></span>
 
-                        <div class="nav-b hidden-xs">
-                           <div class="nav-box">
-                              <ul>
-                                 <li><a href="/index/">Home</a></li>
-                                 <i class="ri-twitter-fill"></i>
-                                 <li><a href="/index/">Gallery</a></li>
-                                 <li><a href="/allproductpage/">All Products</a></li>
-                                 <li><a href="/opencategory/?cname=Business Cards">Business Card</a></li>
-                                 <li><a href="/index/">Inquiry</a></li>&nbsp&nbsp
+  {% elif rate.star == 5 %}
+  <span class="fa fa-star checked" style="color: orange;"></span>
+  <span class="fa fa-star checked" style="color: orange;"></span>
+  <span class="fa fa-star checked" style="color: orange;"></span>
+  <span class="fa fa-star checked" style="color: orange;"></span>
+  <span class="fa fa-star checked" style="color: orange;"></span>
+    {% else %}
+  <span class="fa fa-star checked"  ></span>
+  <span class="fa fa-star checked" ></span>
+  <span class="fa fa-star checked" ></span>
+  <span class="fa fa-star checked" ></span>
+  <span class="fa fa-star checked" ></span>
+    {% endif %}
+  <div>
+             
+      </div>
+      </div>
+ 
+  </section>
 
+<!--##################### whatsapp ############################################# -->
 
-
-                                 {% if session == checksession  %}
-                                    <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/opencart/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
-                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
-                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
-                                  {% elif sessionre == checksessionre %}
-                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
-                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
-                                 {% else %}
-                                    
-                                 
-
-
-                                 <li class="dropdown">
-                                   <button class="dropbtn">Reseller</button>
-                                   <div class="dropdown-content">
-                                      <a   href="/resellerregistration/">Join as Reseller</a>
-                                       <a href="/resellerlogin/">Login</a>
-                                   </div>
-                                 </li>&nbsp&nbsp&nbsp&nbsp
+<!-- ###################### popup ######################################### -->
 
 
-                                 <li class="dropdown">
-                                   <button class="dropbtn">User</button>
-                                   <div class="dropdown-content">
-                                       <a href="/userlogin/">Login</a>
-                                       <a class="custom-b" href="/userregistration/">Sign up</a>
-                                     
-                                   </div>
-                                 </li>
 
-                                 {% endif %}
-                                 
-                                
-                      
-                        
 
-                              </ul>
-                           </div>
-                        </div>
-
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <!--/.container-fluid -->
-         </nav>
-      </header>
       <div class="modal fade lug" id="myModal" role="dialog">
          <div class="modal-dialog">
             <!-- Modal content-->
@@ -203,13 +192,15 @@
          </div>
       </div>
       <!--/.mobile menu -->
+
       <div id="sidebar" class="top-nav">
+      
          <ul id="sidebar-nav" class="sidebar-nav">
             <li><a href="/index/">Home</a></li>
-                                 <li><a href="/index/">Gallery</a></li>
+                                 <li><a href="/gallerys/">Gallery</a></li>
                                  <li><a href="/allproductpage/">All Products</a></li>
                                  <li><a href="/opencategory/?cname=Business Cards">Business Card</a></li>
-                                 <li><a href="/index/">Inquiry</a></li>
+                                 <li><a href="/inquiryform/">Inquiry</a></li>
 
 
 
@@ -228,7 +219,7 @@
                                  <li >
                                    <h2 style="color:black;">Reseller</h2>
                                    
-                                    <li><a   href="/resellerregistration/">Join as Reseller</a></l>
+                                    <li><a   href="/resellerregistration/">Join as Reseller</a></li>
                                     <li>   <a href="/resellerlogin/">Login</a></li>
                                    
                                  </li>
@@ -243,11 +234,11 @@
                                  </li>
 
                                  {% endif %}
-         
+         </ul>
       </div>
-      <div class="container" style="width:100vw; margin-top:0vh;height:30em;">
+      <div class="container-fluid" style="width:100vw; margin-top:0vh; ">
 
-  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:30em;">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" >
     <!-- Indicators -->
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -259,26 +250,52 @@
     </ol>
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner"  style="height:30em;">
+    <div class="carousel-inner" >
       <div class="item active">
-        <img src="{% static 'images/d5.jpg' %}" alt="Los Angeles" style="width:100%; height:30em; ">
+        
+        <a href="/productopen/?productname=Business Cards" >
+        <img src="{% static 'images/d5.jpg' %}" alt="Los Angeles" class="go">
+        <center>
+        <div class="text" style="  position: absolute; top: 75%; left: 50%;transform: translate(-50%, -50%); color: red;">
+          </div></center></a>
+        
       </div>
 
       <div class="item">
-        <img src="{% static 'images/d6.jpg' %}" alt="Chicago" style="width:100%; height:30em;">
+        <a href="/productopen/?productname=Stationary" >
+        <img src="{% static 'images/d6.jpg' %}" alt="Chicago"  class="go">
+        <center>
+        <div class="text" style="  position: absolute; top: 75%; left: 50%;transform: translate(-50%, -50%); color: red;">
+          </div></center></a>
       </div>
     
       <div class="item">
-        <img src="{% static 'images/d1.jpg' %}" alt="New york" style="width:100%;height:30em;">
+        <a href="/productopen/?productname=Stationary" >
+        <img src="{% static 'images/d1.jpg' %}" alt="New york" class="go">
+        <center>
+        <div class="text" style="  position: absolute; top: 75%; left: 50%;transform: translate(-50%, -50%); color: red;">
+          </div></center></a>
       </div>
       <div class="item">
-        <img src="{% static 'images/d3.jpg' %}" alt="New york" style="width:100%;height:30em;">
+        <a href="/productopen/?productname=Promotional Tools" >
+        <img src="{% static 'images/d3.jpg' %}" alt="New york" class="go">
+        <center>
+        <div class="text" style="  position: absolute; top: 75%; left: 50%;transform: translate(-50%, -50%); color: red;">
+         </div></center></a>
       </div>
       <div class="item">
-        <img src="{% static 'images/d2.jpg' %}" alt="New york" style="width:100%;height:30em;">
+        <a href="/productopen/?productname=Promotional Tools" >
+        <img src="{% static 'images/d2.jpg' %}" alt="New york"  class="go">
+        <center>
+        <div class="text" style="  position: absolute; top: 75%; left: 50%;transform: translate(-50%, -50%); color: red;">
+          </div></center></a>
       </div>
       <div class="item">
-        <img src="{% static 'images/d4.jpg' %}" alt="New york" style="width:100%;height:30em;">
+        <a href="/productopen/?productname=Stationary" >
+        <img src="{% static 'images/d4.jpg' %}" alt="New york"  class="go">
+        <center>
+        <div class="text" style="  position: absolute; top: 75%; left: 50%;transform: translate(-50%, -50%); color: red;">
+          </div></center></a>
       </div>
     </div>
 
@@ -295,83 +312,168 @@
 </div>
       <div class="cat-main-box" style="padding-bottom:0px;">
 
-         <div class="container" style="align:center;">
-            <div class="row panel-row" style="padding-top:10vh;  ">
+         <div class="container" style="align:center;  margin: 5% 5%">
+            <div class="row panel-row" style="padding-top:10vh; width: 115%;  ">
                
-               <a href="/opencategory/?cname=Business Cards">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px; margin-bottom:40px; width:300px; margin-right:5vw;" data-wow-delay="0.0s">
+               <a href="/productopen/?productname=Business Cards">
+               <div class="col-md-3 col-sm-6 wow fadeIn" style="margin-bottom:40px; margin-bottom:40px; " data-wow-delay="0.0s">
                   <div class="panel panel-default w3-hover-blue" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
                         <center><img style="border-radius:10px; width:300px; height:200px;" src="{% static 'images/Visiting-Cards-BIG.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
-                        <h4>Business Cards</h4></center>
+                        <h5>Business | Visiting Cards</h5><div>Matt | Glossy | UV | Non tearable</div></center>
                      </div>
                   </div>
                </div>
                </a>
 
-               <a href="/opencategory/?cname=Office Stationary">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;width:300px; margin-right:6vw" data-wow-delay="0.0s">
+               <a href="/productopen/?productname=Stationary">
+               <div class="col-md-3 col-sm-6 wow fadeIn" style="margin-bottom:40px" data-wow-delay="0.0s">
                   <div class="panel panel-default w3-hover-red" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
                         <center><img style="border-radius:10px;width:300px;height:200px;" src="{% static 'images/40307043-back-to-school-blackboard-with-pencilbox-and-school-equipment-on-table.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
-                        <h4>Office Stationary</h4></center>
+                        <h5>Stationary</h5><div>Shop | Office | School</div></center>
                      </div>
                   </div>
                </div>
                </a>
 
-               <a href="/opencategory/?cname=Marketing Tool">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;width:300px; margin-right:3vw" data-wow-delay="0.0s">
+               <a href="/productopen/?productname=Promotional Tools">
+               <div class="col-md-3 col-sm-6 wow fadeIn" style="margin-bottom:40px" data-wow-delay="0.0s">
                   <div class="panel panel-default w3-hover-green" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
-                        <center><img style="border-radius:10px;width:300px;height:200px;" src="{% static 'images/pexels-photo-313691-1024x768.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
-                        <h4>Marketing Tool</h4></center>
+                        <center><img style="border-radius:10px;width:300px;height:200px;" src="{% static 'images/fly.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <h5>Promotional Tools</h5><div>Pamphlet | Flyer | Posters etc.</div></center>
                      </div>
                   </div>
                </div>
                </a>
 
-            </div>
+              <a href="/productopen/?productname=Flex or Banner">
+               <div class="col-md-3 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-yellow" style="box-shadow: 5px 5px 12px">
+                     <div class="panel-body">
+                        <center><img style="border-radius:10px;width:300px;height:200px;" src="{% static 'images/b1.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <h5>Flex | Banner</h5><div>Standy | Kenopy | Sign Boards</div></center>
+                     </div>
+                  </div>
+               </div>
+               </a>
+
+
+
+
+
+
 
             </div>
 
-         <div class="container">
-            <div class="row panel-row">
+            </div>
+
+<!--==========next===========-->
+
+ <div class="container" style="align:center;  margin: 5% 5%">
+            <div class="row panel-row" style="padding-top:10vh; width: 115%;  ">
+               
+               <a href="/productopen/?productname=Doctoor Tools">
+               <div class="col-md-3 col-sm-6 wow fadeIn" style="margin-bottom:40px; margin-bottom:40px; " data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-blue" style="box-shadow: 5px 5px 12px">
+                     <div class="panel-body">
+                        <center><img style="border-radius:10px;width:300px;height:200px;" src="{% static 'images/download.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <h5>Medical / Doctor Tools</h5><div>Files | Envelopes | Appointment cards</div></center>
+                     </div>
+                  </div>
+               </div>
+               </a>
+
+               <a href="/productopen/?productname=Invitation Cards">
+               <div class="col-md-3 col-sm-6 wow fadeIn" style="margin-bottom:40px" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-red" style="box-shadow: 5px 5px 12px">
+                     <div class="panel-body">
+                        <center><img style="border-radius:10px;width:300px;height:200px;" src="{% static 'images/gift2.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <h5>Invitation Cards</h5><div>For All Events</div></center>
+                     </div>
+                  </div>
+               </div>
+               </a>
+
+               <a href="/productopen/?productname=Gift or Novelties">
+               <div class="col-md-3 col-sm-6 wow fadeIn" style="margin-bottom:40px" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-green" style="box-shadow: 5px 5px 12px">
+                     <div class="panel-body">
+                        <center><img style="border-radius:10px;width:300px;height:200px;" src="{% static 'images/tshirt.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <h5>Gift / Novelties</h5><div>Mug | T-shirt | Pen & Much More</div></center>
+                     </div>
+                  </div>
+               </div>
+               </a>
+              <a href="/productopen/?productname=Digital Marketing">
+               <div class="col-md-3 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-yellow" style="box-shadow: 5px 5px 12px">
+                     <div class="panel-body">
+                        <center><img style="border-radius:10px;width:300px;height:200px;" src="{% static 'images/b2.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <h5>Digital Marketing</h5><div>Social Media Ad | Video Ad etc</div></center>
+                     </div>
+                  </div>
+               </div>
+               </a>
+
+
+
+
+
+
+
+            </div>
+
+            </div>
+<!--==============-->
+<!--         <div class="container" style="align:center;  margin: 5% 5%">
+            <div class="row panel-row" style="padding-top:10vh; width: 140%; ">
                
                <a href="/opencategory/?cname=Doctoor Tools">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;width:300px; margin-right:5vw;" data-wow-delay="0.0s">
+               <div class="col-md-2 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
                   <div class="panel panel-default w3-hover-orange" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
                         <center><img style="border-radius:10px;width:300px;height:200px;" src="{% static 'images/download.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
-                        <h4>Doctoor Tools</h4></center>
+                        <h5>Medical / Doctor Tools</h5><div>Files | Envelopes | Appointment cards</div></center>
                      </div>
                   </div>
                </div>
                </a>
 
                <a href="/opencategory/?cname=Invitation Cards">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;width:300px; margin-right:5vw;" data-wow-delay="0.0s">
+               <div class="col-md-2 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
                   <div class="panel panel-default w3-hover-yellow" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
-                        <center><img style="border-radius:10px;width:300px;height:200px;" src="{% static 'images/47227_invitation-card-wedding-wallpapers-invitation-card-wedding_1600x1200_h.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
-                        <h4>Invitation Cards</h4></center>
+                        <center><img style="border-radius:10px;width:300px;height:200px;" src="{% static 'images/gift.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <h5>Invitation Cards</h5><div>For All Events</div></center>
+                     </div>
+                  </div>
+               </div>
+               </a>
+ <a href="/opencategory/?cname=Invitation Cards">
+               <div class="col-md-2 col-sm-6 wow fadeIn" style="margin-bottom:40px;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-yellow" style="box-shadow: 5px 5px 12px">
+                     <div class="panel-body">
+                        <center><img style="border-radius:10px;width:300px;height:200px;" src="{% static 'images/gift.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <h5>Invitation Cards</h5><div>For All Events</div></center>
                      </div>
                   </div>
                </div>
                </a>
 
                <a href="\opencategory\?cname=Apparels/Gifts">
-               <div class="col-md-4 col-sm-6 wow fadeIn" style="margin-bottom:40px;width:300px; margin-right:3vw;" data-wow-delay="0.0s">
+               <div class="col-md-2 col-sm-6 wow fadeIn" style="margin-bottom:40px; margin-right:3vw;" data-wow-delay="0.0s">
                   <div class="panel panel-default w3-hover-light-green" style="box-shadow: 5px 5px 12px">
                      <div class="panel-body">
-                        <center><img style="border-radius:10px;width:300px;height:200px;" src="{% static 'images/pexels-photo-264787.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
-                        <h4>Apparels / Gifts</h4></center>
+                        <center><img style="border-radius:10px;width:300px;height:200px;" src="{% static 'images/tshirt.jpg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        <h5>Gift / Novelties</h5><div>Mug | T-shirt | Pen & Much More</div></center>
                      </div>
                   </div>
                </div>
                </a>
             </div>
-         </div>
+         </div>-->
       <div class="products" style="padding-top:0px;">
          <div class="main-products">
             <h2 style="font-size:30px;">OUR PRODUCTS</h2>
@@ -387,14 +489,19 @@
                            <div class="dit-t clearfix">
                               <div class="left-ti">
                                  <h4>{{ i.Product_Name|safe }}</h4>
-                                 <p><span>Catrgory :</span>{{ i.Product_Category|safe }}<br>
-                                 <span>Quantity :</span>{{ i.Product_Quantity|safe }}</p>
+                            <!--     <p><br>
+                                 <span>Quantity :</span>{{ i.Product_Quantity|safe }}</p>-->
                               </div>
                            </div>
+                           {% if 'Business Cards' == i.Product_Type %}
+                           <a class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:5px;"  href="/price/?cname={{ i.Product_ID|safe }}">BUY NOW</a> 
+
+                           {% else %}
 
                            <div class="dit-btn clearfix">
                               <a class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:5px;"  href="/productdetails/?cname={{ i.Product_ID|safe }}"><i class="fa fa-inr"></i> {{ i.Product_Price|safe }}</a>
                            </div>
+                           {% endif %}
                         </div>
                      </div>
                   </div>
@@ -409,13 +516,13 @@
                            <div class="dit-t clearfix">
                               <div class="left-ti">
                                  <h4>{{ i.Product_Name|safe }}</h4>
-                                 <p><span>Catrgory :</span>{{ i.Product_Category|safe }}<br>
-                                 <span>Quantity :</span>{{ i.Product_Quantity|safe }}</p>
+                          <!--       <p><br>
+                                 <span>Quantity :</span>{{ i.Product_Quantity|safe }}</p>-->
                               </div>
                            </div>
 
                            <div class="dit-btn clearfix">
-                              <a class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:5px;"  href="/productdetails/?cname={{ i.Product_ID|safe }}"><i class="fa fa-inr"></i> {{ i.Product_Price|safe }}</a>
+                              <a class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:5px;"  href="/productdetails/?cname={{ i.Product_ID|safe }}"><!--<i class="fa fa-inr">--></i>BUY NOW</a>
                            </div>
                         </div>
                      </div>
@@ -516,22 +623,25 @@
                   <div class="container">
                      <div class="buyer-box clearfix">
                         <div class="col-md-6 col-sm-6 wow fadeIn" data-wow-delay="0.2s">
+                        <center>
                            <div class="left-buyer">
-                              <img class="img-responsive" src="{% static 'images/costeffect.jpeg' %}" alt="#" />
+                              <img class="img-responsive"  src="{% static 'images/page3.jpg' %}" alt="#" />
                            </div>
+                           </center>
                         </div>
                         <div class="col-md-6 col-sm-6 wow fadeIn" data-wow-delay="0.4s">
                            <div class="right-buyer">
-                              <h4>buyer</h4>
-                              <h2>Empower your factory<br>
-                                 <span>With a new lead Channel</span>
+                              <h4>Dear, Client </h4>
+                              <h2>Welcome to printsathi.com
+                                for all printing solution<br>
+                                 <span></span>
                               </h2>
-                              <p>Never worry about sales or income ftom outbound
-                                 channels. with printsathi your store is directly
-                                 connected to thousands of interested in your
-                                 products.
+                              <p style="font-size: 25px; color: navy;">save your money & time with high quality printing service
+provider in central india.Largest Categories of printing
+goods available here, that fulfill your all printing needs 
                               </p>
-                              <a href="/userregistration/">Create a buyer account</a>
+                              <a href="/userregistration/">Create a Client Accout
+</a>
                            </div>
                         </div>
                      </div>
@@ -545,20 +655,21 @@
                      <div class="supplier clearfix">
                         <div class="col-md-5 col-sm-6">
                            <div class="left-supplier">
-                              <h4>supplier</h4>
-                              <h2>Grow your store <br><span>With a new sales channel</span></h2>
-                              <p>Never worry about sales or income ftom outbound
-                                 channels. with printsathi your store is directly
-                                 connected to thousands of interested in your
-                                 products.
+                              <h4>Dear, Printers</h4>
+                              <h2>Empower your printing shop
+with printsathi.com  <br><span></span></h2>
+                              <p style="font-size: 25px; color: navy;">grow your printing business with join un as Reseller,
+affordable rates with minimum printing time duration.
+which can help you to create more satisfied Customer base
+
                               </p>
                               .
-                              <a href="/userregistration/">Create an account</a>
+                              <a href="/resellerregistration/">Create an Printers Account</a>
                            </div>
                         </div>
                         <div class="col-md-7 col-sm-6">
                            <div class="right-supplier">
-                              <img class="img-responsive" src="{% static 'images/supplier-pc-img.png' %}" alt="#" />
+                              <img class="img-responsive" src="{% static 'images/pageh.jpg' %}" alt="#" />
                            </div>
                         </div>
                      </div>
@@ -568,160 +679,158 @@
 
 
 
-            <div class="row" style="margin-top:0px;">
-               <div class="col-lg-8 col-lg-offset-2" align="center">
+            
+               <div class="col-lg-8 col-lg-offset-2" align="center" style="margin-bottom:50px">
                      <h2>We are best at</h2>
                      
                </div>
-               <div class="about-icons row" style="margin-bottom: -90px;">
-                        <div class="col-xs-3 wow fadeIn" data-wow-delay="0.0s"><img src="{% static 'images/printclear.jpeg' %}" alt=""/></div>
-                        <div class="col-xs-3 wow fadeIn" data-wow-delay="0.4s"><img src="{% static 'images/fast.jpeg' %}" alt=""/></div>
-                        <div class="col-xs-3 wow fadeIn" data-wow-delay="0.2s"><img src="{% static 'images/costeffect.jpeg' %}" alt=""/></div>
-                        
-                        <div class="col-xs-3 wow fadeIn"  data-wow-delay="0.4s"><img src="{% static 'images/large.jpeg' %}" alt=""/></div>
+               <div class="fluide-container">
+            <div class="row panel-row">
+               
+              
+               <div class="col-md-3 col-sm-3 wow fadeIn"  class="go" style="margin-bottom:40px; " data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-orange" style="border: none;">
+                     <div class="panel-body" style="background-color: white; filter: drop-shadow(15px 10px 4px gray);">
+                        <center><img style="border-radius:10px;height:200px;" src="{% static 'images/printclear.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        </center>
+                     </div>
+                  </div>
+               </div>
+             
 
                
-               <div class="col-lg-8 col-lg-offset-2" align="center" style="margin-top:100px;">
+               <div class="col-md-3 col-sm-6 wow fadeIn" class="go" style="margin-bottom:40px;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-yellow" style="border: none;">
+                     <div class="panel-body" style="background-color: white; filter: drop-shadow(15px 10px 4px gray);">
+                        <center><img style="border-radius:10px;;height:200px;" src="{% static 'images/fast.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        </center>
+                     </div>
+                  </div>
+               </div>
+           
+
+               
+               <div class="col-md-3 col-sm-6 wow fadeIn" class="go" style="margin-bottom:40px; border: 0px;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-light-green" style="border: none;">
+                     <div class="panel-body" style="background-color: white; filter: drop-shadow(15px 10px 4px gray);">
+                        <center><img style=";height:200px;" src="{% static 'images/costeffect.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        </center>
+                     </div>
+                  </div>
+               </div>
+            
+
+               
+               <div class="col-md-3 col-sm-6 wow fadeIn" class="go" style="margin-bottom:40px; border: none;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-light-green" style="border: none;">
+                     <div class="panel-body" style="background-color: white; filter: drop-shadow(15px 10px 4px gray);">
+                        <center><img style="border-radius:10px;;height:200px;" src="{% static 'images/large.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        </center>
+                     </div>
+                  </div>
+               </div>
+              
+            </div>
+         </div>
+               
+               <div class="col-lg-8 col-lg-offset-2" align="center" style="margin-top:100px; margin-bottom:50px">
                      <h2>Get Started</h2>
                      
                </div>
-               <div class="about-icons row" style="margin-top:20px;">
-                        <div class="col-xs-3 wow fadeIn" data-wow-delay="0.0s"><img src="{% static 'images/add.jpeg' %}" alt=""/></div>
-                        <div class="col-xs-3 wow fadeIn" data-wow-delay="0.2s"><img src="{% static 'images/upload.jpeg' %}" alt=""/></div>
-                        <div class="col-xs-3 wow fadeIn" data-wow-delay="0.4s"><img src="{% static 'images/tellus.jpeg' %}" alt=""/></div>
-                        <div class="col-xs-3 wow fadeIn" data-wow-delay="0.4s"><img src="{% static 'images/alldone.jpeg' %}" alt=""/></div>
 
+               <div class="fluide-container">
+            <div class="row panel-row">
+               
+              
+               <div class="col-md-3 col-sm-6 wow fadeIn"  class="go" style="margin-bottom:40px;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-orange" style="border: none;">
+                     <div class="panel-body" style="background-color: white;">
+                        <center><img style="border-radius:10px;height:200px; filter: drop-shadow(15px 10px 4px gray);" src="{% static 'images/add.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        </center>
+                     </div>
+                  </div>
                </div>
+             
+
+               
+               <div class="col-md-3 col-sm-6 wow fadeIn" class="go" style="margin-bottom:40px;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-yellow" style="border: none;">
+                     <div class="panel-body" style="background-color: white;">
+                        <center><img style="border-radius:10px; height:200px; filter: drop-shadow(15px 10px 4px gray);" src="{% static 'images/upload.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        </center>
+                     </div>
+                  </div>
+               </div>
+           
+
+               
+               <div class="col-md-3 col-sm-6 wow fadeIn" class="go" style="margin-bottom:40px;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-light-green" style="border: none;">
+                     <div class="panel-body" style="background-color: white;">
+                        <center><img style="border-radius:10px;height:200px; filter: drop-shadow(15px 10px 4px gray);" src="{% static 'images/tellus.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        </center>
+                     </div>
+                  </div>
+               </div>
+            
+
+               
+               <div class="col-md-3 col-sm-6 wow fadeIn" class="go" style="margin-bottom:40px;" data-wow-delay="0.0s">
+                  <div class="panel panel-default w3-hover-light-green" style="border: none;">
+                     <div class="panel-body" style="background-color: white;">
+                        <center><img style="border-radius:10px;height:200px; filter: drop-shadow(15px 10px 4px gray);" src="{% static 'images/alldone.jpeg' %}" class="icon-small fadeIn" alt="" data-wow-delay="1000">
+                        </center>
+                     </div>
+                  </div>
+               </div>
+              
+            </div>
+         </div>
+
+
+
+
+
+<div align="center" style="margin-bottom:0vh;"><h2>Testimonials</h2></div>
+
+ <div class="row" style="margin-bottom:3vh;">
+
+{% for i in testi %}
+    <div class="col-md-3 col-sm-3 wow fadeIn" >
+      <div class="right-buyer" style="padding-left: 2em;
+    padding-right: 2em;"> <center>
+        <img  src="{{ i.pic }}" alt="Forest" style=" height: 10em; border-radius: 5em; border: 1px solid #555;">
+           <h4>{{ i.name }}</h4>
+            <div style="margin-top: 0px; padding-top: 0px;">{{ i.msg }}
+            </div>
+          </center>
+       </div>
+    </div>
+{% endfor %}
+
+</div>
+  <div align="center" style="margin-bottom:15vh;"><a href="/alltesti/" class="w3-button w3-blue w3-hover-black" style="font-size:10px;border-radius:5px;">View All  </a> </div>
+
+</div>
+<div class="container-fluid">
+<div  class="col-md-3" style="margin-bottom:10vh; margin-top: 0vh; float: right;"><a href="/feedback/" class="  w3-hover-black" style="font-size:25px;">Feedback  </a> </div></div>
+
+         </div>
+
             </div>
 
 
 
          </div>
       </div>
-      
-      <footer>
-         <div class="main-footer">
-            <div class="container">
-               <div class="row">
-                  <div class="footer-link-box clearfix">
-                     <div class="col-md-6 col-sm-6">
-                        <div class="left-f-box">
-                           <div class="col-sm-4">
-                              <h2>Reseller's Counter</h2>
-                              <ul>
-                                 <li><a href="/resellerregistration/">Join as Reseller</a></li>
-                                 <li><a href="/resellerlogin/">Login</a></li>
-                              </ul>
-                           </div>
-                           <div class="col-sm-4">
-                              <h2>Products</h2>
-                              <ul>
-                                 <li><a href="/allproductpage/">All Products</a></li>
-                                 <li><a href="/opencategory/?cname=Business Cards">Business Cards</a></li>
-                                 <li><a href="/opencategory/?cname=Office Stationary">Office Stationary</a></li>
-                                 <li><a href="/opencategory/?cname=Marketing Tool">Marketing Tool</a></li>
-                                 <li><a href="/opencategory/?cname=Doctoor Tools">Doctoor Tools</a></li>
-                                 <li><a href="/opencategory/?cname=Invitation Cards">Invitation Cards</a></li>
-                                 <li><a href="/opencategory/?cname=Apparels/Gifts">Apparels/Gifts</a></li>
-                              </ul>
-                           </div>
-                           <div class="col-sm-4">
-                              <h2>Useful Links</h2>
-                              <ul>
-                                 <li><a href="#">FAQs</a></li>
-                                 <li><a href="#">About Us</a></li>
-                                 <li><a href="#">Contact Us</a></li>
-                                 <li><a href="#">Terms & Conditions</a></li>
-                                 <li><a href="#">Privacy Policy</a></li>
-                                
-                              </ul>
-                           </div>>
-                           
-                        </div>
-                     </div>
-                     <div class="col-md-6 col-sm-6">
-                        <div class="left-f-box">
-                           <div class="col-sm-4">
-                              <h2>Quick Links</h2>
-                              <ul>
-                                 <li><a href="#">1 Side Visiting Card Designs</a></li>
-                                 <li><a href="#">2 Side Visiting Card Designs</a></li>
-                                 <li><a href="#">Single sided business cards</a></li>
-                                 <li><a href="#">Back to back business cards</a></li>
-                                 <li><a href="#">Business card templates</a></li>
-                                 <li><a href="#">Spot lamination visiting cards</a></li>
-                                
-                              </ul>
-                           </div>
-                           <div class="col-sm-4">
-                              <h2>ABOUT US</h2>
-                              <ul>
-                                 <li><a href="/about/">about Printsathi</a></li>
-                                 
-                              </ul>
-                           </div>
-                           
-                        </div>
-                     </div>
-                     
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="copyright">
-            <div class="container">
-               <div class="row">
-                  <div class="col-md-8">
-                     <p><img width="90" src="{% static 'images/logo.png' %}" alt="#" style="margin-top: -5px;" /> All Rights Reserved. <a href="http://funtouchit.com/"> Funtouch IT Solution © 2020</a></p>
-                  </div>
-                  <div class="col-md-4">
-                     <ul class="list-inline socials">
-                        <li>
-                           <a href="">
-                           <i class="fa fa-facebook" aria-hidden="true"></i>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="">
-                           <i class="fa fa-twitter" aria-hidden="true"></i>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="">
-                           <i class="fa fa-instagram" aria-hidden="true"></i>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#">
-                           <i class="fa fa-linkedin" aria-hidden="true"></i>
-                           </a>
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </footer>
-      <!--main js--> 
-      <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script> 
-      <!--bootstrap js--> 
-      <script src="{% static 'js/bootstrap.min.js' %}"></script> 
-      <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
-      <script src="{% static 'js/slick.min.js' %}"></script> 
-      <script src="{% static 'js/wow.min.js' %}"></script>
-      
-      <!--custom js--> 
-      <script src="{% static 'js/custom.js' %}"></script>
+   </div> 
+
+
+
       <style>
-div.gallery {
-  border: 1px solid #ccc;
 
-}
 
-div.gallery:hover {
-  border: 1px solid #777;
-}
+
 
 div.gallery img {
   width: 100%;
@@ -773,12 +882,46 @@ div.desc {
   }
 }
 </style>
-    <script>
+
+
+
+{% endblock container %}
+
+
+
+{% block footer %}
+
+<!--custom js--> 
+ <script src="{% static 'js/custom.js' %}"></script>
+ <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script> 
+ 
+<!--bootstrap js--> 
+<script src="{% static 'js/bootstrap.min.js' %}"></script> 
+<script src="{% static 'js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'js/slick.min.js' %}"></script> 
+<script src="{% static 'js/wow.min.js' %}"></script>
+<script>
   $(document).ready(function(){
     setTimeout(function(){
       $('#popupmain').css('display','block');},50);
 
   });
 </script>
-   </body>
-</html>
+  <script>
+  $(document).ready(function(){
+    setTimeout(function(){
+      $('#popupmain2').css('display','block');},50);
+
+  });
+</script>
+
+  <script>
+  $(document).ready(function(){
+    setTimeout(function(){
+      $('#popupmain3').css('display','block');},50);
+
+  });
+</script>
+
+{% endblock footer %}
+

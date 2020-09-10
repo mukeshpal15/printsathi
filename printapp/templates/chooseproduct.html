@@ -1,0 +1,100 @@
+{% extends 'header.html' %}
+{% load static %}
+
+
+{% block container %}
+      <div id="sidebar" class="top-nav">
+         <ul id="sidebar-nav" class="sidebar-nav">
+            <li>
+               <form>
+                  <input class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;" type="submit" value="Back">
+               </form>
+            </li>
+         </ul>
+      </div>
+      <div class="terms-conditions">
+         <div class="terms-title">
+            <div class="container">
+               <div class="row">
+                  <ol class="breadcrumb">
+                     <li class="active">Admin Dashboard</li>
+                  </ol>
+               </div>
+            </div>
+         </div>
+         <div class="container">
+            <h2>Choose Category</h2>
+            <div class="row" style="margin-top: 50px;">
+
+               
+
+               <div class="col-md-3 col-sm-12 left-rs">
+                  <form action="/addvisitingcard/" method="POST">
+                     <input type="hidden" name="cproduct" value="Business Cards">
+                     <input type="submit" value="Visiting Card" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px; width: 90%;">
+                  </form>
+               </div>
+
+               <div class="col-md-3 col-sm-12 left-rs">
+                  <form action="/addvisitingcard/" method="POST">
+                     <input type="hidden" name="cproduct" value="Stationary">
+                     <input type="submit" value="Stationary" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px; width: 90%;" >
+                  </form>
+               </div>
+
+               <div class="col-md-3 col-sm-12 left-rs" style="">
+                  <form action="/addvisitingcard/" method="POST">
+                     <input type="hidden" name="cproduct" value="Promotional Tools">
+                     <input type="submit" value="Promotional Tools" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px; width: 90%;">
+                  </form>
+               </div>
+
+               <div class="col-md-3 col-sm-12 left-rs">
+                  <form action="/addvisitingcard/" method="POST" style="">
+                     <input type="hidden" name="cproduct" value="Flex or Banner">
+                     <input type="submit" value="Flex | Banner" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px; width: 90%;">
+                  </form>
+               </div>
+
+               <div class="col-md-3 col-sm-12 left-rs">
+                  <form action="/addvisitingcard/" method="POST" style="margin-top: 10px;">
+                     <input type="hidden" name="cproduct" value="Doctoor Tools">
+                     <input type="submit" value="Medical / Doctor Tools" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px; width: 90%;">
+                  </form>
+               </div>
+
+               <div class="col-md-3 col-sm-12 left-rs">
+                  <form action="/addvisitingcard/" method="POST" style="margin-top: 10px;">
+                     <input type="hidden" name="cproduct" value="Invitation Cards">
+                     <input type="submit" value="Invitation Cards" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px; width: 90%;">
+                  </form>
+               </div>
+
+               <div class="col-md-3 col-sm-12 left-rs">
+                  <form action="/addvisitingcard/" method="POST" style="margin-top: 10px;">
+                     <input type="hidden" name="cproduct" value="Gift or Novelties">
+                     <input type="submit" value="Gift / Novelties" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px; width: 90%;">
+                  </form>
+               </div>
+
+               <div class="col-md-3 col-sm-12 left-rs">
+                  <form action="/addvisitingcard/" method="POST" style="margin-top: 10px;">
+                     <input type="hidden" name="cproduct" value="Digital Marketing">
+                     <input type="submit" value="Digital Marketing" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px; width: 90%;">
+                  </form>
+               </div>
+
+
+         </div>
+      </div>
+
+
+
+{% endblock container %}
+
+
+
+{% block footer %}
+<script src="{% static 'js/custom.js' %}"></script>
+
+{% endblock footer %}

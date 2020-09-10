@@ -1,27 +1,5 @@
+{% extends 'header.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <title>Printsathi</title>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <!--enable mobile device-->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!--fontawesome css-->
-      <link rel="stylesheet" href="{% static 'w3.css' %}">
-      <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-      <!--bootstrap css-->
-      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-      <!--animate css-->
-      <link rel="stylesheet" href="{% static 'css/animate-wow.css' %}">
-      <!--main css-->
-      <link rel="stylesheet" href="{% static 'css/style.css' %}">
-      <link rel="stylesheet" href="{% static 'css/bootstrap-select.min.css' %}">
-      <link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
-      <!--responsive css-->
-      <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
       <style>
 .dropbtn {
   background-color: white;
@@ -64,85 +42,7 @@
   background-color: white;
 }
 </style>
-   </head>
-   <body>
-      <header id="header" class="top-head">
-         <!-- Static navbar -->
-         <nav class="navbar navbar-default">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-md-4 col-sm-12 left-rs">
-                     <div class="navbar-header">
-                        <button type="button" id="top-menu" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"> 
-                        <span class="sr-only">Toggle navigation</span> 
-                        <span class="icon-bar"></span> 
-                        <span class="icon-bar"></span> 
-                        <span class="icon-bar"></span> 
-                        </button>
-                        <a href="\index\" class="navbar-brand"><img src="{% static 'images/logo.png' %}" style="width:200px;" alt="" /></a>
-                     </div>
-                  </div>
-                  <div class="col-md-8 col-sm-12">
-                     <div class="right-nav">
-                        
-                        
-
-                        <div class="nav-b hidden-xs">
-                           <div class="nav-box">
-                              <ul>
-                                 <li><a href="/index/">Home</a></li>
-                                 <li><a href="/index/">Gallery</a></li>
-                                 <li><a href="/allproductpage/">All Products</a></li>
-                                 <li><a href="/opencategory/?cname=Business Cards">Business Card</a></li>
-                                 <li><a href="/index/">Inquiry</a></li>&nbsp&nbsp
-
-
-
-                                 {% if session == checksession  %}
-                                    <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/opencart/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
-                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
-                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
-                                  {% elif sessionre == checksessionre %}
-                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
-                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
-                                 {% else %}
-                                    
-                                 
-
-
-                                 <li class="dropdown">
-                                   <button class="dropbtn">Reseller</button>
-                                   <div class="dropdown-content">
-                                      <a   href="/resellerregistration/">Join as Reseller</a>
-                                       <a href="/resellerlogin/">Login</a>
-                                   </div>
-                                 </li>&nbsp&nbsp&nbsp&nbsp
-
-
-                                 <li class="dropdown">
-                                   <button class="dropbtn">User</button>
-                                   <div class="dropdown-content">
-                                       <a href="/userlogin/">Login</a>
-                                       <a class="custom-b" href="/userregistration/">Sign up</a>
-                                     
-                                   </div>
-                                 </li>
-
-                                 {% endif %}
-                      
-                        
-
-                              </ul>
-                           </div>
-                        </div>
-
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <!--/.container-fluid -->
-         </nav>
-      </header>
+{% block container %}
       <div class="modal fade lug" id="myModal" role="dialog">
          <div class="modal-dialog">
             <!-- Modal content-->
@@ -165,23 +65,50 @@
          </div>
       </div>
       <!--/.mobile menu -->
+       <!--/.mobile menu -->
+
       <div id="sidebar" class="top-nav">
+      
          <ul id="sidebar-nav" class="sidebar-nav">
             <li><a href="/index/">Home</a></li>
-            <li><a href="/about/">About</a></li>
-            <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</a></li>
-            {% if session == checksession  %}
-            <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/opencart/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
-            <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
-            <li><a class="custom-b" href="/logout/">Logout</a></li>
-          {% elif sessionre == checksessionre %}
-            <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
-            <li><a class="custom-b" href="/logout/">Logout</a></li>
-         {% else %}
-            <li><a href="/userlogin/">Login</a></li>
-            <li><a class="custom-b" href="/userregistration/">Sign up</a></li>
-         {% endif %}
-         
+                                 <li><a href="/gallerys/">Gallery</a></li>
+                                 <li><a href="/allproductpage/">All Products</a></li>
+                                 <li><a href="/opencategory/?cname=Business Cards">Business Card</a></li>
+                                 <li><a href="/inquiryform/">Inquiry</a></li>
+
+
+
+                                 {% if session == checksession  %}
+                                    <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/opencart/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
+                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
+                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
+                                  {% elif sessionre == checksessionre %}
+                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
+                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
+                                 {% else %}
+                                    
+                                 
+
+
+                                 <li >
+                                   <h2 style="color:black;">Reseller</h2>
+                                   
+                                    <li><a   href="/resellerregistration/">Join as Reseller</a></li>
+                                    <li>   <a href="/resellerlogin/">Login</a></li>
+                                   
+                                 </li>
+
+
+                                 <li>
+                                   <h2 style="color:black;">User</h2>
+                                   
+                                    <li><a href="/userlogin/">Login</a></li>
+                                    <li><a class="custom-b" href="/userregistration/">Sign up</a></li>
+                                
+                                 </li>
+
+                                 {% endif %}
+         </ul>
       </div>
 
 <div align="center" style="margin-bottom:10vh;"><h2>Product Category</h2></div>
@@ -220,7 +147,7 @@
                      </div>
                   </div>
                </div> 
-               <a class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:5px;"  href="/opencategory/?cname=Business Cards">BUY  </a>    
+               <a class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:5px;"  href="/opencategory/?cname=Office Stationary">BUY  </a>    
             </div>
          </div>
       </div>
@@ -239,7 +166,7 @@
                      </div>
                   </div>
                </div> 
-               <a class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:5px;"  href="/opencategory/?cname=Business Cards">BUY  </a>    
+               <a class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:5px;"  href="/opencategory/?cname=Marketing Tool">BUY  </a>    
             </div>
          </div>
       </div>
@@ -261,7 +188,7 @@
                      </div>
                   </div>
                </div> 
-               <a class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:5px;"  href="/opencategory/?cname=Business Cards">BUY  </a>    
+               <a class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:5px;"  href="/opencategory/?cname=Doctoor Tools">BUY  </a>    
             </div>
          </div>
       </div>
@@ -280,7 +207,7 @@
                      </div>
                   </div>
                </div> 
-               <a class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:5px;"  href="/opencategory/?cname=Business Cards">BUY  </a>    
+               <a class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:5px;"  href="/opencategory/?cname=Invitation Cards">BUY  </a>    
             </div>
          </div>
       </div>
@@ -299,128 +226,19 @@
                      </div>
                   </div>
                </div> 
-               <a class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:5px;"  href="/opencategory/?cname=Business Cards">BUY  </a>    
+               <a class="w3-button w3-blue w3-hover-black" style="width:100%;font-size:20px;border-radius:5px;"  href="/opencategory/?cname=Apparels/Gifts">BUY  </a>    
             </div>
          </div>
       </div>
    </div>
  </div>
 </div>
-      <footer>
-         <div class="main-footer">
-            <div class="container">
-               <div class="row">
-                  <div class="footer-link-box clearfix">
-                     <div class="col-md-6 col-sm-6">
-                        <div class="left-f-box">
-                           <div class="col-sm-4">
-                              <h2>Reseller's Counter</h2>
-                              <ul>
-                                 <li><a href="/resellerregistration/">Join as Reseller</a></li>
-                                 <li><a href="/resellerlogin/">Login</a></li>
-                              </ul>
-                           </div>
-                           <div class="col-sm-4">
-                              <h2>Products</h2>
-                              <ul>
-                                 <li><a href="/allproductpage/">All Products</a></li>
-                                 <li><a href="/opencategory/?cname=Business Cards">Business Cards</a></li>
-                                 <li><a href="/opencategory/?cname=Office Stationary">Office Stationary</a></li>
-                                 <li><a href="/opencategory/?cname=Marketing Tool">Marketing Tool</a></li>
-                                 <li><a href="/opencategory/?cname=Doctoor Tools">Doctoor Tools</a></li>
-                                 <li><a href="/opencategory/?cname=Invitation Cards">Invitation Cards</a></li>
-                                 <li><a href="/opencategory/?cname=Apparels/Gifts">Apparels/Gifts</a></li>
-                              </ul>
-                           </div>
-                           <div class="col-sm-4">
-                              <h2>Useful Links</h2>
-                              <ul>
-                                 <li><a href="#">FAQs</a></li>
-                                 <li><a href="#">About Us</a></li>
-                                 <li><a href="#">Contact Us</a></li>
-                                 <li><a href="#">Terms & Conditions</a></li>
-                                 <li><a href="#">Privacy Policy</a></li>
-                                
-                              </ul>
-                           </div>>
-                           
-                        </div>
-                     </div>
-                     <div class="col-md-6 col-sm-6">
-                        <div class="left-f-box">
-                           <div class="col-sm-4">
-                              <h2>Quick Links</h2>
-                              <ul>
-                                 <li><a href="#">1 Side Visiting Card Designs</a></li>
-                                 <li><a href="#">2 Side Visiting Card Designs</a></li>
-                                 <li><a href="#">Single sided business cards</a></li>
-                                 <li><a href="#">Back to back business cards</a></li>
-                                 <li><a href="#">Business card templates</a></li>
-                                 <li><a href="#">Spot lamination visiting cards</a></li>
-                                
-                              </ul>
-                           </div>
-                           <div class="col-sm-4">
-                              <h2>ABOUT US</h2>
-                              <ul>
-                                 <li><a href="/about/">about Printsathi</a></li>
-                                 
-                              </ul>
-                           </div>
-                           
-                        </div>
-                     </div>
-                     
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="copyright">
-            <div class="container">
-               <div class="row">
-                  <div class="col-md-8">
-                     <p><img width="90" src="{% static 'images/logo.png' %}" alt="#" style="margin-top: -5px;" /> All Rights Reserved. <a href="http://funtouchit.com/"> Funtouch IT Solution © 2020</a></p>
-                  </div>
-                  <div class="col-md-4">
-                     <ul class="list-inline socials">
-                        <li>
-                           <a href="">
-                           <i class="fa fa-facebook" aria-hidden="true"></i>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="">
-                           <i class="fa fa-twitter" aria-hidden="true"></i>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="">
-                           <i class="fa fa-instagram" aria-hidden="true"></i>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#">
-                           <i class="fa fa-linkedin" aria-hidden="true"></i>
-                           </a>
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </footer>
-      <!--main js--> 
-      <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script> 
-      <!--bootstrap js--> 
-      <script src="{% static 'js/bootstrap.min.js' %}"></script> 
-      <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
-      <script src="{% static 'js/slick.min.js' %}"></script> 
-      <script src="{% static 'js/wow.min.js' %}"></script>
-      
-      <!--custom js--> 
-      <script src="{% static 'js/custom.js' %}"></script>
-      <style>
+{% endblock container %}
+
+
+
+{% block footer %}
+ <style>
 div.gallery {
   border: 1px solid #ccc;
 
@@ -480,5 +298,9 @@ div.desc {
   }
 }
 </style>
-   </body>
-</html>
+
+<script src="{% static 'js/custom.js' %}"></script>
+
+{% endblock footer %}
+     
+ 

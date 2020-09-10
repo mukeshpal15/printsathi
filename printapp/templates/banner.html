@@ -1,0 +1,66 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block container %}
+
+      <div class="terms-conditions">
+         <div class="terms-title">
+            <div class="container">
+               <div class="row">
+                  <ol class="breadcrumb">
+                     <li>Admin Login</li>
+                     <li class="active">Update banner</li>
+                  </ol>
+               </div>
+            </div>
+         </div>
+       <div class="container">
+         <div class="row">
+            <div class="column">
+               <div class="w3-container w3-blue" style="padding-top:10px;padding-bottom:10px;margin-bottom:20px;border-radius:10px;font-size:5px;">
+                  <h2 style="font-size:25px;">Update Banner</h2>
+               </div>
+               <form class="w3-container w3-light-grey" style="padding:20px;border-radius:10px;" action="/savebanner/" method="POST"  enctype="multipart/form-data"> {% csrf_token %}
+
+                  <label style="margin-bottom:15px;font-size:20px;color:green;">{{ msg|safe }}</label>
+
+                  <label style="margin-bottom:15px;font-size:20px;color:green;">Banner First</label>
+
+                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="b1" placeholder="Paper Type Name" type="file">
+
+                  <label style="margin-bottom:15px;font-size:20px;color:green;">Banner Second</label>
+
+                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" name="b2" placeholder="Paper Type Name" type="file">
+
+                  <input type="submit" value="Update" class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;">
+               </form>
+            </div>
+            <div class="column" style="margin-top:20px;">
+               <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+                 <tr class="w3-black">
+                   <th>Banner ID</th>
+                   <th>Banner 1</th>
+                   <th>Banner 2</th>
+                 </tr>
+                 {% for x in data %}
+                 <tr>
+                   <td>{{ x.Bannerid|safe }}</td>
+                   <td><img src="{{ x.first.url }}" width="200"></td>
+                   <td><img src="{{ x.second.url }}" width="200"></td>
+                   
+                 </tr>
+                 {% endfor %}
+               </table>
+            </div>
+         </div>
+
+      </div>  
+      </div>
+{% endblock container %}
+
+
+
+{% block footer %}
+<script src="{% static 'js/custom.js' %}"></script>
+
+{% endblock footer %}

@@ -1,0 +1,582 @@
+{% extends 'header.html' %}
+{% load static %}
+
+<style>
+element.style {
+}
+@media screen and (min-width: 320px){
+.go {
+        width: 100%;
+         height:30em; 
+}
+}
+@media screen and (min-width: 1080px){
+.carousel-inner {
+        width: 100%;
+         height:30em; 
+}
+}
+
+@media screen and (min-width: 360px){
+.go {
+        width: 100%;
+         height:30em; 
+}
+}
+@media screen and (min-width: 1080px){
+.carousel-inner {
+        width: 100%;
+         height:30em; 
+}
+}
+
+</style>
+{% block container %}
+{% load static %}
+
+<div class="container" style="border: 1px solid; margin-bottom: 40px; margin-top: 40px;">
+	<center>
+		<div style="height: 50px; background-color: #ffffcc;"><h1>PRICE CALCULATOR</h1></div>
+	</center>
+
+	<div style="margin-left: 100px; ">
+
+		<div class="row" style="margin-top: 20px;">
+			<div style="float: left; width: 33.33%" style=""><b>	PAPER TYPE: </b>
+			</div>
+			<div style="float: left;width: 33.33%;" >
+				250GSM<br>
+				<input type="radio" id="paper" value="50" name="pap" required></input><br>
+				Price
+			</div>
+			<div style="float: left; width: 33.33%" >
+				350GSM<br>
+				<input type="radio" id="paper" value="100" name="pap" required></input> <br>
+				price
+			</div> 
+		</div>
+
+		<div class="row" style="margin-top: 50px;">
+			<center>
+			<div style="">
+				<input type="radio" name="card" id="single" value="100" class="input-hidden" />
+				<label for="single">
+					<b> SINGLE</b><br>
+				<img src="{% static 'images/single.png' %}"  alt="I'm sad" style="width: 240px; height: 170px;" />
+				</label>
+					
+				<input type="radio" name="card" id="backfont" value="200" class="input-hidden" />
+				<label for="backfont">
+					<b> BACK FONT</b><br>
+				<img src="{% static 'images/front.png' %}" alt="I'm happy" style="width: 240px; height: 230px;"/>
+				</label>
+			</div>
+		</center>
+
+			
+		</div>
+
+		<div class="row" style="margin-top: 20px;">
+			<center><b>QUANTITY</b></center>
+			<center>
+			<div style="margin-top: 20px;">
+				<div > 
+					<input type="radio" name="quantity" id="q100" value="100" class="input-hidden" required= />
+					<label for="q100" style="margin-left: 5em;">
+					<img src="{% static 'images/qnty2.png' %}"  alt="I'm sad"  style="width: 5em; height: 5em;" />
+					</label>
+				 
+					<input type="radio" name="quantity" id="q200" value="200" class="input-hidden" />
+					<label for="q200" style="margin-left: 5em;">
+					<img src="{% static 'images/qnty1.png' %}"  alt="I'm sad"  style="width: 5em; height: 5em;"/>
+					</label>
+				
+					<input type="radio" name="quantity" id="q500" value="500" class="input-hidden" />
+					<label for="q500" style="margin-left: 5em;">
+					<img src="{% static 'images/qnty3.png' %}"  alt="I'm sad" style="width: 5em; height: 5em;" />
+					</label>
+				
+					<input type="radio" name="quantity" id="q1000" value="1000" class="input-hidden" />
+					<label for="q1000" style="margin-left: 5em;">
+					<img src="{% static 'images/qnty4.png' %}"  alt="I'm sad"  style="width: 5em; height: 5em;"/>
+					</label>
+				
+					<input type="radio" name="quantity" id="q2000" value="2000" class="input-hidden" />
+					<label for="q2000" style="margin-left: 5em;">
+					<img src="{% static 'images/qnty5.png' %}"  alt="I'm sad"  style="width: 5em; height: 5em;"/>
+					</label>
+				</div>
+				</div>
+			</center>
+				
+			</div>
+
+			<div class="row" style="margin-top: 20px;">
+				<center><b>LAMINATION OPTIONAL</b></center>
+				<center>
+				<div style=" width: 100%; margin-top: 20px;"> 
+					<input type="radio" name="lamination" id="glass" value="10" class="input-hidden"  required="" />
+					<label for="glass" style="margin-left: 5em;">
+					<img src="{% static 'images/gloss.png' %}"  alt="I'm sad" />
+					<CENTER><div><B>GLOSS</B></div></CENTER>
+					</label>
+					
+				
+					<input type="radio" name="lamination" id="3dglass" value="20" class="input-hidden"  required="" />
+					<label for="3dglass" style="margin-left: 5em;">
+					<img src="{% static 'images/3dvc.jpeg' %}"  alt="I'm sad" />
+					<CENTER><div><B> 3D GLOSS</B></div></CENTER>
+					</label>
+					
+				
+					<input type="radio" name="lamination" id="matt" value="30" class="input-hidden"  required="" />
+					<label for="matt" style="margin-left: 5em;">
+					<img src="{% static 'images/PremiumVC.jpeg' %}"  alt="I'm sad" />
+					<CENTER><div><B>MATT</B></div></CENTER>
+					</label>
+					
+				
+					<input type="radio" name="lamination" id="volvet" value="40" class="input-hidden" required="" />
+					<label for="volvet" style="margin-left: 5em;">
+					<img src="{% static 'images/volvet.jpg' %}"  alt="I'm sad" />
+					<CENTER>
+					<div><B>VALVAT</B></div></CENTER>
+					</label>
+					
+				</div>
+				</center>
+
+			
+		</div>
+
+		<div class="row" style="margin-top: 20px;">
+			<div style="float: left; width: 33.33%;"><b>CORNERS</b></div>
+			<div style="float: left; width: 33.33%;">
+				
+			<center><div><b></b></div></center> 
+				<input type="radio" name="corner" id="standard" value="10" class="input-hidden" required="" />
+				<label for="standard">
+					<h5><b>Standard</b></h5>
+				<img src="{% static 'images/rect1.jpg' %}"  alt="I'm sad"  style="width: 165px; height: 120px" />
+				</label>
+			</div>
+			<div style="float: left; width: 33.33%;">
+				
+				<center><div><b></b></div></center>
+				<input type="radio" name="corner" id="round" value="20" class="input-hidden" required="" />
+				<label for="round">
+					<h5><b>Rounded</b></h5>
+				<img src="{% static 'images/round1.png' %}" alt="I'm happy" style="width: 165px; height: 120px"  />
+				</label>
+			</div>
+
+			
+		</div>
+<!--
+		<div class="row" style="margin-top: 40px;">
+			<div style="float: left; width: 33.33%;"><b>CUSTUM DESIGN</b></div>
+			<div style="float: left; width: 33.33%;">
+				<label>
+			<center><div><b></b></div>Yes</center> 
+				<input type="radio" name="design" id="GO" value="10" required="" />
+				
+			</div>
+			<div style="float: left; width: 33.33%;">
+				<label>
+				<center><div><b></b>NO</div></center>
+				<input type="radio" name="design" id="GO" value="0" required="" />
+				
+			</div>
+			
+
+			
+		</div>-->
+
+		<div class="row" style="margin-top: 40px;">
+			<div style="float: left; width: 30%"><b>DELIVERY CHARGE</b></div>
+			<div style="float: left; width: 70%;"> 
+				<select  id="state" class="form-control d-block rounded-0" style="float:left;width: 40%; margin-right: 10px;" required="">
+                          
+                            <option value="10">U.P</option>
+                </select>
+				
+			
+				<select name="district" id="district" class="form-control d-block rounded-0" style=" float:left;width: 40%; margin-left: 10px;" required="">
+                          
+                            <option value="20">Mathura</option>
+                            <option value="10">agra</option>
+                </select>
+				
+			</div><br>
+			
+			
+			
+
+			
+		</div>
+		<div class="row" style="margin-top: 40px;">
+			<div style="float: left; width: 30%">
+				<h4><button onclick="addNumbers()" style="background-color: blue; font-size: 15px; border-radius: 10px; border:none; color: white; padding: 10px;">GRAND TOTAL</button></h4>	
+			</div>
+
+			<div style="float: left; width: 40%; margin-left: 20px; ">
+				<p id="result" style=" height: 35px; border-radius: 25px; font-size: 15px; padding: 10px;"></p>
+				
+			</div>
+			
+		</div>
+
+		<div class="row" style="margin-top: 50px; margin-bottom: 100px; margin-left: 240px;">
+				<div  style="width: 33.33%; float: left;">
+				<label >
+							
+	    			<div style="background-color: #531294; color: white; width: 100px; height: 50px;">
+	    				<span style="padding-left:20px; padding-top: 10px;">
+	    				<form id="myForm" action="/chooseproduct/">
+					<input type="hidden"  value="{{cname}}" name="cid">
+					<input type="hidden" id="myText0" value="" name="sum">
+					<input type="hidden" id="myText1" value="" name="gsm">
+					<input type="hidden" id="myText2" value="" name="side">
+					<input type="hidden" id="myText3" value="" name="quantity">
+					<input type="hidden" id="myText4" value="" name="lamination">
+					<input type="hidden" id="myText5" value="" name="corner">
+					
+					<input type="hidden" id="myText7" value="" name="state">
+					<input type="hidden" id="myText8" value="" name="district">
+	    			<button onclick="selectdesign()" style="width: 100%; background-color:#531294; border:none; ">BROWSE DESIGN</button>
+				</form>
+	    				</span>
+	    			</div>
+    		
+				</label>
+
+				
+				</div>
+
+				<div class="image-upload" style="width: 33.33%; float: left;">
+				
+    			<div style="background-color: #d534eb; color: white; width: 140px; height: 50px;">
+    				<span style="">
+    					<button onclick="selectdesign()" style="width: 100%; background-color:#d534eb; border:none; margin-top: 10px; ">
+    						<b>UPLOAD YOUR <br>Design</b></button>
+    				
+    				</span>
+    			</div>
+				
+
+				
+				</div>
+
+				
+		</div>
+
+		
+
+
+	</div>
+
+			<div class="row" >
+				<div style="float: left; width: 50%; font-size: 25px; background-color: #ffff99">
+					<center>
+				<form id="myForm3" action="/Preview/">
+					<input type="hidden"  value="{{cname}}" name="cname">
+					<input type="hidden" id="myText10" value="" name="sum">
+					<input type="hidden" id="myText11" value="" name="gsm">
+					<input type="hidden" id="myText12" value="" name="side">
+					<input type="hidden" id="myText13" value="" name="quantity">
+					<input type="hidden" id="myText14" value="" name="lamination">
+					<input type="hidden" id="myText15" value="" name="corner">
+					
+					<input type="hidden" id="myText17" value="" name="state">
+					<input type="hidden" id="myText18" value="" name="district">
+					
+					<button onclick="Preview()" style="width: 100%; background-color:#ffff99; border:none; ">ORDER PREVIEW</button>
+				</form>
+
+						</center>
+				</div>
+				<div  style="float: left; width: 50%; font-size: 25px; color: white; background-color: black;">
+					<center>
+					BUY NOW
+					</center>
+				</div>
+
+				
+			</div>
+</div>
+
+
+
+
+
+<style type="text/css">
+.image-upload > input
+{
+    display: none;
+}
+
+.image-upload img
+{
+    width: 80px;
+    cursor: pointer;
+}
+	
+	.input-hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+input[type=radio]:checked + label>img {
+  border: 1px solid #fff;
+  box-shadow: 0 0 3px 3px #090;
+}
+
+/* Stuff after this is only to make things more pretty */
+input[type=radio] + label>img {
+ 
+  width: 65px;
+  height: 71px;
+  transition: 500ms all;
+}
+
+input[type=radio]:checked + label>img {
+  transform: 
+    rotateZ(-10deg) 
+    rotateX(10deg);
+}
+
+/*
+ | //lea.verou.me/css3patterns
+ | Because white bgs are boring.
+*/
+html {
+  background-color: #fff;
+  background-size: 100% 1.2em;
+  background-image: 
+    linear-gradient(
+      90deg, 
+      transparent 79px, 
+      #abced4 79px, 
+      #abced4 81px, 
+      transparent 81px
+    ),
+    linear-gradient(
+      #eee .1em, 
+      transparent .1em
+    );
+}
+</style>
+     <script language="javascript">
+                function addNumbers()
+                {		
+
+                        var val1 = document.getElementsByName("pap");
+                        var val2 = document.getElementsByName("card");
+                        var val3 = document.getElementsByName("quantity");
+                        var val4 = document.getElementsByName("lamination");
+                        var val5 = document.getElementsByName("corner");
+                       
+                       	var val7 = document.getElementById('state').value;
+                        var val8 = document.getElementById('district').value;
+                        
+
+
+                    	for(i = 0; i < val1.length; i++) { 
+            			if(val1[i].checked) 
+            				var a=val1[i].value; 
+        				} 
+        			
+
+        
+        				for(i = 0; i < val2.length; i++) { 
+            			if(val2[i].checked) 
+            			var b=val2[i].value; 
+        				}
+        				for(i = 0; i < val3.length; i++) { 
+            			if(val3[i].checked) 
+            				var c=val3[i].value; 
+        				} 
+        
+        				 
+          
+        				for(i = 0; i < val4.length; i++) { 
+            			if(val4[i].checked) 
+            			var d=val4[i].value; 
+        				}
+        				for(i = 0; i < val5.length; i++) { 
+            			if(val5[i].checked) 
+            				var e=val5[i].value; 
+        				} 
+        
+        			
+          
+        				
+
+        				var s=parseFloat(val7)+(parseFloat(a)*parseFloat(b)*parseFloat(c)*parseFloat(d)*parseFloat(e))+parseFloat(val8)
+        				document.getElementById("result").innerHTML = s;
+                }
+
+                function Preview(){
+                		var val1 = document.getElementsByName("pap");
+                        var val2 = document.getElementsByName("card");
+                        var val3 = document.getElementsByName("quantity");
+                        var val4 = document.getElementsByName("lamination");
+                        var val5 = document.getElementsByName("corner");
+                        
+                       	var val7 = document.getElementById('state').value;
+                        var val8 = document.getElementById('district').value;
+
+                        
+                        document.getElementById("myText17").value = val7;
+                        document.getElementById("myText18").value = val8;
+                        for(i = 0; i < val1.length; i++) { 
+            			if(val1[i].checked) 
+            				var a=val1[i].value; 
+        				} 
+        
+        				for(i = 0; i < val2.length; i++) { 
+            			if(val2[i].checked) 
+            			var b=val2[i].value; 
+        				}
+        				for(i = 0; i < val3.length; i++) { 
+            			if(val3[i].checked) 
+            				var c=val3[i].value; 
+        				} 
+        
+        				 
+          
+        				for(i = 0; i < val4.length; i++) { 
+            			if(val4[i].checked) 
+            			var d=val4[i].value; 
+        				}
+        				for(i = 0; i < val5.length; i++) { 
+            			if(val5[i].checked) 
+            				var e=val5[i].value; 
+        				} 
+        
+        			
+          
+        				
+
+        				var s=parseFloat(val7)+(parseFloat(a)*parseFloat(b)*parseFloat(c)*parseFloat(d)*parseFloat(e))+parseFloat(val8)
+        			
+
+        				document.getElementById("myText11").value = a;
+                        document.getElementById("myText12").value = b;
+                        document.getElementById("myText13").value = c;
+                        document.getElementById("myText14").value = d;
+                        document.getElementById("myText15").value = e;
+                       
+                        document.getElementById("myText10").value = s;
+
+                        document.getElementById("myForm3").submit();
+                }
+
+                function selectdesign(){
+                		var val1 = document.getElementsByName("pap");
+                        var val2 = document.getElementsByName("card");
+                        var val3 = document.getElementsByName("quantity");
+                        var val4 = document.getElementsByName("lamination");
+                        var val5 = document.getElementsByName("corner");
+                        
+                       	var val7 = document.getElementById('state').value;
+                        var val8 = document.getElementById('district').value;
+
+                        
+                        document.getElementById("myText7").value = val7;
+                        document.getElementById("myText8").value = val8;
+                        for(i = 0; i < val1.length; i++) { 
+            			if(val1[i].checked) 
+            				var a=val1[i].value; 
+            				if (a=='50'){
+            					var h='250gsm'
+            				}
+            				else if( a=='100'){
+            						var h='350gsm'
+            					}
+            				else{
+            					var h=''
+            				}
+        				} 
+        
+        				for(i = 0; i < val2.length; i++) { 
+            			if(val2[i].checked) 
+            			var b=val2[i].value; 
+            				if(b=='100'){
+            					var z='Single'
+            				}
+            				else if(b=='200'){
+            					var z='Backfont'
+            				}
+            				else{
+            					var z=''
+            				}
+        				}
+        				for(i = 0; i < val3.length; i++) { 
+            			if(val3[i].checked) 
+            				var c=val3[i].value;
+            				if(c==''){
+            					c=''
+            				}
+
+        				} 
+        
+        				 
+          
+        				for(i = 0; i < val4.length; i++) { 
+            			if(val4[i].checked) 
+            			var d=val4[i].value;
+            					var j; 
+            					if(d=='10'){
+            						j='GLOSS'
+            					}
+            					else if( d=='20'){
+            							j='3DGloss'
+            					}
+            					else if( d=='30'){
+            							j='Matt'
+            					}
+            					else if( d=='40'){
+            							j='volvet'
+            					}
+            					else{
+            						j=''
+            					} 
+        				}
+        				for(i = 0; i < val5.length; i++) { 
+            			if(val5[i].checked) 
+            				var e=val5[i].value; 
+            					var k; 
+            					if(e=='10'){
+            						k='standard'
+            					}
+            					else if (e=='20'){
+            						k='Rounded'
+            					}
+            					
+            					else{
+            						k=''
+            					}
+        				} 
+        
+        			
+          
+        				
+
+        				var s=parseFloat(val7)+(parseFloat(a)*parseFloat(b)*parseFloat(c)*parseFloat(d)*parseFloat(e))+parseFloat(val8)
+        			
+
+        				document.getElementById("myText1").value = h;
+                        document.getElementById("myText2").value = z;
+                        document.getElementById("myText3").value = c;
+                        document.getElementById("myText4").value = j;
+                        document.getElementById("myText5").value = k;
+                        
+                        document.getElementById("myText0").value = s;
+
+                        document.getElementById("myForm").submit();
+                }
+        </script>
+
+
+{% endblock container %}

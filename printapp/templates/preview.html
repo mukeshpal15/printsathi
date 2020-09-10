@@ -1,0 +1,175 @@
+{% extends 'header.html' %}
+{% load static %}
+
+<style>
+element.style {
+}
+@media screen and (min-width: 320px){
+.go {
+        width: 100%;
+         height:30em; 
+}
+}
+@media screen and (min-width: 1080px){
+.carousel-inner {
+        width: 100%;
+         height:30em; 
+}
+}
+
+@media screen and (min-width: 360px){
+.go {
+        width: 100%;
+         height:30em; 
+}
+}
+@media screen and (min-width: 1080px){
+.carousel-inner {
+        width: 100%;
+         height:30em; 
+}
+}
+
+</style>
+{% block container %}
+{% load static %}
+
+<div class="container" style="border: 1px solid; margin-bottom: 40px; margin-top: 40px;">
+	<center>
+		<div style="height: 50px; background-color: #ffffcc;"><h1>PREVIEW</h1></div>
+	</center>
+
+	<div class="row" style="width: 100%;">
+
+			<table style="margin-bottom: 50px;">
+				<tr>
+					<th style="margin-left: 2em;"><br>
+						<center>
+						<b> Products</b>
+					</center>
+					</th >
+					<th style="width: 30%; padding-left: 95px;"><br>
+						<b> Quality</b>
+					</th>
+					<th style="width: 30%;     padding-left: 153px;"><br>
+						<b>Price</b>
+					</th>
+				</tr>
+				<tr>
+					<td style="    padding-left: 96px;"><br>
+						<b>	PAPER TYPE: </b>
+					</td>
+					<td style="width: 30%; padding-left: 95px;"><br>
+						{% if '50' == paper %} 250GSM {% else %} 350GSM {% endif %}
+					</td>
+					<td style="width: 30%;     padding-left: 153px;"><br>
+						{{paper}}
+					</td>
+				</tr>
+				<tr>
+					<td style="    padding-left: 96px;"><br>
+						<b>	Print Cards Side </b>
+					</td>
+					<td style="width: 30%; padding-left: 95px;"><br>
+						{% if '100' == side %} Single {% else %} Front Back {% endif %}
+					</td>
+					<td style="width: 30%;     padding-left: 153px;"><br>
+						{{side}}
+					</td>
+				</tr>
+				<tr>
+					<td style="    padding-left: 96px;"><br>
+						<b>	QUANTITY </b>
+					</td>
+					<td style="width: 30%; padding-left: 95px;"><br>
+						{% if '100' == quantity %} 100 
+						{% elif '200' == quantity%} 200 
+						{% elif '500' == quantity%} 500 
+						{% elif '1000' == quantity%}1000
+						{% else %} 2000 {% endif %}
+					</td>
+					<td style="width: 30%;     padding-left: 153px;"><br>
+						{{quantity}}
+					</td>
+				</tr>
+				<tr>
+					<td style="    padding-left: 96px;"><br>
+						<b>	LAMINATION OPTIONAL </b>
+					</td>
+					<td style="width: 30%; padding-left: 95px;"><br>
+						{% if '10' == lamination %} GLOSS 
+						{% elif '20' == lamination %} 3D GLOSS 
+						{% elif '30' == lamination %} MATT
+						{% else %}VALVAT {% endif %}
+					</td>
+					<td style="width: 30%;     padding-left: 153px;"><br>
+						{{lamination}}
+					</td>
+				</tr>
+				<tr>
+					<td style="    padding-left: 96px;"><br>
+						<b>	CORNERS </b>
+					</td>
+					<td style="width: 30%; padding-left: 95px;"><br>
+						{% if '10' == corner %} Standard 
+						{% else %}Rounded {% endif %}
+					</td>
+					<td style="width: 30%;     padding-left: 153px;"><br>
+						{{corner}}
+					</td>
+				</tr>
+<!--				<tr>
+					<td style="    padding-left: 96px;"><br>
+						<b>	CUSTUM DESIGN </b>
+					</td>
+					<td style="width: 30%; padding-left: 95px;"><br>
+						{% if '10' == custum %} Yes
+						{% else %}No {% endif %}
+					</td>
+					<td style="width: 30%;     padding-left: 153px;"><br>
+						{{custum}}
+					</td>
+				</tr>-->
+				<tr>
+					<td style="    padding-left: 96px;"><br>
+						<b>	DELIVERY CHARGE</b>
+					</td>
+					<td style="width: 30%; padding-left: 95px;"><br>
+						
+					</td>
+					<td style="width: 30%;     padding-left: 153px;"><br>
+						{{delcharge}}
+					</td>
+
+				</tr><br><br>
+				<tr >
+					<td style="    padding-left: 96px;"><br><b><hr></b>
+						<b>	Total</b>
+					</td>
+					<td style="width: 30%; padding-left: 95px;"><br>
+						
+					</td>
+					<td style="width: 30%;     padding-left: 153px;"><br><b><hr></b>
+						{{total}}
+					</td>
+
+				</tr>
+
+			</table>
+
+	</div>
+
+
+
+
+		
+
+
+
+
+
+
+
+
+
+{% endblock container %}

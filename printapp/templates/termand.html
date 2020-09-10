@@ -1,0 +1,396 @@
+{% extends 'header.html' %}
+{% load static %}
+      <style>
+.dropbtn {
+  background-color: white;
+  color: #636363;
+  padding: 0px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Raleway', sans-serif;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: white}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: white;
+}
+</style>
+   </head>
+ {% block container %}      <!-- Modal -->
+      <div class="modal fade lug" id="myModal" role="dialog">
+         <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Choose from Wide Range of Categories</h4>
+               </div>
+               <div class="modal-body">
+                  <ul>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Business Cards">Business Cards</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Office Stationary">Office Stationary</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Marketing Tool">Marketing Tool</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Doctoor Tools">Doctoor Tools</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Invitation Cards">Invitation Cards</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Apparels/Gifts">Apparels/Gifts</a></li><br>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--/.mobile menu -->
+       <!--/.mobile menu -->
+
+      <div id="sidebar" class="top-nav">
+      
+         <ul id="sidebar-nav" class="sidebar-nav">
+            <li><a href="/index/">Home</a></li>
+                                 <li><a href="/gallerys/">Gallery</a></li>
+                                 <li><a href="/allproductpage/">All Products</a></li>
+                                 <li><a href="/opencategory/?cname=Business Cards">Business Card</a></li>
+                                 <li><a href="/inquiryform/">Inquiry</a></li>
+
+
+
+                                 {% if session == checksession  %}
+                                    <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/opencart/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
+                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
+                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
+                                  {% elif sessionre == checksessionre %}
+                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
+                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
+                                 {% else %}
+                                    
+                                 
+
+
+                                 <li >
+                                   <h2 style="color:black;">Reseller</h2>
+                                   
+                                    <li><a   href="/resellerregistration/">Join as Reseller</a></li>
+                                    <li>   <a href="/resellerlogin/">Login</a></li>
+                                   
+                                 </li>
+
+
+                                 <li>
+                                   <h2 style="color:black;">User</h2>
+                                   
+                                    <li><a href="/userlogin/">Login</a></li>
+                                    <li><a class="custom-b" href="/userregistration/">Sign up</a></li>
+                                
+                                 </li>
+
+                                 {% endif %}
+         </ul>
+      </div>
+      <div class="main-template-about">
+         
+            
+            <div class="container-fluide">
+               <div class="row">
+                  <div class="col-lg-8 col-lg-offset-2">
+                     <div class="wow fadeIn" data-wow-delay="0.0s">
+                        <h1 style="color:black;">Term & Conditions
+                        </h1>
+                        <p class="lead" style="color:black; " align="justify">
+
+                           <br>
+                           Thank you for using our products and services (“Services”). The Services are provided by SHREE SAI FLEX & PRINTERS,  “SHREE SAI FLEX & PRINTERS” located at First Floor Martand Complex, Rewa, Madhya Pradesh, India
+
+                          By using our Services, you are agreeing to these terms. Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the http://www.Printsathi.com website and the mobile application (the "Service") operated by SHREE SAI FLEX & PRINTERS ("us", "we", or "our"). 
+
+
+                          For any of our products or services if there are additional terms and conditions, the same shall be published along with the relevant product or service. The same shall be deemed as part of the overall contract that you sign by taking the service or product.
+                           <br>
+                     <!--      Go sign up and get inspired!  -->
+                        </p>
+                     </div>
+                     
+                  </div>
+               </div>
+            </div>
+         </div>
+         
+            
+         </div>
+        
+         
+         <div class="section-white" align="center" style="padding-top:0px;">
+            <div class="container-fluide" align="center">
+               <div class="row">
+                  <h2>Terminology</h2>
+                  <div class="about-icons row" style="margin-top:0px; margin-bottom: 0px;">
+                         <div class="col-xs-8 wow fadeIn" data-wow-delay="0.4s" align="center" style="float:none;">
+                            <p align="justify">The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer notice, and any or all Agreements: "Client", "You" and "Your" refer to you, the person accessing this website and accepting the Company's terms and conditions. "The Company", "Ourselves", "We" and "Us" refer to our Company. "Party", "Parties" or "Us" refers to both the Customer and ourselves, or either the Customer or ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner, whether through formal meetings of a fixed duration, or by any other means, with the express purpose of meeting the Client's needs in terms of providing the Company's declared services / products, in accordance with and subject to applicable INDIAN laws. Any use of the above terminology or other words in the singular, plural, capital letters and/or plural, and/or these terms, is considered interchangeable and therefore a reference to them.</p>
+                         </div>
+                     </div> 
+
+
+                     
+
+                  <div class="col-lg-8 col-lg-offset-2" style="padding-top:0px;     width: 66.66666667%;">
+                     <h2>Using our Services </h2>
+                  </div>
+                 
+
+                  <div class="col-lg-8 col-lg-offset-2" style="padding-top:0px;     width: 66.66666667%;">
+                     <p align="justify">You must follow any policies made available to you within the Services. Don’t misuse our Services. For example, don’t interfere with our Services or try to access them using a method other than the interface and the instructions that we provide. You may use our Services only as permitted by law, including applicable export and re-export control laws and regulations. We may suspend or stop providing our Services to you if you do not comply with our terms or policies or if we are investigating suspected misconduct.</p>
+                     <p align="justify">Using our Services does not give you ownership of any intellectual property rights in our Services or the content you access. You may not use content from our Services unless you obtain permission from its owner or are otherwise permitted by law. These terms do not grant you the right to use any branding or logos used in our Services. Don’t remove, obscure, or alter any legal notices displayed in or along with our Services.</p>
+                     <p align="justify">In connection with your use of the Services, we may send you service announcements, administrative messages, and other information. You may opt out of some of those communications.</p>
+                     <p align="justify">Some of our Services are available on mobile devices. Do not use such Services in a way that distracts you and prevents you from obeying traffic or safety laws.
+
+                    “Shree Sai Flex & Printers” reserves the right to make changes to this Site and to these Terms of Usage at any time without prior notice. You should review these Terms of Usage each time you access this Site.</p>
+                    <p align="justify">All the terms and conditions and/or any transactions occuring online at www.printsathi.com or by phone are subject to the laws of Rewa M.P. India.   Shree Sai Flex & Printers is not responsible for the delay and/or damages, Price Changes resulting from Machinery Breakdown, Acts of God, and from other actions, both governmental and otherwise, including but not limited to war, riot, seizure, and embargo. The tools available on www.printsathi.com to create document is the property of Shree Sai Flex & Printers and its affiliated companies.  The Buyer’s order shall be deemed an acceptance of the Seller's terms.  The Terms and conditions shall in all respects be governed by jurisdiction of the Courts of Mumbai, India.</p>
+                  </div>
+                    
+                  <div class="col-lg-8 col-lg-offset-2" style="padding-top:0px;     width: 66.66666667%;">
+                     <h2>Privacy Statement  </h2>
+                  </div>
+                  <div class="col-lg-8 col-lg-offset-2" style="padding-top:0px; width: 66.66666667%;">
+                     <p align="justify">We are committed to protecting your privacy. SHREE SAI FLEX & PRINTERS’s privacy policies explain how we treat your personal data and protect your privacy when you use our Services. By using our Services, you agree that SHREE SAI FLEX & PRINTERS can use such data in accordance with our privacy policies. [PLEASE REFER TO THE OFFICIAL PRIVACY POLICY OF THE COMPANY]</p>
+                     <p align="justify">Only authorized employees within the company who, in the course of their duties, can access and use information collected from individual customers. </p>
+                     <p align="justify">We are constantly reviewing our systems and data to ensure the best possible service to our customers. Government authorities have created specific offences for unauthorized actions against computer systems and data. We will investigate such actions with a view to bringing legal action and/or civil action for damages against those responsible.</p>
+                  </div>
+
+                  <div class="col-lg-8 col-lg-offset-2" style="padding-top:0px;     width: 66.66666667%;">
+                     <h2>Purchases  </h2>
+                  </div>
+                  <div class="col-lg-8 col-lg-offset-2" style="padding-top:0px; width: 66.66666667%;">
+                     <p align="justify">If you wish to purchase any product or service made available through the Service ("Purchase"), you may be asked to supply certain information relevant to your Purchase including, without limitation, your [SPECIFY].</p>
+                  </div>
+
+                  <div class="col-lg-8 col-lg-offset-2" style="padding-top:0px;     width: 66.66666667%;">
+                     <h2>Subscriptions  </h2>
+                  </div>
+                  <div class="col-lg-8 col-lg-offset-2" style="padding-top:0px; width: 66.66666667%;">
+                     <p align="justify">Some parts of the Service are billed on a subscription basis ("Subscription(s)"). You will be billed in advance on a recurring [SPECIFY].</p>
+                  </div>
+
+                  <div class="col-lg-8 col-lg-offset-2" style="padding-top:0px;     width: 66.66666667%;">
+                     <h2>Software in our Services</h2>
+                  </div>
+                  <div class="col-lg-8 col-lg-offset-2" style="padding-top:0px; width: 66.66666667%;">
+                     <p align="justify">When a Service requires or includes downloadable software, this software may update automatically on your device once a new version or feature is available. Some Services may let you adjust your automatic update settings</p>
+                     <p align="justify" >“Shree Sai Flex & Printers” gives you a personal, worldwide, royalty-free, non-assignable and non-exclusive license to use the software provided to you by “Shree Sai Flex & Printers” as part of the Services. This license is for the sole purpose of enabling you to use and enjoy the benefit of the Services as provided by “Shree Sai Flex & Printers”, in the manner permitted by these terms. You may not copy, modify, distribute, sell, or lease any part of our Services or included software, nor may you reverse engineer or attempt to extract the source code of that software, unless laws prohibit those restrictions or you have our written permission.</p>
+                  </div>
+                </div>
+             
+
+                  <div class="wow fadeIn" data-wow-delay="0.0s" style="padding-top:0px; width: 66.66666667%;">>
+                     
+                        <h1 style="color:black; float: left">Disclaimer 
+                        </h1>
+                        <h2>Exclusions and Limitations</h2>
+                        <p class="lead" style="color:black; " align="justify">
+                          The information contained on this website is provided on an " as is " basis. To the fullest extent permitted by law, this company: 
+                     <!--      Go sign up and get inspired!  -->
+                        </p>
+                        <p align="justify"><b>1.</b> excludes all representations and warranties with respect to this website and its content or that are or may be provided by affiliates or any other third party, including with respect to any inaccuracy or omission in this website and/or the Company's documentation; and</p>
+                        <p align="justify"><b>2.</b> excludes any liability for damages arising out of or in connection with your use of this website. “Shree Sai Flex & Printers”, and Shree Sai Flex & Printers’s suppliers and distributors, will not be responsible for lost profits, revenues, or data, financial losses or indirect, special, consequential, exemplary, punitive damages or damage caused to your computer, computer software, systems and programs and data relating thereto or any other direct or indirect, consequential or incidental damages. </p>
+                     </div>
+                     </div>
+                     <div  style="padding-top:0px;     width: 66.66666667%;">
+                     <h2>Liability for our Services</h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%;">
+                     <p align="justify">To the extent permitted by law, the total liability of “Shree Sai Flex & Printers”, and its suppliers and distributors, for any claims under these terms, including for any implied warranties, is limited to the amount you paid us to use the Services.gs</p>
+                     <p align="justify" >“Shree Sai Flex & Printers” will not be liable in contract or in tort (including negligence) to the customer for incidental or consequential damages, arising out of or resulting from anybody’s performance or nonperformance of our obligations.  “Shree Sai Flex & Printers” shall not be liable to anyone for any kind of financial losses, cost, expenses, damages and/or other economic damages.  The Buyer agrees that the Buyer will not “Shree Sai Flex & Printers” responsible for any and all loss, cost, expense, and damages (including legal costs) on account of any and all manner of claims, demands, actions, and proceedings that may be instituted against “Shree Sai Flex & Printers” and its affiliated company(s) on grounds alleging that the said work violates any copyrights, trademarks, service marks, or is scandalous, or invades any person's right to privacy or other personal rights.</p>
+                  </div>
+                
+
+                    <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Business uses of our Services</h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">If you are using our Services on behalf of a business, that business accepts these terms. It will hold harmless and indemnify “Shree Sai Flex & Printers” and its affiliates, officers, agents, and employees from any claim, suit or action arising from or related to the use of the Services or violation of these terms, including any liability or expense arising from claims, losses, damages, suits, judgments, litigation costs and attorneys’ fees</p>
+                    
+                  </div>
+
+
+                    <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Cancellation Policy</h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">A minimum of 24 hours' notice of cancellation is required. Such notice may be given, in person, by email, mobile phone, text message and/or fax, or by any other means, and will be accepted subject to written confirmation. We reserve the right to charge a cancellation fee of [SPECIFY] to cover any administrative costs.</p>
+                    
+                  </div>
+                  <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Modifying and Terminating our Services </h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">We are constantly changing and improving our Services. We may add or remove functionalities or features, and we may suspend or stop a Service altogether.
+
+                      The Customer and “Shree Sai Flex & Printers” have the right to terminate any Service Agreement for any reason whatsoever, including the termination of services already in progress. “Shree Sai Flex & Printers” may also stop providing Services to you or add or create new limits to our Services at any time.</p>
+                    
+                  </div>
+                  <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Refunds Policy</h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">No refund will be offered when a service is deemed to have commenced and is, for all intents and purposes, in progress. Any amount paid to us that constitutes payment for the provision of unused Services, will be refunded.</p>
+                    
+                  </div>
+                  <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Returns</h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">Due to the nature of the product, no returns can be made once the order is processed and/or shipped. Any claims for defects, damages, or shortages must be made in writing within two (2) business days after receipt of the merchandise. We will replace only those orders that were processed incorrectly. The replacement of the order will take place only after the receipt of returned merchandise. We will not replace the order if it is determined by us that the order was misused or mishandle by the buyer or part of the order was used by the buyer and part of the order is being returned.</p>
+                    
+                  </div>
+                  <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Credit Card</h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">If the Buyer's credit card is declined, “Shree Sai Flex & Printers” will not process the Buyer’s order. In the event that Shree Sai Flex & Printers must commence legal action to enforce any terms of this agreement, the Buyer agrees to pay reasonable legal fees and costs.</p>
+                    
+                  </div>
+                  <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Warranty</h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">Shree Sai Flex & Printers neither makes any explicit warranty nor imply or accepts any responsibility other than possible replacement of the products that Buyer is buying.  Shree Sai Flex & Printers may but does not guarantee the replacement of the defective product, or credit the amount of the purchase price..</p>
+                    
+                  </div>
+                  <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Shipping</h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">Shree Sai Flex & Printers will arrange for shipping with a reputed carrier. Shree Sai Flex & Printers will not be responsible for the delay in delivery, loss or damage of the order while the order is with the shipping carrier.</p>
+                    
+                  </div>
+
+                  <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Log Files</h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">We use IP addresses to analyse trends, administer the site, track user’s movement, and gather broad demographic information for aggregate use. IP addresses are not linked to personally identifiable information. Additionally, for systems administration, detecting usage patterns and troubleshooting purposes, our web servers automatically log standard access information including browser type, access times/open mail, URL requested, and referral URL. This information is not shared with third parties and is used only within this Company on a need-to-know basis. Any individually identifiable information related to this data will never be used in any way different to that stated above without your explicit permission.
+                  </div>
+
+                  <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Cookies</h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">Like most interactive websites, this Company’s website uses cookies to enable us to retrieve user details for each visit. Cookies are used in some areas of our site to enable the functionality of this area and ease of use for those people visiting. Some of our affiliate partners may also use cookies. [REFER TO THE COOKIE USAGE POLICY WITHIN THE PRIVACY POLICY]
+                  </div>
+                  <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Links others website</h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">Our Service may contain links to third-party web sites or services that are not owned or controlled by “Shree Sai Flex & Printers”. </p>
+                     <p align="justify">“Shree Sai Flex & Printers” has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third-party web sites or services. The opinions expressed or material appearing on these websites are not necessarily shared or endorsed by us and should not be considered as the publisher of such opinions or material. Please note that we are not responsible for the privacy practices or content of these sites. We encourage our users to be aware when they leave our site and to read the privacy statements of these sites.</p>
+                     <p align="justify">You should evaluate the security and reliability of any other site linked to or accessed through this site before disclosing any personal information to them. This company will not accept any liability for any loss or damage, in any manner whatsoever, regardless of the cause, resulting from your disclosure of personal information to third parties.</p>
+                     <p align="justify">You further acknowledge and agree that “Shree Sai Flex & Printers”. shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such web sites or services.</p>
+                  </div>
+                  <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Links to this website </h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">You may not create a link to a page on this website without our prior written consent. If you link to any page on this website, you do so at your own risk and the exclusions and limitations set out above apply to your use of this website.</p>
+                  </div>
+                  <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Copyright Notice </h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">Copyright and other relevant intellectual property rights exist on all text relating to the Company’s services and the full content of this website. This Company’s logo is a registered trademark of this Company in the United Kingdom and other countries. The brand names and specific services of this Company featured on this web site are trade marked.</p>
+                  </div>
+                  <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Force Majeure</h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">Neither party shall be liable to the other for any failure to perform any obligation under any Agreement which is due to an event beyond the control of such party including but not limited to any Act of God, terrorism, war, Political insurgence, insurrection, riot, civil unrest, act of civil or military authority, uprising, earthquake, flood or any other natural or man made eventuality outside of our control, which causes the termination of an agreement or contract entered into, nor which could have been reasonably foreseen. Any Party affected by such event shall forthwith inform the other Party of the same and shall use all reasonable endeavours to comply with the terms and conditions of any Agreement contained herein. </p>
+                  </div>
+                  <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Waiver</h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">Failure of either Party to insist upon strict performance of any provision of this or any Agreement or the failure of either Party to exercise any right or remedy to which it, he or they are entitled hereunder shall not constitute a waiver thereof and shall not cause a diminution of the obligations under this or any Agreement. No waiver of any of the provisions of this or any Agreement shall be effective unless it is expressly stated to be such and signed by both Parties. </p>
+                  </div>
+                  
+                  <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>About these Terms</h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">We reserve the right to modify these terms or any additional terms that apply to a Service to, for example, reflect changes to the law or changes to our Services. You should look at the terms regularly. If a revision is material, we will try to provide at least [SPECIFY] days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.  </p>
+                     <p align="justify">We’ll post notice of modifications to these terms on this page. We’ll post notice of modified additional terms in the applicable Service. Changes will not apply retroactively and will become effective no sooner than [SPECIFY] days after they are posted. However, changes addressing new functions for a Service or changes made for legal reasons will be effective immediately. If you do not agree to the modified terms for a Service, you should discontinue your use of that Service</p>
+                     <p align="justify">If there is a conflict between these terms and the additional terms, the additional terms will control for that conflict.<br>
+
+                      These terms control the relationship between “Shree Sai Flex & Printers” and you. They do not create any third-party beneficiary rights.<br>
+
+                      If you do not comply with these terms, and we don’t act right away, this doesn’t mean that we are giving up any rights that we may have (such as taking action in the future).</p>
+                      <p align="justify">If it turns out that a particular term is not enforceable, this will not affect any other terms.
+                      The courts in some countries will not apply Madhya Pradesh law to some types of disputes. If you reside in one of those countries, then where Madhya Pradesh law is excluded from applying, your country’s laws will apply to such disputes related to these terms.</p>
+                  </div>
+
+                  <div  style="padding-top:0px; width: 66.66666667%; float:none" >
+                     <h2>Contact Us </h2>
+                    </div>
+                  <div style="padding-top:0px; width: 66.66666667%; float:none">
+                     <p align="justify">If you have any questions about these Terms, please contact us at <br>
+                      Care@printsathi.com<br>
+                      6232114407<br>
+                      6232114408</p>
+                      </div>
+                  </div>
+            <!--     <div class="col-lg-8 col-lg-offset-2">
+                     <h2>The ball is now yours.</h2>
+                     <p>Over the coming years, the way that business through the web works will change at a great level - and Printsathi is the gamebreaker. Customers will expect options of where and how to buy: in-store or online, delivered or for pick-up. It’s an incredibly exciting time for this industry, and we’re going to be right at the centre of it.</p>
+                     <p>So what are you waiting for? Sign up and create oppurtinities for your business.</p>
+                  </div>-->
+<!--               <div class="col-lg-8 col-lg-offset-2">
+                     <div class="row">
+                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.2s">
+                           <div class="rectange">
+                              <h3 class="rectange_title">Career opportunities</h3>
+                              <p class="rectange_text">We’re growing, and we’re looking for talented people who can make commerce better.</p>
+                              <a href="" class="rectange_link">See open positions</a>
+                           </div>
+                        </div>
+                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.4s">
+                           <div class="rectange">
+                              <h3 class="rectange_title">Contact us</h3>
+                              <p class="rectange_text">Have questions or any requests for us? Contact our team and we will get back to you.</p>
+                              <a href="" class="rectange_link">Contact Chamb</a>
+                           </div>
+                        </div>
+                     </div>
+                  </div> -->
+               </div>
+            </div>
+         </div>
+      </div>
+ {% endblock container %}
+
+
+
+{% block footer %}
+<script src="{% static 'js/custom.js' %}"></script>
+
+{% endblock footer %}

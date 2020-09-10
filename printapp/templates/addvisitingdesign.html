@@ -1,0 +1,72 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block container %}
+
+      <div class="terms-conditions">
+         <div class="terms-title">
+            <div class="container">
+               <div class="row">
+                  <ol class="breadcrumb">
+                     <li>Admin Login</li>
+                     <li class="active">Add Designs</li>
+                  </ol>
+               </div>
+            </div>
+         </div>
+       <div class="container">
+         <div class="row">
+            <div class="column">
+               <div class="w3-container w3-blue" style="padding-top:10px;padding-bottom:10px;margin-bottom:20px;border-radius:10px;font-size:5px;">
+                  <h2 style="font-size:25px;">Add Designs</h2>
+               </div>
+               <form class="w3-container w3-light-grey" style="padding:20px;border-radius:10px;" action="/savedesignsofcategory/" method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+                  <label style="margin-bottom:15px;font-size:20px;color:green;">{{ msg|safe }}</label>
+
+                  <select name="Product" style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0">
+                     <option required="required" selected="selected" disabled="disabled">Select Product</option>
+                     {% for x in prod %}
+                     <option value="{{ x.Product_ID|safe }}">{{ x.Product_Name|safe }}</option>
+                     {% endfor %}
+                  </select>
+
+
+                  <select name="corner" style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0">
+                     <option required="required" selected="selected" disabled="disabled">Select corner type</option>
+                     
+                     <option value="Horizontal">Standard</option>
+                     <option value="Vertical">Rounded</option>
+                     
+                  </select>
+
+                  <input style="margin-bottom:20px;border-radius:10px;" class="w3-input w3-border-0" type="file" name="image" accept="image/*" required id="id_image">
+
+                  <input type="submit" value="Add " class="w3-button w3-blue w3-hover-black" style="font-size:20px;border-radius:20px;">
+               </form>
+            </div>
+            <div class="column" style="margin-top:20px;">
+               <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+                 <tr class="w3-black">
+                   <th>Product ID</th>
+                   <th>Number Designs Uploaded</th>
+                 </tr>
+                 {% for x in data %}
+                 <tr>
+                   <td>{{ x.id|safe }}</td>
+                   <td>{{ x.count|safe }}</td>
+                 </tr>
+                 {% endfor %}
+               </table>
+            </div>
+         </div>
+
+      </div>  
+      </div>
+{% endblock container %}
+
+
+
+{% block footer %}
+<script src="{% static 'js/custom.js' %}"></script>
+{% endblock footer %}

@@ -1,28 +1,6 @@
+
+{% extends 'header.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-   <head>
-      <meta charset="UTF-8">
-
-     
-      <title>Printsathi - Order Details</title>
-
-      <link rel="stylesheet" href="{% static 'w3.css' %}">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <!--enable mobile device-->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!--fontawesome css-->
-      <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-      <!--bootstrap css-->
-      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-      <!--animate css-->
-      <link rel="stylesheet" href="{% static 'css/animate-wow.css' %}">
-      <!--main css-->
-      <link rel="stylesheet" href="{% static 'css/style.css' %}">
-      <link rel="stylesheet" href="{% static 'css/bootstrap-select.min.css' %}">
-      <link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
-      <!--responsive css-->
-      <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
       <style type="text/css">
       
          input[type=radio]:checked + img {
@@ -86,88 +64,8 @@
 </style>
 
 
-   </head>
-   <body>
-      <header id="header" class="top-head">
-         <!-- Static navbar -->
-         <nav class="navbar navbar-default">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-md-4 col-sm-12 left-rs">
-                     <div class="navbar-header">
-                        <button type="button" id="top-menu" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"> 
-                        <span class="sr-only">Toggle navigation</span> 
-                        <span class="icon-bar"></span> 
-                        <span class="icon-bar"></span> 
-                        <span class="icon-bar"></span> 
-                        </button>
-                        <a href="\index\" class="navbar-brand"><img src="{% static 'images/logo.png' %}" style="width:200px;" alt="" /></a>
-                     </div>
-                  </div>
-                  <div class="col-md-8 col-sm-12">
-                     <div class="right-nav">
-                        
-                        <div class="login-sr">
-                           <div class="login-signup">
-                              <ul>
-                                 
-                              </ul>
-                           </div>
-                        </div>
+{% block container %}
 
-                        <div class="nav-b hidden-xs">
-                           <div class="nav-box">
-                              <ul>
-                                 <li><a href="/index/">Home</a></li>
-                                 <li><a href="/index/">Gallery</a></li>
-                                 <li><a href="/allproductpage/">All Products</a></li>
-                                 <li><a href="/opencategory/?cname=Business Cards">Business Card</a></li>
-                                 <li><a href="/index/">Inquiry</a></li>&nbsp&nbsp
-
-
-
-                                 {% if session == checksession  %}
-                                    <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/opencart/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
-                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
-                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
-                                  {% elif sessionre == checksessionre %}
-                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
-                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
-                                 {% else %}
-                                    
-                                 
-
-
-                                 <li class="dropdown">
-                                   <button class="dropbtn">Reseller</button>
-                                   <div class="dropdown-content">
-                                      <a   href="/resellerregistration/">Join as Reseller</a>
-                                       <a href="/resellerlogin/">Login</a>
-                                   </div>
-                                 </li>&nbsp&nbsp&nbsp&nbsp
-
-
-                                 <li class="dropdown">
-                                   <button class="dropbtn">User</button>
-                                   <div class="dropdown-content">
-                                       <a href="/userlogin/">Login</a>
-                                       <a class="custom-b" href="/userregistration/">Sign up</a>
-                                     
-                                   </div>
-                                 </li>
-
-                                 {% endif %}
-                              </ul>
-                           </div>
-                        </div>
-
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <!--/.container-fluid -->
-         </nav>
-      </header>
       <div class="modal fade lug" id="myModal" role="dialog">
          <div class="modal-dialog">
             <!-- Modal content-->
@@ -190,22 +88,49 @@
          </div>
       </div>
       <!--/.mobile menu -->
+       <!--/.mobile menu -->
+
       <div id="sidebar" class="top-nav">
+      
          <ul id="sidebar-nav" class="sidebar-nav">
             <li><a href="/index/">Home</a></li>
-            <li><a href="/about/">About</a></li>
-            <li><a data-toggle="modal" data-target="#myModal" href="#">Categories</a></li>
-            {% if session == checksession  %}
-            <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/opencart/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
-            <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
-            <li><a class="custom-b" href="/logout/">Logout</a></li>
-          {% elif sessionre == checksessionre %}
-            <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
-            <li><a class="custom-b" href="/logout/">Logout</a></li>
-         {% else %}
-            <li><a href="/userlogin/">Login</a></li>
-            <li><a class="custom-b" href="/userregistration/">Sign up</a></li>
-         {% endif %}
+                                 <li><a href="/gallerys/">Gallery</a></li>
+                                 <li><a href="/allproductpage/">All Products</a></li>
+                                 <li><a href="/opencategory/?cname=Business Cards">Business Card</a></li>
+                                 <li><a href="/inquiryform/">Inquiry</a></li>
+
+
+
+                                 {% if session == checksession  %}
+                                    <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/opencart/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
+                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
+                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
+                                  {% elif sessionre == checksessionre %}
+                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
+                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
+                                 {% else %}
+                                    
+                                 
+
+
+                                 <li >
+                                   <h2 style="color:black;">Reseller</h2>
+                                   
+                                    <li><a   href="/resellerregistration/">Join as Reseller</a></li>
+                                    <li>   <a href="/resellerlogin/">Login</a></li>
+                                   
+                                 </li>
+
+
+                                 <li>
+                                   <h2 style="color:black;">User</h2>
+                                   
+                                    <li><a href="/userlogin/">Login</a></li>
+                                    <li><a class="custom-b" href="/userregistration/">Sign up</a></li>
+                                
+                                 </li>
+
+                                 {% endif %}
          </ul>
       </div>
       
@@ -214,12 +139,14 @@
         <form action="/orderdatasave/" method="POST" enctype="multipart/form-data">
           <div class="col-md-6 col-sm-6">
             <div style="color:red;">
-            
+              {{message}}
             </div>
+            <label>Note<span style="color: red">*</span>: Enter Details which will printed </label>
             
               <div class="form-group">
                 <label for="exampleInputEmail1">Name </label>
-                <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" required="
+                ">
                   <small id="emailHelp" class="form-text text-muted"></small>
               </div>
               <div class="form-group">
@@ -238,8 +165,13 @@
                   <small id="emailHelp" class="form-text text-muted"></small>
               </div>
               <div class="form-group">
+                <label for="exampleInputEmail1">Website Link</label>
+                <input type="gmail" class="form-control" name="web" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <small id="emailHelp" class="form-text text-muted"></small>
+              </div>
+              <div class="form-group">
                 <label for="exampleInputEmail1">Phone Number 1</label>
-                <input type="number" class="form-control" name="ph1" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="number" class="form-control" name="ph1" id="exampleInputEmail1" aria-describedby="emailHelp" required="">
                   <small id="emailHelp" class="form-text text-muted"></small>
               </div>
               <div class="form-group">
@@ -256,12 +188,19 @@
                   <label for="exampleFormControlTextarea1">Other Information</label>
                     <textarea class="form-control" name="other" id="exampleFormControlTextarea1" rows="5"></textarea>
               </div>
+
+              
+             <div class="form-group">
+                <label for="exampleFormControlFile1">Upload Your logo</label>(optional)
+                <input type="file" class="form-control-file" name="logo" id="exampleFormControlFile1">
+            </div>
+
               <div class="form-group">
                   <label for="exampleFormControlTextarea1">OR</label>
                     
               </div>
              <div class="form-group">
-                <label for="exampleFormControlFile1">Upload file of documents</label>
+                <label for="exampleFormControlFile1">Upload Your Design</label>
                 <input type="file" class="form-control-file" name="filedata" id="exampleFormControlFile1">
             </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -275,6 +214,16 @@
                 {% for x in designs %}
                     <input class="w3-input" type="hidden" name="design"  value="{{ x.did }}" >
                     <img src="{{x.image }}"  name="design" alt="Forest" width="600" height="400">
+                    <input type="hidden" name="pid" value="{{ x.pid }}">
+                    <input type="hidden"  name="" value="{{x.product}}">
+                      <input type="hidden"  name="sum" value="{{x.total}}">
+                      <input type="hidden"  name="paper" value="{{x.paper}}">
+                      <input type="hidden"  name="side" value="{{x.side}}">
+                      <input type="hidden"  name="quantity" value="{{x.quantity}}">
+                      <input type="hidden"  name="lamination" value="{{x.lamination}}">
+                      <input type="hidden"  name="corner" value="{{x.corner}}">
+                      <input type="hidden"  name="district" value="{{x.district}}">
+                      <input type="hidden"  name="state" value="{{x.state}}">
                   {% endfor %}
                       <div class="prod-dit clearfix">
                         <div class="dit-t clearfix">
@@ -282,7 +231,7 @@
                               
                               <input type="hidden" name="uid" value="{{ uid|safe }}">
 
-                               <input type="hidden" name="pid" value="{{ Product_ID|safe }}"><br>
+                               <br>
                         <!--         <p><span>Catrgory :</span>{{ i.Product_Category|safe }}<br>
                                  <span>Quantity :</span>{{ i.Product_Quantity|safe }}</p>-->
                             </div>
@@ -292,7 +241,20 @@
                 </div>
               </div>
             </div>
+            <label>Note<span style="color: red">*</span>: Delivary Address </label>
+
+            
+            
+            <div class="boxed">
+              <textarea rows="5" cols="80" name="add" required></textarea>
+              
+            </div>
+            <br>
+            <div>
+          
+        </div>
           </div>
+
      
       </form>
          
@@ -300,119 +262,33 @@
       </div>  
    </div>
 
+   <style type="text/css">
+     
+     .boxed label {
+  display: inline-block;
+  width: 200px;
+  padding: 10px;
+  border: solid 2px #ccc;
+  transition: all 0.3s;
+}
 
-      <footer>
-         <div class="main-footer">
-            <div class="container">
-               <div class="row">
-                  <div class="footer-link-box clearfix">
-                     <div class="col-md-6 col-sm-6">
-                        <div class="left-f-box">
-                           <div class="col-sm-4">
-                              <h2>Reseller's Counter</h2>
-                              <ul>
-                                 <li><a href="/resellerregistration/">Join as Reseller</a></li>
-                                 <li><a href="/resellerlogin/">Login</a></li>
-                              </ul>
-                           </div>
-                           <div class="col-sm-4">
-                              <h2>Products</h2>
-                              <ul>
-                                 <li><a href="/allproductpage/">All Products</a></li>
-                                 <li><a href="/opencategory/?cname=Business Cards">Business Cards</a></li>
-                                 <li><a href="/opencategory/?cname=Office Stationary">Office Stationary</a></li>
-                                 <li><a href="/opencategory/?cname=Marketing Tool">Marketing Tool</a></li>
-                                 <li><a href="/opencategory/?cname=Doctoor Tools">Doctoor Tools</a></li>
-                                 <li><a href="/opencategory/?cname=Invitation Cards">Invitation Cards</a></li>
-                                 <li><a href="/opencategory/?cname=Apparels/Gifts">Apparels/Gifts</a></li>
-                              </ul>
-                           </div>
-                           <div class="col-sm-4">
-                              <h2>Useful Links</h2>
-                              <ul>
-                                 <li><a href="#">FAQs</a></li>
-                                 <li><a href="#">About Us</a></li>
-                                 <li><a href="#">Contact Us</a></li>
-                                 <li><a href="#">Terms & Conditions</a></li>
-                                 <li><a href="#">Privacy Policy</a></li>
-                                
-                              </ul>
-                           </div>>
-                           
-                        </div>
-                     </div>
-                     <div class="col-md-6 col-sm-6">
-                        <div class="left-f-box">
-                           <div class="col-sm-4">
-                              <h2>Quick Links</h2>
-                              <ul>
-                                 <li><a href="#">1 Side Visiting Card Designs</a></li>
-                                 <li><a href="#">2 Side Visiting Card Designs</a></li>
-                                 <li><a href="#">Single sided business cards</a></li>
-                                 <li><a href="#">Back to back business cards</a></li>
-                                 <li><a href="#">Business card templates</a></li>
-                                 <li><a href="#">Spot lamination visiting cards</a></li>
-                                
-                              </ul>
-                           </div>
-                           <div class="col-sm-4">
-                              <h2>ABOUT US</h2>
-                              <ul>
-                                 <li><a href="/about/">about Printsathi</a></li>
-                                 
-                              </ul>
-                           </div>
-                           
-                        </div>
-                     </div>
-                     
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="copyright">
-            <div class="container">
-               <div class="row">
-                  <div class="col-md-8">
-                     <p><img width="90" src="{% static 'images/logo.png' %}" alt="#" style="margin-top: -5px;" /> All Rights Reserved. <a href="http://funtouchit.com/"> Funtouch IT Solution © 2020</a></p>
-                  </div>
-                  <div class="col-md-4">
-                     <ul class="list-inline socials">
-                        <li>
-                           <a href="">
-                           <i class="fa fa-facebook" aria-hidden="true"></i>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="">
-                           <i class="fa fa-twitter" aria-hidden="true"></i>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="">
-                           <i class="fa fa-instagram" aria-hidden="true"></i>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#">
-                           <i class="fa fa-linkedin" aria-hidden="true"></i>
-                           </a>
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </footer>
-      <!--main js--> 
-      <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script> 
-      <!--bootstrap js--> 
-      <script src="{% static 'js/bootstrap.min.js' %}"></script> 
-      <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
-      <script src="{% static 'js/slick.min.js' %}"></script> 
-      <script src="{% static 'js/wow.min.js' %}"></script>
-      <!--custom js--> 
-      <script src="{% static 'js/custom.js' %}"></script>
-   </body>
-</html>
+.boxed input[type="radio"] {
+  display: none;
+}
+
+.boxed input[type="radio"]:checked + label {
+  border: solid 2px green;
+}
+
+
+   </style>
+
+
+ {% endblock container %}
+
+
+
+{% block footer %}
+
+<script src="{% static 'js/custom.js' %}"></script>
+{% endblock footer %}

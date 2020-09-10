@@ -1,0 +1,109 @@
+{% extends 'header.html' %}
+{% load static %}
+
+
+{% block container %}
+      <div class="modal fade lug" id="myModal" role="dialog">
+         <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Choose from Wide Range of Categories</h4>
+               </div>
+               <div class="modal-body">
+                  <ul>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Business Cards">Business Cards</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Office Stationary">Office Stationary</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Marketing Tool">Marketing Tool</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Doctoor Tools">Doctoor Tools</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Invitation Cards">Invitation Cards</a></li><br>
+                     <li class="w3-button w3-hover-blue" style="width:100%;font-size:15px;padding:10px;margin-bottom:10px;"><a href="/opencategory/?cname=Apparels/Gifts">Apparels/Gifts</a></li><br>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--/.mobile menu -->
+       <!--/.mobile menu -->
+
+      <div id="sidebar" class="top-nav">
+      
+         <ul id="sidebar-nav" class="sidebar-nav">
+            <li><a href="/index/">Home</a></li>
+                                 <li><a href="/gallerys/">Gallery</a></li>
+                                 <li><a href="/allproductpage/">All Products</a></li>
+                                 <li><a href="/opencategory/?cname=Business Cards">Business Card</a></li>
+                                 <li><a href="/inquiryform/">Inquiry</a></li>
+
+
+
+                                 {% if session == checksession  %}
+                                    <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/opencart/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
+                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
+                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
+                                  {% elif sessionre == checksessionre %}
+                                    <li><a class="custom-b" href="/myuseraccount/">My Account</a></li>
+                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
+                                 {% else %}
+                                    
+                                 
+
+
+                                 <li >
+                                   <h2 style="color:black;">Reseller</h2>
+                                   
+                                    <li><a   href="/resellerregistration/">Join as Reseller</a></li>
+                                    <li>   <a href="/resellerlogin/">Login</a></li>
+                                   
+                                 </li>
+
+
+                                 <li>
+                                   <h2 style="color:black;">User</h2>
+                                   
+                                    <li><a href="/userlogin/">Login</a></li>
+                                    <li><a class="custom-b" href="/userregistration/">Sign up</a></li>
+                                
+                                 </li>
+
+                                 {% endif %}
+         </ul>
+      </div>
+
+<div align="center" style="margin-bottom:10vh;"><h2> Contact</h2></div>
+<div class="container" style="width:69.77%; margin-bottom:10vh;">
+  
+  <form action="/inquiry/" method="POST">{% csrf_token %}
+  
+  <div class="form-group">
+    <label for="exampleInputPassword1">FullName</label>
+    <input type="text" name="name" class="form-control" id="exampleInputPassword1" placeholder="FullName">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">EMAIL ID</label>
+    <input type="email" name="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Mobile No.</label>
+    <input type="number" min="6" name="phone" class="form-control" id="exampleInputPassword1" placeholder="Mobile No.">
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleInputPassword1">Message</label>
+    <textarea class="form-control" name="msg" id="exampleInputPassword1" rows="5" placeholder="Message"></textarea> 
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+  </div>
+ 
+</div>
+      {% endblock container %}
+
+
+
+{% block footer %}
+<script src="{% static 'js/custom.js' %}"></script>
+
+{% endblock footer %}

@@ -1,0 +1,133 @@
+{% extends 'header.html' %}
+{% load static %}
+
+
+{% block container %}
+
+      <!-- Modal -->
+      
+         
+      
+
+      <div class="terms-conditions">
+         <div class="terms-title">
+            <div class="container">
+               <div class="row">
+                  <ol class="breadcrumb">
+
+                     <li class="active">Admin Login</li>
+                     <li>Add Product</li>
+
+                  </ol>
+               </div>
+            </div>
+         </div>
+       <div class="container">
+         <div class="row">
+            <div class="column" style="margin-top:20px;">
+
+               <label style="margin-bottom:15px;font-size:20px;color:green;">Order List</label>
+               <div style="overflow-x:auto;overflow-y:auto;">
+               <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+                 <tr class="w3-black">
+
+               <label style="margin-bottom:15px;font-size:20px;color:green;">Paid Order List</label>
+               <div style="overflow-x:auto;overflow-y:auto;height:0px;">
+
+               <table class="w3-table-all w3-hoverable" style="margin-top:20px;">
+               {% for i in data %}
+               <tr class="w3-white">   
+                  <th>Order ID</th> <td>{{ i.orderid }}</td>
+                </tr>
+                <tr class="w3-white">   
+                   <th>Order Date</th><td>{{ i.orderdate }}</td>
+                </tr>
+                <tr class="w3-white">   
+                   <th>Product Name</th><td>{{ i.pname }}</td>
+                </tr>
+                {% if 'Business Cards' == i.Product_Type %}
+
+                <tr class="w3-white">   
+                   <th>Paper Weight</th><td>{{ i.paper }}</td>
+                </tr>
+                <tr class="w3-white">   
+                   <th>Corner</th><td>{{ i.Corner }}</td>
+                </tr>
+                <tr class="w3-white">   
+                   <th>Printig Side</th><td>{{ i.side }}</td>
+                </tr>
+                
+                <tr class="w3-white">   
+                   <th>Laminations</th><td>{{ i.lamination }}</td>
+                </tr>
+                {% else %}
+
+                {% endif%}
+                <tr class="w3-white">   
+                   <th>Quantity</th><td>{{ i.quantity }}</td>
+                </tr>
+                <tr class="w3-white">   
+                   <th>Product Design</th><td><img src="{{ i.design|safe }}" onclick="document.getElementById('modal01').style.display='block'" class="w3-hover-opacity" width="100">
+                    <div id="modal01" class="w3-modal w3-animate-zoom" onclick="this.style.display='none'">
+                    <img class="w3-modal-content" src="{{ i.design|safe }}">
+                    </div><a href="{{ i.design|safe }}" download>download</a></td>
+                </tr>
+
+                <tr class="w3-black">   
+                <center><th>Printing Details</th></center>
+                </tr>
+                <tr class="w3-white"> 
+                   <th> Name</th><td>{{i.name}}</td>
+                </tr>
+                <tr class="w3-white"> 
+                   <th>Mail ID</th><td>{{i.gmail}}</td>
+                </tr>
+                <tr class="w3-white"> 
+                   <th> Phone1 </th><td>{{i.ph1}}</td>
+                </tr>
+                <tr class="w3-white"> 
+                   <th> Phone2 </th><td>{{i.ph2}}</td>
+                </tr>
+                <tr class="w3-white"> 
+                   <th>GSTN no.</th><td>{{i.gstn}}</td>
+                </tr>
+                <tr class="w3-white">    
+                   <th>Company Address</th><td>{{i.address}}</td>
+                </tr>
+                <tr class="w3-white"> 
+                   <th>Website Url </th><td>{{i.web}}</td>
+                </tr>
+                <tr class="w3-white">
+                   <th>Other </th><td><p>{{i.other}}</p></td>
+                </tr>
+                <tr class="w3-white">
+                   <th>logo / Photo</th><td><img src="{{ i.logo}}" onclick="document.getElementById('modal02').style.display='block'" class="w3-hover-opacity" width="100">
+                    <div id="modal02" class="w3-modal w3-animate-zoom" onclick="this.style.display='none'">
+                    <img class="w3-modal-content" src="{{ i.logo}}">
+                    </div><a href="{{ i.logo}}" download>download</a></td>
+                </tr>
+                <tr class="w3-white"> 
+                   <th>file</th><td><img src="{{ i.file}}" onclick="document.getElementById('modal03').style.display='block'" class="w3-hover-opacity" width="100">
+                    <div id="modal03" class="w3-modal w3-animate-zoom" onclick="this.style.display='none'">
+                    <img class="w3-modal-content" src="{{ i.file}}">
+                    </div><a href="{{ i.file}}" download>download</a></td>
+                 </tr>
+                 
+               {% endfor %}
+             </table>
+              </div>
+            </div>
+
+         </div>
+
+      </div>  
+      </div>
+      </div>
+{% endblock container %}
+
+
+
+{% block footer %}
+<script src="{% static 'js/custom.js' %}"></script>
+
+{% endblock footer %}

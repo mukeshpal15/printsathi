@@ -1,0 +1,558 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+      <title>Printsathi</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!--enable mobile device-->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!--fontawesome css-->
+      <link rel="stylesheet" href="{% static 'w3.css' %}">
+      <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+      <!--bootstrap css-->
+      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+      <!--animate css-->
+      <link rel="stylesheet" href="{% static 'css/animate-wow.css' %}">
+      <!--main css-->
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      <link rel="stylesheet" href="{% static 'css/bootstrap-select.min.css' %}">
+      <link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
+      <!--responsive css-->
+      <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+      <link rel="stylesheet" href="{% static 'css/ddrodown.css' %}">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+      <style>
+.dropbtn {
+  background-color: white;
+  color: #636363;
+  padding: 0px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Raleway', sans-serif;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: white}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: white;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+.form-control-borderless {
+    border: none;
+}
+</style>
+
+</head>
+<body>
+  <!--##################### whatsapp ############################################# -->
+
+
+<!--##################### whatsapp ############################################# -->
+
+<div class=" container-fluid">
+	
+<header id="header" class="top-head">
+         <!-- Static navbar -->
+         <nav class="navbar navbar-default">
+            <div class="container-fluid">
+            <div class="border-bottom bg-white top-bar">
+<!--      
+        <div class="row align-items-center">
+          <div class="col-4 col-md-6">
+            <p class="mb-0">
+              <a href="tel:07000596002" class="mr-3"><span class="glyphicon glyphicon-earphone"></span> <span class="d-none d-md-inline-block ml-2">+917000596002</span></a>
+              <a href="mailto:shrirajproperty00@gmail.com" style="margin-left:10px;"><span class="glyphicon glyphicon-envelope"></span> <span class="d-none d-md-inline-block ml-2">shrirajproperty00@gmail.com
+                </span>
+              </a>
+            </p>  
+          </div>
+          <div class="col-8 col-md-6 text-right">
+          <a href="https://www.youtube.com/channel/UCsTj4mFbAKHOAZwcIt1YrlA" class="mr-3"><span ><img style="width:25px; height:25px; " src="{% static 'images/youtube1.png' %}"></span></a>
+            <a href="https://wa.me/917000596002?text=Hello Sir" class="mr-3" ><span  style="color:green; "><img  style="width:23px; height:25px; " src="{% static 'images/what2.png' %}"></span></a>
+            <a href="https://t.me/shrirajproperty" class="mr-3"><span ><img style="width:35px; height:35px; " src="{% static 'images/telegram.png' %}"></span></a>
+          </div>
+        </div>-->
+              <div class="row" style="margin-left:0px; margin-right: 15px;
+    border: 5px solid;
+    border-color: royalblue; background-color: black;">
+                  <div class="col-md-3 col-sm-12 left-rs"  >
+                    <p class="mb-0" >
+              <a href="tel:06232114410" class="mr-3" style="color: white;" ><span style="font-size: 20px; " class="glyphicon glyphicon-earphone"></span> <span  class="d-none d-md-inline-block ml-2"></span> +916232114410</a>
+              <a href="mailto:care@printsathi.com" style="margin-left:10px; color: white;"><span style="font-size: 20px; margin-top: 5px;" class="glyphicon glyphicon-envelope"></span><span class="d-none d-md-inline-block ml-2">
+                </span>care@printsathi.com
+              </a>
+            </p></div>
+
+
+            <div class="col-md-6 col-sm-12 left-rs"> 
+                            <form class="card card-search " action="/search/">
+                                <div class="card-body row no-gutters align-items-center">
+                                    
+                                    <!--end of col-->
+                                    <div class="col-md-8 col-sm-12 left-rs" style="margin-top: 2px; padding: 0px">
+                                        
+
+                                        <select name="cname" id="offer-types" class="form-control d-block rounded-0" >
+                                          <option value="">Select Your Product</option>
+                                            <option value="Premium Visiting Cards">Premium Visiting Cards</option>
+                                            <option value="Non Tearable Visiting Cards">Non Tearable Visiting Cards</option>
+                     <option value="Spot UV Visiting Cards">Spot UV Visiting Cards</option>
+                     <option value="3D Visiting Cards">3D Visiting Cards</option>
+                     <option value="Envelope">Envelope</option>
+                     <option value="Diary">Diary</option>
+                     <option value="Notebook">  Notebook</option>
+                     <option value="Voucher">Voucher</option>
+
+                     <option value="letter head">letter head</option>
+                     <option value="Certificate">Certificate</option>
+                     <option value="vinyle-sunboard">vinyle-sunboard</option>
+                     <option value="Poll board">Poll board</option>
+                     <option value="Flex banner">Flex banner</option>
+                     <option value="Standy">Standy</option>
+                     <option value="Kenopy">Kenopy</option>
+
+                     <option value="Sunpack">Sunpack</option>
+                     <option value="Flyers/phamplets">Flyers/phamplets</option>
+                     <option value=" Brochures">Brochures</option>
+                     <option value="Booklets posters">Booklets posters</option>
+                     <option value="Lebals">Lebals</option>
+                     <option value="Tags">Tags</option>
+                     <option value="Stickers">Stickers</option>
+                     <option value="Letter head">Letter head</option>
+                     <option value="Prescription Pad">Prescription Pad</option>
+
+                     <option value="Patient file">Patient file</option>
+                     <option value="Oppoinment Card">Oppoinment Card</option>
+                     <option value="Patient Card">Patient Card</option>
+                     <option value="Case summery card">Case summery card</option>
+                     <option value="Wedding cards">Wedding cards</option>
+                     <option value="Wedding stickers">Wedding stickers</option>
+                     <option value="wedding standy">wedding standy</option>
+
+
+                     <option value="Tilkotsav Cards">Tilkotsav Cards</option>
+                     <option value="Barhon/Upnayan cards">Barhon/Upnayan cards</option>
+                     <option value="Ram katha/ram charit manas card">Ram katha/ram charit manas card</option>
+                     <option value="Bhagwat katha cards">Bhagwat katha cards</option>
+                     <option value="Char dham pooja cards">Char dham pooja cards</option>
+                     <option value="T-shirts">T-shirts</option>
+                     <option value="Photo Frames">Mugs</option>
+                     <option value="Caps">Caps</option>
+
+                     <option value="Water bottles">Water bottles</option>
+                     <option value="Photo frames">Photo frames</option>
+                     <option value="Momentos">Momentos</option>
+                     <option value="vinyle-canvas roll">vinyle-canvas roll</option>
+                     <option value="Video Add">Video Add</option>
+                     <option value="Social Media Handling">Social Media Handling</option>
+                     <option value="Campaign Marketing">Campaign Marketing</option>
+                     <option value="Social Media Post Design">Social Media Post Design</option>
+
+                    
+                  </select>
+                                           
+                                            
+                                            
+                                      </select>
+                                    </div>
+                                    <!--end of col-->
+                                    <div class="col-md-2 col-sm-12 left-rs" style="margin-top: 2px; font-size:21px; padding: 0px; border-radius: 5px;">
+                                       <button type="submit" style="float: left;
+  width: 100%;
+  
+  background: #2196F3;
+  color: white;
+  font-size: 21px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;"><i class="fa fa-search"></i></button>
+                                    </div>
+                                    <!--end of col-->
+                                </div>
+                            </form>
+                        </div>
+
+              <div class="col-md-2 col-sm-6 left-rs"> 
+                <div class="row">
+                  <div class="col-md-6 col-sm-12 left-rs" style="margin-top: 5px;">
+
+              <a href="/userlogin/" style="color: white; font-size: 14px;"> Login |</a><a href="/userregistration/" style="color: white; font-size: 14px;">  Signup </a>   
+                </div> 
+                <div class="col-md-6 col-sm-12 ">    
+              <a href="https://www.youtube.com/channel/UCsTj4mFbAKHOAZwcIt1YrlA"  ><span style="float: right; margin-top: 5px;" ><img style="width:40px; height:25px;  " src="{% static 'images/youtube1.png' %}"></span></a>
+<!--            <a href="https://wa.me/917000596002?text=Hello Sir" class="mr-3" ><span  style="color:green; float: right;"><img  style="width:23px; height:25px; " src="{% static 'images/what2.png' %}"></span></a>-->
+            <a href="https://t.me/shrirajproperty" class="mr-3"><span style="float: right; margin-top: 0px;"><img style="width:40px; height:38px; " src="{% static 'images/telegram.png' %}"></span></a>
+            </p> 
+                </div>
+               </div> 
+                     
+                  </div>
+                  
+               </div>
+      
+    
+               <div class="row">
+                  <div class="col-md-4 col-sm-6 left-rs" style="padding: 0 0 0 0px;">
+                    <span>
+                    <a href="/index/" class="navbar-brand" style="float: left; margin-left: 20px"><img src="{% static 'images/logo.png' %}" style="width:200px;  margin-left: -25px;" alt="" /></a></span>
+                     <span class="navbar-header" >
+                        <button type="button" id="top-menu" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"> 
+                        <span class="sr-only">Toggle navigation</span> 
+                        <span class="icon-bar"></span> 
+                        <span class="icon-bar"></span> 
+                        <span class="icon-bar"></span> 
+                        </button>
+                        
+                     </div>
+                  </div>
+                  <div class="col-md-8 col-sm-12" style="float: right; margin-top: -57px; margin-right: 0px;">
+                     <div class="right-nav">
+                        
+                        
+
+                        <div class="nav-b hidden-xs">
+                           <div class="nav-box">
+                              <ul>
+                                 <li><a href="/index/">Home</a></li>
+                                 <i class="ri-twitter-fill"></i>
+                                 <li><a href="/gallerys/">Gallery</a></li>
+                                 <!--li><a href="/allproductpage/"></a>
+                                      
+                                 </li-->
+
+                                 <li >
+                                   <div class="dropdown">
+                                    <button class="dropbtn">Categories 
+                                      
+                                    </button>
+                                    <div class="dropdown-content" style="width: 28em; " >
+                                      <div class="row" style="    margin-top: 1em;
+">
+                                        <div class="col-4" style=" float: left;float: left;    padding-left: 1em;">                                              
+                                          <a href="/productopen/?productname=Business Cards" style="padding: 4px 10px;">Visiting Cards</a>
+                                          <a href="/productopen/?productname=Stationary" style="padding: 4px 10px;">Stationary</a>
+                                          <a href="/search/?cname=letter head" style="padding: 4px 10px;">Letterhead</a>
+                                          <a href="/search/?cname=Envelope" style="padding: 4px 10px;">Envelopes A4</a>
+                             <!--        <a href="/search/?cname=Envelopes10" style="padding: 4px 10px;">Envelopes #10</a>-->
+                                          <a href="/search/?cname=Letter Pad" style="padding: 4px 10px;">Letterpads</a>
+                                          <a href="/search/?cname=Folder" style="padding: 4px 10px;">Folders</a>
+                                          <a href="/search/?cname=File" style="padding: 4px 10px;">Files</a>
+                                          <a href="/search/?cname=Stamps" style="padding: 4px 10px;">Stamps</a>
+                                          <a href="/search/?cname=Notebook" style="padding: 4px 10px;">Notebooks</a>
+                                          <a href="/search/?cname=Flyers" style="padding: 4px 10px;">Flyers</a>
+                                          <a href="/search/?cname=Brochures" style="padding: 4px 10px;">Brochures</a>   
+                                                </div>                                  
+                                        <div class="col-4" style=" float: left;float: left    padding-left: 1em;">
+                                          <a href="/search/?cname=Poster"style="padding: 4px 10px;">Poster</a>
+                                          <a href="/productopen/?productname=Flex or Banner"style="padding: 4px 10px;">Banners</a>
+                                          
+                                          <a href="/search/?cname=Tent Cards"style="padding: 4px 10px;">Tent Cards</a>
+                                          <a href="/search/?cname=Voucher"style="padding: 4px 10px;">Vouchers</a>
+                                          <a href="/search/?cname=Documents Pricing"style="padding: 4px 10px;">Documents Pricing</a>
+                                          <a href="/search/?cname=Certificate"style="padding: 4px 10px;">Certificares</a>                                 
+                              
+                                          <a href="/search/?cname=Stickers"style="padding: 4px 10px;">Stickers</a>
+                                          <a href="/productopen/?productname=Doctoor Tools"style="padding: 4px 10px;">Product for Doctor</a>
+                                          <a href="/search/?cname=Corporate GIfts" style="padding: 4px 10px;">Corporates Gifting</a>
+                                          <a href="/search/?cname=Gift Bags" style="padding: 4px 10px;">Gift Bags</a>
+                                          <a href="/search/?cname=Gift Box" style="padding: 4px 10px;">Gift Boxes </a>
+                                          
+                                        </div>
+                                        <div class="col-4" style="float: left;float: left;    padding-left: 1em;">                                                    
+                                            <a href="/search/?cname=Calendars" style="padding: 4px 10px;">Calendars</a>
+                                              <a href="/search/?cname=Diary" style="padding: 4px 10px;">Diaries</a>
+                                            <a href="/search/?cname=Coasters" style="padding: 4px 10px;">Coasters</a>
+                                            <a href="/search/?cname=Mugs" style="padding: 4px 10px;">Mugs</a>
+                                            <a href="/search/?cname=Engraved Pen" style="padding: 4px 10px;">Engraved Pens</a>
+                                            <a href="/search/?cname=Plastic Pen" style="padding: 4px 10px;">Plastic Pens</a>
+                                            <a href="/search/?cname=Lanyard" style="padding: 4px 10px;">Lanyards</a>
+                                            <a href="/productopen/?productname=Invitation Cards" style="padding: 4px 10px;">Invitation Cards</a>
+                                            <a href="/search/?cname=Canvas" style="padding: 4px 10px;">Canvas</a>
+                                            <a href="/productopen/?productname=Flex or Banner" style="padding: 4px 10px;">Banners</a>
+                                            <a href="/search/?cname=Photo Frames" style="padding: 4px 10px;">Photo Frames</a>
+                                            <a href="/search/?cname=T-shirts" style="padding: 4px 10px;">Polo T-shirt</a>
+                                        </div>
+                                      </div>
+
+                                    </div>
+                                  </div> </li>
+
+                                
+
+                                 <li><a href="/productopen/?productname=Business Cards">Business Card</a></li>
+                                 <li><a href="/inquiryform/">Inquiry</a></li>&nbsp&nbsp
+
+
+
+                                 {% if session == checksession  %}
+                                    <li><a style="font-size:19px;padding-top:5px;padding-bottom:8px;" class="custom-b" href="/opencart/"><i class="fa fa-shopping-cart"></i> ({{ cartcount|safe }})</a></li>
+                                    <li><a class="custom-b" href="/myuseraccount/">Order</a></li>
+                                    <li><a class="custom-b" href="/accounts/">My Account</a></li>
+                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
+                                  {% elif sessionre == checksessionre %}
+                                    <li><a class="custom-b" href="/accounts/">My Account</a></li>
+                                    <li><a class="custom-b" href="/logout/">Logout</a></li>
+                                 {% else %}
+                                    
+                                 
+
+
+                                 <li class="dropdown">
+                                   <button class="dropbtn">Reseller</button>
+                                   <div class="dropdown-content">
+                                      <a   href="/resellerregistration/">Join as Reseller</a>
+                                       <a href="/resellerlogin/">Login</a>
+                                   </div>
+                                 </li>&nbsp&nbsp&nbsp&nbsp
+
+
+
+                                 {% endif %}
+                                 
+                                
+                      
+                        
+
+                              </ul>
+                           </div>
+                        </div>
+
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!--/.container-fluid -->
+         </nav>
+      </header>
+
+</div>
+<div class="container-fluide">
+{% block container %}
+
+{% endblock %}
+
+</div>
+<!-- ###################footer######################### -->
+
+
+      <footer style="background-color: black; background-image: none;">
+         <div class="main-footer" style="background-color: black; background-image: none;">
+            <div class="container" style="background-color: black">
+               <div class="row">
+                  <div class="footer-link-box clearfix">
+                     <div class="col-md-6 col-sm-6">
+                        <div class="left-f-box">
+                           <div class="col-sm-4">
+                              <h2>Reseller's Counter</h2>
+                              <ul>
+                                 <li><a href="/resellerregistration/">Join as Reseller</a></li>
+                                 <li><a href="/resellerlogin/">Login</a></li>
+                              </ul>
+                              <h2>Useful Links</h2>
+                              <ul>
+                               
+                                 
+                                 <li><a href="/contact/">Contact Us</a></li>
+                                 <li><a href="/term/">Terms & Conditions</a></li>
+                                 <li><a href="/term/">Privacy Policy</a></li>
+                                
+                              </ul>
+                           </div>
+                           <div class="col-sm-4">
+                              <h2> All Products</h2>
+                              <ul>
+                                 <li><a href="/productopen/?productname=Business Cards">Visiting Cards</a></li>
+                                 <li><a href="/productopen/?productname=Stationary">Stationary</a></li>
+                                 <li><a href="/search/?cname=letter head">Letterhead</a></li>
+                                 <li><a href="/search/?cname=Envelope">Envelopes A4</a></li>
+                  <!--               <li><a href="/search/?cname=Envelopes10">Envelopes #10</a></li>-->
+                                 <li><a href="/search/?cname=Letter Pad">Letterpads</a></li>
+                                 <li><a href="/search/?cname=Folder">Folders</a></li>
+                                 <li><a href="/search/?cname=File">Files</a></li>
+                                 <li><a href="/search/?cname=Stamps">Stamps</a></li>
+                                 <li><a href="/search/?cname=Notebook">Notebooks</a></li>
+                                 <li><a href="/search/?cname=Flyers">Flyers</a></li>
+                                 <li><a href="/search/?cname=Brochures">Brochures</a></li>
+                                 <li><a href="/search/?cname=Poster">Poster</a></li>
+                                 <li><a href="/productopen/?productname=Flex or Banner">Banners</a></li>
+                                 <li><a href="/search/?cname=Stander">Standers</a></li>
+                                 <li><a href="/search/?cname=Tent Cards">Tent Cards</a></li>
+                                 <li><a href="/search/?cname=Voucher">Vouchers</a></li>
+                                 <li><a href="/search/?cname=Documents Pricing">Documents Pricing</a></li>
+                                 <li><a href="/search/?cname=Certificate">Certificares</a></li>
+                                 
+                              </ul>
+                           </div>
+                           <div class="col-sm-4">
+                            <h2>More Products</h2>
+                            <ul>
+                                 <li><a href="/search/?cname=Stickers">Stickers</a></li>
+                                 <li><a href="/productopen/?productname=Doctoor Tools">Product for Doctor</a></li>
+                                 <li><a href="/search/?cname=Corporates Gifting">Corporates Gifting</a></li>
+                                 <li><a href="/search/?cname=Gift Bags">Gift Bags</a></li>
+                                 <li><a href="/search/?cname=Gift Box">Gift Boxes </a></li>
+                                 <li><a href="/search/?cname=Calendars">Calendars</a></li>
+                                 <li><a href="/search/?cname=Diary">Diaries</a></li>
+                                 <li><a href="/search/?cname=Coasters">Coasters</a></li>
+                                 <li><a href="/search/?cname=Mugs">Mugs</a></li>
+                                 <li><a href="/search/?cname=Engraved Pen">Engraved Pens</a></li>
+                                 <li><a href="/search/?cname=Plastic Pen">Plastic Pens</a></li>
+                                 <li><a href="/search/?cname=Lanyard">Lanyards</a></li>
+                                 <li><a href="/productopen/?productname=Invitation Cards">Invitation Cards</a></li>
+                                 <li><a href="/search/?cname=Canvas">Canvas</a></li>
+                                 
+                                 <li><a href="/search/?cname=Photo Frames">Photo Frames</a></li>
+                                 <li><a href="/search/?cname=t-shirt">Polo T-shirt</a></li>
+                                
+                                 
+                              </ul>
+
+                              
+                           </div>
+                           
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-sm-6">
+                        <div class="left-f-box">
+                           <div class="col-sm-4">
+                              <h2>Quick Links</h2>
+                              <ul>
+                                
+                                 <li><a href="/singlesidebusineescard/">Single sided business cards</a></li>
+                                 <li><a href="/bothidebusineescard/">Back to back business cards</a></li>
+                                 <li><a href="#">Business card templates</a></li>
+                                 <li><a href="/spotliminitedvisitingcard/">Spot lamination visiting cards</a></li>
+                                
+                              </ul>
+                           </div>
+                           <div class="col-sm-4">
+                              <h2>ABOUT US</h2>
+                              <ul>
+                                 <li><a href="/about/">about Printsathi</a></li>
+                                 
+                              </ul>
+                           </div>
+                           <div class="col-sm-4">
+                              <h2>FOLLOW US ON</h2>
+                              <ul>
+                                 <li>   <!-- Facebook -->
+                                  <a class="fb-ic" style="    margin-right: 1.5em; font-size: 20px;">
+                                    <i class="fa fa-facebook" > </i>
+                                  </a>
+                                  <!-- Twitter -->
+                                  <a class="tw-ic" style="    margin-right: 1.5em;">
+                                    <i class="fa fa-twitter"> </i>
+                                  </a>
+                              
+                                  <!--Linkedin -->
+                                  <a class="li-ic" style="    margin-right: 1.5em; font-size: 20px;">
+                                                   <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                  </a>
+                                  <!--Instagram-->
+                                  <a class="ins-ic" style="    margin-right: 1.5em; font-size: 20px;">
+                                                   <i class="fa fa-instagram" aria-hidden="true"></i>
+                                  </a>
+                                  <a class="ins-ic" style="    margin-right: 1.5em; font-size: 20px;">
+                                                   <i class="fa fa-youtube" aria-hidden="true"></i>
+                                  </a>
+                                </li>
+                                 
+                              </ul>
+                             
+                           </div>
+                           <!-- Grid row-->
+                           <div class="col-sm-6">
+                               <ul>
+                                <h2>Payment Methods</h2>
+                                <li>
+                                      <img class="responsive" style="margin-top: 1em; width: auto; height: auto;" src="{% static 'images/pay.jpg' %}">
+
+                                </li>
+                              </ul>
+                            </div>
+ 
+    <!-- Grid row-->
+
+                           
+                        </div>
+                     </div>
+
+                     
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="copyright">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-8">
+                     <p><img width="90" src="{% static 'images/logo.png' %}" alt="#" style="margin-top: -5px;" /> All Rights Reserved. <a href="http://funtouchit.com/"> Funtouch IT Solution © 2020</a></p>
+                  </div>
+                  <div class="col-md-4">
+                     
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!--main js--> 
+      <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script> 
+       
+      <!--bootstrap js--> 
+      <script src="{% static 'js/bootstrap.min.js' %}"></script> 
+      <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
+      <script src="{% static 'js/slick.min.js' %}"></script> 
+      <script src="{% static 'js/wow.min.js' %}"></script>
+   <script>
+  $(document).ready(function(){
+    setTimeout(function(){
+      $('#call').css('display','block');},50);
+
+  });
+</script>     
+      
+      
+
+<div class="container">
+	{% block footer %}
+
+	{% endblock footer %}
+</div>
+</div>
+</body>
+</html>
